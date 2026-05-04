@@ -497,7 +497,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
 </div>
 
 <!-- ════════════════ LOGIN PAGE ════════════════ -->
-<div id="login-page" class="login-page" style="display:none!important;">
+<div id="login-page" class="login-page" style="display:flex;">
   <div class="login-gsi-label">Gabinete de Segurança Institucional</div>
   <div class="login-card">
     <div class="login-logo">
@@ -527,7 +527,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
 </div>
 
 <!-- ════════════════ MAIN APP ════════════════ -->
-<div id="app-page" style="display:block;">
+<div id="app-page" style="display:none;">
 <div class="app">
 
 <!-- SIDEBAR BACKDROP -->
@@ -3612,11 +3612,14 @@ function init(){
 
 // ─── BOOT ───
 (function(){
-  // Auto-login: acesso local não requer autenticação
-  localStorage.setItem('gsi_logged','1');
-  document.getElementById('login-page').style.display = 'none';
-  document.getElementById('app-page').style.display = 'block';
-  init();
+  if(localStorage.getItem('gsi_logged') === '1'){
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('app-page').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('login-page').style.display = 'flex';
+    document.getElementById('app-page').style.display = 'none';
+  }
   document.getElementById('l-pass').addEventListener('keydown', function(e){if(e.key==='Enter') doLogin();});
   document.getElementById('l-user').addEventListener('keydown', function(e){if(e.key==='Enter') doLogin();});
 })();
