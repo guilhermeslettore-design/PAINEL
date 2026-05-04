@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 60,
+      "memory": 256
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/chat",
+      "dest": "/api/chat.js",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/",
+      "dest": "/monitor_rio.html"
+    },
+    {
+      "src": "/favicon\\.ico",
+      "dest": "/favicon.png"
+    },
+    {
+      "src": "/(.*\\.(js|css|html|png|json|ico|txt|jpg|jpeg|svg|webp|woff|woff2|ttf|eot))",
+      "dest": "/$1"
+    }
+  ]
+}
