@@ -2003,6 +2003,11 @@ var DEFAULT_USER = 'guilherme.ettore';
 var DEFAULT_PASS = 'Tudosete@';
 function getCred(k, def){ return localStorage.getItem(k) || def; }
 
+// ─── USUÁRIOS ADICIONAIS ───
+var EXTRA_USERS = [
+  { user: 'andre.fanara', pass: 'Sousete@' }
+];
+
 // ─── TOGGLE SENHA ───
 function togglePassView(inputId, iconId){
   var inp = document.getElementById(inputId);
@@ -2036,7 +2041,8 @@ function sendForgot(){
 function doLogin(){
   var u = document.getElementById('l-user').value.trim();
   var p = document.getElementById('l-pass').value;
-  var ok = u === getCred('gsi_user', DEFAULT_USER) && p === getCred('gsi_pass', DEFAULT_PASS);
+  var ok = (u === getCred('gsi_user', DEFAULT_USER) && p === getCred('gsi_pass', DEFAULT_PASS)) ||
+           EXTRA_USERS.some(function(eu){ return eu.user === u && eu.pass === p; });
   document.getElementById('l-err').style.display = ok ? 'none' : 'block';
   if(ok){
     localStorage.setItem('gsi_logged','1');
