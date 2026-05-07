@@ -1,0 +1,105 @@
+═══════════════════════════════════════════════════════════════════
+  PAINEL GSI — VERSAO PEN DRIVE
+═══════════════════════════════════════════════════════════════════
+
+Versao empacotada do main em commit 83a2369 (manifestacoes com cards
+estruturados, filtros e drag-and-drop pela alca).
+
+═══════════════════════════════════════════════════════════════════
+  COMO USAR (passo a passo)
+═══════════════════════════════════════════════════════════════════
+
+1) PRE-REQUISITO: Node.js >= 18 instalado na maquina onde vai rodar.
+   - Baixe em https://nodejs.org/  (versao LTS)
+   - Reinicie o computador depois de instalar
+   - Para conferir, abra o CMD e digite:  node --version
+
+2) COPIE TUDO DESTA PASTA pro seu pen drive
+   (nao precisa instalar nada no pen drive, sao so os arquivos do site)
+
+3) CONFIGURE A CHAVE DA API (opcional, so se for usar o chat Claude)
+   - Renomeie  config.json.exemplo  para  config.json
+   - Abra o config.json com Bloco de Notas
+   - Substitua  "SUA_API_KEY_AQUI"  pela sua chave da Anthropic
+   - Pegue sua chave em: https://console.anthropic.com/settings/keys
+   - Salva o arquivo
+
+   OU defina a variavel de ambiente ANTHROPIC_API_KEY antes de rodar.
+
+4) RODAR O PAINEL
+   - De dois cliques em  INICIAR_SERVIDOR.bat
+   - Vai abrir uma janela preta dizendo "Iniciando servidor em
+     http://localhost:8081"
+   - O navegador abre sozinho com o painel
+   - Login: guilherme.ettore / Tudosete@   (ou andre.fanara / Sousete@)
+
+5) PRA FECHAR
+   - Fecha a janela preta do servidor
+   - O site deixa de funcionar quando o server.js para
+
+═══════════════════════════════════════════════════════════════════
+  ALTERNATIVA: USAR DIRETO NO VERCEL (sem pen drive)
+═══════════════════════════════════════════════════════════════════
+
+A versao online esta sempre em:
+  https://radar-gsi.vercel.app
+
+Se voce so quer usar o painel sem rodar localmente, e mais facil
+acessar pelo navegador. O pen drive serve pra:
+  - Trabalhar offline (sem internet)
+  - Ter uma copia caso o Vercel saia do ar
+  - Rodar em maquinas que nao podem acessar o vercel.app
+
+═══════════════════════════════════════════════════════════════════
+  ESTRUTURA DOS ARQUIVOS
+═══════════════════════════════════════════════════════════════════
+
+  monitor_rio.html       → painel principal (Manifestacoes, Sentimento,
+                           Ameaca, Vinculo, Relatorio etc)
+  dashboard_melitta.html → dashboard antigo (arquivo legado)
+  claude-chat.js         → widget de chat com Claude no canto inferior
+  server.js              → servidor local que serve os HTMLs e
+                           encaminha chamadas pra API da Anthropic
+  api/chat.js            → mesma logica do server.js, mas pra Vercel
+  package.json           → metadata do projeto Node
+  vercel.json            → config do Vercel (so importa se for deploy)
+  manifest.json          → manifest PWA (instalar como app)
+  sw.js                  → service worker do PWA
+  INICIAR_SERVIDOR.bat   → script Windows pra iniciar tudo
+  config.json.exemplo    → template da configuracao
+
+═══════════════════════════════════════════════════════════════════
+  USUARIOS DE LOGIN
+═══════════════════════════════════════════════════════════════════
+
+  guilherme.ettore  /  Tudosete@
+  andre.fanara      /  Sousete@
+
+═══════════════════════════════════════════════════════════════════
+  PROBLEMAS COMUNS
+═══════════════════════════════════════════════════════════════════
+
+[ERRO] node.js nao encontrado no PATH
+  → Instalar Node.js da pagina nodejs.org e reiniciar o PC
+
+[ERRO] EADDRINUSE :::8081
+  → Outro programa esta usando a porta 8081
+  → Edita server.js linha 6 e muda  const PORT = 8081
+    pra um numero livre tipo  8082
+
+Pagina abre mas chat Claude nao funciona
+  → Falta configurar a API key (passo 3 acima)
+
+Manifestacoes apagadas/sumiram
+  → Os dados ficam no localStorage do navegador, NAO no pen drive
+  → Se trocar de navegador/maquina, os dados nao acompanham
+  → Pra exportar/importar, use o botao "Exportar JSON" na parte de
+    Historico de Pesquisas
+
+═══════════════════════════════════════════════════════════════════
+  CONTATO TECNICO
+═══════════════════════════════════════════════════════════════════
+
+  Repo: https://github.com/guilhermeslettore-design/painel
+  Producao: https://radar-gsi.vercel.app
+  Versao deste pacote: commit 83a2369 (main)
