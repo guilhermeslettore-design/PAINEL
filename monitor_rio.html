@@ -247,6 +247,60 @@ body.dark .manif-apikey-row{background:#1a2d20;border-color:#3d5a30;}
 body.dark .drag-handle{color:#3a5070;}
 body.dark .drag-handle:hover{color:#5ab4f0;}
 
+/* ─── MANIFESTAÇÃO — CARD ESTRUTURADO ─── */
+.manif-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;}
+.manif-card-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
+.manif-card-date{font-size:12px;font-weight:700;color:#0d5aa7;letter-spacing:.02em;}
+.manif-card-time{font-size:11.5px;color:#1a2d4f;font-weight:600;background:#e8f2fb;padding:2px 8px;border-radius:10px;}
+.manif-card-badge{font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:2px 7px;border-radius:9px;text-transform:uppercase;}
+.manif-card-badge.future{background:#e1f5e8;color:#1a6f3a;}
+.manif-card-badge.past{background:#f0eef0;color:#7a6a7a;}
+.manif-card-badge.today{background:#fff3cd;color:#856404;}
+.manif-card-row{font-size:12px;color:#1a2a3a;line-height:1.5;display:flex;gap:6px;}
+.manif-card-row .manif-ico{flex-shrink:0;width:18px;text-align:center;}
+.manif-card-row .manif-val{flex:1;min-width:0;word-break:break-word;}
+.manif-card-row .manif-val.muted{color:#9aaabf;font-style:italic;}
+.manif-card-actions{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;}
+.manif-act-btn{font-size:10.5px;font-weight:700;border:1.5px solid #c0d8ee;border-radius:6px;padding:4px 10px;cursor:pointer;background:#fff;color:#0d5aa7;display:inline-flex;align-items:center;gap:4px;transition:all .15s;}
+.manif-act-btn:hover{background:#e8f2fb;border-color:#0d5aa7;}
+.manif-act-btn.danger{color:#c0392b;border-color:#e8c0c0;}
+.manif-act-btn.danger:hover{background:#fdecea;border-color:#c0392b;}
+.manifestacao-item.is-past{opacity:.72;}
+.manifestacao-item.hidden{display:none !important;}
+body.dark .manif-card-date{color:#5ab4f0;}
+body.dark .manif-card-time{background:#0a1f33;color:#c8daf0;}
+body.dark .manif-card-badge.future{background:#0a2a18;color:#5fc77f;}
+body.dark .manif-card-badge.past{background:#1a1820;color:#9a8a9a;}
+body.dark .manif-card-badge.today{background:#2a2310;color:#e8c460;}
+body.dark .manif-card-row{color:#c8daf0;}
+body.dark .manif-card-row .manif-val.muted{color:#5a7090;}
+body.dark .manif-act-btn{background:#0b1622;color:#5ab4f0;border-color:#1a3050;}
+body.dark .manif-act-btn:hover{background:#0f2035;border-color:#5ab4f0;}
+body.dark .manif-act-btn.danger{color:#e88080;border-color:#3a2020;}
+body.dark .manif-act-btn.danger:hover{background:#2a1010;border-color:#c0392b;}
+
+/* ─── MANIFESTAÇÃO — FILTRO ─── */
+.b1-filter-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 12px;background:#f0f4f8;border:1px solid #dce6f0;border-radius:8px;margin-bottom:10px;font-size:11px;}
+.b1-filter-group{display:flex;align-items:center;gap:4px;background:#fff;border-radius:6px;padding:2px;border:1px solid #dce6f0;}
+.b1-filter-group .b1-filter-btn{font-size:10.5px;font-weight:600;color:#6a8aaa;background:transparent;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif;transition:all .15s;}
+.b1-filter-group .b1-filter-btn:hover{background:#e0e8f0;color:#1a2d4f;}
+.b1-filter-group .b1-filter-btn.active{background:#1a2d4f;color:#fff;}
+.b1-filter-date{display:flex;align-items:center;gap:5px;}
+.b1-filter-date label{font-size:10.5px;color:#6a8aaa;font-weight:600;}
+.b1-filter-date input[type=date]{font-size:11px;border:1px solid #dce6f0;border-radius:5px;padding:3px 6px;color:#1a2a3a;background:#fff;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif;}
+.b1-filter-date input[type=date]:focus{outline:none;border-color:#0d5aa7;}
+.b1-filter-clear{font-size:10.5px;font-weight:600;color:#c0704a;background:transparent;border:1.5px solid #e0cece;border-radius:5px;padding:3px 9px;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif;}
+.b1-filter-clear:hover{background:#fdecea;}
+.b1-filter-count{font-size:10.5px;color:#6a8aaa;margin-left:auto;font-weight:600;}
+body.dark .b1-filter-bar{background:#0a1626;border-color:#1a3050;}
+body.dark .b1-filter-group{background:#0b1622;border-color:#1a3050;}
+body.dark .b1-filter-group .b1-filter-btn{color:#7aaad0;}
+body.dark .b1-filter-group .b1-filter-btn:hover{background:#0f2035;color:#c8daf0;}
+body.dark .b1-filter-group .b1-filter-btn.active{background:#0d5aa7;color:#fff;}
+body.dark .b1-filter-date label{color:#7aaad0;}
+body.dark .b1-filter-date input[type=date]{background:#0b1622;color:#c8daf0;border-color:#1a3050;}
+body.dark .b1-filter-count{color:#7aaad0;}
+
 /* ─── AGENDA STRUCTURED ─── */
 .ag-struct-item{padding:9px 12px;background:#f4f8fc;border-radius:8px;margin-bottom:5px;border-left:3px solid #0d5aa7;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .ag-struct-item.st-aconteceu{background:#f0faf4;border-left-color:#27ae60;}
@@ -744,6 +798,21 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
           </div>
         </div>
         <div class="section-body">
+          <div id="b1-filter-bar" class="b1-filter-bar" style="display:none;">
+            <div class="b1-filter-group" role="tablist" aria-label="Filtro por status">
+              <button class="b1-filter-btn active" data-status="todas" onclick="b1FilterStatus('todas')">📋 Todas</button>
+              <button class="b1-filter-btn" data-status="futuras" onclick="b1FilterStatus('futuras')">⏳ Próximas</button>
+              <button class="b1-filter-btn" data-status="passadas" onclick="b1FilterStatus('passadas')">✅ Já passou</button>
+            </div>
+            <div class="b1-filter-date">
+              <label for="b1-filter-from">De</label>
+              <input type="date" id="b1-filter-from" onchange="applyB1Filters()">
+              <label for="b1-filter-to">até</label>
+              <input type="date" id="b1-filter-to" onchange="applyB1Filters()">
+            </div>
+            <button class="b1-filter-clear" onclick="b1FilterClear()" title="Limpar filtros">✕ Limpar</button>
+            <span class="b1-filter-count" id="b1-filter-count"></span>
+          </div>
           <div id="b1" class="result-empty">Aguardando consulta...</div>
         </div>
         <!-- Drop zone: adicionar manifestações por imagem -->
@@ -2264,6 +2333,41 @@ function parseB1Items(text){
 
 function saveB1All(){ localStorage.setItem('gsi_b1_all', JSON.stringify(b1AllItems)); }
 
+function parseB1Item(item){
+  // Extrai campos estruturados de um bloco de manifestação
+  var dateM   = item.match(/📅\s*(.+?)(?:\n|$)/);
+  var localM  = item.match(/🏛\s*(?:Local:?\s*)?(.+?)(?:\n|$)/);
+  var orgM    = item.match(/🏷\s*(?:Organiza[çc][aã]o:?\s*)?(.+?)(?:\n|$)/);
+  var motivoM = item.match(/📋\s*(?:Motivo:?\s*)?(.+?)(?:\n|$)/);
+  var pubM    = item.match(/(?:📊|👥)\s*(?:Estimativa de p[úu]blico:?|P[úu]blico esperado:?|N[úu]mero esperado:?)?\s*(.+?)(?:\n|$)/);
+  var progM   = item.match(/⏱\s*(.+?)(?:\n|$)/);
+  var dateLine = dateM ? dateM[1].trim() : '';
+  // Data DD/MM/YYYY
+  var dateNum = '';
+  var dn = dateLine.match(/(\d{1,2})\/(\d{2})\/(\d{4})/);
+  if(dn) dateNum = String(parseInt(dn[1],10)).padStart(2,'0')+'/'+dn[2]+'/'+dn[3];
+  else { var dn2 = dateLine.match(/(\d{1,2})\/(\d{2})/); if(dn2) dateNum = dn2[0]; }
+  // Hora — aceita formatos "14h", "14h00", "14:00", "14h às 16h", "— 14h"
+  var horaStr = '';
+  var hm = dateLine.match(/(\d{1,2}h(?:\d{2})?)/);
+  if(hm) horaStr = hm[1];
+  else {
+    var hm2 = dateLine.match(/(\d{1,2}:\d{2})/);
+    if(hm2) horaStr = hm2[1];
+  }
+  if(!horaStr && /a\s+confirmar/i.test(dateLine)) horaStr = '';
+  return {
+    dateNum: dateNum,
+    dateLine: dateLine,
+    hora: horaStr,
+    local: localM ? localM[1].trim() : '',
+    org: orgM ? orgM[1].trim() : '',
+    motivo: motivoM ? motivoM[1].trim() : '',
+    publico: pubM ? pubM[1].trim() : '',
+    programacao: progM ? progM[1].trim() : ''
+  };
+}
+
 function renderB1WithCheckboxes(text, skipMerge){
   b1RawText = text;
   var el = document.getElementById('b1');
@@ -2278,29 +2382,64 @@ function renderB1WithCheckboxes(text, skipMerge){
     saveB1All();
   }
   var items = b1AllItems.length ? b1AllItems : parseB1Items(text);
+  var filterBar = document.getElementById('b1-filter-bar');
   if(!items.length){
     el.className = 'result-empty'; el.textContent = 'Aguardando consulta...';
     document.getElementById('manif-send-bar').style.display = 'none';
+    if(filterBar) filterBar.style.display = 'none';
     return;
   }
   el.className = '';
+  // Hoje (BRT) — meia-noite — para classificar passada/futura
+  var nowBR = new Date();
+  var todayMs = new Date(nowBR.getFullYear(), nowBR.getMonth(), nowBR.getDate()).getTime();
   el.innerHTML = items.map(function(item, idx){
     var id = 'chk-b1-'+idx;
-    var localM = item.match(/🏛\s*Local:\s*(.+?)(?:\n|$)/);
-    var motivoM = item.match(/📋\s*(?:Motivo:\s*)?(.+?)(?:\n|$)/);
-    var dateM = item.match(/📅\s*(.+?)(?:\n|$)/);
-    var localStr = localM ? localM[1].trim() : '';
-    var motivoStr = motivoM ? motivoM[1].trim() : '';
-    var dateStr = dateM ? dateM[1].trim() : '';
-    // Extrai data no formato DD/MM/YYYY
-    var dateNum = '';
-    var dn = dateStr.match(/(\d{1,2})\/(\d{2})\/(\d{4})/);
-    if(dn) dateNum = dn[1]+'/'+dn[2]+'/'+dn[3];
-    else { var dn2 = dateStr.match(/(\d{1,2})\/(\d{2})/); if(dn2) dateNum = dn2[0]; }
-    return '<div class="manifestacao-item" draggable="true" data-idx="'+idx+'" data-date="'+escHtml(dateNum)+'" data-local="'+escHtml(localStr)+'" data-motivo="'+escHtml(motivoStr)+'" data-text="'+escHtml(item)+'">'
+    var p = parseB1Item(item);
+    // Classifica passada/futura/hoje
+    var status = 'unknown';
+    var dateMs = parseBRTDate(p.dateNum || p.dateLine);
+    if(dateMs && dateMs < 9e12){
+      if(dateMs < todayMs) status = 'past';
+      else if(dateMs === todayMs) status = 'today';
+      else status = 'future';
+    }
+    // Texto da hora
+    var horaTxt = p.hora ? p.hora : '<span class="manif-val muted">horário a confirmar</span>';
+    var statusBadge = '';
+    if(status === 'past')   statusBadge = '<span class="manif-card-badge past">já passou</span>';
+    else if(status === 'today')  statusBadge = '<span class="manif-card-badge today">hoje</span>';
+    else if(status === 'future') statusBadge = '<span class="manif-card-badge future">próxima</span>';
+    var pastClass = (status === 'past') ? ' is-past' : '';
+    var dateDisplay = p.dateNum || (p.dateLine ? escHtml(p.dateLine.split('—')[0].trim()) : '<span class="manif-val muted">sem data</span>');
+    return '<div class="manifestacao-item'+pastClass+'" draggable="true" '
+        + 'data-idx="'+idx+'" '
+        + 'data-date="'+escHtml(p.dateNum)+'" '
+        + 'data-date-ms="'+(dateMs && dateMs<9e12?dateMs:'')+'" '
+        + 'data-status="'+status+'" '
+        + 'data-local="'+escHtml(p.local)+'" '
+        + 'data-motivo="'+escHtml(p.motivo)+'" '
+        + 'data-org="'+escHtml(p.org)+'" '
+        + 'data-hora="'+escHtml(p.hora)+'" '
+        + 'data-text="'+escHtml(item)+'">'
       +'<span class="drag-handle" title="Ative o modo Manual para reordenar">⠿</span>'
       +'<input type="checkbox" class="manif-chk" id="'+id+'">'
-      +'<label for="'+id+'">'+linkify(item)+renderMediaCards(item)+'</label>'
+      +'<div class="manif-card-body">'
+        +'<div class="manif-card-head">'
+          +'<span class="manif-card-date">📅 '+dateDisplay+'</span>'
+          +(p.hora ? '<span class="manif-card-time">🕐 '+escHtml(p.hora)+'</span>' : '<span class="manif-card-time" style="background:transparent;color:#9aaabf;font-style:italic;font-weight:500;">horário a confirmar</span>')
+          +statusBadge
+        +'</div>'
+        +'<div class="manif-card-row"><span class="manif-ico">🏛</span><span class="manif-val'+(p.local?'':' muted')+'">'+(p.local?escHtml(p.local):'sem dados')+'</span></div>'
+        +(p.org    ? '<div class="manif-card-row"><span class="manif-ico">🏷</span><span class="manif-val">'+escHtml(p.org)+'</span></div>' : '')
+        +'<div class="manif-card-row"><span class="manif-ico">📋</span><span class="manif-val'+(p.motivo?'':' muted')+'">'+(p.motivo?escHtml(p.motivo):'sem dados')+'</span></div>'
+        +(p.publico ? '<div class="manif-card-row"><span class="manif-ico">👥</span><span class="manif-val">'+escHtml(p.publico)+'</span></div>' : '')
+        +renderMediaCards(item)
+        +'<div class="manif-card-actions">'
+          +'<button class="manif-act-btn" onclick="generateReportFromCard(this)" title="Preencher relatório com base nesta manifestação">📄 Gerar Relatório</button>'
+          +'<button class="manif-act-btn danger" onclick="deleteOneManif(this)" title="Excluir esta manifestação">🗑 Excluir</button>'
+        +'</div>'
+      +'</div>'
       +'</div>';
   }).join('');
   // Listeners checkboxes
@@ -2310,7 +2449,77 @@ function renderB1WithCheckboxes(text, skipMerge){
   // Listeners drag-to-reorder
   setupManifDragReorder(el);
   document.getElementById('manif-send-bar').style.display = 'flex';
+  if(filterBar) filterBar.style.display = 'flex';
+  applyB1Filters();
   updateCheckedCount();
+}
+
+// ─── FILTROS B1 ───
+var b1FilterState = { status: 'todas', from: '', to: '' };
+
+function b1FilterStatus(s){
+  b1FilterState.status = s;
+  document.querySelectorAll('#b1-filter-bar .b1-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-status') === s);
+  });
+  applyB1Filters();
+}
+
+function b1FilterClear(){
+  b1FilterState = { status: 'todas', from: '', to: '' };
+  var fr = document.getElementById('b1-filter-from'); if(fr) fr.value = '';
+  var to = document.getElementById('b1-filter-to');   if(to) to.value = '';
+  document.querySelectorAll('#b1-filter-bar .b1-filter-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-status') === 'todas');
+  });
+  applyB1Filters();
+}
+
+function applyB1Filters(){
+  var fromEl = document.getElementById('b1-filter-from');
+  var toEl   = document.getElementById('b1-filter-to');
+  var fromMs = (fromEl && fromEl.value) ? new Date(fromEl.value+'T00:00:00').getTime() : null;
+  var toMs   = (toEl   && toEl.value)   ? new Date(toEl.value+'T23:59:59').getTime()   : null;
+  var status = b1FilterState.status;
+  var nowBR  = new Date();
+  var todayMs = new Date(nowBR.getFullYear(), nowBR.getMonth(), nowBR.getDate()).getTime();
+  var visible = 0, total = 0;
+  document.querySelectorAll('#b1 .manifestacao-item').forEach(function(card){
+    total++;
+    var ms = parseInt(card.getAttribute('data-date-ms')||'0', 10);
+    var st = card.getAttribute('data-status') || 'unknown';
+    var pass = true;
+    if(status === 'futuras' && !(st === 'future' || st === 'today')) pass = false;
+    if(status === 'passadas' && st !== 'past') pass = false;
+    if(pass && fromMs && (!ms || ms < fromMs)) pass = false;
+    if(pass && toMs   && (!ms || ms > toMs))   pass = false;
+    card.classList.toggle('hidden', !pass);
+    if(pass) visible++;
+  });
+  var countEl = document.getElementById('b1-filter-count');
+  if(countEl) countEl.textContent = visible + ' de ' + total + ' manifestaç' + (total===1?'ão':'ões');
+}
+
+// ─── AÇÕES POR CARD ───
+function generateReportFromCard(btn){
+  var card = btn.closest('.manifestacao-item');
+  if(!card){ alert('Card não encontrado.'); return; }
+  generateReportFromManifestacao(card);
+  showView('relatorio');
+}
+
+function deleteOneManif(btn){
+  var card = btn.closest('.manifestacao-item');
+  if(!card) return;
+  var key = (card.dataset.text || '').slice(0,40);
+  if(!key) return;
+  var localStr  = card.dataset.local  || '';
+  var dateStr   = card.dataset.date   || '';
+  var resumo = (dateStr || '?') + (localStr ? ' · '+localStr : '');
+  if(!confirm('Excluir esta manifestação?\n\n'+resumo)) return;
+  b1AllItems = b1AllItems.filter(function(it){ return it.slice(0,40) !== key; });
+  saveB1All();
+  renderB1WithCheckboxes('', true);
 }
 
 function updateCheckedCount(){
@@ -2609,6 +2818,10 @@ function generateReportFromManifestacao(div){
     text: itemText
   };
 
+  // Helper: usa valor real ou "sem dados" como fallback
+  var SD = 'sem dados';
+  function or(v, fb){ v = (v==null?'':String(v).trim()); return v ? v : (fb || SD); }
+
   // ── Cabeçalho ──
   var now = new Date();
   var _year = now.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo',year:'numeric'});
@@ -2625,81 +2838,95 @@ function generateReportFromManifestacao(div){
   var dateLinha = dateLineM ? dateLineM[1].trim() : dsDate;
   // Extrai data numérica DD/MM/YYYY do texto para formatar no padrão militar
   var dateNumM = dateLinha.match(/(\d{1,2})\/(\d{2})\/(\d{4})/);
-  var dataMilitar = dateNumM ? formatDataMilitar(dateNumM[0]) : (dsDate ? formatDataMilitar(dsDate) : dateLinha);
+  var dataMilitar = dateNumM ? formatDataMilitar(dateNumM[0]) : (dsDate ? formatDataMilitar(dsDate) : '');
   // hora
   var horaM = itemText.match(/(?:—\s*|às\s*)(\d{1,2}h(?:\d{2})?)/i);
   var horaStr = horaM ? (' — ' + horaM[1]) : '';
-  setv('rs1-datahorario', dataMilitar + horaStr);
+  setv('rs1-datahorario', or((dataMilitar||'') + horaStr));
 
   // Local
-  var localM = itemText.match(/🏛\s*Local:\s*(.+?)(?:\n|$)/);
-  setv('rs1-local', localM ? localM[1].trim() : dsLocal);
+  var localM = itemText.match(/🏛\s*(?:Local:?\s*)?(.+?)(?:\n|$)/);
+  var localFinal = localM ? localM[1].trim() : dsLocal;
+  setv('rs1-local', or(localFinal));
 
   // Trajeto — buscar em b3
   var trajetoStr = extractAfterColon(b3RawText, '🗺');
-  if(!trajetoStr) trajetoStr = 'A definir conforme planejamento operacional.';
-  setv('rs1-trajeto', trajetoStr);
+  setv('rs1-trajeto', or(trajetoStr));
 
   // Organizadores
   var orgM = itemText.match(/🏷\s*(?:Organiza[çc][aã]o:?\s*)?(.+?)(?:\n|$)/);
-  setv('rs1-organizadores', orgM ? orgM[1].trim() : '');
+  setv('rs1-organizadores', or(orgM ? orgM[1].trim() : ''));
 
   // Motivo (pode ser multi-linha)
   var motivoM = itemText.match(/📋\s*(?:Motivo:\s*)?(.+?)(?:\n|$)/);
   var programacaoM = itemText.match(/⏱\s*(.+?)(?:\n|$)/);
   var motivoTxt = motivoM ? motivoM[1].trim() : dsMotivo;
   if(programacaoM) motivoTxt += '\n' + programacaoM[1].trim();
-  setv('rs1-motivo', motivoTxt);
+  setv('rs1-motivo', or(motivoTxt));
 
   // Público e fonte
   var pubStr = extractAfterColon(b3RawText, '👥');
+  if(!pubStr){
+    var pubLocal = itemText.match(/(?:📊|👥)\s*(?:Estimativa de p[úu]blico:?|P[úu]blico esperado:?|N[úu]mero esperado:?)?\s*(.+?)(?:\n|$)/);
+    if(pubLocal) pubStr = pubLocal[1].trim();
+  }
   var fonteStr = extractAfterColon(b3RawText, '📊');
-  if(!pubStr) pubStr = 'A estimar';
-  setv('rs1-publico', pubStr + (fonteStr ? ' — Fonte: ' + fonteStr : ''));
+  setv('rs1-publico', or(pubStr ? (pubStr + (fonteStr ? ' — Fonte: ' + fonteStr : '')) : ''));
 
   // Assunto
-  setv('rel-assunto', 'Relatório de Monitoramento — ' + (localM?localM[1].trim():dsLocal) + ' · ' + dataMilitar);
+  var assuntoLocal = localFinal || dsLocal;
+  setv('rel-assunto', 'Relatório de Monitoramento — ' + or(assuntoLocal) + (dataMilitar ? ' · ' + dataMilitar : ''));
 
   // ── Seção 2: Análise de Risco ──
   var violM = extractAfterColon(b3RawText, '⚠️');
   // Grau
-  var grauStr = 'BAIXO';
-  if(/alto/i.test(violM)) grauStr = 'ALTO';
-  else if(/médio/i.test(violM)||/medio/i.test(violM)) grauStr = 'MÉDIO';
-  else if(/crítico/i.test(violM)||/critico/i.test(violM)) grauStr = 'CRÍTICO';
-  setv('rs2-grau', grauStr);
+  var grauStr = '';
+  if(violM){
+    if(/alto/i.test(violM)) grauStr = 'ALTO';
+    else if(/médio/i.test(violM)||/medio/i.test(violM)) grauStr = 'MÉDIO';
+    else if(/crítico/i.test(violM)||/critico/i.test(violM)) grauStr = 'CRÍTICO';
+    else if(/baixo/i.test(violM)) grauStr = 'BAIXO';
+  }
+  setv('rs2-grau', or(grauStr));
 
   var filiacaoStr = extractAfterColon(b3RawText, '🏛');
   var motivacaoStr = extractAfterColon(b3RawText, '🎯');
-  var justTxt = 'Histórico de violência: ' + (violM||'Não identificado') + '.';
-  if(filiacaoStr) justTxt += ' Filiação estimada: ' + filiacaoStr + '.';
-  if(motivacaoStr) justTxt += ' Motivação: ' + motivacaoStr + '.';
-  setv('rs2-justificativa', justTxt);
-  setv('rs2-incidentes', violM.includes('BAIXO') ? 'Baixo — sem histórico de confrontos relevantes' : 'Monitorar — verificar histórico de incidentes');
-  setv('rs2-radicais', 'Não identificada presença de grupos radicais neste evento.');
+  var justParts = [];
+  if(violM)        justParts.push('Histórico de violência: ' + violM + '.');
+  if(filiacaoStr)  justParts.push('Filiação estimada: ' + filiacaoStr + '.');
+  if(motivacaoStr) justParts.push('Motivação: ' + motivacaoStr + '.');
+  setv('rs2-justificativa', or(justParts.join(' ')));
+  setv('rs2-incidentes', or(violM ? (violM.includes('BAIXO') ? 'Baixo — sem histórico de confrontos relevantes' : 'Monitorar — verificar histórico de incidentes') : ''));
+  setv('rs2-radicais', SD);
 
   var transitoStr = extractAfterColon(b3RawText, '🚗');
   var rotasStr = extractAfterColon(b3RawText, '🚦');
-  var transitoTxt = transitoStr || 'A avaliar conforme planejamento da operação.';
-  if(rotasStr) transitoTxt += '\nRotas alternativas: ' + rotasStr + '.';
-  setv('rs2-transito', transitoTxt);
+  var transitoParts = [];
+  if(transitoStr) transitoParts.push(transitoStr);
+  if(rotasStr)    transitoParts.push('Rotas alternativas: ' + rotasStr + '.');
+  setv('rs2-transito', or(transitoParts.join('\n')));
 
   // ── Seção 3: Histórico ──
   var histStr = extractAfterColon(b3RawText, '📁');
-  setv('rs3-historico', histStr || 'Primeira ocorrência registrada neste formato/local — sem histórico anterior disponível.');
+  setv('rs3-historico', or(histStr));
 
   // ── Seção 4: Medidas recomendadas ──
   var policiaStr = extractAfterColon(b3RawText, '🚔');
-  setv('rs4-policiamento', policiaStr || 'A definir conforme avaliação operacional.');
+  setv('rs4-policiamento', or(policiaStr));
   setv('rs4-orgaos', 'SEOP, COR (Centro de Operações Rio), Corpo de Bombeiros CBMERJ, CET-Rio');
 
   var atencaoM = b3RawText.match(/⚠️\s*Ponto de aten[çc][aã]o:\s*(.+?)(?:\n|$)/i);
-  setv('rs4-atencao', atencaoM ? atencaoM[1].trim() : 'Manter monitoramento das redes sociais nas 48h anteriores ao evento. Verificar possíveis contra-manifestações.');
+  setv('rs4-atencao', or(atencaoM ? atencaoM[1].trim() : ''));
   setv('rs4-recomendacoes', 'Acionar SEOP para planejamento de desvios de trânsito com antecedência mínima de 4 horas. Manter equipe de inteligência em campo para monitoramento em tempo real. Relatório de atualização a ser emitido 24h antes do evento.');
 
   // ── Seção 5: Conclusão ──
   var impactoStr = extractAfterColon(b3RawText, '🏛 Impacto');
-  setv('rs5-sintese', 'O evento está programado para ocorrer de forma pacífica, com ampla mobilização '+(orgM?orgM[1].trim():'sindical')+'. O grau de risco é classificado como '+grauStr+'. '+(impactoStr?'Impacto estimado ao governo: '+impactoStr+'. ':'')+'Nenhum indicativo de radicalização ou confronto foi identificado até o momento.');
+  var sintParts = [];
+  sintParts.push('O evento está programado para ocorrer de forma pacífica, com ampla mobilização ' + or(orgM?orgM[1].trim():'', 'sindical') + '.');
+  if(grauStr) sintParts.push('O grau de risco é classificado como ' + grauStr + '.');
+  if(impactoStr) sintParts.push('Impacto estimado ao governo: ' + impactoStr + '.');
+  sintParts.push('Nenhum indicativo de radicalização ou confronto foi identificado até o momento.');
+  setv('rs5-sintese', sintParts.join(' '));
   setv('rs5-posicionamento', 'O GSI/SSIE recomenda acompanhamento contínuo do evento com reforço preventivo do policiamento na área de concentração. Situação sob monitoramento permanente. Novas informações serão incorporadas em relatório de atualização.');
 
   renderRelManifestacao();
@@ -5045,6 +5272,9 @@ var amChartInstance = null;
 
 function amRenderTabela(dados){
   var tbody = document.getElementById('am-tabela-body');
-  if(!tbod
+  if(!tbody) return;
+  // Implementação truncada no deploy original — preservada como stub seguro
+}
+</script>
 <!-- Chat Claude AI -->
 <script src="/claude-chat.js"></script>
