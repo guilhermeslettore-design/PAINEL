@@ -141,20 +141,20 @@
   // ─── HTML ─────────────────────────────────────────────────────────
   const HTML = `
 <style>${CSS}</style>
-<button id="_cc-btn" title="Conversar com a Argus" aria-label="Abrir Argus">🛡</button>
-<div id="_cc-panel" class="cc-hidden" role="dialog" aria-label="Argus — IA do GSI">
+<button id="_cc-btn" title="Conversar com o Argus" aria-label="Abrir Argus">🛡</button>
+<div id="_cc-panel" class="cc-hidden" role="dialog" aria-label="Argus — IA">
   <div class="_cc-hdr">
     <span class="_cc-hdr-ico">🛡</span>
     <div>
       <div class="_cc-hdr-title">Argus</div>
-      <div class="_cc-hdr-sub">IA do GSI · Online</div>
+      <div class="_cc-hdr-sub">IA · Online</div>
     </div>
     <button class="_cc-close" id="_cc-close" aria-label="Fechar">✕</button>
   </div>
   <div class="_cc-msgs" id="_cc-msgs">
     <div class="_cc-welcome">
-      <strong>👋 E aí! Sou a Argus</strong>
-      IA do GSI. Posso responder dúvidas sobre o painel, resumir o que tá no feed,
+      <strong>👋 E aí! Sou o Argus</strong>
+      IA do painel. Posso responder dúvidas sobre o painel, resumir o que tá no feed,
       buscar posts antigos — ou qualquer pergunta sua. Bora trabalhar!
     </div>
   </div>

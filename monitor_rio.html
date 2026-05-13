@@ -6,13 +6,13 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Painel GSI">
+  <meta name="apple-mobile-web-app-title" content="Painel">
   <meta name="theme-color" content="#1a2d4f">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSI — Sistema de Monitoramento de Manifestações</title>
+<title>Sistema de Monitoramento de Manifestações</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;background:#f0f4f8;transition:background .3s,color .3s;}
@@ -107,7 +107,7 @@ body.dark .modal-card input{background:#0b1622;border-color:#1a3050;color:#e0e8f
 .help-sub{font-size:10px;color:rgba(255,255,255,.4);line-height:1.5;}
 .btn-manual{width:100%;background:#3d8ecb;color:#fff;border:none;border-radius:6px;padding:7px;font-size:11px;font-weight:600;cursor:pointer;margin-top:.5rem;}
 
-/* ─── GSI BAR ─── */
+/* ─── TOP BAR ─── */
 .gsi-bar{background:#f7f9fc;border-bottom:1px solid #dce6f0;padding:.25rem 1.4rem;display:flex;align-items:center;gap:8px;}
 .gsi-bar-emblem{width:18px;height:18px;background:#0d5aa7;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;}
 .gsi-bar-title{font-size:10px;font-weight:700;color:#1a2d4f;letter-spacing:.04em;text-transform:uppercase;}
@@ -480,7 +480,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
   .main{margin-left:0 !important;}
   .app{flex-direction:column;}
 
-  /* ── GSI bar simplify ── */
+  /* ── Top bar simplify ── */
   .gsi-bar{padding:.4rem .8rem;flex-wrap:wrap;}
   .gsi-bar-sub,.gsi-bar-sep{display:none;}
   .gsi-bar-title{font-size:11px;}
@@ -558,7 +558,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <div class="login-shield">🛡</div>
       <div>
         <div class="login-brand">Sistema de Monitoramento<br>de Manifestações</div>
-        <div class="login-brand-sub">GSI · Estado do Rio de Janeiro</div>
+        <div class="login-brand-sub">Estado do Rio de Janeiro</div>
       </div>
     </div>
     <div class="login-title">Acesso restrito — identifique-se</div>
@@ -590,7 +590,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
 <div class="sidebar" id="main-sidebar">
   <div class="sidebar-logo">
     <div class="logo-box">
-      <div class="logo-shield">GSI</div>
+      <div class="logo-shield">🛡</div>
       <div>
         <div class="logo-text">Gabinete de Segurança<br>Institucional</div>
         <div class="logo-sub">MONITORAMENTO · RJ</div>
@@ -627,7 +627,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
 
 <!-- MAIN -->
 <div class="main">
-  <!-- GSI BAR -->
+  <!-- TOP BAR -->
   <div class="gsi-bar">
     <div class="gsi-bar-emblem">🛡</div>
     <span class="gsi-bar-title">Gabinete de Segurança Institucional</span>
@@ -1176,7 +1176,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
         <div>
           <div style="font-size:18px;font-weight:700;color:#1a2d4f;">⚠️ Ameaças Monitoradas</div>
-          <div style="font-size:11px;color:#6a8aaa;margin-top:2px;">GSI/SSIE · Subsecretaria de Inteligência Estratégica</div>
+          <div style="font-size:11px;color:#6a8aaa;margin-top:2px;">SSIE · Subsecretaria de Inteligência Estratégica</div>
         </div>
         <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #dce6f0;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;">
           <span id="am-status-dot" style="width:9px;height:9px;border-radius:50%;background:#27ae60;display:inline-block;animation:amPulse 1.4s ease-in-out infinite;"></span>
@@ -1406,7 +1406,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <button class="back-btn" onclick="showView('inicio')">← Voltar</button>
       <div class="section-card">
         <div class="section-header">
-          <div class="section-left"><div class="sec-icon icon-orange">🔺</div><div><div class="section-title">Extremismo</div><div class="chips"><span class="chip chip-orange">GSI/SSIE</span><span class="chip chip-blue">EM DESENVOLVIMENTO</span></div></div></div>
+          <div class="section-left"><div class="sec-icon icon-orange">🔺</div><div><div class="section-title">Extremismo</div><div class="chips"><span class="chip chip-orange">SSIE</span><span class="chip chip-blue">EM DESENVOLVIMENTO</span></div></div></div>
         </div>
         <div class="section-body">
           <div style="text-align:center;padding:2.5rem 1rem;color:#aac0d8;">
@@ -1473,7 +1473,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:.5rem;">
         <div>
           <div style="font-size:18px;font-weight:700;color:#1a2d4f;">🔗 Análise de Vínculo</div>
-          <div style="font-size:11px;color:#6a8aaa;margin-top:2px;">GSI/SSIE · Mapeamento de Redes e Conexões</div>
+          <div style="font-size:11px;color:#6a8aaa;margin-top:2px;">SSIE · Mapeamento de Redes e Conexões</div>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button id="vc-tog-arvore" class="vc-toggle" onclick="vcToggleView('arvore')">🌳 Árvore Familiar</button>
@@ -1883,7 +1883,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
             .argus-textarea.dragover{border-color:#E8B94F;background:#fff8e1;}
             body.dark .argus-textarea.dragover{background:#1a1408;}
 
-            /* Mensagens da Argus (respostas no feed quando é pergunta/busca) */
+            /* Mensagens do Argus (respostas no feed quando é pergunta/busca) */
             .argus-msg-card{background:linear-gradient(135deg,#fff7e6,#fffaf0);border:1px solid #f5d57a;border-radius:12px;padding:14px 16px;margin-bottom:14px;position:relative;}
             body.dark .argus-msg-card{background:linear-gradient(135deg,#1a1408,#221a08);border-color:#c89010;}
             .argus-msg-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
@@ -1961,16 +1961,16 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
             <div class="argus-head">
               <div class="argus-avatar">🛡</div>
               <div style="flex:1;line-height:1.25;">
-                <div class="argus-name">Argus · IA do GSI</div>
+                <div class="argus-name">Argus · IA</div>
                 <div class="argus-sub">Cola um link, arrasta um print, ou pergunta o que precisar</div>
               </div>
-              <button class="argus-chat-btn" onclick="argusOpenChat()" title="Conversar com a Argus">
+              <button class="argus-chat-btn" onclick="argusOpenChat()" title="Conversar com o Argus">
                 💬 <span style="font-size:11px;">Conversar</span>
               </button>
             </div>
 
             <textarea id="argus-input" class="argus-textarea"
-              placeholder="O que você viu? Pode escrever, colar link, colar texto do Grok, ou perguntar — a Argus entende e age."
+              placeholder="O que você viu? Pode escrever, colar link, colar texto do Grok, ou perguntar — o Argus entende e age."
               rows="3"></textarea>
 
             <!-- Preview de anexo (print colado/arrastado) -->
@@ -2012,7 +2012,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
                 <button class="argus-tool" onclick="document.getElementById('argus-grok-helper').style.display='none'" style="font-size:11px;margin-left:auto;">✕ Fechar</button>
               </div>
               <div style="font-size:11px;color:#6a8aaa;margin-top:8px;">
-                Depois de copiar a resposta do Grok, cole no campo da Argus acima e clique Enviar.
+                Depois de copiar a resposta do Grok, cole no campo do Argus acima e clique Enviar.
               </div>
             </div>
           </div>
@@ -2123,7 +2123,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
                 <div class="argus-avatar">🛡</div>
                 <div>
                   <div class="argus-chat-title">Argus</div>
-                  <div class="argus-chat-sub">IA do GSI · Online</div>
+                  <div class="argus-chat-sub">IA · Online</div>
                 </div>
                 <button class="argus-chat-close" onclick="argusCloseChat()">✕</button>
               </div>
@@ -2153,7 +2153,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <button class="back-btn" onclick="showView('inicio')">← Voltar</button>
       <div class="section-card">
         <div class="section-header">
-          <div class="section-left"><div class="sec-icon icon-orange">🛡</div><div><div class="section-title">Análise de Risco</div><div class="chips"><span class="chip chip-orange">USO INTERNO</span><span class="chip chip-purple">GSI/SSIE</span></div></div></div>
+          <div class="section-left"><div class="sec-icon icon-orange">🛡</div><div><div class="section-title">Análise de Risco</div><div class="chips"><span class="chip chip-orange">USO INTERNO</span><span class="chip chip-purple">SSIE</span></div></div></div>
           <div class="sec-right"><button class="cp-btn" onclick="cp('b3',this)">Copiar</button></div>
         </div>
         <div class="section-body">
@@ -2207,12 +2207,12 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
         <div class="section-header">
           <div class="section-left"><div class="sec-icon icon-purple">📄</div><div>
             <div class="section-title">Relatório de Monitoramento de Manifestação</div>
-            <div class="chips"><span class="chip chip-purple">GSI/SSIE</span><span class="chip chip-blue">INTELIGÊNCIA ESTRATÉGICA</span><span class="chip chip-orange">RESTRITO</span></div>
+            <div class="chips"><span class="chip chip-purple">SSIE</span><span class="chip chip-blue">INTELIGÊNCIA ESTRATÉGICA</span><span class="chip chip-orange">RESTRITO</span></div>
           </div></div>
           <div class="sec-right" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <button class="cp-btn" onclick="cpRelatorio(this)">Copiar</button>
             <button class="btn-add" onclick="exportDoc()" style="font-size:11px;padding:0 14px;background:#22a06b;">⬇ Exportar .doc</button>
-            <a href="https://cronos.gsi.rj.gov.br/index.php/login" target="_blank" rel="noopener noreferrer" class="btn-add" style="font-size:11px;padding:0 14px;background:#1a2d4f;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">🔗 Exportar para Cronos GSI</a>
+            <a href="https://cronos.gsi.rj.gov.br/index.php/login" target="_blank" rel="noopener noreferrer" class="btn-add" style="font-size:11px;padding:0 14px;background:#1a2d4f;text-decoration:none;display:inline-flex;align-items:center;gap:6px;">🔗 Exportar para Cronos</a>
             <button class="btn-add" onclick="openConfirmClear()" style="font-size:11px;padding:0 14px;background:#c0392b;" title="Limpar todos os campos do relatório">🗑 Limpar Relatório</button>
             <button class="cp-btn" onclick="openTrash()" title="Relatórios excluídos" style="font-size:11px;padding:0 10px;display:flex;align-items:center;gap:4px;">🗑️ Lixeira</button>
           </div>
@@ -2228,7 +2228,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
               onerror="this.style.display='none';document.getElementById('brasao-fallback').style.display='flex';"
             />
             <div id="brasao-fallback" style="display:none;flex-direction:column;align-items:center;gap:4px;">
-              <div style="width:64px;height:64px;background:#1a2d4f;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:700;">GSI</div>
+              <div style="width:64px;height:64px;background:#1a2d4f;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:700;">RJ</div>
             </div>
             <div style="font-size:12px;font-weight:400;color:#1a2a3a;margin-top:4px;">Governo do Estado do Rio de Janeiro</div>
             <div style="font-size:12px;font-weight:700;color:#1a2d4f;">Gabinete de Segurança Institucional</div>
@@ -2241,7 +2241,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem;">
             <div class="field-wrap" style="margin-bottom:0;">
               <span class="field-label">Número do Relatório</span>
-              <input class="main-input" type="text" id="rel-num" placeholder="RELINT GSI/SSIE 001/2026" />
+              <input class="main-input" type="text" id="rel-num" placeholder="RELINT SSIE 001/2026" />
             </div>
             <div class="field-wrap" style="margin-bottom:0;">
               <span class="field-label">Data de emissão (por extenso)</span>
@@ -2356,14 +2356,14 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
           </div>
           <div class="rel-field-block" style="margin-bottom:.85rem;">
             <div class="rel-field-label">Posicionamento institucional</div>
-            <textarea class="rel-textarea-field" id="rs5-posicionamento" rows="2" placeholder="Ex: O GSI/SSIE recomenda acompanhamento contínuo do evento e reforço preventivo do policiamento na área de concentração. Situação sob monitoramento."></textarea>
+            <textarea class="rel-textarea-field" id="rs5-posicionamento" rows="2" placeholder="Ex: O SSIE recomenda acompanhamento contínuo do evento e reforço preventivo do policiamento na área de concentração. Situação sob monitoramento."></textarea>
           </div>
 
           <!-- ── RODAPÉ ── -->
           <div class="rel-section-header">RODAPÉ / RESPONSÁVEL</div>
           <div class="field-wrap" style="margin-bottom:.85rem;">
             <span class="field-label">Responsável pelo relatório</span>
-            <input class="main-input" type="text" id="rel-responsavel" placeholder="Ex: Ten. Cel. Silva — GSI/SSIE · Seção de Inteligência" />
+            <input class="main-input" type="text" id="rel-responsavel" placeholder="Ex: Ten. Cel. Silva — SSIE · Seção de Inteligência" />
           </div>
 
           <!-- Acesso rápido à manifestação relacionada -->
@@ -2392,7 +2392,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
         <div class="section-header">
           <div class="section-left"><div class="sec-icon icon-purple">📝</div><div>
             <div class="section-title">Modelo de Relatório — Texto Livre</div>
-            <div class="chips"><span class="chip chip-purple">GSI/SSIE</span><span class="chip chip-blue">PARÁGRAFOS NUMERADOS</span></div>
+            <div class="chips"><span class="chip chip-purple">SSIE</span><span class="chip chip-blue">PARÁGRAFOS NUMERADOS</span></div>
           </div></div>
           <div class="sec-right" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <button class="cp-btn" id="btn-cp-modelo" onclick="cpModelo(this)">Copiar Relatório</button>
@@ -2426,7 +2426,7 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
       <button class="back-btn" onclick="showView('inicio')">← Voltar</button>
       <div class="section-card">
         <div class="section-header">
-          <div class="section-left"><div class="sec-icon icon-blue">📖</div><div><div class="section-title">Manual de Uso</div><div class="chips"><span class="chip chip-blue">GSI · SISTEMA DE MONITORAMENTO</span></div></div></div>
+          <div class="section-left"><div class="sec-icon icon-blue">📖</div><div><div class="section-title">Manual de Uso</div><div class="chips"><span class="chip chip-blue">SISTEMA DE MONITORAMENTO</span></div></div></div>
         </div>
         <div class="section-body" style="line-height:1.9;">
 
@@ -2516,15 +2516,15 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
   <div class="footer">
     <div class="footer-text">Gabinete de Segurança Institucional · Sistema de Monitoramento de Manifestações</div>
     <div class="footer-search-done" id="footer-search-done" style="display:none;"></div>
-    <div class="footer-right">GSI/SSIE © 2026 · Uso interno e restrito</div>
+    <div class="footer-right">SSIE © 2026 · Uso interno e restrito</div>
   </div>
 </div><!-- /main -->
 </div><!-- /app -->
 </div><!-- /app-page -->
 
-<script id="dados" type="application/json">{"status":"concluido","query":"manifestações","timestamp":"30/04/2026 10:34","dataAtualizacao":"30/04/2026 14:30","risco":"Médio-Alto","sentimentoGovernador":{"dataAnalise":"30/04/2026 10:52","tema":"Governador Ricardo Couto — Menções nas Redes","sentimentoGeral":"positivo","scoreRisco":28,"nivelRisco":"Baixo","periodoColeta":"30/04/2026 00:00 – 10:52","fonteColeta":"Coleta OSINT manual — GSI/SSIE. Dados estimados via monitoramento de buscas abertas (X, Google Trends, portais de notícia). Para volume exato, integração com API Twitter v2 / Brandwatch é necessária.","metodologia":"Estimativa por OSINT — escala proporcional baseada em cobertura editorial e engajamento observado nas buscas abertas.","distribuicao":{"positivo":62,"neutro":25,"negativo":13},"periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","volumePorRede":{"twitter":4200,"instagram":1850,"facebook":980,"tiktok":430,"youtube":210,"telegram":520},"volumePostsPorRede":{"twitter":980,"instagram":390,"facebook":210,"tiktok":380,"youtube":180,"telegram":195},"volumeComentariosPorRede":{"twitter":3220,"instagram":1460,"facebook":770,"tiktok":50,"youtube":30,"telegram":325},"topPalavras":["exonerações","Couto","fiscalização","STF","auditoria","contratos","Zanin","segurança"],"topPalavrasPorRede":{"x":["exonerações","Couto","STF","Zanin","constitucional","Cláudio Castro","ALERJ","governador interino","eleições RJ","fundo soberano"],"threads":["exonerações","governador","STF","Zanin","gestão pública","RJ 2026","fiscalização","constitucional"],"ig":["exonerações","governador RJ","pagamento servidores","kit escolar","governo Rio","saúde RJ","segurança RJ","obras"],"fb":["exonerações","repasses municipais","fundo soberano","governador","municípios","contratos RJ","auditoria","servidores"],"tt":["exonerações","governador RJ","kit escolar","candidatos governo","saúde","segurança","obras RJ","concurso"]},"topHashtags":["#GovernoRJ","#RioDeJaneiro","#GovernadorRJ","#RJ2026","#EstadoDoRio"],"alertas":[{"tipo":"aprovação","descricao":"Quaest (21-25/abr): 71% de reação positiva às medidas do governador — Fonte: Genial/Quaest RJ-00613/2026","nivel":"baixo"},{"tipo":"risco político","descricao":"Disputa no STF com Douglas Ruas (PL) sobre legitimidade do cargo — decisão de Zanin manteve Couto","nivel":"moderado"},{"tipo":"mobilização","descricao":"Ato do 1º de Maio em Copacabana menciona governo estadual — monitorar proximidade com o governador","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":12,"negativoPct":22},{"hora":"01:00","volume":7,"negativoPct":20},{"hora":"02:00","volume":5,"negativoPct":18},{"hora":"03:00","volume":4,"negativoPct":17},{"hora":"04:00","volume":6,"negativoPct":19},{"hora":"05:00","volume":18,"negativoPct":22},{"hora":"06:00","volume":48,"negativoPct":26},{"hora":"07:00","volume":94,"negativoPct":29},{"hora":"08:00","volume":187,"negativoPct":31},{"hora":"09:00","volume":312,"negativoPct":33},{"hora":"10:00","volume":478,"negativoPct":34}],"posts":[{"rede":"twitter","handle":"@leorjtj","link":"https://x.com/leorjtj","texto":"Falta legitimidade pra quem usa o dinheiro do contribuinte para se perpetuar em cargo político. O RJ merece um governador sem rabo preso. Fica Ricardo Couto, a população fluminense te apoia e quer a tua permanência. @STF_oficial","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":8},{"rede":"twitter","handle":"@MarcusPPaiva","link":"https://x.com/MarcusPPaiva","texto":"Continue Desembargador Ricardo Couto até 2027. Assim o povo verá que o RJ tem dinheiro sim, só era desviado, pessimamente empregado... O melhor governador que o RJ já teve é um Desembargador.","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":5},{"rede":"twitter","handle":"@sputnik_brasil","link":"https://x.com/sputnik_brasil","texto":"Ricardo Couto deve permanecer como governador do RJ, afirma ministro Edson Fachin (STF). Ministro declarou que governador em exercício Ricardo Couto deve permanecer no cargo.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":12},{"rede":"twitter","handle":"@Andy5vez","link":"https://x.com/Andy5vez","texto":"E foi só o Governador interino do RJ, o desembargador Ricardo Couto fazer a limpa na farra de funcionários fantasmas do Cláudio Castro, exonerando 638 servidores, bloqueando mais de R$ 700 milhões do fundo soberano que eles ficam DOIDOS!","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":10},{"rede":"twitter","handle":"Busca ao vivo no X","link":"https://x.com/search?q=%22Ricardo+Couto%22+governador+RJ&src=typed_query&f=live","texto":"[Monitoramento em tempo real] Acesse para ver as menções mais recentes ao Governador Ricardo Couto no X/Twitter.","sentimento":"neutro","intensidade":"leve","classificacao":"monitoramento","risco":20}]},
-"sentimentoPoliticos":{"dataAnalise":"30/04/2026 10:52","tema":"Políticos do Estado do Rio de Janeiro","sentimentoGeral":"negativo","scoreRisco":68,"nivelRisco":"Alto","periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","fonteColeta":"Estimativa OSINT — GSI/SSIE. Busca aberta no X/Twitter, cobertura editorial e engajamento observado.","metodologia":"Estimativa proporcional baseada em volume editorial e busca aberta. Dados de posts vs comentários baseados em padrão observado de plataforma.","distribuicao":{"positivo":12,"neutro":24,"negativo":64},"volumePorRede":{"twitter":8400,"instagram":3200,"facebook":1800,"tiktok":920,"youtube":440,"telegram":680},"volumePostsPorRede":{"twitter":1950,"instagram":680,"facebook":380,"tiktok":810,"youtube":380,"telegram":255},"volumeComentariosPorRede":{"twitter":6450,"instagram":2520,"facebook":1420,"tiktok":110,"youtube":60,"telegram":425},"topPalavras":["Douglas Ruas","ALERJ","eleição indireta","STF","Ceciliano","oposição","mandato","Freixo"],"topPalavrasPorRede":{"x":["Douglas Ruas","eleição indireta","STF","Zanin","ALERJ","Ceciliano","governador RJ","Freixo","PL","PT"],"threads":["Douglas Ruas","ALERJ","eleição indireta","Ceciliano","governador","oposição","STF"],"ig":["Douglas Ruas","ALERJ","deputados RJ","eleição RJ 2026","Freixo","Ceciliano"],"fb":["Douglas Ruas","eleição indireta","governador RJ","deputados","ALERJ","partidos RJ"],"tt":["ALERJ","eleição RJ","Douglas Ruas","governador RJ","deputados","crise política"]},"topHashtags":["#ALERJ","#AssembleiaRJ","#DeputadosRJ","#PoliticaRJ","#RJ2026"],"alertas":[{"tipo":"crise institucional","descricao":"Disputa Douglas Ruas (PL) x Ricardo Couto no STF sobre sucessão do governo domina o debate — 3K+ impressões em posts principais","nivel":"alto"},{"tipo":"denúncia","descricao":"André Ceciliano citado em movimentação de R$ 50 milhões — posts com alto engajamento nesta semana","nivel":"alto"},{"tipo":"histórico","descricao":"Narrativa viral sobre 30 anos de corrupção sistêmica no RJ (governadores + presidentes ALERJ presos)","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":28,"negativoPct":42},{"hora":"01:00","volume":15,"negativoPct":40},{"hora":"02:00","volume":9,"negativoPct":38},{"hora":"03:00","volume":7,"negativoPct":37},{"hora":"04:00","volume":12,"negativoPct":39},{"hora":"05:00","volume":34,"negativoPct":42},{"hora":"06:00","volume":98,"negativoPct":46},{"hora":"07:00","volume":198,"negativoPct":49},{"hora":"08:00","volume":387,"negativoPct":52},{"hora":"09:00","volume":560,"negativoPct":54},{"hora":"10:00","volume":742,"negativoPct":55}],"posts":[{"rede":"twitter","handle":"@agendadopoder","link":"https://x.com/agendadopoder","texto":"ELEIÇÃO ALERJ | Ministro já havia suspendido modelo aberto em eleição indireta no RJ aprovada pelos deputados. (Fux reforça posição por voto secreto como relator no STF)","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":32},{"rede":"twitter","handle":"@ChavesNegocio","link":"https://x.com/ChavesNegocio","texto":"Nos últimos 30 anos, todos os governadores do RJ foram presos, afastados por corrupção, ex-presidente da ALERJ suspeito de ligação com o CV, deputados TH Joias e Lucinha, ex-vereador Jairinho e os irmãos Brazão.","sentimento":"negativo","intensidade":"forte","classificacao":"tensão","risco":72},{"rede":"twitter","handle":"@jordi_mello","link":"https://x.com/jordi_mello","texto":"Aproveita e denuncia o André Ceciliano, que é do partido que vc vota e que era presidente da ALERJ e movimentou 50 milhões nesse esquema que vc acusa o Flávio de participar.","sentimento":"negativo","intensidade":"forte","classificacao":"denúncia","risco":75},{"rede":"twitter","handle":"@revistaoeste","link":"https://x.com/revistaoeste","texto":"Governador em exercício do RJ exonera 191 e amplia mudanças","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":18},{"rede":"twitter","handle":"Busca: eleição indireta RJ","link":"https://x.com/search?q=elei%C3%A7%C3%A3o+indireta+RJ+governador&f=live","texto":"[Monitoramento ao vivo] Eleição indireta para governador do RJ — acompanhe o debate em tempo real no X/Twitter.","sentimento":"negativo","intensidade":"forte","classificacao":"tensão","risco":65}]},
-"sentimentoSecretarias":{"dataAnalise":"30/04/2026 10:52","tema":"Secretarias do Estado do Rio de Janeiro","sentimentoGeral":"negativo","scoreRisco":50,"nivelRisco":"Moderado","periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","fonteColeta":"Estimativa OSINT — GSI/SSIE. Monitoramento de secretarias estaduais do RJ. Apenas órgãos do Poder Executivo Estadual.","metodologia":"Estimativa proporcional baseada em cobertura editorial, buscas abertas no X e portais de notícia. Não inclui secretarias municipais ou federais.","distribuicao":{"positivo":21,"neutro":36,"negativo":43},"volumePorRede":{"twitter":5200,"instagram":2100,"facebook":1400,"tiktok":680,"youtube":310,"telegram":490},"volumePostsPorRede":{"twitter":1100,"instagram":440,"facebook":295,"tiktok":600,"youtube":268,"telegram":184},"volumeComentariosPorRede":{"twitter":4100,"instagram":1660,"facebook":1105,"tiktok":80,"youtube":42,"telegram":306},"topPalavras":["SESEG","SES","SEEDuc","SEFAZ","atraso salarial","exonerações","concurso","segurança pública"],"topPalavrasPorRede":{"x":["SESEG","SES greve","SEEDuc","atraso salarial","exonerações RJ","SEFAZ","servidores estaduais","concurso RJ","SEOP","contratos"],"threads":["SES greve","SESEG","SEEDuc","servidores RJ","atraso salarial","segurança pública","educação estadual"],"ig":["SESEG","SES RJ","servidores estaduais","greve saúde RJ","concurso RJ","segurança pública RJ","obras estaduais"],"fb":["SES atraso","SESEG","servidores RJ","greve saúde","SEEDuc professores","concurso estado RJ","exonerações"],"tt":["servidores RJ","greve saúde RJ","segurança pública RJ","concurso estado","professores RJ","obras RJ"]},"topHashtags":["#SESEG","#SES_RJ","#SEEDucRJ","#ServidoresRJ","#GreveRJ","#SEFAZ_RJ"],"alertas":[{"tipo":"tensão","descricao":"Servidores da Saúde estadual mobilizados por atraso salarial — 3ª semana consecutiva","nivel":"alto"},{"tipo":"mobilização","descricao":"Professores estaduais convocam ato em frente à SEEDuc para o 1º de Maio","nivel":"moderado"},{"tipo":"monitoramento","descricao":"Denúncias sobre contratos da SEOP amplificadas por perfis com histórico de desinformação","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":18,"negativoPct":35},{"hora":"01:00","volume":10,"negativoPct":32},{"hora":"02:00","volume":7,"negativoPct":30},{"hora":"03:00","volume":5,"negativoPct":29},{"hora":"04:00","volume":9,"negativoPct":31},{"hora":"05:00","volume":24,"negativoPct":34},{"hora":"06:00","volume":78,"negativoPct":38},{"hora":"07:00","volume":162,"negativoPct":41},{"hora":"08:00","volume":290,"negativoPct":44},{"hora":"09:00","volume":418,"negativoPct":46},{"hora":"10:00","volume":521,"negativoPct":47}],"posts":[{"rede":"twitter","handle":"@Louh_novak","link":"https://x.com/Louh_novak","texto":"PENTE-FINO NO RJ — Uma edição extra do Diário Oficial do Rio de Janeiro, publicada na noite de quinta-feira (16), trouxe a exoneração de mais de 150 servidores lotados na Secretaria de Governo do estado.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":22},{"rede":"twitter","handle":"@jonasdiandrade","link":"https://x.com/jonasdiandrade","texto":"O que acontece no Rio de Janeiro no que se refere ao governo não é novidade, mas deveria causar revolta em todos. Houve exoneração de 152 servidores lotados na Secretaria de Governo do estado e adivinhem: parte dos exonerados são FUNCIONÁRIOS FANTASMAS.","sentimento":"negativo","intensidade":"forte","classificacao":"denúncia","risco":68},{"rede":"twitter","handle":"@cut_rj","link":"https://x.com/cut_rj","texto":"Servidores da Saúde do RJ: 3ª semana de atraso no pagamento. Paralisação confirmada para 05/05. Solidariedade total! #ServidoresRJ #SES #GreveRJ","sentimento":"negativo","intensidade":"forte","classificacao":"mobilização","risco":70},{"rede":"twitter","handle":"@ALERJ","link":"https://x.com/ALERJ","texto":"Comissão de Educação da ALERJ convoca secretário da SEEDuc para prestar esclarecimentos sobre reajuste salarial do magistério estadual.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":20},{"rede":"twitter","handle":"Busca: secretarias RJ pente-fino","link":"https://x.com/search?q=secretaria+governo+RJ+exoneração+since%3A2026-04-01&f=live","texto":"[Monitoramento ao vivo] Repercussão do pente-fino nas secretarias do estado do RJ — acompanhe em tempo real.","sentimento":"neutro","intensidade":"moderado","classificacao":"monitoramento","risco":30}]},
+<script id="dados" type="application/json">{"status":"concluido","query":"manifestações","timestamp":"30/04/2026 10:34","dataAtualizacao":"30/04/2026 14:30","risco":"Médio-Alto","sentimentoGovernador":{"dataAnalise":"30/04/2026 10:52","tema":"Governador Ricardo Couto — Menções nas Redes","sentimentoGeral":"positivo","scoreRisco":28,"nivelRisco":"Baixo","periodoColeta":"30/04/2026 00:00 – 10:52","fonteColeta":"Coleta OSINT manual — SSIE. Dados estimados via monitoramento de buscas abertas (X, Google Trends, portais de notícia). Para volume exato, integração com API Twitter v2 / Brandwatch é necessária.","metodologia":"Estimativa por OSINT — escala proporcional baseada em cobertura editorial e engajamento observado nas buscas abertas.","distribuicao":{"positivo":62,"neutro":25,"negativo":13},"periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","volumePorRede":{"twitter":4200,"instagram":1850,"facebook":980,"tiktok":430,"youtube":210,"telegram":520},"volumePostsPorRede":{"twitter":980,"instagram":390,"facebook":210,"tiktok":380,"youtube":180,"telegram":195},"volumeComentariosPorRede":{"twitter":3220,"instagram":1460,"facebook":770,"tiktok":50,"youtube":30,"telegram":325},"topPalavras":["exonerações","Couto","fiscalização","STF","auditoria","contratos","Zanin","segurança"],"topPalavrasPorRede":{"x":["exonerações","Couto","STF","Zanin","constitucional","Cláudio Castro","ALERJ","governador interino","eleições RJ","fundo soberano"],"threads":["exonerações","governador","STF","Zanin","gestão pública","RJ 2026","fiscalização","constitucional"],"ig":["exonerações","governador RJ","pagamento servidores","kit escolar","governo Rio","saúde RJ","segurança RJ","obras"],"fb":["exonerações","repasses municipais","fundo soberano","governador","municípios","contratos RJ","auditoria","servidores"],"tt":["exonerações","governador RJ","kit escolar","candidatos governo","saúde","segurança","obras RJ","concurso"]},"topHashtags":["#GovernoRJ","#RioDeJaneiro","#GovernadorRJ","#RJ2026","#EstadoDoRio"],"alertas":[{"tipo":"aprovação","descricao":"Quaest (21-25/abr): 71% de reação positiva às medidas do governador — Fonte: Genial/Quaest RJ-00613/2026","nivel":"baixo"},{"tipo":"risco político","descricao":"Disputa no STF com Douglas Ruas (PL) sobre legitimidade do cargo — decisão de Zanin manteve Couto","nivel":"moderado"},{"tipo":"mobilização","descricao":"Ato do 1º de Maio em Copacabana menciona governo estadual — monitorar proximidade com o governador","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":12,"negativoPct":22},{"hora":"01:00","volume":7,"negativoPct":20},{"hora":"02:00","volume":5,"negativoPct":18},{"hora":"03:00","volume":4,"negativoPct":17},{"hora":"04:00","volume":6,"negativoPct":19},{"hora":"05:00","volume":18,"negativoPct":22},{"hora":"06:00","volume":48,"negativoPct":26},{"hora":"07:00","volume":94,"negativoPct":29},{"hora":"08:00","volume":187,"negativoPct":31},{"hora":"09:00","volume":312,"negativoPct":33},{"hora":"10:00","volume":478,"negativoPct":34}],"posts":[{"rede":"twitter","handle":"@leorjtj","link":"https://x.com/leorjtj","texto":"Falta legitimidade pra quem usa o dinheiro do contribuinte para se perpetuar em cargo político. O RJ merece um governador sem rabo preso. Fica Ricardo Couto, a população fluminense te apoia e quer a tua permanência. @STF_oficial","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":8},{"rede":"twitter","handle":"@MarcusPPaiva","link":"https://x.com/MarcusPPaiva","texto":"Continue Desembargador Ricardo Couto até 2027. Assim o povo verá que o RJ tem dinheiro sim, só era desviado, pessimamente empregado... O melhor governador que o RJ já teve é um Desembargador.","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":5},{"rede":"twitter","handle":"@sputnik_brasil","link":"https://x.com/sputnik_brasil","texto":"Ricardo Couto deve permanecer como governador do RJ, afirma ministro Edson Fachin (STF). Ministro declarou que governador em exercício Ricardo Couto deve permanecer no cargo.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":12},{"rede":"twitter","handle":"@Andy5vez","link":"https://x.com/Andy5vez","texto":"E foi só o Governador interino do RJ, o desembargador Ricardo Couto fazer a limpa na farra de funcionários fantasmas do Cláudio Castro, exonerando 638 servidores, bloqueando mais de R$ 700 milhões do fundo soberano que eles ficam DOIDOS!","sentimento":"positivo","intensidade":"forte","classificacao":"apoio","risco":10},{"rede":"twitter","handle":"Busca ao vivo no X","link":"https://x.com/search?q=%22Ricardo+Couto%22+governador+RJ&src=typed_query&f=live","texto":"[Monitoramento em tempo real] Acesse para ver as menções mais recentes ao Governador Ricardo Couto no X/Twitter.","sentimento":"neutro","intensidade":"leve","classificacao":"monitoramento","risco":20}]},
+"sentimentoPoliticos":{"dataAnalise":"30/04/2026 10:52","tema":"Políticos do Estado do Rio de Janeiro","sentimentoGeral":"negativo","scoreRisco":68,"nivelRisco":"Alto","periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","fonteColeta":"Estimativa OSINT. Busca aberta no X/Twitter, cobertura editorial e engajamento observado.","metodologia":"Estimativa proporcional baseada em volume editorial e busca aberta. Dados de posts vs comentários baseados em padrão observado de plataforma.","distribuicao":{"positivo":12,"neutro":24,"negativo":64},"volumePorRede":{"twitter":8400,"instagram":3200,"facebook":1800,"tiktok":920,"youtube":440,"telegram":680},"volumePostsPorRede":{"twitter":1950,"instagram":680,"facebook":380,"tiktok":810,"youtube":380,"telegram":255},"volumeComentariosPorRede":{"twitter":6450,"instagram":2520,"facebook":1420,"tiktok":110,"youtube":60,"telegram":425},"topPalavras":["Douglas Ruas","ALERJ","eleição indireta","STF","Ceciliano","oposição","mandato","Freixo"],"topPalavrasPorRede":{"x":["Douglas Ruas","eleição indireta","STF","Zanin","ALERJ","Ceciliano","governador RJ","Freixo","PL","PT"],"threads":["Douglas Ruas","ALERJ","eleição indireta","Ceciliano","governador","oposição","STF"],"ig":["Douglas Ruas","ALERJ","deputados RJ","eleição RJ 2026","Freixo","Ceciliano"],"fb":["Douglas Ruas","eleição indireta","governador RJ","deputados","ALERJ","partidos RJ"],"tt":["ALERJ","eleição RJ","Douglas Ruas","governador RJ","deputados","crise política"]},"topHashtags":["#ALERJ","#AssembleiaRJ","#DeputadosRJ","#PoliticaRJ","#RJ2026"],"alertas":[{"tipo":"crise institucional","descricao":"Disputa Douglas Ruas (PL) x Ricardo Couto no STF sobre sucessão do governo domina o debate — 3K+ impressões em posts principais","nivel":"alto"},{"tipo":"denúncia","descricao":"André Ceciliano citado em movimentação de R$ 50 milhões — posts com alto engajamento nesta semana","nivel":"alto"},{"tipo":"histórico","descricao":"Narrativa viral sobre 30 anos de corrupção sistêmica no RJ (governadores + presidentes ALERJ presos)","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":28,"negativoPct":42},{"hora":"01:00","volume":15,"negativoPct":40},{"hora":"02:00","volume":9,"negativoPct":38},{"hora":"03:00","volume":7,"negativoPct":37},{"hora":"04:00","volume":12,"negativoPct":39},{"hora":"05:00","volume":34,"negativoPct":42},{"hora":"06:00","volume":98,"negativoPct":46},{"hora":"07:00","volume":198,"negativoPct":49},{"hora":"08:00","volume":387,"negativoPct":52},{"hora":"09:00","volume":560,"negativoPct":54},{"hora":"10:00","volume":742,"negativoPct":55}],"posts":[{"rede":"twitter","handle":"@agendadopoder","link":"https://x.com/agendadopoder","texto":"ELEIÇÃO ALERJ | Ministro já havia suspendido modelo aberto em eleição indireta no RJ aprovada pelos deputados. (Fux reforça posição por voto secreto como relator no STF)","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":32},{"rede":"twitter","handle":"@ChavesNegocio","link":"https://x.com/ChavesNegocio","texto":"Nos últimos 30 anos, todos os governadores do RJ foram presos, afastados por corrupção, ex-presidente da ALERJ suspeito de ligação com o CV, deputados TH Joias e Lucinha, ex-vereador Jairinho e os irmãos Brazão.","sentimento":"negativo","intensidade":"forte","classificacao":"tensão","risco":72},{"rede":"twitter","handle":"@jordi_mello","link":"https://x.com/jordi_mello","texto":"Aproveita e denuncia o André Ceciliano, que é do partido que vc vota e que era presidente da ALERJ e movimentou 50 milhões nesse esquema que vc acusa o Flávio de participar.","sentimento":"negativo","intensidade":"forte","classificacao":"denúncia","risco":75},{"rede":"twitter","handle":"@revistaoeste","link":"https://x.com/revistaoeste","texto":"Governador em exercício do RJ exonera 191 e amplia mudanças","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":18},{"rede":"twitter","handle":"Busca: eleição indireta RJ","link":"https://x.com/search?q=elei%C3%A7%C3%A3o+indireta+RJ+governador&f=live","texto":"[Monitoramento ao vivo] Eleição indireta para governador do RJ — acompanhe o debate em tempo real no X/Twitter.","sentimento":"negativo","intensidade":"forte","classificacao":"tensão","risco":65}]},
+"sentimentoSecretarias":{"dataAnalise":"30/04/2026 10:52","tema":"Secretarias do Estado do Rio de Janeiro","sentimentoGeral":"negativo","scoreRisco":50,"nivelRisco":"Moderado","periodoColeta":"30/04/2026 — 00:00 às 10:52 (Brasília)","periodoInicio":"00:00","periodoFim":"10:52","fonteColeta":"Estimativa OSINT. Monitoramento de secretarias estaduais do RJ. Apenas órgãos do Poder Executivo Estadual.","metodologia":"Estimativa proporcional baseada em cobertura editorial, buscas abertas no X e portais de notícia. Não inclui secretarias municipais ou federais.","distribuicao":{"positivo":21,"neutro":36,"negativo":43},"volumePorRede":{"twitter":5200,"instagram":2100,"facebook":1400,"tiktok":680,"youtube":310,"telegram":490},"volumePostsPorRede":{"twitter":1100,"instagram":440,"facebook":295,"tiktok":600,"youtube":268,"telegram":184},"volumeComentariosPorRede":{"twitter":4100,"instagram":1660,"facebook":1105,"tiktok":80,"youtube":42,"telegram":306},"topPalavras":["SESEG","SES","SEEDuc","SEFAZ","atraso salarial","exonerações","concurso","segurança pública"],"topPalavrasPorRede":{"x":["SESEG","SES greve","SEEDuc","atraso salarial","exonerações RJ","SEFAZ","servidores estaduais","concurso RJ","SEOP","contratos"],"threads":["SES greve","SESEG","SEEDuc","servidores RJ","atraso salarial","segurança pública","educação estadual"],"ig":["SESEG","SES RJ","servidores estaduais","greve saúde RJ","concurso RJ","segurança pública RJ","obras estaduais"],"fb":["SES atraso","SESEG","servidores RJ","greve saúde","SEEDuc professores","concurso estado RJ","exonerações"],"tt":["servidores RJ","greve saúde RJ","segurança pública RJ","concurso estado","professores RJ","obras RJ"]},"topHashtags":["#SESEG","#SES_RJ","#SEEDucRJ","#ServidoresRJ","#GreveRJ","#SEFAZ_RJ"],"alertas":[{"tipo":"tensão","descricao":"Servidores da Saúde estadual mobilizados por atraso salarial — 3ª semana consecutiva","nivel":"alto"},{"tipo":"mobilização","descricao":"Professores estaduais convocam ato em frente à SEEDuc para o 1º de Maio","nivel":"moderado"},{"tipo":"monitoramento","descricao":"Denúncias sobre contratos da SEOP amplificadas por perfis com histórico de desinformação","nivel":"moderado"}],"timeline":[{"hora":"00:00","volume":18,"negativoPct":35},{"hora":"01:00","volume":10,"negativoPct":32},{"hora":"02:00","volume":7,"negativoPct":30},{"hora":"03:00","volume":5,"negativoPct":29},{"hora":"04:00","volume":9,"negativoPct":31},{"hora":"05:00","volume":24,"negativoPct":34},{"hora":"06:00","volume":78,"negativoPct":38},{"hora":"07:00","volume":162,"negativoPct":41},{"hora":"08:00","volume":290,"negativoPct":44},{"hora":"09:00","volume":418,"negativoPct":46},{"hora":"10:00","volume":521,"negativoPct":47}],"posts":[{"rede":"twitter","handle":"@Louh_novak","link":"https://x.com/Louh_novak","texto":"PENTE-FINO NO RJ — Uma edição extra do Diário Oficial do Rio de Janeiro, publicada na noite de quinta-feira (16), trouxe a exoneração de mais de 150 servidores lotados na Secretaria de Governo do estado.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":22},{"rede":"twitter","handle":"@jonasdiandrade","link":"https://x.com/jonasdiandrade","texto":"O que acontece no Rio de Janeiro no que se refere ao governo não é novidade, mas deveria causar revolta em todos. Houve exoneração de 152 servidores lotados na Secretaria de Governo do estado e adivinhem: parte dos exonerados são FUNCIONÁRIOS FANTASMAS.","sentimento":"negativo","intensidade":"forte","classificacao":"denúncia","risco":68},{"rede":"twitter","handle":"@cut_rj","link":"https://x.com/cut_rj","texto":"Servidores da Saúde do RJ: 3ª semana de atraso no pagamento. Paralisação confirmada para 05/05. Solidariedade total! #ServidoresRJ #SES #GreveRJ","sentimento":"negativo","intensidade":"forte","classificacao":"mobilização","risco":70},{"rede":"twitter","handle":"@ALERJ","link":"https://x.com/ALERJ","texto":"Comissão de Educação da ALERJ convoca secretário da SEEDuc para prestar esclarecimentos sobre reajuste salarial do magistério estadual.","sentimento":"neutro","intensidade":"moderado","classificacao":"institucional","risco":20},{"rede":"twitter","handle":"Busca: secretarias RJ pente-fino","link":"https://x.com/search?q=secretaria+governo+RJ+exoneração+since%3A2026-04-01&f=live","texto":"[Monitoramento ao vivo] Repercussão do pente-fino nas secretarias do estado do RJ — acompanhe em tempo real.","sentimento":"neutro","intensidade":"moderado","classificacao":"monitoramento","risco":30}]},
 "sentimento":{"dataAnalise":"29/04/2026 14:00","tema":"Manifestações Rio de Janeiro","sentimentoGeral":"negativo","scoreRisco":62,"nivelRisco":"Alto","distribuicao":{"positivo":18,"neutro":31,"negativo":51},"volumePorRede":{"twitter":1240,"instagram":876,"facebook":543,"tiktok":312,"youtube":198,"telegram":87},"topPalavras":["greve","protesto","trabalhadores","escala6x1","salário","direitos","mobilização","paralisação"],"topHashtags":["#1deMaio","#EscalaFDS","#GreveDosServidores","#FimDaEscala6x1","#ManifestacaoRJ"],"alertas":[{"tipo":"mobilização","descricao":"Aumento de 340% em convocações nas últimas 12h","nivel":"alto"},{"tipo":"tensão","descricao":"Crescimento de discurso de confronto em grupos do Telegram","nivel":"moderado"},{"tipo":"desinformação","descricao":"Posts com informações falsas sobre cancelamento do ato detectados","nivel":"baixo"}],"timeline":[{"hora":"08:00","volume":120,"negativoPct":45},{"hora":"09:00","volume":189,"negativoPct":48},{"hora":"10:00","volume":234,"negativoPct":52}],"posts":[{"rede":"twitter","handle":"@cut_rj","texto":"AMANHÃ tem! 1º de Maio em Copacabana 14h Posto 5. Venha defender seus direitos! #1deMaio","sentimento":"positivo","intensidade":"forte","classificacao":"mobilização","risco":35},{"rede":"twitter","handle":"@trabalhador_rj","texto":"Essa greve vai travar tudo no Rio. Cansei dessas paralisações que só prejudicam quem precisa trabalhar","sentimento":"negativo","intensidade":"moderado","classificacao":"tensão","risco":42},{"rede":"instagram","handle":"@plebiscitopopular.rj","texto":"Copacabana Posto 5, 14h. Fim da escala 6x1. Reduza a carga horária JÁ!","sentimento":"positivo","intensidade":"forte","classificacao":"convocação","risco":30},{"rede":"telegram","handle":"Canal Trabalhadores Unidos","texto":"SE NÃO SAIR DO JEITO CERTO A GENTE VAI BLOQUEAR A VIA. Não aguento mais essa situação","sentimento":"negativo","intensidade":"forte","classificacao":"incitação","risco":78},{"rede":"facebook","handle":"Democracia Sim","texto":"Compartilhem! Amanhã é o dia. Todos nas ruas contra o sistema que nos oprime","sentimento":"negativo","intensidade":"moderado","classificacao":"mobilização","risco":55}]},"redesSociais":[{"manifestacao":"Ato 1º de Maio — Cinelândia","data":"01/05/2026","posts":[{"rede":"instagram","handle":"@cut_rj","link":"https://www.instagram.com/cut_rj/","thumbnail":null,"texto":"Confirma presença no ato do 1º de Maio na Cinelândia! Venha lutar pelo fim da escala 6x1 e pela redução da jornada de trabalho. #DiaDoTrabalhador #Cinelândia","screenshot":null},{"rede":"instagram","handle":"@ctb_nacional","link":"https://www.instagram.com/ctb_nacional/","thumbnail":null,"texto":"1º DE MAIO no Rio! Concentração às 14h na Cinelândia. Vamos às ruas defender os direitos dos trabalhadores! #1deMaio","screenshot":null},{"rede":"x","handle":"@forcasindical","link":"https://x.com/forcasindical","thumbnail":null,"texto":"Rio de Janeiro confirma mobilização para o Dia do Trabalhador. CUT, CTB, CSB e Força Sindical unidas na Cinelândia, 14h. #1deMaio2026","screenshot":null},{"rede":"x","handle":"@movimentovat","link":"https://x.com/movimentovat","thumbnail":null,"texto":"1º DE MAIO É NA CINELÂNDIA! Fim da escala 6x1 agora! Redução de jornada sem perda de salário. #MovimentoVAT #1deMaio","screenshot":null},{"rede":"tiktok","handle":"@trabalhador_rj","link":"https://www.tiktok.com/@trabalhador_rj","thumbnail":null,"texto":"Convocação para o ato na Cinelândia no dia 1º de Maio. Fim da escala 6x1! Programação até 20h40. #1deMaio #TrabalhadoresRJ","screenshot":null},{"rede":"facebook","handle":"CUT Rio de Janeiro","link":"https://www.facebook.com/cutriodejaneiro/","thumbnail":null,"texto":"1º DE MAIO NA CINELÂNDIA — Fim da escala 6x1. Concentração às 14h. #DiaDoTrabalhador","screenshot":null},{"rede":"whatsapp","handle":"Canal: CUT RJ Oficial","link":null,"thumbnail":null,"texto":"[Canal público] Confirmada concentração às 14h na Cinelândia. Vista vermelho e venha fortalecer a luta! #1deMaio","screenshot":null},{"rede":"threads","handle":"@sepe_rj","link":"https://www.threads.net/@sepe_rj","thumbnail":null,"texto":"1º de Maio na Cinelândia — magistério e servidores públicos unidos! Saindo do Largo da Carioca às 13h para concentração.","screenshot":null}]},{"manifestacao":"1º de Maio — Copacabana, Posto 5","data":"01/05/2026","posts":[{"rede":"instagram","handle":"@plebiscitopopular.rj","link":"https://www.instagram.com/p/DXZwcsbkSYi/","thumbnail":null,"texto":"1º de Maio no RJ 📍 Copacabana, Posto 5 🕑 14h — Fim da escala 6x1, redução da jornada sem redução salarial, defesa da soberania nacional, regulamentação do trabalho nos aplicativos. 316 curtidas. Postado em 21 de abril.","screenshot":null},{"rede":"x","handle":"@ABREU96174736","link":"https://x.com/ABREU96174736","thumbnail":null,"texto":"O Rio de Janeiro é LADRÃO, vamos mostrar isso na manifestação do dia do trabalhador em Copacabana, com muitas faixas.","screenshot":null},{"rede":"whatsapp","handle":"Grupo VAT Mulheres 💕","link":"https://web.whatsapp.com/","thumbnail":null,"texto":"Syonara: 'Esse card ficou muito bom, imprimi para levar protesto' ❤️ — Grupo com 574 mensagens organizando a participação no 1º de Maio em Copacabana. Grupo confirma mobilização ativa do movimento VAT para o ato.","screenshot":null}]},{"manifestacao":"Greve UERJ — Portão 5","data":"28/04/2026","posts":[{"rede":"instagram","handle":"@aduerj_oficial","link":"https://www.instagram.com/aduerj_oficial/","thumbnail":null,"texto":"Ato ontem (28/04), 17h, Portão 5 da UERJ! Professores e técnicos em greve por recomposição salarial. Greve completa 1 mês! #GreveUERJ","screenshot":null},{"rede":"x","handle":"@sintuperj","link":"https://x.com/sintuperj","thumbnail":null,"texto":"Ato 28/04 às 17h no portão 5 da UERJ (Rua São Francisco Xavier). Greve completa 1 mês! Governo Castro precisa negociar. #SINTUPERJ #GreveUERJ","screenshot":null},{"rede":"tiktok","handle":"@professor_uerj","link":"https://www.tiktok.com/@professor_uerj","thumbnail":null,"texto":"Já são 34 dias de greve e o governo não nos chama para negociar — vídeo do protesto no portão 5. #GreveUERJ","screenshot":null},{"rede":"threads","handle":"@andes_ssn","link":"https://www.threads.net/@andes_ssn","thumbnail":null,"texto":"Solidariedade à greve da UERJ! Docentes de PR, RJ e MA unidos pela recomposição salarial. #GreveUERJ","screenshot":null},{"rede":"x","handle":"@F1LH0DASANTA","link":"https://x.com/search?q=manifesta%C3%A7%C3%A3o+rio+de+janeiro","thumbnail":null,"texto":"É mais uma manifestação pacífica se degenera em caos e violência... Gritos de terror permeiam as ruas do Rio de Janeiro.","screenshot":null}]},{"manifestacao":"Assembleia SEPE-RJ + Ato frente à ALERJ","data":"05/05/2026","posts":[{"rede":"instagram","handle":"@sepe_rj","link":"https://www.instagram.com/sepe_rj/","thumbnail":null,"texto":"Convocação: Assembleia em 05/05 para deliberar sobre estado de greve na rede estadual. Recomposição salarial já! Perda acumulada de 24,07% desde 2019 (SEPE/DIEESE). #SEPERJ #EducacaoRJ","screenshot":null},{"rede":"x","handle":"@sepe_rj","link":"https://x.com/sepe_rj","thumbnail":null,"texto":"Professores e profissionais da educação estadual do RJ se reúnem em 05/05 para avaliar estado de greve. Após assembleia: ato frente à ALERJ. #SEPERJ","screenshot":null},{"rede":"facebook","handle":"SEPE RJ Oficial","link":"https://www.facebook.com/seperj/","thumbnail":null,"texto":"Rede estadual: assembleia 05/05 + ato na ALERJ. Lute pela recomposição salarial! #EducacaoPública #SEPERJ","screenshot":null}]},{"manifestacao":"Ato UERJ — Abraço ao Campus Maracanã","data":"06/05/2026","posts":[{"rede":"instagram","handle":"@aduerj_oficial","link":"https://www.instagram.com/aduerj_oficial/","thumbnail":null,"texto":"06/05 às 13h — Abraço simbólico ao Campus Maracanã da UERJ + atividade musical. Venha fortalecer a greve! Julgamento ADI 4917 no STF nesta mesma data. #GreveUERJ","screenshot":null},{"rede":"x","handle":"@sintuperj","link":"https://x.com/sintuperj","thumbnail":null,"texto":"06/05 é dia decisivo: abraço ao campus da UERJ às 13h + STF julga ADI 4917. Qualquer resultado: estamos nas ruas! #SINTUPERJ #GreveUERJ","screenshot":null}]},{"manifestacao":"Ato UERJ — Largo da Carioca","data":"13/05/2026","posts":[{"rede":"instagram","handle":"@aduerj_oficial","link":"https://www.instagram.com/aduerj_oficial/","thumbnail":null,"texto":"13/05 — Ato público no Largo da Carioca, 15h. Leve sua bandeira! #GreveUERJ #LargoDaCarioca","screenshot":null},{"rede":"facebook","handle":"SINTUPERJ Oficial","link":"https://www.facebook.com/sintuperj/","thumbnail":null,"texto":"Confirmado: ato na Praça Largo da Carioca em 13/05 às 15h. Mobilização geral dos servidores da UERJ em greve.","screenshot":null}]},{"manifestacao":"Greve Nacional da Educação — Ato Unificado Rio","data":"15/05/2026","posts":[{"rede":"instagram","handle":"@sintufrj","link":"https://www.instagram.com/sintufrj/","thumbnail":null,"texto":"15/05 — Ato unificado da Greve Nacional da Educação no Rio! Servidores das federais às ruas. 12h, Centro. #GreveNacionalEducacao #UFRJ #UFF","screenshot":null},{"rede":"x","handle":"@andes_ssn","link":"https://x.com/andes_ssn","thumbnail":null,"texto":"Greve Nacional da Educação: 15/05 é dia de ato em todo o Brasil. No Rio: 12h, Centro. Exigimos cumprimento dos acordos do MEC/MGI! #ANDES","screenshot":null},{"rede":"facebook","handle":"SINTUFRJ","link":"https://www.facebook.com/sintufrj/","thumbnail":null,"texto":"Confirmado: ato em 15/05 às 12h no Centro do Rio. Greve nacional das federais. UFRJ, UFF, UNIRIO e UFRRJ unidas! #GreveFederais","screenshot":null},{"rede":"threads","handle":"@fasubra","link":"https://www.threads.net/@fasubra","thumbnail":null,"texto":"15 de maio: Greve Nacional da Educação. Atos em todo o país. No Rio: 12h, Centro. #FASUBRA #GreveNacionalEducacao","screenshot":null},{"rede":"tiktok","handle":"@opovoonlinee","link":"https://www.tiktok.com/search?q=manifesta%C3%A7%C3%A3o+rio+de+janeiro","thumbnail":null,"texto":"Manifestantes de diversas categorias nas ruas do Rio de Janeiro em ato pela educação.","screenshot":null},{"rede":"tiktok","handle":"@newsbrasiltv","link":"https://www.tiktok.com/search?q=manifesta%C3%A7%C3%A3o+rio+de+janeiro","thumbnail":null,"texto":"Um Brasil justo — cobertura de protestos e manifestações no Rio de Janeiro.","screenshot":null}]},{"manifestacao":"Assembleia Professores Rede Municipal + Ato Cinelândia","data":"16/05/2026","posts":[{"rede":"instagram","handle":"@sepe_rj","link":"https://www.instagram.com/sepe_rj/","thumbnail":null,"texto":"16/05 — Assembleia dos profissionais da rede municipal + ato na Cinelândia. Recomposição salarial já! #SEPERJ #EducacaoMunicipal","screenshot":null},{"rede":"x","handle":"@sepe_rj","link":"https://x.com/sepe_rj","thumbnail":null,"texto":"Rede municipal: assembleia em 16/05 para deliberar sobre greve, seguida de ato na Cinelândia. #EducacaoRJ","screenshot":null}]}],"b1":"📅 28/04/2026 (ONTEM) — 17h ✅ [JÁ ACONTECEU]\n🏛 Local: Portão 5 da UERJ — Rua São Francisco Xavier, Maracanã\n🏷 Organização: ADUERJ + SINTUPERJ\n📋 Motivo: Greve por recomposição salarial (em greve desde 25/03). Professores e técnicos da UERJ. Greve completou 1 mês.\n📊 Estimativa de público: 300 a 1.000 participantes (fonte: SINTUPERJ)\n🔗 Fontes: sintuperj.org.br | brasildefato.com.br/2026/04/27/greve-de-professores-e-tecnicos-da-uerj\n\n📅 01/05/2026 (Sexta-feira) — 14h\n🏛 Local: Cinelândia (Praça Floriano), Centro do Rio de Janeiro\n🏷 Organização: CUT, CTB, CSB, Força Sindical, Intersindical, Movimento VAT\n📋 Motivo: Dia do Trabalhador — Fim da escala 6x1 e redução da jornada sem perda de salário\n⏱ Programação até 20h40 — \"Festival Vida Além do Trabalho\" (festival + ato político)\n👥 Estimativa de público: 10.000 a 50.000 pessoas (histórico: 30.000-80.000 em 2025 — fonte: CUT/RJ + O Globo)\n🔗 Fontes: cut.org.br/noticias/veja-onde-havera-atos-da-cut-neste-1-de-maio | extraclasse.org.br | istoedinheiro.com.br\n\n📅 05/05/2026 (Terça-feira) — horário a confirmar\n🏛 Local: ALERJ — Rua Primeiro de Março, Centro do Rio\n🏷 Organização: SEPE-RJ (Sindicato Estadual dos Profissionais da Educação)\n📋 Motivo: Assembleia geral + ato frente à ALERJ — deliberação sobre estado de greve na rede estadual\n📊 Perda salarial acumulada: 24,07% desde 2019 (SEPE-RJ/DIEESE)\n👥 Estimativa de público: 500 a 3.000 pessoas\n🔗 Fonte: agenciabrasil.ebc.com.br/educacao/noticia/2026-04/professores-estaduais-e-municipais-do-rio-fazem-paralisacao-de-24h\n\n📅 06/05/2026 (Quarta-feira) — 13h\n🏛 Local: Campus Maracanã da UERJ\n🏷 Organização: Grevistas da UERJ (docentes + técnicos)\n📋 Abraço simbólico ao campus + atividade musical\n⚠️ ATENÇÃO: Julgamento ADI 4917 no STF nesta data — pode definir os rumos da greve UERJ\n🔗 Fonte: sintuperj.org.br\n\n📅 13/05/2026 (Quarta-feira) — 15h\n🏛 Local: Praça Largo da Carioca, Centro do Rio de Janeiro\n🏷 Organização: ADUERJ + SINTUPERJ\n📋 Ato público dos grevistas da UERJ no coração do Centro\n👥 Estimativa de público: 500 a 2.000 pessoas\n🔗 Fonte: sintuperj.org.br | @aduerj_oficial (Instagram)\n\n📅 15/05/2026 (Sexta-feira) — 12h\n🏛 Local: Centro do Rio de Janeiro (a confirmar)\n🏷 Organização: ANDES-SN + FASUBRA + SINTUFRJ + SINTUFF + SINTUNIRIO + SINTUFRRJ\n📋 Motivo: Greve Nacional da Educação — recomposição salarial e cumprimento dos acordos MEC/MGI\n👥 Estimativa de público: 1.000 a 5.000 pessoas (ato unificado das 4 federais do RJ)\n📌 Histórico: Ato de abril/2026 fechou a Linha Vermelha (fonte: sintufrj.org.br + sintuff.org.br)\n🔗 Fonte: andes.org.br/conteudos/noticia/greve-nacional-da-educacao-lista-de-atos1\n\n📅 16/05/2026 (Sábado) — horário a confirmar\n🏛 Local: Cinelândia (a confirmar)\n🏷 Organização: SEPE-RJ seção Municipal + professores rede municipal\n📋 Assembleia + ato dos profissionais da rede municipal — deliberação sobre estado de greve\n📊 Se aprovada greve: impacto em todas as escolas municipais do Rio de Janeiro\n🔗 Fonte: agenciabrasil.ebc.com.br/educacao/noticia/2026-04/professores-estaduais-e-municipais-do-rio-fazem-paralisacao-de-24h","b2":"📰 Extra Classe — 28/04/2026\n\"Atos do 1º de Maio pelo país pedem fim da escala 6x1\"\nFonte: extraclasse.org.br/movimento/2026/04/atos-do-1o-de-maio-pelo-pais-pedem-fim-da-escala-6x1\nConfirma Cinelândia (14h) como ponto no Rio. Tema: fim da escala 6x1.\n\n📰 CUT Nacional — cut.org.br\n\"Veja onde haverá atos da CUT neste 1º de Maio\"\nFonte: cut.org.br/noticias/veja-onde-havera-atos-da-cut-neste-1-de-maio-dia-do-trabalhador-e-da-trabalhador-6976\nConfirma Cinelândia (14h) como concentração no Rio.\n\n📰 ISTOÉ Dinheiro — 2026\n\"Fim da escala 6x1 une movimentos no ato de 1º de Maio no Rio\"\nFonte: istoedinheiro.com.br/fim-da-escala-6x1-une-movimentos-no-ato-de-1o-de-maio-no-rio\nCUT, CTB, CSB, Força Sindical, Intersindical e Movimento VAT confirmados.\n\n📰 Brasil de Fato — 27/04/2026\n\"Greve de professores e técnicos da UERJ por recomposição salarial completa um mês\"\nFonte: brasildefato.com.br/2026/04/27/greve-de-professores-e-tecnicos-da-uerj-por-recomposicao-salarial-completa-um-mes\nDetalha calendário de mobilizações e negativa do governo estadual antes da ADI 4917 no STF (06/05).\n\n📰 Agência Brasil — abril/2026\n\"Professores estaduais e municipais do Rio fazem paralisação de 24h\"\nFonte: agenciabrasil.ebc.com.br/educacao/noticia/2026-04/professores-estaduais-e-municipais-do-rio-fazem-paralisacao-de-24h\nSEPE-RJ: assembleia 05/05 (rede estadual) + ato frente à ALERJ. Rede municipal: assembleia 16/05.\n\n📰 SINTUFRJ — abril/2026\n\"Ato unificado fecha a Linha Vermelha\"\nFonte: sintufrj.org.br/2026/04/ato-unificado-fecha-a-linha-vermelha\nAto unificado das 4 federais do RJ (UFRJ, UFF, UNIRIO, UFRRJ) fechou pista da Linha Vermelha em abril.\n\n📰 SINTUFF — abril/2026\n\"Ato da educação federal em greve ocupa a Linha Vermelha\"\nFonte: sintuff.org.br/post/ato-da-educacao-federal-em-greve-ocupa-a-linha-vermelha\n\n📰 ANDES-SN — 2026\n\"Greve Nacional da Educação: confira os atos marcados para 15 de maio\"\nFonte: andes.org.br/conteudos/noticia/greve-nacional-da-educacao-lista-de-atos1\nConfirma ato no Rio em 15/05 às 12h.\n\n📰 SINDSCOPE — abril/2026\n\"Educação em greve vai às ruas, resiste à violência da PM e exige que Lula negocie\"\nFonte: sindscope.org.br (registro de violência policial em ato anterior das federais)\n\n📰 ANDES — 2026\n\"Docentes da Uerj aprovam greve e ampliam mobilização por recomposição salarial\"\nFonte: andes.org.br/conteudos/noticia/docentes-da-uerj-aprovam-greve-e-ampliam-mobilizacao-por-recomposicao-salarial1\n\n📰 SINTUPERJ — sintuperj.org.br\n\"Greve Unificada na UERJ: Calendário de lutas de técnicos e docentes\"\nDetalha atos: 28/04 (portão 5 UERJ), 06/05 (abraço campus), 13/05 (Largo da Carioca).\n\n📰 Jornal Hora H / Diário do Rio — abril/2026 [EVENTO PASSADO]\n\"Servidores do Detran-RJ mantêm greve e fecham Avenida Presidente Vargas\"\nFonte: jornalhorah.com.br | diariodorio.com\nGreve DETRAN-RJ desde 02/04/2026 — manifestação em 07/04 na Av. Presidente Vargas.\n\n📱 X/Twitter rastreado: @cut_rj, @forcasindical, @movimentovat — convocação para Cinelândia 01/05\n📱 X/Twitter rastreado: @sintuperj, @andes_ssn — atos da greve UERJ\n📱 Instagram rastreado: @aduerj_oficial, @cut_rj, @ctb_nacional, @sepe_rj — convocações com contagem regressiva","b3":"═══════════════════════════════\n1º DE MAIO — CINELÂNDIA (PRINCIPAL / ALTA PRIORIDADE)\n═══════════════════════════════\nMotivo da análise: Maior evento do período — feriado nacional, área central, mobilização massiva\nFonte da estimativa de público: CUT Nacional + Extra Classe + histórico PM-RJ\nDados históricos: 1º de Maio 2025 — 30.000 a 80.000 participantes (CUT/RJ + O Globo)\nFiliação política estimada: PT, PCdoB, PDT, Rede — espectro centro-esquerda a esquerda\nNúmero esperado: 10.000 a 50.000 pessoas\nHistórico de violência: BAIXO — manifestações do Dia do Trabalhador historicamente pacíficas no RJ\nMotivação: Trabalhista-econômica (fim escala 6x1) com componente político\nImpacto no trânsito: MÉDIO-ALTO — Cinelândia, Av. Rio Branco, possível Av. Pres. Vargas interditadas\nTrajeto provável: Concentração Praça Floriano → caminhada Av. Rio Branco sentido Centro\nEncerramento previsto: ~20h40\nLideranças: Dirigentes CUT RJ, CTB, líderes Movimento VAT\nImpacto imagem governo RJ: NEUTRO — pauta trabalhista federal\nEfetivo policial estimado: 300 a 500 PMs\nRotas alternativas: Rua da Assembleia, Av. Chile, Av. Almirante Barroso\n🟡 NÍVEL DE RISCO GLOBAL: MÉDIO\n\n═══════════════════════════════\nASSEMBLEIA SEPE-RJ — FRENTE À ALERJ (05/05) ⚠️\n═══════════════════════════════\nMotivo: Deliberação sobre estado de greve da rede estadual — alto impacto potencial\nFonte: Agência Brasil / SEPE-RJ / DIEESE\nNúmero estimado: 500 a 3.000 pessoas\nMotivação: Econômica — perda salarial de 24,07% desde 2019 (SEPE-RJ/DIEESE)\nImpacto no trânsito: LOCAL — entorno da ALERJ, Centro\nAtenção: Se aprovada greve: impacto em TODAS as escolas estaduais do RJ\nImpacto imagem governo RJ: ALTO — pauta dirigida diretamente ao governo Castro\nEfetivo policial estimado: 50 a 150 PMs\n🟠 NÍVEL DE RISCO: MÉDIO (se greve aprovada: ALTO)\n\n═══════════════════════════════\nGREVE UERJ — ATOS 28/04 ✅, 06/05 e 13/05\n═══════════════════════════════\nMotivo da análise: Greve em curso com mobilizações regulares — risco de escalada\nFonte: SINTUPERJ + ADUERJ + Brasil de Fato\nDados históricos: Atos março/abril 2026 — 500 a 1.500 participantes\nFiliação: Sindical educacional — ADUERJ, SINTUPERJ, apoio ANDES\nNúmero estimado: 500 a 2.000 pessoas por ato\nHistórico de violência: BAIXO\nMotivação: Econômica (recomposição salarial estadual)\nImpacto no trânsito: LOCAL — entorno UERJ (Maracanã) e Largo da Carioca\nImpacto imagem governo RJ: MODERADO — expõe fragilidade fiscal do governo Castro\nPONTO CRÍTICO 06/05: Julgamento ADI 4917 no STF — resultado pode escalar ou encerrar o movimento\nEfetivo policial 13/05 (Largo da Carioca): 80 a 150 PMs\n🟡 NÍVEL DE RISCO: MÉDIO\n\n═══════════════════════════════\nGREVE NACIONAL DA EDUCAÇÃO — ATO UNIFICADO RIO (15/05)\n═══════════════════════════════\nMotivo da análise: Ato unificado das 4 federais do RJ — histórico de bloqueio de vias\nFonte: ANDES-SN + SINTUFRJ + SINTUFF\nHistórico: Ato de abril/2026 fechou a Linha Vermelha + registro de violência policial (SINDSCOPE)\nFiliação: Sindical federal — ANDES, FASUBRA, SINTUFRJ, SINTUFF, SINTUNIRIO, SINTUFRRJ\nNúmero estimado: 1.000 a 5.000 pessoas\nHistórico de violência: BAIXO-MÉDIO (ato anterior registrou confronto com PM)\nMotivação: Econômica federal — recomposição salarial, RSC, jornada 30h, cumprimento acordos MEC\nImpacto no trânsito: MÉDIO — potencial bloqueio de vias no Centro ou autoestradas\nImpacto imagem governo federal: MODERADO — pressão sobre Lula\nEfetivo policial estimado: 100 a 300 PMs\n🟡 NÍVEL DE RISCO: MÉDIO\n\n═══════════════════════════════\nASSEMBLEIA PROFESSORES MUNICIPAIS (16/05)\n═══════════════════════════════\nMotivo: Deliberação sobre greve da rede municipal — impacto social potencial elevado\nFonte: Agência Brasil / SEPE-RJ\nNúmero estimado: 500 a 2.000 pessoas\nMotivação: Econômica — recomposição salarial rede municipal\nAtenção: Se aprovada greve: impacto em toda a rede municipal do Rio de Janeiro\nImpacto imagem Prefeitura: ALTO\nEfetivo policial estimado: 50 a 150 PMs\n🟠 NÍVEL DE RISCO: MÉDIO (se greve aprovada: ALTO)"}</script>
 
 <script>
@@ -3295,7 +3295,7 @@ function generateReportFromManifestacao(div){
   var _year = now.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo',year:'numeric'});
   var _counter = parseInt(localStorage.getItem('gsi_rel_counter')||'0', 10) + 1;
   localStorage.setItem('gsi_rel_counter', String(_counter));
-  var relNum = 'RELINT GSI/SSIE ' + String(_counter).padStart(3,'0') + '/' + _year;
+  var relNum = 'RELINT SSIE ' + String(_counter).padStart(3,'0') + '/' + _year;
   setv('rel-num', relNum);
   setv('rel-data', dataEmissaoPorExtenso());
   setv('rel-class', 'RESTRITO');
@@ -3395,7 +3395,7 @@ function generateReportFromManifestacao(div){
   if(impactoStr) sintParts.push('Impacto estimado ao governo: ' + impactoStr + '.');
   sintParts.push('Nenhum indicativo de radicalização ou confronto foi identificado até o momento.');
   setv('rs5-sintese', sintParts.join(' '));
-  setv('rs5-posicionamento', 'O GSI/SSIE recomenda acompanhamento contínuo do evento com reforço preventivo do policiamento na área de concentração. Situação sob monitoramento permanente. Novas informações serão incorporadas em relatório de atualização.');
+  setv('rs5-posicionamento', 'O SSIE recomenda acompanhamento contínuo do evento com reforço preventivo do policiamento na área de concentração. Situação sob monitoramento permanente. Novas informações serão incorporadas em relatório de atualização.');
 
   renderRelManifestacao();
   // Auto-download do .doc
@@ -3479,7 +3479,7 @@ function renderMediaCards(text){
 function cpRelatorio(btn){
   var lines = [];
   lines.push('════════════════════════════════════════════');
-  lines.push('GABINETE DE SEGURANÇA INSTITUCIONAL — GSI/SSIE');
+  lines.push('MONITORAMENTO — SSIE');
   lines.push('RELATÓRIO DE MONITORAMENTO DE MANIFESTAÇÃO');
   lines.push(rv('rel-num'));
   lines.push(rv('rel-data') + ' | Classificação: ' + rv('rel-class'));
@@ -3515,7 +3515,7 @@ function cpRelatorio(btn){
   lines.push('Posicionamento institucional: ' + rv('rs5-posicionamento'));
   lines.push('');
   lines.push('────────────────────────────────────────────');
-  lines.push('Documento gerado pelo Sistema de Monitoramento — GSI');
+  lines.push('Documento gerado pelo Sistema de Monitoramento');
   lines.push('Gerado em: ' + rv('rel-data') + ' | Responsável: ' + rv('rel-responsavel'));
   navigator.clipboard.writeText(lines.join('\n')).then(function(){
     btn.textContent='Copiado!'; setTimeout(function(){btn.textContent='Copiar';},2000);
@@ -3586,7 +3586,7 @@ function exportDoc(){
     + '<hr>'
 
     // Parágrafo de abertura
-    + '<p>1. Esta Agência de Inteligência Estratégica de Estado (GSI/SSIE) traz ao conhecimento informações sobre '
+    + '<p>1. Esta Agência de Inteligência Estratégica de Estado (SSIE) traz ao conhecimento informações sobre '
     +    esc(assunto)+'.</p>'
 
     // Seção 2 — Identificação
@@ -3641,11 +3641,11 @@ function exportDoc(){
 
     + '</body></html>';
 
-  // Nome do arquivo: RELINT_GSI_SSIE_001_2026.doc
+  // Nome do arquivo: RELINT_SSIE_001_2026.doc
   var rawNum = rv('rel-num');
   var filename = rawNum
-    ? rawNum.replace(/GSI\/SSIE\s*/,'GSI_SSIE_').replace(/\//g,'_').replace(/\s+/g,'_')
-    : 'RELINT_GSI_SSIE';
+    ? rawNum.replace(/SSIE\s*/,'SSIE_').replace(/\//g,'_').replace(/\s+/g,'_')
+    : 'RELINT_SSIE';
   var blob = new Blob(['﻿', html], {type:'application/msword'});
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
@@ -3956,7 +3956,7 @@ function buscar(){
   var _pCfg = _periodoConfig[_periodoSelecionado] || _periodoConfig.diario;
 
   var systemPrompt = [
-    'Você é o sistema GSI-RJ — Monitor de Manifestações do Estado do Rio de Janeiro.',
+    'Você é o sistema RJ — Monitor de Manifestações do Estado do Rio de Janeiro.',
     'Sua função é analisar o cenário de manifestações, protestos e movimentos sociais no RJ com base no tema fornecido.',
     'Use seu conhecimento atualizado sobre o contexto político, social e de segurança pública do Rio de Janeiro.',
     'Responda SEMPRE em JSON puro e válido, sem markdown, sem blocos de código, sem texto adicional fora do JSON.'
@@ -4356,7 +4356,7 @@ function exportAgendaXlsx(){
   // Larguras das colunas
   ws['!cols'] = [{wch:14},{wch:10},{wch:30},{wch:28},{wch:40},{wch:22},{wch:14},{wch:18},{wch:24}];
   var wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sobrestado GSI');
+  XLSX.utils.book_append_sheet(wb, ws, 'Sobrestado');
   XLSX.writeFile(wb, 'sobrestado_manifestacoes.xlsx');
 }
 
@@ -4766,7 +4766,7 @@ function vcRenderIntel(dados){
   var hoje      = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
   var hora      = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
   var linhas = [];
-  linhas.push('RELATÓRIO DE ANÁLISE DE VÍNCULO — GSI/SSIE');
+  linhas.push('RELATÓRIO DE ANÁLISE DE VÍNCULO — SSIE');
   linhas.push('Data de processamento: '+hoje+' às '+hora+' (Brasília)');
   linhas.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   linhas.push('');
@@ -4802,7 +4802,7 @@ function vcRenderIntel(dados){
   linhas.push('• Cruzar dados com bases de processos judiciais (CNJ) e registros patrimoniais (DETRO, CAIXA).');
   linhas.push('');
   linhas.push('5. CLASSIFICAÇÃO');
-  linhas.push('Este relatório é gerado automaticamente pelo Sistema de Monitoramento GSI/SSIE.');
+  linhas.push('Este relatório é gerado automaticamente pelo Sistema de Monitoramento SSIE.');
   linhas.push('Classificação: USO INTERNO — RESTRIÇÃO DE CIRCULAÇÃO.');
   body.textContent = linhas.join('\n');
   card.style.display='block';
@@ -4953,7 +4953,7 @@ function salvarEdicaoVolume(){
     var fInp = document.getElementById('sent-vol-fonte');
     if(pInp&&pInp.value) s.periodoColeta = pInp.value;
     if(fInp&&fInp.value) s.fonteColeta   = fInp.value;
-    s.metodologia = 'Dados informados manualmente pelo analista GSI/SSIE.';
+    s.metodologia = 'Dados informados manualmente pelo analista SSIE.';
     d[pKey] = s;
     document.getElementById('dados').textContent = JSON.stringify(d);
     document.getElementById('sent-vol-editor').style.display='none';
@@ -5355,7 +5355,7 @@ var _sentRankings = {
 var _sentRankingsSecretarias = {
   hoje: [
     // Ranking secretarias estaduais RJ por volume de menções — 30/04/2026 00:00–10:52
-    // Fonte: OSINT/estimativa GSI — secretarias com maior cobertura editorial e busca aberta
+    // Fonte: OSINT/estimativa — secretarias com maior cobertura editorial e busca aberta
     {nome:'SESEG',cargo:'Sec. Estado de Segurança Pública',vol:1420,trend:'up',delta:'+28%',link:'https://x.com/search?q=SESEG+segurança+pública+RJ&f=live'},
     {nome:'SES',cargo:'Sec. Estado de Saúde — greve servidores',vol:1180,trend:'up',delta:'+62%',link:'https://x.com/search?q=SES+greve+saúde+RJ&f=live'},
     {nome:'SEEDuc',cargo:'Sec. Estado de Educação',vol:820,trend:'up',delta:'+34%',link:'https://x.com/search?q=SEEDuc+professores+RJ&f=live'},
@@ -5608,7 +5608,7 @@ function sentInit(){
     var pInp = document.getElementById('sent-vol-periodo');
     var fInp = document.getElementById('sent-vol-fonte');
     if(pInp) pInp.value = periodo;
-    if(fInp) fInp.value = 'Coleta OSINT manual — GSI/SSIE';
+    if(fInp) fInp.value = 'Coleta OSINT manual — SSIE';
   }
 
   // Palavras-chave (nuvem)
@@ -5704,7 +5704,7 @@ var AM_DADOS = [
   { id:1, dt:'29/04/2026 08:14', alvo:'Dep. Federal Marcos Souto', tipo:'Digital', origem:'Redes Sociais', nivel:'critico', status:'escalado',
     texto:'Publicação no X/Twitter com linguagem ameaçadora e convocação para ato hostil em frente à residência do parlamentar no dia 01/05. Perfis coordenados identificados.',
     link:'https://x.com/search?q=Marcos+Souto+ameaca&src=typed_query',
-    hostilidade:91, tags:['ameaça direta','coordenação','parlamentar','X/Twitter'], recomendacoes:['Acionar serviço de proteção pessoal','Monitorar rede de perfis','Comunicar CGI/GSI','Análise forense das contas']},
+    hostilidade:91, tags:['ameaça direta','coordenação','parlamentar','X/Twitter'], recomendacoes:['Acionar serviço de proteção pessoal','Monitorar rede de perfis','Comunicar CGI','Análise forense das contas']},
   { id:2, dt:'29/04/2026 07:42', alvo:'Sede da SEOP — Centro', tipo:'Planejamento', origem:'Inteligência', nivel:'alto', status:'validado',
     texto:'Fonte humana reportou conversas em grupo fechado de WhatsApp planejando bloqueio de acesso à sede da SEOP durante manifestação do 1º de Maio.',
     link:'https://web.whatsapp.com/',
@@ -5712,7 +5712,7 @@ var AM_DADOS = [
   { id:3, dt:'28/04/2026 22:30', alvo:'Governador do Estado', tipo:'Verbal', origem:'Denúncias', nivel:'alto', status:'analise',
     texto:'Denúncia anônima via 0300 relatou ameaça verbal proferia em reunião de sindicato, com menção a represália pessoal caso pauta de negociação não seja atendida.',
     link:'',
-    hostilidade:62, tags:['ameaça verbal','sindicato','denúncia anônima'], recomendacoes:['Validar fonte','Verificar histórico do denunciante','Acionar protocolo GSI-GOV','Aguardar corroboração']},
+    hostilidade:62, tags:['ameaça verbal','sindicato','denúncia anônima'], recomendacoes:['Validar fonte','Verificar histórico do denunciante','Acionar protocolo institucional','Aguardar corroboração']},
   { id:4, dt:'28/04/2026 19:55', alvo:'Av. Presidente Vargas', tipo:'Incitação', origem:'Redes Sociais', nivel:'moderado', status:'analise',
     texto:'Vídeo viral no Instagram convocando manifestantes a bloquear a Presidente Vargas. Linguagem incita desobediência civil mas sem ameaça pessoal direta.',
     link:'https://www.instagram.com/explore/tags/presidentevargas/',
@@ -5795,7 +5795,7 @@ function rsfLoadProfile(){
     id: 'guilherme',
     name: 'Guilherme',
     role: 'cacador',
-    color: RSF_PALETTE[1], // azul GSI
+    color: RSF_PALETTE[1], // azul institucional
     photo: null
   };
   rsfSaveProfile(padrao);
@@ -5955,7 +5955,7 @@ function rsfHandlePrint(files){
 }
 
 function rsfBuildPostPrompt(rede, linkUrl){
-  return 'Você analisa um print de postagem de rede social pra um sistema de inteligência do GSI/RJ.\n\n'+
+  return 'Você analisa um print de postagem de rede social pra um sistema de inteligência do RJ.\n\n'+
     'Rede informada: '+(rede||'desconhecida')+'\n'+
     'Link informado: '+(linkUrl||'nenhum')+'\n\n'+
     'Devolva APENAS um JSON válido (sem markdown, sem ```), no formato:\n'+
@@ -5965,7 +5965,7 @@ function rsfBuildPostPrompt(rede, linkUrl){
     '  "texto": "transcrição completa do texto da postagem (todos os caracteres legíveis)",\n'+
     '  "horarioOriginal": "horário/data visível na postagem, se houver",\n'+
     '  "linkOriginal": "URL da postagem se aparecer no print",\n'+
-    '  "comentarioGSI": "frase curta no estilo GSI sobre o conteúdo (ex: postagem convocando ato em frente à ALERJ)",\n'+
+    '  "comentarioGSI": "frase curta de análise sobre o conteúdo (ex: postagem convocando ato em frente à ALERJ)",\n'+
     '  "classificacao": "convocacao|denuncia|incitacao|tensao|apoio|institucional|monitoramento|desinformacao",\n'+
     '  "risco": 0-100,\n'+
     '  "comentarios": [\n'+
@@ -6261,7 +6261,7 @@ function rsfRenderCard(p){
     : '';
 
   var gsiHtml = p.gsi.comentario
-    ? '<div class="rsf-gsi"><span class="rsf-gsi-lbl">💬 Comentário GSI</span>'+esc(p.gsi.comentario)+'</div>'
+    ? '<div class="rsf-gsi"><span class="rsf-gsi-lbl">💬 Comentário interno</span>'+esc(p.gsi.comentario)+'</div>'
     : '';
 
   // Comentários originais (sempre visíveis OU expandíveis)
@@ -6319,7 +6319,7 @@ function rsfRenderCard(p){
       '<button class="rsf-act'+(p.likes.indexOf(profile.id)>=0?' liked':'')+'" onclick="rsfToggleLike(\''+p.id+'\')">❤ <span>'+p.likes.length+'</span></button>'+
       '<button class="rsf-act" onclick="rsfPromptComment(\''+p.id+'\')">💬 Comentar</button>'+
       '<button class="rsf-act'+(p.status==='relevante'?' relevant':'')+'" onclick="rsfToggleRelevant(\''+p.id+'\')">⭐ '+(p.status==='relevante'?'Relevante':'Marcar relevante')+'</button>'+
-      '<button class="rsf-act" onclick="rsfEditGsi(\''+p.id+'\')">✏️ '+(p.gsi.comentario?'Editar coment.':'+ Coment. GSI')+'</button>'+
+      '<button class="rsf-act" onclick="rsfEditGsi(\''+p.id+'\')">✏️ '+(p.gsi.comentario?'Editar comentário':'+ Comentário')+'</button>'+
       '<button class="rsf-act" onclick="rsfSendToReport(\''+p.id+'\')">📄 Pro relatório</button>'+
       '<button class="rsf-act" style="margin-left:auto;color:#c0392b;" onclick="rsfDeletePost(\''+p.id+'\')">🗑</button>'+
     '</div>'+
@@ -6341,7 +6341,7 @@ function rsfToggleRelevant(id){
 }
 function rsfPromptComment(id){
   var c = prompt('Comentário (visível pra todos):'); if(!c) return;
-  // Por enquanto, comentários internos viram texto agregado no GSI (sem servidor não tem thread interna)
+  // Por enquanto, comentários internos viram texto agregado no comentário (sem servidor não tem thread interna)
   var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
   var profile = rsfGetProfile();
   p.gsi.comentario = (p.gsi.comentario||'') + (p.gsi.comentario?' · ':'') + profile.name + ': ' + c;
@@ -6350,7 +6350,7 @@ function rsfPromptComment(id){
 function rsfEditGsi(id){
   var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
   var atual = p.gsi.comentario || '';
-  var novo = prompt('Comentário GSI sobre este post:', atual);
+  var novo = prompt('Comentário interno sobre este post:', atual);
   if(novo === null) return;
   p.gsi.comentario = novo.trim();
   rsfSavePosts(); rsfRenderFeed();
@@ -6481,7 +6481,7 @@ function rsfOpenLightbox(src){
 // ─── TRENDING ───
 function rsfRenderTrending(){
   var posts = rsfState.posts;
-  // Conta palavras significativas (>3 letras, fora do stopwords) em texto + comentário GSI
+  // Conta palavras significativas (>3 letras, fora do stopwords) em texto + comentário interno
   var contaPalavras = {};
   var contaPessoas = {};
   var contaAutores = {};
@@ -6537,7 +6537,7 @@ function rsfRenderTrending(){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// ═══ ARGUS — IA do GSI (cérebro central da rede social)     ═══
+// ═══ ARGUS — IA (cérebro central da rede social)     ═══
 // ═══════════════════════════════════════════════════════════════
 var argusState = {
   attachment: null,        // {dataUrl, mimeType, base64}
@@ -6546,16 +6546,16 @@ var argusState = {
 };
 
 var ARGUS_SYSTEM = (
-  'Você é a Argus, IA do Gabinete de Segurança Institucional do Rio de Janeiro (GSI/SSIE-RJ). '+
+  'Você é o Argus, o IA do Gabinete de Segurança Institucional do Rio de Janeiro (SSIE-RJ). '+
   'Você trabalha junto com analistas humanos do setor (Guilherme, André, e outros) numa rede social interna '+
   'usada pra coletar e classificar informações de OSINT sobre manifestações, política e segurança no RJ. '+
   'Seu tom é profissional, amigável, brasileiro — você trata os colegas pelo nome, usa emojis com moderação, '+
-  'fala "beleza" e "bora" naturalmente, mas mantém compostura porque o trabalho é sério (GSI). '+
+  'fala "beleza" e "bora" naturalmente, mas mantém compostura porque o trabalho é sério. '+
   'Você é parceira de equipe, não um assistente formal. '+
   'Quando alguém te manda algo, você classifica e age. Quando perguntam, você busca nos dados e responde objetiva.'
 );
 
-// ─── CONFIG DE PERFIL: pra Argus saber com quem fala ───
+// ─── CONFIG DE PERFIL: pro Argus saber com quem fala ───
 function argusCurrentUserContext(){
   var p = rsfGetProfile();
   return 'Você está conversando com '+p.name+' (papel: '+rsfRoleLabel(p.role)+').';
@@ -6639,7 +6639,7 @@ function argusSend(){
   // Detecta intenção: tem imagem? tem link colado? é texto longo do Grok? é pergunta?
   var intentHint = argusDetectIntent(text, attach);
 
-  // Constrói o prompt da Argus (sistema decide entre 4 ações)
+  // Constrói o prompt do Argus (sistema decide entre 4 ações)
   var imgs = attach ? [{base64: attach.base64, type: attach.mimeType}] : [];
   var userPrompt = argusBuildClassifyPrompt(text, intentHint);
 
@@ -6664,7 +6664,7 @@ function argusFinish(){
   document.getElementById('argus-send-btn').disabled = false;
 }
 
-// ─── DETECTOR DE INTENÇÃO (heurística rápida pra ajudar a Argus) ───
+// ─── DETECTOR DE INTENÇÃO (heurística rápida pra ajudar o Argus) ───
 function argusDetectIntent(text, attach){
   if(attach && !text) return 'imagem solo (provavelmente print)';
   // Texto começa com bloco POSTAGEM do Grok?
@@ -6696,7 +6696,7 @@ function argusBuildClassifyPrompt(text, hint){
     '    "texto": "transcrição completa do conteúdo da postagem original",\n'+
     '    "horarioOriginal": "data/hora da postagem se aparece",\n'+
     '    "linkOriginal": "URL se houver",\n'+
-    '    "comentarioGSI": "frase curta de análise no estilo GSI",\n'+
+    '    "comentarioGSI": "frase curta de análise",\n'+
     '    "classificacao": "convocacao|denuncia|incitacao|tensao|apoio|institucional|monitoramento|desinformacao",\n'+
     '    "risco": 0-100,\n'+
     '    "comentarios": [{"handle":"@x","texto":"...","horario":"...","link":"..."}],\n'+
@@ -6731,7 +6731,7 @@ function argusBuildClassifyPrompt(text, hint){
     '- mensagemUsuario SEMPRE em primeira pessoa, amigável, curto (1-2 frases).';
 }
 
-// Resumo curto do feed pra dar contexto à Argus
+// Resumo curto do feed pra dar contexto ao Argus
 function argusFeedSummary(){
   if(!rsfState.posts.length) return 'feed vazio';
   var redes = {};
@@ -6770,7 +6770,7 @@ function argusExecuteAction(parsed, originalText, attach){
   }
 
   if(acao === 'responder' || acao === 'buscar'){
-    // Resposta vai pro feed como "mensagem da Argus"
+    // Resposta vai pro feed como "mensagem do Argus"
     var resposta = dados.resposta || argusBuscaLocal(dados.consulta || originalText);
     argusPostMessage(resposta, acao === 'buscar' ? 'busca' : 'resposta');
     argusClearCompose();
@@ -6944,7 +6944,7 @@ function argusRenderChat(){
   if(!argusState.chatHistory.length){
     var p = rsfGetProfile();
     body.innerHTML = '<div class="argus-chat-msg assistant"><div class="argus-chat-bubble">'+
-      'Beleza '+esc(p.name)+'! 👋 Sou a Argus, sua IA do GSI.\n\nVocê pode me perguntar coisas tipo:\n• "O que tá rolando no feed hoje?"\n• "Me lista os posts sobre Cláudio Castro"\n• "Quem postou mais essa semana?"\n• "Resume as manifestações dos próximos 7 dias"\n\nÉ tudo privado entre a gente — se quiser compartilhar com a equipe, tem o botão lá embaixo.'+
+      'Beleza '+esc(p.name)+'! 👋 Sou o Argus, sua IA.\n\nVocê pode me perguntar coisas tipo:\n• "O que tá rolando no feed hoje?"\n• "Me lista os posts sobre Cláudio Castro"\n• "Quem postou mais essa semana?"\n• "Resume as manifestações dos próximos 7 dias"\n\nÉ tudo privado entre a gente — se quiser compartilhar com a equipe, tem o botão lá embaixo.'+
       '</div><div class="argus-chat-time">agora há pouco</div></div>';
     return;
   }
@@ -7001,7 +7001,7 @@ function argusFeedDump(){
     return (i+1)+'. ['+rsfRelativeTime(p.criadoEm)+' · '+p.autor+' · '+(p.fonte.rede||'outro')+'] '+
       (p.fonte.handle?p.fonte.handle+': ':'')+
       ((p.fonte.texto||'').slice(0,180))+
-      (p.gsi.comentario?'\n   [Coment. GSI: '+p.gsi.comentario+']':'');
+      (p.gsi.comentario?'\n   [Comentário: '+p.gsi.comentario+']':'');
   }).join('\n');
 }
 function argusShareConversation(){
