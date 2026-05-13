@@ -1677,10 +1677,377 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
             body.dark .rs-post-card{background:#0f2035;border-color:#1a3050;}
             body.dark .rs-handle{color:#c8daf0;}
             body.dark .rs-texto{color:#a0b8d0;}
+
+            /* ═══════════════════════════════════════════════════
+               REDE SOCIAL INTERNA — feed estilo Twitter+IG+Whats
+               ═══════════════════════════════════════════════════ */
+            .rsf-layout{display:grid;grid-template-columns:1fr 280px;gap:1.2rem;align-items:flex-start;}
+            @media(max-width:1100px){ .rsf-layout{grid-template-columns:1fr;} .rsf-trending{display:none;} }
+
+            /* INGESTÃO (3 abinhas no topo) */
+            .rsf-ingest{background:#fff;border:1px solid #dce6f0;border-radius:12px;margin-bottom:1rem;overflow:hidden;}
+            body.dark .rsf-ingest{background:#0f2035;border-color:#1a3050;}
+            .rsf-ingest-tabs{display:flex;border-bottom:1px solid #dce6f0;}
+            body.dark .rsf-ingest-tabs{border-color:#1a3050;}
+            .rsf-itab{flex:1;padding:11px 8px;background:#f7faff;border:none;cursor:pointer;font-size:12.5px;font-weight:700;color:#6a8aaa;border-right:1px solid #dce6f0;font-family:inherit;transition:all .15s;}
+            .rsf-itab:last-child{border-right:none;}
+            .rsf-itab:hover{background:#e8f2fb;color:#1a2d4f;}
+            .rsf-itab.active{background:#fff;color:#1a2d4f;box-shadow:inset 0 -3px 0 #0d5aa7;}
+            body.dark .rsf-itab{background:#0b1622;color:#7090b0;border-color:#1a3050;}
+            body.dark .rsf-itab:hover{background:#1a2a3f;color:#c8daf0;}
+            body.dark .rsf-itab.active{background:#0f2035;color:#5ab4f0;box-shadow:inset 0 -3px 0 #5ab4f0;}
+            .rsf-ipanel{padding:14px 18px;display:none;}
+            .rsf-ipanel.active{display:block;}
+            .rsf-dropzone{border:2.5px dashed #aac4e0;border-radius:10px;background:#f5f9ff;padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s;}
+            .rsf-dropzone:hover,.rsf-dropzone.dragover{border-color:#0d5aa7;background:#e8f2fb;}
+            body.dark .rsf-dropzone{border-color:#2a5080;background:#0d1e2e;}
+            body.dark .rsf-dropzone:hover,body.dark .rsf-dropzone.dragover{border-color:#5ab4f0;background:#0d2a40;}
+            .rsf-input{width:100%;border:1.5px solid #c0cfe0;border-radius:8px;padding:10px 13px;font-size:13px;font-family:inherit;color:#1a1a1a;outline:none;}
+            .rsf-input:focus{border-color:#0d5aa7;}
+            body.dark .rsf-input{background:#0b1622;border-color:#1a3050;color:#e0e8f5;}
+            .rsf-textarea{width:100%;border:1.5px solid #c0cfe0;border-radius:8px;padding:10px 13px;font-size:13px;font-family:inherit;color:#1a1a1a;outline:none;resize:vertical;min-height:120px;line-height:1.55;}
+            .rsf-textarea:focus{border-color:#0d5aa7;}
+            body.dark .rsf-textarea{background:#0b1622;border-color:#1a3050;color:#e0e8f5;}
+            .rsf-btn{background:#0d5aa7;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;}
+            .rsf-btn:hover{background:#0a4a8a;}
+            .rsf-btn.secondary{background:#f0f4f8;color:#1a2d4f;border:1px solid #dce6f0;}
+            .rsf-btn.secondary:hover{background:#e0e8f0;}
+            body.dark .rsf-btn.secondary{background:#0b1622;color:#c8daf0;border-color:#1a3050;}
+            body.dark .rsf-btn.secondary:hover{background:#1a2a3f;}
+            .rsf-status{font-size:12px;margin-top:8px;min-height:16px;}
+            .rsf-status.ok{color:#22a06b;}
+            .rsf-status.err{color:#c0392b;}
+            .rsf-status.proc{color:#0d5aa7;display:inline-flex;align-items:center;gap:6px;}
+
+            /* FILTROS DO FEED */
+            .rsf-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;background:#fff;border:1px solid #dce6f0;border-radius:10px;padding:10px 14px;align-items:center;}
+            body.dark .rsf-filters{background:#0f2035;border-color:#1a3050;}
+            .rsf-fchip{font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:14px;border:1.5px solid #dce6f0;background:#f7faff;color:#5a7a9a;cursor:pointer;font-family:inherit;transition:all .15s;}
+            .rsf-fchip:hover{background:#e8f2fb;border-color:#0d5aa7;color:#0d5aa7;}
+            .rsf-fchip.active{background:#1a2d4f;border-color:#1a2d4f;color:#fff;}
+            body.dark .rsf-fchip{background:#0b1622;border-color:#1a3050;color:#7090b0;}
+            body.dark .rsf-fchip:hover{background:#1a2a3f;color:#c8daf0;}
+            body.dark .rsf-fchip.active{background:#0d5aa7;border-color:#0d5aa7;color:#fff;}
+            .rsf-fsep{width:1px;height:20px;background:#dce6f0;margin:0 4px;}
+            body.dark .rsf-fsep{background:#1a3050;}
+            .rsf-fsearch{flex:1;min-width:140px;border:1.5px solid #dce6f0;border-radius:14px;padding:5px 12px;font-size:11.5px;font-family:inherit;outline:none;}
+            .rsf-fsearch:focus{border-color:#0d5aa7;}
+            body.dark .rsf-fsearch{background:#0b1622;border-color:#1a3050;color:#c8daf0;}
+
+            /* CARD DO POST */
+            .rsf-card{background:#fff;border:1px solid #dce6f0;border-radius:14px;padding:18px 20px;margin-bottom:16px;transition:border-color .15s;}
+            .rsf-card:hover{border-color:#aac4e0;}
+            .rsf-card.is-new{border-left:4px solid #22a06b;}
+            .rsf-card.is-relevant{border-left:4px solid #e67e22;}
+            body.dark .rsf-card{background:#0f2035;border-color:#1a3050;}
+            body.dark .rsf-card:hover{border-color:#2a5080;}
+            .rsf-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+            .rsf-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;}
+            .rsf-avatar:hover{transform:scale(1.06);border-color:#0d5aa7;}
+            .rsf-author{flex:1;min-width:0;line-height:1.3;}
+            .rsf-aname{font-size:14.5px;font-weight:700;color:#1a2d4f;cursor:pointer;}
+            .rsf-aname:hover{text-decoration:underline;}
+            body.dark .rsf-aname{color:#e0e8f5;}
+            .rsf-ameta{font-size:11.5px;color:#6a8aaa;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+            body.dark .rsf-ameta{color:#7090b0;}
+            .rsf-role{display:inline-block;font-size:9.5px;font-weight:700;background:#e8f2fb;color:#0d5aa7;padding:1px 7px;border-radius:8px;letter-spacing:.04em;}
+            body.dark .rsf-role{background:#0d2a4a;color:#5ab4f0;}
+            .rsf-vis{font-size:11px;color:#6a8aaa;display:inline-flex;align-items:center;gap:3px;background:#f0f4f8;padding:2px 8px;border-radius:8px;}
+            body.dark .rsf-vis{background:#0b1622;color:#7090b0;}
+            .rsf-src{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f7faff;border-radius:8px;margin-bottom:12px;font-size:12px;flex-wrap:wrap;}
+            body.dark .rsf-src{background:#0b1622;}
+            .rsf-src-badge{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+            .rsf-src-link{flex:1;min-width:0;font-size:11.5px;color:#1a6fc4;text-decoration:underline;word-break:break-all;}
+            body.dark .rsf-src-link{color:#5ab4f0;}
+            .rsf-thumb-wrap{margin-bottom:12px;border-radius:10px;overflow:hidden;background:#f0f4f8;}
+            body.dark .rsf-thumb-wrap{background:#0b1622;}
+            .rsf-thumb{width:100%;max-height:520px;object-fit:contain;display:block;cursor:zoom-in;background:#1a2d4f;}
+            .rsf-orig{margin-bottom:12px;padding:10px 14px;background:#fafcff;border-left:3px solid #dce6f0;border-radius:0 8px 8px 0;}
+            body.dark .rsf-orig{background:#0b1622;border-color:#1a3050;}
+            .rsf-orig-handle{font-size:13px;font-weight:700;color:#1a2d4f;margin-bottom:4px;}
+            body.dark .rsf-orig-handle{color:#c8daf0;}
+            .rsf-orig-text{font-size:14px;color:#2a3a4a;line-height:1.6;white-space:pre-wrap;word-wrap:break-word;}
+            body.dark .rsf-orig-text{color:#c8daf0;}
+            .rsf-orig-time{font-size:11px;color:#9aaabf;margin-top:6px;}
+            .rsf-gsi{margin-bottom:12px;padding:10px 14px;background:#fff8e1;border-left:3px solid #f39c12;border-radius:0 8px 8px 0;font-size:13px;color:#5a3a00;line-height:1.55;}
+            body.dark .rsf-gsi{background:#1a1408;color:#e8c460;border-color:#c89010;}
+            .rsf-gsi-lbl{font-size:10px;font-weight:800;color:#b07000;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;display:block;}
+            body.dark .rsf-gsi-lbl{color:#e8a820;}
+            .rsf-thread{margin-top:14px;border-left:2px solid #dce6f0;padding-left:14px;}
+            body.dark .rsf-thread{border-color:#1a3050;}
+            .rsf-reply{margin-bottom:10px;padding:10px 12px;background:#f7faff;border-radius:8px;}
+            body.dark .rsf-reply{background:#0b1622;}
+            .rsf-reply.depth-1{margin-left:18px;}
+            .rsf-reply.depth-2{margin-left:36px;}
+            .rsf-reply-handle{font-size:12.5px;font-weight:700;color:#1a2d4f;}
+            body.dark .rsf-reply-handle{color:#c8daf0;}
+            .rsf-reply-text{font-size:13px;color:#2a3a4a;line-height:1.55;margin-top:3px;white-space:pre-wrap;}
+            body.dark .rsf-reply-text{color:#a0b8d0;}
+            .rsf-reply-meta{font-size:10.5px;color:#9aaabf;margin-top:5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+            .rsf-reply-meta a{color:#1a6fc4;}
+            body.dark .rsf-reply-meta a{color:#5ab4f0;}
+            .rsf-actions{display:flex;gap:14px;align-items:center;padding-top:10px;margin-top:12px;border-top:1px solid #eef1f5;flex-wrap:wrap;}
+            body.dark .rsf-actions{border-color:#1a3050;}
+            .rsf-act{background:none;border:none;cursor:pointer;font-size:12.5px;color:#6a8aaa;display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:7px;font-family:inherit;transition:all .15s;}
+            .rsf-act:hover{background:#e8f2fb;color:#0d5aa7;}
+            body.dark .rsf-act:hover{background:#1a2a3f;color:#5ab4f0;}
+            .rsf-act.liked{color:#e74c3c;}
+            .rsf-act.relevant{color:#e67e22;font-weight:700;}
+
+            /* TRENDING SIDEBAR */
+            .rsf-trending{display:flex;flex-direction:column;gap:14px;position:sticky;top:80px;}
+            .rsf-tcard{background:#fff;border:1px solid #dce6f0;border-radius:12px;padding:14px 16px;}
+            body.dark .rsf-tcard{background:#0f2035;border-color:#1a3050;}
+            .rsf-ttitle{font-size:11px;font-weight:800;color:#1a2d4f;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
+            body.dark .rsf-ttitle{color:#5ab4f0;}
+            .rsf-titem{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f0f4f8;cursor:pointer;font-size:13px;}
+            .rsf-titem:last-child{border-bottom:none;}
+            body.dark .rsf-titem{border-color:#1a3050;}
+            .rsf-tlabel{flex:1;font-weight:600;color:#1a2d4f;}
+            body.dark .rsf-tlabel{color:#c8daf0;}
+            .rsf-tcount{font-size:11px;color:#6a8aaa;font-weight:700;}
+            body.dark .rsf-tcount{color:#7090b0;}
+            .rsf-tup{color:#22a06b;font-size:11px;}
+            .rsf-tdown{color:#c0392b;font-size:11px;}
+            .rsf-tempty{font-size:11.5px;color:#9aaabf;font-style:italic;text-align:center;padding:8px 0;}
+
+            /* PERFIL MODAL */
+            .rsf-profile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:flex-start;justify-content:center;padding-top:60px;}
+            .rsf-profile-overlay.open{display:flex;}
+            .rsf-profile-panel{background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);}
+            body.dark .rsf-profile-panel{background:#0f2035;color:#e0e8f5;}
+            .rsf-profile-head{display:flex;align-items:center;gap:14px;padding:20px 24px;border-bottom:1px solid #eef1f5;}
+            body.dark .rsf-profile-head{border-color:#1a3050;}
+            .rsf-profile-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;flex-shrink:0;}
+            .rsf-profile-name{font-size:18px;font-weight:800;color:#1a2d4f;}
+            body.dark .rsf-profile-name{color:#e0e8f5;}
+            .rsf-profile-role{font-size:12px;color:#6a8aaa;margin-top:2px;}
+            .rsf-profile-close{margin-left:auto;background:none;border:none;font-size:20px;color:#8a9ab0;cursor:pointer;}
+            .rsf-profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:16px 24px;border-bottom:1px solid #eef1f5;}
+            body.dark .rsf-profile-stats{border-color:#1a3050;}
+            .rsf-pstat{text-align:center;}
+            .rsf-pstat-val{font-size:20px;font-weight:800;color:#1a2d4f;}
+            body.dark .rsf-pstat-val{color:#e0e8f5;}
+            .rsf-pstat-lbl{font-size:10px;color:#6a8aaa;text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+            .rsf-profile-feed{flex:1;overflow-y:auto;padding:14px 24px;}
+
+            /* Lightbox */
+            .rsf-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1010;align-items:center;justify-content:center;cursor:zoom-out;}
+            .rsf-lightbox.open{display:flex;}
+            .rsf-lightbox img{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:8px;}
+
+            /* Empty state */
+            .rsf-empty{text-align:center;padding:40px 20px;color:#aac0d8;}
+            .rsf-empty-icon{font-size:42px;margin-bottom:10px;}
+            .rsf-empty-title{font-size:15px;font-weight:700;color:#6a8aaa;margin-bottom:4px;}
+            .rsf-empty-sub{font-size:12.5px;color:#9aaabf;}
+
+            /* Aviso de duplicata */
+            .rsf-dup{background:#fff8e1;border:1px solid #f5d57a;border-radius:8px;padding:10px 14px;font-size:12.5px;color:#5a3a00;margin-top:10px;}
+            body.dark .rsf-dup{background:#1a1408;color:#e8c460;border-color:#c89010;}
+
+            /* Avatar com foto + bonequinho fallback */
+            .rsf-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+            .rsf-avatar.is-empty{background:#e0e8f0 !important;color:#8a9ab0;font-size:22px;}
+            body.dark .rsf-avatar.is-empty{background:#1a3050 !important;color:#5a7090;}
+            .rsf-profile-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+
+            /* Paleta de cores no editor de perfil */
+            .rsf-palette{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:10px;}
+            .rsf-color{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform .15s,border-color .15s;}
+            .rsf-color:hover{transform:scale(1.12);}
+            .rsf-color.selected{border-color:#1a2d4f;box-shadow:0 0 0 2px #fff inset;}
+            body.dark .rsf-color.selected{border-color:#e0e8f5;box-shadow:0 0 0 2px #0f2035 inset;}
+            .rsf-photo-up{display:flex;gap:8px;align-items:center;margin-top:14px;flex-wrap:wrap;}
+            .rsf-photo-up button{font-size:12px;padding:6px 12px;border-radius:7px;border:1px solid #dce6f0;background:#f7faff;color:#1a2d4f;cursor:pointer;font-family:inherit;}
+            body.dark .rsf-photo-up button{background:#0b1622;color:#c8daf0;border-color:#1a3050;}
+
+            /* Toggle "comentários sempre visíveis vs expandir" */
+            .rsf-feed-toolbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:10px;font-size:11.5px;color:#6a8aaa;}
+            .rsf-toggle-cmt{display:inline-flex;align-items:center;gap:6px;background:#f7faff;border:1px solid #dce6f0;border-radius:14px;padding:4px 10px;cursor:pointer;font-family:inherit;font-weight:600;color:#1a2d4f;}
+            body.dark .rsf-toggle-cmt{background:#0b1622;border-color:#1a3050;color:#c8daf0;}
+            .rsf-cmt-collapsed-btn{background:#f7faff;border:1px dashed #aac4e0;border-radius:8px;padding:8px 12px;font-size:12px;color:#1a2d4f;cursor:pointer;font-family:inherit;width:100%;text-align:left;margin-top:10px;}
+            body.dark .rsf-cmt-collapsed-btn{background:#0b1622;border-color:#2a5080;color:#5ab4f0;}
           </style>
-          <div id="b2-rs-container">
-            <div class="result-empty">Aguardando consulta...</div>
+
+          <!-- ═══ INGESTÃO INTELIGENTE (3 abinhas) ═══ -->
+          <div class="rsf-ingest">
+            <div class="rsf-ingest-tabs">
+              <button class="rsf-itab active" data-itab="print" onclick="rsfSwitchIngest('print')">🖼 Print</button>
+              <button class="rsf-itab" data-itab="grok" onclick="rsfSwitchIngest('grok')">🤖 Ponte Grok</button>
+              <button class="rsf-itab" data-itab="url" onclick="rsfSwitchIngest('url')">🔗 URL</button>
+            </div>
+
+            <!-- Painel: PRINT -->
+            <div class="rsf-ipanel active" data-ipanel="print">
+              <div id="rsf-dz-print" class="rsf-dropzone"
+                   onclick="document.getElementById('rsf-file-print').click()"
+                   ondragover="event.preventDefault();this.classList.add('dragover')"
+                   ondragleave="this.classList.remove('dragover')"
+                   ondrop="event.preventDefault();this.classList.remove('dragover');rsfHandlePrint(event.dataTransfer.files)">
+                <div style="font-size:32px;margin-bottom:6px;">🖼️</div>
+                <div style="font-size:13.5px;font-weight:700;color:#1a2d4f;margin-bottom:4px;">Arraste o print do post aqui</div>
+                <div style="font-size:11.5px;color:#6a8aaa;">ou clique para escolher · PNG/JPG · vários de uma vez OK</div>
+                <input id="rsf-file-print" type="file" accept="image/*" multiple style="display:none;"
+                       onchange="rsfHandlePrint(this.files);this.value=''">
+              </div>
+              <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <input id="rsf-print-link" class="rsf-input" style="flex:1;min-width:200px;" type="text" placeholder="Link da postagem original (opcional, mas recomendado)">
+                <select id="rsf-print-rede" class="rsf-input" style="max-width:150px;">
+                  <option value="">Rede social…</option>
+                  <option value="x">X / Twitter</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="tiktok">TikTok</option>
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="threads">Threads</option>
+                  <option value="youtube">YouTube</option>
+                  <option value="telegram">Telegram</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div id="rsf-print-status" class="rsf-status"></div>
+            </div>
+
+            <!-- Painel: PONTE GROK -->
+            <div class="rsf-ipanel" data-ipanel="grok">
+              <div style="font-size:13px;color:#1a2d4f;margin-bottom:8px;font-weight:600;">
+                1️⃣ Pergunta pronta pro Grok (copia, abre o Grok, cola lá)
+              </div>
+              <textarea id="rsf-grok-prompt" class="rsf-textarea" readonly style="min-height:90px;background:#f7faff;font-size:12px;"></textarea>
+              <div style="display:flex;gap:8px;margin:8px 0;flex-wrap:wrap;">
+                <button class="rsf-btn secondary" onclick="rsfRegenGrokPrompt()">🔄 Gerar nova pergunta</button>
+                <button class="rsf-btn" onclick="rsfCopyGrokPrompt(this)">📋 Copiar pergunta</button>
+                <a class="rsf-btn secondary" href="https://x.com/i/grok" target="_blank" rel="noopener" style="text-decoration:none;">🌐 Abrir Grok</a>
+              </div>
+              <div style="font-size:13px;color:#1a2d4f;margin:14px 0 8px;font-weight:600;">
+                2️⃣ Cole aqui a resposta que o Grok te deu
+              </div>
+              <textarea id="rsf-grok-response" class="rsf-textarea" placeholder="Cole o texto inteiro que o Grok respondeu (POSTAGEM, COMENTÁRIO 1, COMENTÁRIO 2…)"></textarea>
+              <div style="margin-top:8px;">
+                <button class="rsf-btn" onclick="rsfProcessGrokResponse()">⚡ Processar resposta do Grok</button>
+              </div>
+              <div id="rsf-grok-status" class="rsf-status"></div>
+            </div>
+
+            <!-- Painel: URL -->
+            <div class="rsf-ipanel" data-ipanel="url">
+              <div style="font-size:13px;color:#1a2d4f;margin-bottom:8px;font-weight:600;">
+                Cole o link da postagem que você viu (X, IG, FB, TikTok, etc.)
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <input id="rsf-url-input" class="rsf-input" style="flex:1;min-width:240px;" type="url" placeholder="https://x.com/usuario/status/...">
+                <button class="rsf-btn" onclick="rsfHandleUrl()">+ Adicionar link</button>
+              </div>
+              <div id="rsf-url-status" class="rsf-status"></div>
+              <div style="font-size:11.5px;color:#6a8aaa;margin-top:10px;line-height:1.55;">
+                💡 <strong>Hoje:</strong> o link entra na fila esperando alguém adicionar print/análise.<br>
+                💡 <strong>Quando o servidor entrar (amanhã):</strong> o sistema tira print automático e classifica sozinho.
+              </div>
+            </div>
           </div>
+
+          <!-- ═══ LAYOUT: FEED + TRENDING ═══ -->
+          <div class="rsf-layout">
+
+            <!-- COLUNA CENTRAL: filtros + feed -->
+            <div>
+              <!-- Filtros -->
+              <div class="rsf-filters">
+                <button class="rsf-fchip active" data-rfilter="papel" data-val="todos" onclick="rsfApplyFilter('papel','todos',this)">Todos</button>
+                <button class="rsf-fchip" data-rfilter="papel" data-val="cacador" onclick="rsfApplyFilter('papel','cacador',this)">🔎 Caçador</button>
+                <button class="rsf-fchip" data-rfilter="papel" data-val="documentador" onclick="rsfApplyFilter('papel','documentador',this)">📸 Documentador</button>
+                <button class="rsf-fchip" data-rfilter="papel" data-val="analista" onclick="rsfApplyFilter('papel','analista',this)">🧠 Analista</button>
+                <button class="rsf-fchip" data-rfilter="papel" data-val="relator" onclick="rsfApplyFilter('papel','relator',this)">📄 Relator</button>
+                <span class="rsf-fsep"></span>
+                <button class="rsf-fchip active" data-rfilter="status" data-val="todos" onclick="rsfApplyFilter('status','todos',this)">Todos status</button>
+                <button class="rsf-fchip" data-rfilter="status" data-val="novo" onclick="rsfApplyFilter('status','novo',this)">🆕 Novo</button>
+                <button class="rsf-fchip" data-rfilter="status" data-val="relevante" onclick="rsfApplyFilter('status','relevante',this)">⭐ Relevante</button>
+                <span class="rsf-fsep"></span>
+                <input id="rsf-search" class="rsf-fsearch" type="text" placeholder="🔍 Buscar no feed..." oninput="rsfRenderFeed()">
+              </div>
+
+              <!-- Toolbar do feed (toggle de comentários) -->
+              <div class="rsf-feed-toolbar">
+                <span>Comentários originais:</span>
+                <button class="rsf-toggle-cmt" onclick="rsfToggleCommentsMode()">
+                  <span id="rsf-cmt-mode-label">👁 Sempre visíveis</span>
+                </button>
+              </div>
+
+              <!-- Feed -->
+              <div id="rsf-feed">
+                <div class="rsf-empty">
+                  <div class="rsf-empty-icon">📭</div>
+                  <div class="rsf-empty-title">Nenhuma postagem coletada ainda</div>
+                  <div class="rsf-empty-sub">Use a Ingestão acima para começar — Print, Ponte Grok ou URL.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SIDEBAR DIREITA: trending -->
+            <aside class="rsf-trending">
+              <div class="rsf-tcard">
+                <div class="rsf-ttitle">🔥 Assuntos do momento</div>
+                <div id="rsf-trend-assuntos">
+                  <div class="rsf-tempty">Sem dados ainda — comece a coletar</div>
+                </div>
+              </div>
+              <div class="rsf-tcard">
+                <div class="rsf-ttitle">👥 Pessoas mais citadas</div>
+                <div id="rsf-trend-pessoas">
+                  <div class="rsf-tempty">Sem dados ainda</div>
+                </div>
+              </div>
+              <div class="rsf-tcard">
+                <div class="rsf-ttitle">📊 Equipe — atividade hoje</div>
+                <div id="rsf-trend-equipe">
+                  <div class="rsf-tempty">Você é o único ativo no momento</div>
+                </div>
+              </div>
+            </aside>
+
+          </div>
+
+          <!-- ═══ MODAL PERFIL ═══ -->
+          <div id="rsf-profile-overlay" class="rsf-profile-overlay" onclick="if(event.target===this)rsfCloseProfile()">
+            <div class="rsf-profile-panel">
+              <div class="rsf-profile-head">
+                <div id="rsf-profile-avatar" class="rsf-profile-avatar">G</div>
+                <div style="flex:1;min-width:0;">
+                  <div id="rsf-profile-name" class="rsf-profile-name">Guilherme</div>
+                  <div id="rsf-profile-role" class="rsf-profile-role">Caçador</div>
+                </div>
+                <button class="rsf-profile-close" onclick="rsfCloseProfile()">✕</button>
+              </div>
+              <div class="rsf-profile-stats">
+                <div class="rsf-pstat"><div id="rsf-pstat-posts" class="rsf-pstat-val">0</div><div class="rsf-pstat-lbl">Posts</div></div>
+                <div class="rsf-pstat"><div id="rsf-pstat-coments" class="rsf-pstat-val">0</div><div class="rsf-pstat-lbl">Coments</div></div>
+                <div class="rsf-pstat"><div id="rsf-pstat-likes" class="rsf-pstat-val">0</div><div class="rsf-pstat-lbl">Likes recebidos</div></div>
+                <div class="rsf-pstat"><div id="rsf-pstat-relev" class="rsf-pstat-val">0</div><div class="rsf-pstat-lbl">Marcados ⭐</div></div>
+              </div>
+              <!-- Editor de perfil (cor + foto), aparece quando é seu próprio perfil -->
+              <div id="rsf-profile-editor" style="padding:14px 24px;border-bottom:1px solid #eef1f5;display:none;">
+                <div style="font-size:11px;font-weight:800;color:#6a8aaa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">🎨 Personalizar minha cor</div>
+                <div id="rsf-palette" class="rsf-palette"></div>
+                <div class="rsf-photo-up">
+                  <button onclick="document.getElementById('rsf-photo-input').click()">📷 Enviar foto</button>
+                  <button onclick="rsfRemovePhoto()" id="rsf-photo-remove" style="display:none;">🗑 Remover foto</button>
+                  <input id="rsf-photo-input" type="file" accept="image/*" style="display:none;" onchange="rsfHandlePhoto(this.files[0])">
+                  <span style="font-size:11px;color:#6a8aaa;">JPG/PNG · até 1MB</span>
+                </div>
+              </div>
+              <div id="rsf-profile-feed" class="rsf-profile-feed"></div>
+            </div>
+          </div>
+
+          <!-- ═══ LIGHTBOX (zoom de imagem) ═══ -->
+          <div id="rsf-lightbox" class="rsf-lightbox" onclick="this.classList.remove('open')">
+            <img id="rsf-lightbox-img" src="" alt="">
+          </div>
+
+          <!-- Container legado preservado (histórico ainda usa) -->
+          <div id="b2-rs-container" style="display:none;"></div>
           <!-- fallback texto puro (legado) -->
           <div id="b2" style="display:none;" class="result-empty"></div>
         </div>
@@ -2683,17 +3050,44 @@ function handleManifFiles(files){
   });
 }
 
-// ─── CLAUDE VISION API ───
+// ─── CLAUDE API GENÉRICA (texto e/ou imagem, com prompt customizável) ───
+// Refatoração: aceita prompt parametrizado pra atender múltiplos casos
+// (ingestão de manifestação, classificação de post de rede social, etc.)
+function callClaudeAI(apiKey, imgData, customPrompt, opts){
+  opts = opts || {};
+  var content = (imgData||[]).map(function(img){
+    return { type:'image', source:{ type:'base64', media_type: img.type, data: img.base64 } };
+  });
+  content.push({ type:'text', text: customPrompt });
+  return fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: opts.model || 'claude-sonnet-4-6',
+      max_tokens: opts.maxTokens || 2048,
+      messages: [{ role:'user', content: content }]
+    })
+  }).then(function(r){
+    if(!r.ok) return r.json().then(function(e){
+      throw new Error((e.error && e.error.message) || ('HTTP '+r.status));
+    });
+    return r.json();
+  }).then(function(data){
+    return (data.content && data.content[0] && data.content[0].text || '').trim();
+  });
+}
+
+// ─── CLAUDE VISION (manifestações) — wrapper que mantém comportamento antigo ───
 function callClaudeVision(apiKey, imgData){
   var today = new Date();
   var pad = function(n){ return ('0'+n).slice(-2); };
-  var dias = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
   var todayStr = pad(today.getDate())+'/'+pad(today.getMonth()+1)+'/'+today.getFullYear();
-
-  var content = imgData.map(function(img){
-    return { type:'image', source:{ type:'base64', media_type: img.type, data: img.base64 } };
-  });
-  content.push({ type:'text', text:
+  var prompt =
     'Você é um assistente especializado em extrair informações de convocações de manifestações/protestos no Rio de Janeiro.\n\n'+
     'Hoje é '+todayStr+'.\n\n'+
     'Analise a(s) imagem(ns) e extraia CADA convocação encontrada no seguinte formato exato (uma por manifestação):\n\n'+
@@ -2709,29 +3103,8 @@ function callClaudeVision(apiKey, imgData){
     '- Se horário não estiver disponível, escreva: horário a confirmar\n'+
     '- Separe múltiplas convocações com UMA linha em branco entre elas.\n'+
     '- Responda APENAS com as entradas formatadas — sem cabeçalho, sem explicações.\n'+
-    '- Se NÃO houver convocação de manifestação na imagem, responda exatamente: NENHUMA'
-  });
-
-  return fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
-      messages: [{ role:'user', content: content }]
-    })
-  }).then(function(r){
-    if(!r.ok) return r.json().then(function(e){
-      throw new Error((e.error && e.error.message) || ('HTTP '+r.status));
-    });
-    return r.json();
-  }).then(function(data){
-    var text = (data.content && data.content[0] && data.content[0].text || '').trim();
+    '- Se NÃO houver convocação de manifestação na imagem, responda exatamente: NENHUMA';
+  return callClaudeAI(apiKey, imgData, prompt).then(function(text){
     if(!text || text === 'NENHUMA') return [];
     return parseB1Items(text);
   });
@@ -5276,6 +5649,833 @@ function amRenderTabela(dados){
   if(!tbody) return;
   // Implementação truncada no deploy original — preservada como stub seguro
 }
+
+// ═══════════════════════════════════════════════════════════════
+// ═══ MÓDULO: REDE SOCIAL INTERNA (aba "Redes Sociais")        ═══
+// ═══ Tudo prefixado com rsf*  ou  RSF_*  pra não colidir       ═══
+// ═══════════════════════════════════════════════════════════════
+
+// ─── CONSTANTES ───
+var RSF_PALETTE = [
+  '#1a73e8','#0d5aa7','#34a853','#22a06b','#16a085','#27ae60',
+  '#f39c12','#e67e22','#d35400','#e74c3c','#c0392b','#8e44ad',
+  '#9b59b6','#6a1b9a','#1abc9c','#3d8ecb','#7f8c8d','#2c3e50',
+  '#e91e63','#ff5722'
+];
+var RSF_REDE_META = {
+  x:         { icon:'𝕏',  label:'X',         bg:'#0f1419', color:'#fff' },
+  twitter:   { icon:'𝕏',  label:'X',         bg:'#0f1419', color:'#fff' },
+  instagram: { icon:'📸', label:'Instagram', bg:'#e1306c', color:'#fff' },
+  facebook:  { icon:'📘', label:'Facebook',  bg:'#1877f2', color:'#fff' },
+  whatsapp:  { icon:'💬', label:'WhatsApp',  bg:'#25d366', color:'#fff' },
+  threads:   { icon:'🧵', label:'Threads',   bg:'#000',    color:'#fff' },
+  tiktok:    { icon:'🎵', label:'TikTok',    bg:'#000',    color:'#fff' },
+  youtube:   { icon:'▶️', label:'YouTube',   bg:'#ff0000', color:'#fff' },
+  telegram:  { icon:'✈️', label:'Telegram',  bg:'#0088cc', color:'#fff' },
+  outro:     { icon:'🔗', label:'Outro',     bg:'#6a8aaa', color:'#fff' }
+};
+var RSF_PALAVRAS_IGNORAR = new Set([
+  'a','o','as','os','de','da','do','das','dos','em','no','na','nos','nas',
+  'um','uma','uns','umas','para','pra','por','com','sem','que','se','é','foi',
+  'mas','ou','ao','aos','à','às','e','ele','ela','eles','elas','isso','isto',
+  'esse','essa','este','esta','não','sim','já','aqui','ali','lá','muito','mais',
+  'menos','seu','sua','seus','suas','meu','minha','meus','minhas','de','d','t','s'
+]);
+
+// ─── ESTADO GLOBAL ───
+var rsfState = {
+  posts: [],            // {id, autor, autorId, papel, criadoEm, fonte:{rede,linkOriginal,handle,texto,horarioOriginal}, gsi:{comentario,classificacao,risco}, comentariosOriginais:[], thumb, visibilidade, likes:[], status, threadId}
+  filters: { papel:'todos', status:'todos', search:'' },
+  commentsMode: 'always',  // 'always' ou 'expand'
+  currentIngestTab: 'print'
+};
+
+// ─── PERFIL DO USUÁRIO ATUAL ───
+function rsfLoadProfile(){
+  try {
+    var raw = localStorage.getItem('gsi_user_profile');
+    if(raw) return JSON.parse(raw);
+  } catch(e){}
+  // Padrão: Guilherme até o servidor entrar
+  var padrao = {
+    id: 'guilherme',
+    name: 'Guilherme',
+    role: 'cacador',
+    color: RSF_PALETTE[1], // azul GSI
+    photo: null
+  };
+  rsfSaveProfile(padrao);
+  return padrao;
+}
+function rsfSaveProfile(p){
+  localStorage.setItem('gsi_user_profile', JSON.stringify(p));
+}
+function rsfGetProfile(){ return rsfLoadProfile(); }
+
+// ─── COR ESTÁVEL POR NOME (quando perfil não tem cor escolhida) ───
+function rsfHashName(name){
+  var h = 0;
+  for(var i=0;i<name.length;i++){ h = ((h<<5)-h)+name.charCodeAt(i); h |= 0; }
+  return Math.abs(h);
+}
+function rsfColorForName(name){
+  if(!name) return RSF_PALETTE[0];
+  return RSF_PALETTE[rsfHashName(name) % RSF_PALETTE.length];
+}
+function rsfRoleLabel(role){
+  return ({cacador:'🔎 Caçador', documentador:'📸 Documentador', analista:'🧠 Analista', relator:'📄 Relator'})[role] || '👤 Membro';
+}
+
+// ─── PERSISTÊNCIA DOS POSTS ───
+function rsfLoadPosts(){
+  try {
+    var raw = localStorage.getItem('gsi_b2_posts');
+    rsfState.posts = raw ? JSON.parse(raw) : [];
+  } catch(e){ rsfState.posts = []; }
+}
+function rsfSavePosts(){
+  try { localStorage.setItem('gsi_b2_posts', JSON.stringify(rsfState.posts)); } catch(e){}
+}
+
+// ─── DEDUPLICAÇÃO POR URL ───
+function rsfNormalizeUrl(u){
+  if(!u) return '';
+  return u.trim().toLowerCase()
+    .replace(/^https?:\/\/(www\.)?/, '')
+    .replace(/[\/\?#].*$/, function(m){ return m.split('?')[0].split('#')[0].replace(/\/$/,''); })
+    .replace(/\/$/,'');
+}
+function rsfFindDuplicate(url){
+  var key = rsfNormalizeUrl(url);
+  if(!key) return null;
+  return rsfState.posts.find(function(p){
+    return rsfNormalizeUrl(p.fonte && p.fonte.linkOriginal) === key;
+  });
+}
+
+// ─── TIMESTAMP RELATIVO ("há 5 min") ───
+function rsfRelativeTime(ts){
+  var now = Date.now();
+  var diff = Math.max(0, now - ts);
+  var min = Math.floor(diff/60000);
+  if(min < 1) return 'agora há pouco';
+  if(min < 60) return 'há '+min+' min';
+  var h = Math.floor(min/60);
+  if(h < 24) return 'há '+h+' h';
+  var d = Math.floor(h/24);
+  if(d < 7) return 'há '+d+' dia'+(d>1?'s':'');
+  var date = new Date(ts);
+  return date.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});
+}
+
+// ─── TROCA DE ABA DA INGESTÃO ───
+function rsfSwitchIngest(tab){
+  rsfState.currentIngestTab = tab;
+  document.querySelectorAll('[data-itab]').forEach(function(b){
+    b.classList.toggle('active', b.dataset.itab === tab);
+  });
+  document.querySelectorAll('[data-ipanel]').forEach(function(p){
+    p.classList.toggle('active', p.dataset.ipanel === tab);
+  });
+}
+
+// ─── INGESTÃO POR PRINT ───
+function rsfHandlePrint(files){
+  if(!files || !files.length) return;
+  var key = getManifApiKey();
+  if(!key){
+    rsfStatus('rsf-print-status','⚠️ Configure sua chave Anthropic na aba Manifestações primeiro.','err');
+    return;
+  }
+  var arr = Array.from(files).filter(function(f){ return f.type.startsWith('image/'); });
+  if(!arr.length){ rsfStatus('rsf-print-status','Selecione imagens válidas.','err'); return; }
+
+  var linkUrl = (document.getElementById('rsf-print-link').value || '').trim();
+  var rede = (document.getElementById('rsf-print-rede').value || 'outro');
+
+  // Dedup imediato se há link
+  if(linkUrl){
+    var dup = rsfFindDuplicate(linkUrl);
+    if(dup){
+      rsfStatus('rsf-print-status',
+        '⚠️ Esse link já foi coletado por '+escHtml(dup.autor)+' '+rsfRelativeTime(dup.criadoEm)+'. Não vou duplicar.','err');
+      return;
+    }
+  }
+
+  rsfStatus('rsf-print-status','<span class="dz-spinner"></span> Analisando print(s) com Claude…','proc');
+
+  var promises = arr.map(function(f){
+    return new Promise(function(res, rej){
+      var r = new FileReader();
+      r.onload = function(e){
+        res({ base64: e.target.result.split(',')[1], type: f.type, dataUrl: e.target.result });
+      };
+      r.onerror = rej;
+      r.readAsDataURL(f);
+    });
+  });
+
+  Promise.all(promises).then(function(imgs){
+    var prompt = rsfBuildPostPrompt(rede, linkUrl);
+    return callClaudeAI(key, imgs.map(function(i){return {base64:i.base64,type:i.type};}), prompt, {maxTokens:1500})
+      .then(function(text){ return { text: text, thumb: imgs[0].dataUrl }; });
+  }).then(function(res){
+    var parsed = rsfParseClaudePostJSON(res.text);
+    if(!parsed){
+      rsfStatus('rsf-print-status','❌ Claude não retornou um JSON válido. Tente novamente ou ajuste o print.','err');
+      return;
+    }
+    var profile = rsfGetProfile();
+    var post = rsfMakePost({
+      autor: profile.name, autorId: profile.id, papel: profile.role,
+      fonte: {
+        rede: rede || parsed.rede || 'outro',
+        linkOriginal: linkUrl || parsed.linkOriginal || '',
+        handle: parsed.handle || '',
+        texto: parsed.texto || '',
+        horarioOriginal: parsed.horarioOriginal || ''
+      },
+      gsi: {
+        comentario: parsed.comentarioGSI || '',
+        classificacao: parsed.classificacao || '',
+        risco: parsed.risco || 0
+      },
+      comentariosOriginais: parsed.comentarios || [],
+      thumb: res.thumb,
+      visibilidade: 'publico',
+      status: 'novo'
+    });
+    rsfState.posts.unshift(post);
+    rsfSavePosts();
+    rsfRenderFeed();
+    rsfRenderTrending();
+    document.getElementById('rsf-print-link').value = '';
+    document.getElementById('rsf-print-rede').value = '';
+    rsfStatus('rsf-print-status','✅ Post adicionado ao feed!','ok');
+    setTimeout(function(){ rsfStatus('rsf-print-status','',''); }, 3500);
+  }).catch(function(err){
+    console.error('rsfHandlePrint:', err);
+    rsfStatus('rsf-print-status','❌ Erro: '+(err.message || 'tente novamente'),'err');
+  });
+}
+
+function rsfBuildPostPrompt(rede, linkUrl){
+  return 'Você analisa um print de postagem de rede social pra um sistema de inteligência do GSI/RJ.\n\n'+
+    'Rede informada: '+(rede||'desconhecida')+'\n'+
+    'Link informado: '+(linkUrl||'nenhum')+'\n\n'+
+    'Devolva APENAS um JSON válido (sem markdown, sem ```), no formato:\n'+
+    '{\n'+
+    '  "rede": "x|instagram|facebook|tiktok|whatsapp|threads|youtube|telegram|outro",\n'+
+    '  "handle": "@nome_ou_perfil_visivel",\n'+
+    '  "texto": "transcrição completa do texto da postagem (todos os caracteres legíveis)",\n'+
+    '  "horarioOriginal": "horário/data visível na postagem, se houver",\n'+
+    '  "linkOriginal": "URL da postagem se aparecer no print",\n'+
+    '  "comentarioGSI": "frase curta no estilo GSI sobre o conteúdo (ex: postagem convocando ato em frente à ALERJ)",\n'+
+    '  "classificacao": "convocacao|denuncia|incitacao|tensao|apoio|institucional|monitoramento|desinformacao",\n'+
+    '  "risco": 0-100,\n'+
+    '  "comentarios": [\n'+
+    '     {"handle":"@autor","texto":"texto do comentário visível","horario":"se houver"}\n'+
+    '  ]\n'+
+    '}\n\n'+
+    'Se for um print de conversa de WhatsApp, "handle" = nome do remetente principal.\n'+
+    'Se houver replies/comentários visíveis no print, liste em "comentarios" na ordem.\n'+
+    'Se algum campo não for identificável, devolva string vazia ou array vazio. Não invente dados.';
+}
+
+function rsfParseClaudePostJSON(text){
+  if(!text) return null;
+  // Remove possíveis envoltórios de markdown
+  text = text.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
+  try { return JSON.parse(text); } catch(e){
+    // Tenta achar primeiro { ... }
+    var m = text.match(/\{[\s\S]*\}/);
+    if(m){ try { return JSON.parse(m[0]); } catch(_){} }
+    return null;
+  }
+}
+
+// ─── INGESTÃO POR URL (sem servidor: vira card de "fila pra documentar") ───
+function rsfHandleUrl(){
+  var url = (document.getElementById('rsf-url-input').value || '').trim();
+  if(!url || !/^https?:\/\//i.test(url)){
+    rsfStatus('rsf-url-status','Cole um link válido começando com http(s)://','err');
+    return;
+  }
+  var dup = rsfFindDuplicate(url);
+  if(dup){
+    rsfStatus('rsf-url-status',
+      '⚠️ Já coletado por '+escHtml(dup.autor)+' '+rsfRelativeTime(dup.criadoEm)+'.','err');
+    return;
+  }
+  var profile = rsfGetProfile();
+  // Tenta detectar rede pela URL
+  var rede = 'outro';
+  if(/x\.com|twitter\.com/.test(url)) rede = 'x';
+  else if(/instagram\.com/.test(url)) rede = 'instagram';
+  else if(/facebook\.com/.test(url)) rede = 'facebook';
+  else if(/tiktok\.com/.test(url)) rede = 'tiktok';
+  else if(/youtube\.com|youtu\.be/.test(url)) rede = 'youtube';
+  else if(/threads\.net/.test(url)) rede = 'threads';
+  else if(/t\.me|telegram\.me/.test(url)) rede = 'telegram';
+  else if(/whatsapp\.com|wa\.me/.test(url)) rede = 'whatsapp';
+
+  var post = rsfMakePost({
+    autor: profile.name, autorId: profile.id, papel: profile.role,
+    fonte: { rede: rede, linkOriginal: url, handle: '', texto: '(link na fila — aguardando print/análise)', horarioOriginal:'' },
+    gsi: { comentario:'', classificacao:'', risco:0 },
+    comentariosOriginais: [],
+    thumb: null,
+    visibilidade: 'publico',
+    status: 'novo'
+  });
+  rsfState.posts.unshift(post);
+  rsfSavePosts();
+  rsfRenderFeed();
+  rsfRenderTrending();
+  document.getElementById('rsf-url-input').value = '';
+  rsfStatus('rsf-url-status','✅ Link adicionado à fila do feed','ok');
+  setTimeout(function(){ rsfStatus('rsf-url-status','',''); }, 3000);
+}
+
+// ─── PONTE GROK: gerar pergunta + processar resposta ───
+function rsfBuildGrokPrompt(){
+  var hoje = new Date().toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});
+  // Coletar palavras-chave do que o setor já tá monitorando
+  var alvos = [];
+  try {
+    // Pega alvos das manifestações já coletadas (org/local) + nomes mencionados nos posts
+    (b1AllItems||[]).slice(0,10).forEach(function(it){
+      var p = parseB1Item(it);
+      if(p.org) alvos.push(p.org.split(',')[0]);
+      if(p.local) alvos.push(p.local.split(',')[0]);
+    });
+  } catch(e){}
+  if(!alvos.length) alvos = ['Cláudio Castro','Ricardo Couto','ALERJ','manifestação RJ','protesto Rio'];
+  var alvosTxt = Array.from(new Set(alvos)).slice(0,6).join(', ');
+  return 'Hoje é '+hoje+'. Liste os 10 posts mais recentes do X (Twitter) das últimas 24h '+
+    'mencionando: '+alvosTxt+'. '+
+    'Para cada post traga o link completo, autor, horário e texto. '+
+    'Se o post tiver respostas/comentários relevantes, liste cada uma com link, autor, horário e texto, '+
+    'indicando "Em resposta a: POSTAGEM" ou "Em resposta a: COMENTÁRIO N". '+
+    'Use exatamente este formato:\n\n'+
+    '═══ POSTAGEM ═══\n🔗 Link: ...\n👤 Autor: @...\n🕐 Data: DD/MM HH:MM\n📝 Texto: ...\n\n'+
+    '─── COMENTÁRIO 1 ───\n🔗 Link: ...\n👤 Autor: @...\n🕐 Data: DD/MM HH:MM\n📝 Texto: ...\n↳ Em resposta a: POSTAGEM\n\n'+
+    'Sem comentários extras seus. Só o conteúdo no formato pedido.';
+}
+function rsfRegenGrokPrompt(){
+  document.getElementById('rsf-grok-prompt').value = rsfBuildGrokPrompt();
+}
+function rsfCopyGrokPrompt(btn){
+  var ta = document.getElementById('rsf-grok-prompt');
+  if(!ta.value) rsfRegenGrokPrompt();
+  navigator.clipboard.writeText(ta.value).then(function(){
+    var orig = btn.textContent;
+    btn.textContent = '✓ Copiado!';
+    setTimeout(function(){ btn.textContent = orig; }, 1800);
+  });
+}
+
+function rsfProcessGrokResponse(){
+  var raw = (document.getElementById('rsf-grok-response').value || '').trim();
+  if(!raw){ rsfStatus('rsf-grok-status','Cole o texto que o Grok te deu antes.','err'); return; }
+  rsfStatus('rsf-grok-status','<span class="dz-spinner"></span> Lendo resposta do Grok…','proc');
+
+  // Parser do formato pedido
+  var blocos = raw.split(/(?=═══ POSTAGEM ═══|─── COMENTÁRIO|=== POSTAGEM|--- COMENTÁRIO)/i)
+    .map(function(b){ return b.trim(); })
+    .filter(function(b){ return b.length; });
+
+  if(!blocos.length){
+    rsfStatus('rsf-grok-status','❌ Não consegui identificar nenhum bloco POSTAGEM ou COMENTÁRIO. Pediu o formato certo pro Grok?','err');
+    return;
+  }
+
+  var profile = rsfGetProfile();
+  var groupId = 'grok-'+Date.now();
+  var post = null;
+  var comentarios = [];
+
+  blocos.forEach(function(b){
+    var item = rsfParseGrokBlock(b);
+    if(!item) return;
+    if(item.tipo === 'post' && !post) post = item;
+    else comentarios.push(item);
+  });
+
+  if(!post && comentarios.length){
+    // Sem postagem principal — promove o primeiro comentário pra postagem
+    post = comentarios.shift();
+    post.tipo = 'post';
+  }
+  if(!post){
+    rsfStatus('rsf-grok-status','❌ Não achei uma POSTAGEM válida no que você colou.','err');
+    return;
+  }
+
+  // Dedup
+  if(post.link){
+    var dup = rsfFindDuplicate(post.link);
+    if(dup){
+      rsfStatus('rsf-grok-status','⚠️ Esse post já foi coletado por '+escHtml(dup.autor)+' '+rsfRelativeTime(dup.criadoEm)+'.','err');
+      return;
+    }
+  }
+
+  var rede = rsfGuessRedeFromUrl(post.link) || 'x';
+  var newPost = rsfMakePost({
+    autor: profile.name, autorId: profile.id, papel: profile.role,
+    fonte: {
+      rede: rede,
+      linkOriginal: post.link,
+      handle: post.autor || '',
+      texto: post.texto || '',
+      horarioOriginal: post.data || ''
+    },
+    gsi: { comentario:'', classificacao:'', risco:0 },
+    comentariosOriginais: comentarios.map(function(c){
+      return { handle: c.autor||'', texto: c.texto||'', horario: c.data||'', link: c.link||'', emRespostaA: c.emRespostaA||'POSTAGEM' };
+    }),
+    thumb: null,
+    visibilidade: 'publico',
+    status: 'novo'
+  });
+  rsfState.posts.unshift(newPost);
+  rsfSavePosts();
+  rsfRenderFeed();
+  rsfRenderTrending();
+  document.getElementById('rsf-grok-response').value = '';
+  rsfStatus('rsf-grok-status','✅ Postagem + '+comentarios.length+' comentário(s) adicionados!','ok');
+  setTimeout(function(){ rsfStatus('rsf-grok-status','',''); }, 4000);
+}
+
+function rsfParseGrokBlock(text){
+  var isPost = /═══\s*POSTAGEM|=== POSTAGEM/i.test(text);
+  var isComment = /─── COMENTÁRIO|--- COMENTÁRIO/i.test(text);
+  if(!isPost && !isComment) return null;
+  var link = (text.match(/🔗\s*Link:?\s*(\S+)/i) || text.match(/Link:?\s*(https?:\/\/\S+)/i) || [])[1] || '';
+  var autor = (text.match(/👤\s*Autor:?\s*(\S+)/i) || text.match(/Autor:?\s*(@?\S+)/i) || [])[1] || '';
+  var data = (text.match(/🕐\s*Data:?\s*([^\n]+)/i) || text.match(/Data:?\s*([^\n]+)/i) || [])[1] || '';
+  var textoM = text.match(/📝\s*Texto:?\s*([\s\S]+?)(?=\n↳|═══|─── COMENTÁRIO|=== POSTAGEM|--- COMENTÁRIO|$)/i)
+            || text.match(/Texto:?\s*([\s\S]+?)(?=\n↳|═══|─── COMENTÁRIO|=== POSTAGEM|--- COMENTÁRIO|$)/i);
+  var texto = textoM ? textoM[1].trim() : '';
+  var emResp = (text.match(/↳\s*Em resposta a:?\s*([^\n]+)/i) || [])[1] || '';
+  return {
+    tipo: isPost ? 'post' : 'comentario',
+    link: link.trim().replace(/[,;)]+$/,''),
+    autor: autor.trim(),
+    data: data.trim(),
+    texto: texto.trim(),
+    emRespostaA: emResp.trim()
+  };
+}
+
+function rsfGuessRedeFromUrl(url){
+  if(!url) return null;
+  if(/x\.com|twitter\.com/.test(url)) return 'x';
+  if(/instagram\.com/.test(url)) return 'instagram';
+  if(/facebook\.com/.test(url)) return 'facebook';
+  if(/tiktok\.com/.test(url)) return 'tiktok';
+  if(/youtube\.com|youtu\.be/.test(url)) return 'youtube';
+  if(/threads\.net/.test(url)) return 'threads';
+  if(/t\.me/.test(url)) return 'telegram';
+  if(/whatsapp\.com|wa\.me/.test(url)) return 'whatsapp';
+  return 'outro';
+}
+
+// ─── CRIA POST PADRONIZADO ───
+function rsfMakePost(o){
+  o = o || {};
+  return {
+    id: 'p_'+Date.now()+'_'+Math.floor(Math.random()*9999),
+    autor: o.autor, autorId: o.autorId, papel: o.papel,
+    criadoEm: Date.now(),
+    fonte: o.fonte || {},
+    gsi: o.gsi || {},
+    comentariosOriginais: o.comentariosOriginais || [],
+    thumb: o.thumb || null,
+    visibilidade: o.visibilidade || 'publico',
+    likes: [],
+    status: o.status || 'novo'
+  };
+}
+
+// ─── HELPER STATUS ───
+function rsfStatus(elId, msg, kind){
+  var el = document.getElementById(elId);
+  if(!el) return;
+  el.className = 'rsf-status' + (kind?' '+kind:'');
+  el.innerHTML = msg;
+}
+
+// ─── RENDER DO FEED ───
+function rsfRenderFeed(){
+  var el = document.getElementById('rsf-feed');
+  if(!el) return;
+  var search = (document.getElementById('rsf-search').value || '').toLowerCase().trim();
+  var f = rsfState.filters;
+
+  var visiveis = rsfState.posts.filter(function(p){
+    if(f.papel !== 'todos' && p.papel !== f.papel) return false;
+    if(f.status === 'novo' && p.status !== 'novo') return false;
+    if(f.status === 'relevante' && p.status !== 'relevante') return false;
+    if(search){
+      var hay = ((p.fonte.texto||'')+' '+(p.fonte.handle||'')+' '+(p.gsi.comentario||'')+' '+(p.autor||'')).toLowerCase();
+      if(hay.indexOf(search) < 0) return false;
+    }
+    return true;
+  });
+
+  if(!visiveis.length){
+    el.innerHTML = '<div class="rsf-empty"><div class="rsf-empty-icon">📭</div>'+
+      '<div class="rsf-empty-title">'+(rsfState.posts.length?'Nenhuma postagem com esses filtros':'Nenhuma postagem coletada ainda')+'</div>'+
+      '<div class="rsf-empty-sub">'+(rsfState.posts.length?'Limpe os filtros ou faça outra busca.':'Use a Ingestão acima para começar.')+'</div></div>';
+    return;
+  }
+
+  el.innerHTML = visiveis.map(rsfRenderCard).join('');
+}
+
+function rsfRenderCard(p){
+  var profile = rsfGetProfile();
+  var meuAvatar = (p.autorId === profile.id);
+  var color = (meuAvatar && profile.color) ? profile.color : rsfColorForName(p.autor);
+  var photo = (meuAvatar && profile.photo) ? profile.photo : null;
+
+  var avatarHtml = photo
+    ? '<div class="rsf-avatar" style="background:'+color+';" onclick="rsfOpenProfile(\''+p.autorId+'\')"><img src="'+esc(photo)+'" alt="'+esc(p.autor)+'"></div>'
+    : '<div class="rsf-avatar" style="background:'+color+';" onclick="rsfOpenProfile(\''+p.autorId+'\')">'+esc((p.autor||'?').charAt(0).toUpperCase())+'</div>';
+
+  var rede = (p.fonte && p.fonte.rede) || 'outro';
+  var meta = RSF_REDE_META[rede] || RSF_REDE_META.outro;
+
+  var srcHtml = '<div class="rsf-src">'+
+    '<span class="rsf-src-badge" style="background:'+meta.bg+';color:'+meta.color+';">'+meta.icon+' '+meta.label+'</span>'+
+    (p.fonte.linkOriginal ? '<a class="rsf-src-link" href="'+esc(p.fonte.linkOriginal)+'" target="_blank" rel="noopener">'+esc(p.fonte.linkOriginal.length>70?p.fonte.linkOriginal.slice(0,70)+'…':p.fonte.linkOriginal)+'</a>' : '<span style="color:#9aaabf;font-size:11px;">sem link</span>')+
+    '</div>';
+
+  var thumbHtml = p.thumb
+    ? '<div class="rsf-thumb-wrap"><img class="rsf-thumb" src="'+esc(p.thumb)+'" onclick="rsfOpenLightbox(this.src)"></div>'
+    : '';
+
+  var origHtml = (p.fonte.handle || p.fonte.texto)
+    ? '<div class="rsf-orig">'+
+        (p.fonte.handle ? '<div class="rsf-orig-handle">'+esc(p.fonte.handle)+'</div>' : '')+
+        (p.fonte.texto ? '<div class="rsf-orig-text">'+esc(p.fonte.texto)+'</div>' : '')+
+        (p.fonte.horarioOriginal ? '<div class="rsf-orig-time">↗ '+esc(p.fonte.horarioOriginal)+'</div>' : '')+
+      '</div>'
+    : '';
+
+  var gsiHtml = p.gsi.comentario
+    ? '<div class="rsf-gsi"><span class="rsf-gsi-lbl">💬 Comentário GSI</span>'+esc(p.gsi.comentario)+'</div>'
+    : '';
+
+  // Comentários originais (sempre visíveis OU expandíveis)
+  var comentsHtml = '';
+  if(p.comentariosOriginais && p.comentariosOriginais.length){
+    var renderComents = function(){
+      return '<div class="rsf-thread">' + p.comentariosOriginais.map(function(c, i){
+        var depth = c.emRespostaA && /COMENT/i.test(c.emRespostaA) ? ' depth-1' : '';
+        return '<div class="rsf-reply'+depth+'">'+
+          '<div class="rsf-reply-handle">'+esc(c.handle||'(sem autor)')+'</div>'+
+          '<div class="rsf-reply-text">'+esc(c.texto||'')+'</div>'+
+          '<div class="rsf-reply-meta">'+
+            (c.horario ? '<span>'+esc(c.horario)+'</span>' : '')+
+            (c.link ? '<a href="'+esc(c.link)+'" target="_blank" rel="noopener">🔗 link</a>' : '')+
+            (c.emRespostaA ? '<span style="opacity:.7;">↳ '+esc(c.emRespostaA)+'</span>' : '')+
+          '</div>'+
+        '</div>';
+      }).join('') + '</div>';
+    };
+    if(rsfState.commentsMode === 'always'){
+      comentsHtml = renderComents();
+    } else {
+      comentsHtml = '<button class="rsf-cmt-collapsed-btn" onclick="rsfExpandComents(this,\''+p.id+'\')">'+
+        '💬 Ver '+p.comentariosOriginais.length+' comentário(s) original(is) ▾'+
+        '</button>'+
+        '<div data-coments-of="'+p.id+'" style="display:none;">'+renderComents()+'</div>';
+    }
+  }
+
+  var visIcon = p.visibilidade === 'publico' ? '🌐 Público'
+    : p.visibilidade === 'privado' ? '🔒 Só eu'
+    : '👥 Selecionados';
+
+  var classe = 'rsf-card' + (p.status==='novo'?' is-new':'') + (p.status==='relevante'?' is-relevant':'');
+
+  return '<div class="'+classe+'" data-post-id="'+p.id+'">'+
+    '<div class="rsf-head">'+
+      avatarHtml+
+      '<div class="rsf-author">'+
+        '<div class="rsf-aname" onclick="rsfOpenProfile(\''+p.autorId+'\')">'+esc(p.autor||'')+'</div>'+
+        '<div class="rsf-ameta">'+
+          '<span class="rsf-role">'+esc(rsfRoleLabel(p.papel))+'</span>'+
+          '<span>·</span>'+
+          '<span>'+rsfRelativeTime(p.criadoEm)+'</span>'+
+        '</div>'+
+      '</div>'+
+      '<span class="rsf-vis">'+visIcon+'</span>'+
+    '</div>'+
+    srcHtml+
+    thumbHtml+
+    origHtml+
+    gsiHtml+
+    comentsHtml+
+    '<div class="rsf-actions">'+
+      '<button class="rsf-act'+(p.likes.indexOf(profile.id)>=0?' liked':'')+'" onclick="rsfToggleLike(\''+p.id+'\')">❤ <span>'+p.likes.length+'</span></button>'+
+      '<button class="rsf-act" onclick="rsfPromptComment(\''+p.id+'\')">💬 Comentar</button>'+
+      '<button class="rsf-act'+(p.status==='relevante'?' relevant':'')+'" onclick="rsfToggleRelevant(\''+p.id+'\')">⭐ '+(p.status==='relevante'?'Relevante':'Marcar relevante')+'</button>'+
+      '<button class="rsf-act" onclick="rsfEditGsi(\''+p.id+'\')">✏️ '+(p.gsi.comentario?'Editar coment.':'+ Coment. GSI')+'</button>'+
+      '<button class="rsf-act" onclick="rsfSendToReport(\''+p.id+'\')">📄 Pro relatório</button>'+
+      '<button class="rsf-act" style="margin-left:auto;color:#c0392b;" onclick="rsfDeletePost(\''+p.id+'\')">🗑</button>'+
+    '</div>'+
+  '</div>';
+}
+
+// ─── AÇÕES DE CARD ───
+function rsfToggleLike(id){
+  var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
+  var me = rsfGetProfile().id;
+  var i = p.likes.indexOf(me);
+  if(i>=0) p.likes.splice(i,1); else p.likes.push(me);
+  rsfSavePosts(); rsfRenderFeed(); rsfRenderTrending();
+}
+function rsfToggleRelevant(id){
+  var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
+  p.status = (p.status === 'relevante') ? 'novo' : 'relevante';
+  rsfSavePosts(); rsfRenderFeed();
+}
+function rsfPromptComment(id){
+  var c = prompt('Comentário (visível pra todos):'); if(!c) return;
+  // Por enquanto, comentários internos viram texto agregado no GSI (sem servidor não tem thread interna)
+  var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
+  var profile = rsfGetProfile();
+  p.gsi.comentario = (p.gsi.comentario||'') + (p.gsi.comentario?' · ':'') + profile.name + ': ' + c;
+  rsfSavePosts(); rsfRenderFeed();
+}
+function rsfEditGsi(id){
+  var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
+  var atual = p.gsi.comentario || '';
+  var novo = prompt('Comentário GSI sobre este post:', atual);
+  if(novo === null) return;
+  p.gsi.comentario = novo.trim();
+  rsfSavePosts(); rsfRenderFeed();
+}
+function rsfDeletePost(id){
+  if(!confirm('Excluir este post do feed?')) return;
+  rsfState.posts = rsfState.posts.filter(function(x){return x.id!==id;});
+  rsfSavePosts(); rsfRenderFeed(); rsfRenderTrending();
+}
+function rsfSendToReport(id){
+  var p = rsfState.posts.find(function(x){return x.id===id;}); if(!p) return;
+  // Pré-preenche o relatório com info do post
+  var assuntoEl = document.getElementById('rel-assunto');
+  if(assuntoEl) assuntoEl.value = 'Análise de postagem: '+(p.fonte.handle||'')+' — '+(p.fonte.rede||'');
+  var mot = document.getElementById('rs1-motivo');
+  if(mot) mot.value = (p.fonte.texto||'').slice(0,500);
+  showView('relatorio');
+}
+function rsfExpandComents(btn, id){
+  var box = document.querySelector('[data-coments-of="'+id+'"]');
+  if(!box) return;
+  var open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  btn.innerHTML = '💬 '+(open?'Ver':'Ocultar')+' comentário(s) original(is) '+(open?'▾':'▴');
+}
+function rsfToggleCommentsMode(){
+  rsfState.commentsMode = (rsfState.commentsMode === 'always') ? 'expand' : 'always';
+  localStorage.setItem('gsi_b2_cmt_mode', rsfState.commentsMode);
+  document.getElementById('rsf-cmt-mode-label').textContent =
+    rsfState.commentsMode === 'always' ? '👁 Sempre visíveis' : '➕ Expandir ao clicar';
+  rsfRenderFeed();
+}
+
+// ─── FILTROS ───
+function rsfApplyFilter(group, val, btn){
+  rsfState.filters[group] = val;
+  document.querySelectorAll('[data-rfilter="'+group+'"]').forEach(function(b){
+    b.classList.toggle('active', b === btn);
+  });
+  rsfRenderFeed();
+}
+
+// ─── PERFIL MODAL ───
+function rsfOpenProfile(autorId){
+  var profile = rsfGetProfile();
+  var isMe = (autorId === profile.id);
+  var p = isMe ? profile : { id: autorId, name: autorId, role: 'membro', color: rsfColorForName(autorId), photo: null };
+
+  var avEl = document.getElementById('rsf-profile-avatar');
+  avEl.style.background = p.color || rsfColorForName(p.name);
+  avEl.innerHTML = p.photo ? '<img src="'+esc(p.photo)+'">' : esc((p.name||'?').charAt(0).toUpperCase());
+
+  document.getElementById('rsf-profile-name').textContent = p.name;
+  document.getElementById('rsf-profile-role').textContent = rsfRoleLabel(p.role);
+
+  // Stats
+  var meusPosts = rsfState.posts.filter(function(x){return x.autorId === p.id;});
+  var likesRecv = meusPosts.reduce(function(s,x){return s + (x.likes?x.likes.length:0);},0);
+  var relev = meusPosts.filter(function(x){return x.status==='relevante';}).length;
+  var coments = meusPosts.reduce(function(s,x){return s + ((x.gsi.comentario||'').split('·').length-1);},0);
+  document.getElementById('rsf-pstat-posts').textContent = meusPosts.length;
+  document.getElementById('rsf-pstat-coments').textContent = Math.max(0, coments);
+  document.getElementById('rsf-pstat-likes').textContent = likesRecv;
+  document.getElementById('rsf-pstat-relev').textContent = relev;
+
+  // Editor (cor + foto): só pra "meu" perfil
+  document.getElementById('rsf-profile-editor').style.display = isMe ? 'block' : 'none';
+  if(isMe){
+    rsfRenderPalette(p.color);
+    document.getElementById('rsf-photo-remove').style.display = p.photo ? 'inline-block' : 'none';
+  }
+
+  // Feed do autor
+  var feed = document.getElementById('rsf-profile-feed');
+  feed.innerHTML = meusPosts.length
+    ? meusPosts.map(rsfRenderCard).join('')
+    : '<div class="rsf-empty"><div class="rsf-empty-title" style="font-size:13px;">Sem posts ainda.</div></div>';
+
+  document.getElementById('rsf-profile-overlay').classList.add('open');
+}
+function rsfCloseProfile(){
+  document.getElementById('rsf-profile-overlay').classList.remove('open');
+}
+function rsfRenderPalette(activeColor){
+  var el = document.getElementById('rsf-palette');
+  el.innerHTML = RSF_PALETTE.map(function(c){
+    return '<div class="rsf-color'+(c===activeColor?' selected':'')+'" style="background:'+c+';" onclick="rsfPickColor(\''+c+'\')"></div>';
+  }).join('');
+}
+function rsfPickColor(c){
+  var p = rsfGetProfile();
+  p.color = c;
+  rsfSaveProfile(p);
+  rsfRenderPalette(c);
+  document.getElementById('rsf-profile-avatar').style.background = c;
+  rsfRenderFeed();
+}
+function rsfHandlePhoto(file){
+  if(!file) return;
+  if(file.size > 1024*1024){ alert('Foto até 1MB.'); return; }
+  var r = new FileReader();
+  r.onload = function(e){
+    var p = rsfGetProfile();
+    p.photo = e.target.result;
+    rsfSaveProfile(p);
+    var av = document.getElementById('rsf-profile-avatar');
+    av.innerHTML = '<img src="'+esc(p.photo)+'">';
+    document.getElementById('rsf-photo-remove').style.display = 'inline-block';
+    rsfRenderFeed();
+  };
+  r.readAsDataURL(file);
+}
+function rsfRemovePhoto(){
+  var p = rsfGetProfile();
+  p.photo = null;
+  rsfSaveProfile(p);
+  document.getElementById('rsf-profile-avatar').innerHTML = esc((p.name||'?').charAt(0).toUpperCase());
+  document.getElementById('rsf-photo-remove').style.display = 'none';
+  rsfRenderFeed();
+}
+
+// ─── LIGHTBOX ───
+function rsfOpenLightbox(src){
+  document.getElementById('rsf-lightbox-img').src = src;
+  document.getElementById('rsf-lightbox').classList.add('open');
+}
+
+// ─── TRENDING ───
+function rsfRenderTrending(){
+  var posts = rsfState.posts;
+  // Conta palavras significativas (>3 letras, fora do stopwords) em texto + comentário GSI
+  var contaPalavras = {};
+  var contaPessoas = {};
+  var contaAutores = {};
+
+  posts.forEach(function(p){
+    var txt = ((p.fonte && p.fonte.texto)||'')+' '+((p.gsi && p.gsi.comentario)||'');
+    txt.split(/[\s,.;!?:"\(\)\[\]\/]+/).forEach(function(w){
+      w = w.trim();
+      if(!w || w.length<4) return;
+      if(RSF_PALAVRAS_IGNORAR.has(w.toLowerCase())) return;
+      // Pessoas: maiúscula seguida de minúscula em pelo menos 2 palavras (Cláudio Castro)
+      contaPalavras[w] = (contaPalavras[w]||0)+1;
+    });
+    // Detecção simples de pessoas (Nome Sobrenome)
+    var pessoaRe = /\b([A-ZÁÀÂÃÉÈÊÍÓÔÕÚÇ][a-záàâãéèêíóôõúç]{2,})\s+([A-ZÁÀÂÃÉÈÊÍÓÔÕÚÇ][a-záàâãéèêíóôõúç]{2,})/g;
+    var m;
+    while((m = pessoaRe.exec(txt)) !== null){
+      var nome = m[1]+' '+m[2];
+      contaPessoas[nome] = (contaPessoas[nome]||0)+1;
+    }
+    contaAutores[p.autor] = (contaAutores[p.autor]||0)+1;
+  });
+
+  var topPalavras = Object.entries(contaPalavras).sort(function(a,b){return b[1]-a[1];}).slice(0,7);
+  var topPessoas  = Object.entries(contaPessoas).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  var topAutores  = Object.entries(contaAutores).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+
+  var elA = document.getElementById('rsf-trend-assuntos');
+  elA.innerHTML = topPalavras.length
+    ? topPalavras.map(function(t){
+        return '<div class="rsf-titem" onclick="document.getElementById(\'rsf-search\').value=\''+esc(t[0])+'\';rsfRenderFeed();">'+
+          '<span class="rsf-tlabel">'+esc(t[0])+'</span><span class="rsf-tcount">'+t[1]+'</span></div>';
+      }).join('')
+    : '<div class="rsf-tempty">Sem dados ainda</div>';
+
+  var elP = document.getElementById('rsf-trend-pessoas');
+  elP.innerHTML = topPessoas.length
+    ? topPessoas.map(function(t){
+        return '<div class="rsf-titem" onclick="document.getElementById(\'rsf-search\').value=\''+esc(t[0])+'\';rsfRenderFeed();">'+
+          '<span class="rsf-tlabel">'+esc(t[0])+'</span><span class="rsf-tcount">'+t[1]+' menç.</span></div>';
+      }).join('')
+    : '<div class="rsf-tempty">Sem dados ainda</div>';
+
+  var elE = document.getElementById('rsf-trend-equipe');
+  elE.innerHTML = topAutores.length
+    ? topAutores.map(function(t){
+        var color = rsfColorForName(t[0]);
+        return '<div class="rsf-titem">'+
+          '<div style="width:22px;height:22px;border-radius:50%;background:'+color+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;">'+esc((t[0]||'?').charAt(0).toUpperCase())+'</div>'+
+          '<span class="rsf-tlabel">'+esc(t[0])+'</span><span class="rsf-tcount">'+t[1]+' post(s)</span></div>';
+      }).join('')
+    : '<div class="rsf-tempty">Sem atividade ainda</div>';
+}
+
+// ─── INIT (rodar quando entrar na aba) ───
+function rsfInit(){
+  rsfLoadPosts();
+  // Restaura modo de comentários
+  var savedMode = localStorage.getItem('gsi_b2_cmt_mode');
+  if(savedMode) rsfState.commentsMode = savedMode;
+  var lblEl = document.getElementById('rsf-cmt-mode-label');
+  if(lblEl) lblEl.textContent = rsfState.commentsMode === 'always' ? '👁 Sempre visíveis' : '➕ Expandir ao clicar';
+  // Gera prompt do Grok inicial
+  var gp = document.getElementById('rsf-grok-prompt');
+  if(gp && !gp.value) gp.value = rsfBuildGrokPrompt();
+  rsfRenderFeed();
+  rsfRenderTrending();
+}
+
+// Hook na navegação: roda rsfInit() quando entra em b2
+(function(){
+  var origShowView = window.showView;
+  if(typeof origShowView !== 'function') return;
+  window.showView = function(v){
+    origShowView.apply(this, arguments);
+    if(v === 'b2') setTimeout(rsfInit, 50);
+  };
+})();
+
+// Inicializa também no boot, caso alguém abra direto no b2
+(function(){
+  var tryInit = function(){
+    if(document.getElementById('rsf-feed')){ rsfInit(); }
+    else { setTimeout(tryInit, 100); }
+  };
+  if(document.readyState === 'complete' || document.readyState === 'interactive') tryInit();
+  else document.addEventListener('DOMContentLoaded', tryInit);
+})();
 </script>
 <!-- Chat Claude AI -->
 <script src="/claude-chat.js"></script>
