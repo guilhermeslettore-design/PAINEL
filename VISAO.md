@@ -1,4 +1,4 @@
-# Visão do Produto — Painel GSI/SSIE-RJ
+# Visão do Produto — RAFA-RJ
 
 > Última atualização: 13/05/2026
 > Autor: Guilherme Ettore (definição) · IA Claude (transcrição)
@@ -7,9 +7,15 @@
 
 ## O que estamos construindo
 
-**Um Twitter interno do setor GSI/SSIE-RJ** — uma rede social fechada e privada,
-de uso restrito, onde a equipe de inteligência colabora em tempo real na coleta
-e análise de informações de OSINT (Open Source Intelligence).
+**RAFA-RJ** — uma rede social interna do setor SSIE-RJ (Subsecretaria de
+Avaliação de Cenários e Inteligência Estratégica), fechada e privada, onde a
+equipe colabora em tempo real na coleta e análise de informações de OSINT
+(Open Source Intelligence). Tem um assistente de IA embutido chamado **Argus**
+que automatiza ingestão, classificação e busca.
+
+> **Nomenclatura oficial:**
+> - **RAFA-RJ** = nome do sistema/plataforma (a rede social em si)
+> - **Argus** = nome da IA assistente dentro do RAFA-RJ
 
 **Não é** uma rede social aberta. **Não é** um painel solitário. É um espaço
 compartilhado, controlado e didático onde **o que um vê, todos veem** (com

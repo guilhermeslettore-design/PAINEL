@@ -1,7 +1,7 @@
 {
-  "name": "Painel GSI/SSIE — Monitoramento RJ",
-  "short_name": "Painel GSI",
-  "description": "Sistema de Monitoramento de Manifestações — GSI/SSIE Governador RJ",
+  "name": "RAFA-RJ — Rede Social do SSIE",
+  "short_name": "RAFA-RJ",
+  "description": "Rede social interna do SSIE/RJ para monitoramento colaborativo de manifestações",
   "start_url": "./monitor_rio.html",
   "display": "standalone",
   "background_color": "#0d1a2e",

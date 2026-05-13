@@ -1,5 +1,9 @@
 # 🤝 HANDOFF — Continuar de onde paramos
 
+> **Nomes oficiais do projeto:**
+> - **RAFA-RJ** = nome do sistema (a rede social do SSIE-RJ)
+> - **Argus** = nome da IA assistente dentro do RAFA-RJ
+
 > **Como usar este arquivo:** quando você abrir uma nova sessão no Claude Code,
 > a primeira coisa a fazer é pedir pra ele ler ESTE arquivo + o `VISAO.md`.
 > Ele vai entender tudo que já foi feito, o que está pendente e o que decidir.
