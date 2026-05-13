@@ -1846,6 +1846,92 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
             .rsf-dup{background:#fff8e1;border:1px solid #f5d57a;border-radius:8px;padding:10px 14px;font-size:12.5px;color:#5a3a00;margin-top:10px;}
             body.dark .rsf-dup{background:#1a1408;color:#e8c460;border-color:#c89010;}
 
+            /* ═══ CAIXA DA RAFINHA (compose unificado) ═══ */
+            .rafa-box{background:#fff;border:1px solid #dce6f0;border-radius:14px;padding:16px 18px;margin-bottom:1rem;}
+            body.dark .rafa-box{background:#0f2035;border-color:#1a3050;}
+            .rafa-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+            .rafa-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#E8B94F,#F97316);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;box-shadow:0 2px 8px rgba(232,185,79,.35);}
+            .rafa-name{font-size:14.5px;font-weight:800;color:#1a2d4f;}
+            body.dark .rafa-name{color:#e0e8f5;}
+            .rafa-sub{font-size:11.5px;color:#6a8aaa;}
+            .rafa-chat-btn{background:#f0f4f8;border:1px solid #dce6f0;border-radius:8px;padding:7px 12px;cursor:pointer;font-family:inherit;color:#1a2d4f;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;}
+            .rafa-chat-btn:hover{background:#e0e8f0;}
+            body.dark .rafa-chat-btn{background:#0b1622;color:#c8daf0;border-color:#1a3050;}
+            body.dark .rafa-chat-btn:hover{background:#1a2a3f;}
+            .rafa-textarea{width:100%;border:1.5px solid #c0cfe0;border-radius:10px;padding:11px 14px;font-size:14px;font-family:inherit;color:#1a1a1a;outline:none;resize:vertical;min-height:80px;line-height:1.55;background:#fafcff;transition:border-color .15s,background .15s;}
+            .rafa-textarea:focus{border-color:#E8B94F;background:#fff;box-shadow:0 0 0 3px rgba(232,185,79,.12);}
+            body.dark .rafa-textarea{background:#0b1622;border-color:#1a3050;color:#e0e8f5;}
+            body.dark .rafa-textarea:focus{background:#0f2035;}
+            .rafa-attach-preview{position:relative;margin-top:10px;display:inline-block;border-radius:10px;overflow:hidden;border:1px solid #dce6f0;}
+            .rafa-attach-preview img{max-height:180px;max-width:100%;display:block;}
+            .rafa-attach-rm{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-size:13px;line-height:1;}
+            .rafa-toolbar{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;}
+            .rafa-tool{background:#f7faff;border:1px solid #dce6f0;border-radius:18px;padding:6px 12px;cursor:pointer;font-family:inherit;color:#1a2d4f;display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;transition:all .15s;}
+            .rafa-tool:hover{background:#E8B94F;border-color:#E8B94F;color:#fff;}
+            .rafa-tool-lbl{font-size:11.5px;}
+            body.dark .rafa-tool{background:#0b1622;color:#c8daf0;border-color:#1a3050;}
+            body.dark .rafa-tool:hover{background:#E8B94F;border-color:#E8B94F;color:#1a2d4f;}
+            .rafa-send{background:linear-gradient(135deg,#E8B94F,#F97316);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;box-shadow:0 2px 8px rgba(232,185,79,.35);}
+            .rafa-send:hover{opacity:.92;transform:translateY(-1px);}
+            .rafa-send:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+            .rafa-status{font-size:12px;color:#6a8aaa;margin-right:8px;}
+            .rafa-status.ok{color:#22a06b;}
+            .rafa-status.err{color:#c0392b;}
+            .rafa-status.proc{color:#0d5aa7;display:inline-flex;align-items:center;gap:5px;}
+
+            /* Dragover do compose */
+            .rafa-textarea.dragover{border-color:#E8B94F;background:#fff8e1;}
+            body.dark .rafa-textarea.dragover{background:#1a1408;}
+
+            /* Mensagens da Rafinha (respostas no feed quando é pergunta/busca) */
+            .rafa-msg-card{background:linear-gradient(135deg,#fff7e6,#fffaf0);border:1px solid #f5d57a;border-radius:12px;padding:14px 16px;margin-bottom:14px;position:relative;}
+            body.dark .rafa-msg-card{background:linear-gradient(135deg,#1a1408,#221a08);border-color:#c89010;}
+            .rafa-msg-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+            .rafa-msg-text{font-size:13.5px;color:#3a2a00;line-height:1.6;white-space:pre-wrap;}
+            body.dark .rafa-msg-text{color:#e8c460;}
+            .rafa-msg-tag{font-size:9.5px;font-weight:800;background:#E8B94F;color:#fff;padding:2px 8px;border-radius:8px;text-transform:uppercase;letter-spacing:.06em;}
+
+            /* Status do card (rascunho/em-documentação/completo) */
+            .rsf-card.is-rascunho{border-left:4px solid #aab0bc;background:#fafcff;}
+            body.dark .rsf-card.is-rascunho{background:#0b1622;}
+            .rsf-card.is-doc{border-left:4px solid #0d5aa7;}
+            .rsf-card.is-complete{border-left:4px solid #22a06b;}
+            .rsf-status-badge{font-size:10px;font-weight:800;padding:3px 9px;border-radius:8px;text-transform:uppercase;letter-spacing:.05em;}
+            .rsf-status-badge.rascunho{background:#e0e8f0;color:#6a8aaa;}
+            .rsf-status-badge.doc{background:#e8f2fb;color:#0d5aa7;}
+            .rsf-status-badge.complete{background:#e8f5e9;color:#1b5e20;}
+            body.dark .rsf-status-badge.rascunho{background:#1a2a3f;color:#7090b0;}
+            body.dark .rsf-status-badge.doc{background:#0d2a4a;color:#5ab4f0;}
+            body.dark .rsf-status-badge.complete{background:#0a2418;color:#5fc77f;}
+
+            /* CHAT MODAL DA RAFINHA */
+            .rafa-chat-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1005;align-items:center;justify-content:flex-end;}
+            .rafa-chat-overlay.open{display:flex;}
+            .rafa-chat-panel{background:#fff;width:100%;max-width:460px;height:100vh;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.25);}
+            body.dark .rafa-chat-panel{background:#0f2035;}
+            .rafa-chat-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #eef1f5;background:linear-gradient(135deg,#0D1117,#1C2333);color:#fff;}
+            .rafa-chat-head .rafa-avatar{width:36px;height:36px;font-size:17px;}
+            .rafa-chat-title{font-weight:800;font-size:14px;}
+            .rafa-chat-sub{font-size:11px;color:#8b9dc3;}
+            .rafa-chat-close{margin-left:auto;background:transparent;border:none;color:#fff;cursor:pointer;font-size:20px;}
+            .rafa-chat-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+            body.dark .rafa-chat-body{background:#0b1622;}
+            .rafa-chat-msg{max-width:86%;}
+            .rafa-chat-msg.user{align-self:flex-end;}
+            .rafa-chat-msg.assistant{align-self:flex-start;}
+            .rafa-chat-bubble{padding:10px 13px;border-radius:12px;font-size:13.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;}
+            .rafa-chat-msg.user .rafa-chat-bubble{background:linear-gradient(135deg,rgba(232,185,79,.18),rgba(249,115,22,.14));border:1px solid rgba(232,185,79,.35);color:#1a2d4f;}
+            .rafa-chat-msg.assistant .rafa-chat-bubble{background:#f7faff;border:1px solid #dce6f0;color:#1a2d4f;}
+            body.dark .rafa-chat-msg.user .rafa-chat-bubble{color:#e8c460;}
+            body.dark .rafa-chat-msg.assistant .rafa-chat-bubble{background:#1c2333;border-color:#2a3a55;color:#cbd5e1;}
+            .rafa-chat-time{font-size:10px;color:#9aaabf;margin-top:3px;}
+            .rafa-chat-foot{border-top:1px solid #eef1f5;padding:10px 14px;display:flex;gap:8px;align-items:flex-end;}
+            body.dark .rafa-chat-foot{border-color:#1a3050;}
+            .rafa-chat-input{flex:1;border:1.5px solid #c0cfe0;border-radius:10px;padding:8px 12px;font-size:13px;font-family:inherit;color:#1a1a1a;outline:none;resize:none;min-height:38px;max-height:120px;}
+            body.dark .rafa-chat-input{background:#0b1622;border-color:#1a3050;color:#e0e8f5;}
+            .rafa-chat-send{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#E8B94F,#F97316);color:#fff;border:none;cursor:pointer;font-size:15px;flex-shrink:0;}
+            .rafa-chat-share{font-size:11px;color:#0d5aa7;background:transparent;border:none;cursor:pointer;padding:0 5px;}
+
             /* Avatar com foto + bonequinho fallback */
             .rsf-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
             .rsf-avatar.is-empty{background:#e0e8f0 !important;color:#8a9ab0;font-size:22px;}
@@ -1870,79 +1956,63 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
             body.dark .rsf-cmt-collapsed-btn{background:#0b1622;border-color:#2a5080;color:#5ab4f0;}
           </style>
 
-          <!-- ═══ INGESTÃO INTELIGENTE (3 abinhas) ═══ -->
-          <div class="rsf-ingest">
-            <div class="rsf-ingest-tabs">
-              <button class="rsf-itab active" data-itab="print" onclick="rsfSwitchIngest('print')">🖼 Print</button>
-              <button class="rsf-itab" data-itab="grok" onclick="rsfSwitchIngest('grok')">🤖 Ponte Grok</button>
-              <button class="rsf-itab" data-itab="url" onclick="rsfSwitchIngest('url')">🔗 URL</button>
+          <!-- ═══ CAIXA DA RAFINHA — unificada, estilo Twitter Compose ═══ -->
+          <div class="rafa-box">
+            <div class="rafa-head">
+              <div class="rafa-avatar">🛡</div>
+              <div style="flex:1;line-height:1.25;">
+                <div class="rafa-name">Rafinha · IA do GSI</div>
+                <div class="rafa-sub">Cola um link, arrasta um print, ou pergunta o que precisar</div>
+              </div>
+              <button class="rafa-chat-btn" onclick="rafaOpenChat()" title="Conversar com a Rafinha">
+                💬 <span style="font-size:11px;">Conversar</span>
+              </button>
             </div>
 
-            <!-- Painel: PRINT -->
-            <div class="rsf-ipanel active" data-ipanel="print">
-              <div id="rsf-dz-print" class="rsf-dropzone"
-                   onclick="document.getElementById('rsf-file-print').click()"
-                   ondragover="event.preventDefault();this.classList.add('dragover')"
-                   ondragleave="this.classList.remove('dragover')"
-                   ondrop="event.preventDefault();this.classList.remove('dragover');rsfHandlePrint(event.dataTransfer.files)">
-                <div style="font-size:32px;margin-bottom:6px;">🖼️</div>
-                <div style="font-size:13.5px;font-weight:700;color:#1a2d4f;margin-bottom:4px;">Arraste o print do post aqui</div>
-                <div style="font-size:11.5px;color:#6a8aaa;">ou clique para escolher · PNG/JPG · vários de uma vez OK</div>
-                <input id="rsf-file-print" type="file" accept="image/*" multiple style="display:none;"
-                       onchange="rsfHandlePrint(this.files);this.value=''">
-              </div>
-              <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-                <input id="rsf-print-link" class="rsf-input" style="flex:1;min-width:200px;" type="text" placeholder="Link da postagem original (opcional, mas recomendado)">
-                <select id="rsf-print-rede" class="rsf-input" style="max-width:150px;">
-                  <option value="">Rede social…</option>
-                  <option value="x">X / Twitter</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="facebook">Facebook</option>
-                  <option value="tiktok">TikTok</option>
-                  <option value="whatsapp">WhatsApp</option>
-                  <option value="threads">Threads</option>
-                  <option value="youtube">YouTube</option>
-                  <option value="telegram">Telegram</option>
-                  <option value="outro">Outro</option>
-                </select>
-              </div>
-              <div id="rsf-print-status" class="rsf-status"></div>
+            <textarea id="rafa-input" class="rafa-textarea"
+              placeholder="O que você viu? Pode escrever, colar link, colar texto do Grok, ou perguntar — a Rafinha entende e age."
+              rows="3"></textarea>
+
+            <!-- Preview de anexo (print colado/arrastado) -->
+            <div id="rafa-attach-preview" class="rafa-attach-preview" style="display:none;">
+              <img id="rafa-attach-img" alt="">
+              <button class="rafa-attach-rm" onclick="rafaRemoveAttach()" title="Remover">✕</button>
             </div>
 
-            <!-- Painel: PONTE GROK -->
-            <div class="rsf-ipanel" data-ipanel="grok">
-              <div style="font-size:13px;color:#1a2d4f;margin-bottom:8px;font-weight:600;">
-                1️⃣ Pergunta pronta pro Grok (copia, abre o Grok, cola lá)
-              </div>
-              <textarea id="rsf-grok-prompt" class="rsf-textarea" readonly style="min-height:90px;background:#f7faff;font-size:12px;"></textarea>
-              <div style="display:flex;gap:8px;margin:8px 0;flex-wrap:wrap;">
-                <button class="rsf-btn secondary" onclick="rsfRegenGrokPrompt()">🔄 Gerar nova pergunta</button>
-                <button class="rsf-btn" onclick="rsfCopyGrokPrompt(this)">📋 Copiar pergunta</button>
-                <a class="rsf-btn secondary" href="https://x.com/i/grok" target="_blank" rel="noopener" style="text-decoration:none;">🌐 Abrir Grok</a>
-              </div>
-              <div style="font-size:13px;color:#1a2d4f;margin:14px 0 8px;font-weight:600;">
-                2️⃣ Cole aqui a resposta que o Grok te deu
-              </div>
-              <textarea id="rsf-grok-response" class="rsf-textarea" placeholder="Cole o texto inteiro que o Grok respondeu (POSTAGEM, COMENTÁRIO 1, COMENTÁRIO 2…)"></textarea>
-              <div style="margin-top:8px;">
-                <button class="rsf-btn" onclick="rsfProcessGrokResponse()">⚡ Processar resposta do Grok</button>
-              </div>
-              <div id="rsf-grok-status" class="rsf-status"></div>
+            <div class="rafa-toolbar">
+              <button class="rafa-tool" onclick="document.getElementById('rafa-file').click()" title="Anexar print ou foto">
+                🖼 <span class="rafa-tool-lbl">Foto</span>
+              </button>
+              <input id="rafa-file" type="file" accept="image/*" style="display:none;" onchange="rafaAttachFile(this.files[0]);this.value=''">
+
+              <button class="rafa-tool" onclick="rafaPasteGrok()" title="Cola a resposta inteira do Grok no campo">
+                🤖 <span class="rafa-tool-lbl">Grok</span>
+              </button>
+
+              <button class="rafa-tool" onclick="rafaInsertPrompt('Resumir o que tá no feed hoje')" title="Pedir resumo do feed">
+                🔍 <span class="rafa-tool-lbl">Buscar/Resumir</span>
+              </button>
+
+              <span style="flex:1;"></span>
+
+              <span id="rafa-status" class="rafa-status"></span>
+              <button id="rafa-send-btn" class="rafa-send" onclick="rafaSend()">Enviar ▶</button>
             </div>
 
-            <!-- Painel: URL -->
-            <div class="rsf-ipanel" data-ipanel="url">
-              <div style="font-size:13px;color:#1a2d4f;margin-bottom:8px;font-weight:600;">
-                Cole o link da postagem que você viu (X, IG, FB, TikTok, etc.)
+            <!-- Helper drawer pra modo Grok (gerador de pergunta) -->
+            <div id="rafa-grok-helper" style="display:none;padding:14px 18px;background:#f7faff;border-top:1px solid #dce6f0;border-radius:0 0 12px 12px;">
+              <div style="font-size:12px;color:#1a2d4f;font-weight:700;margin-bottom:6px;">
+                🤖 Pergunta pronta pra colar no Grok:
               </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <input id="rsf-url-input" class="rsf-input" style="flex:1;min-width:240px;" type="url" placeholder="https://x.com/usuario/status/...">
-                <button class="rsf-btn" onclick="rsfHandleUrl()">+ Adicionar link</button>
+              <textarea id="rafa-grok-prompt" readonly style="width:100%;min-height:80px;font-size:11.5px;border:1px solid #dce6f0;border-radius:8px;padding:8px 10px;font-family:inherit;background:#fff;color:#1a2d4f;" ></textarea>
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                <button class="rafa-tool" onclick="rafaRegenGrokPrompt()" style="font-size:11px;">🔄 Gerar nova</button>
+                <button class="rafa-tool" onclick="rafaCopyGrokPrompt(this)" style="font-size:11px;">📋 Copiar</button>
+                <a class="rafa-tool" href="https://x.com/i/grok" target="_blank" rel="noopener" style="text-decoration:none;font-size:11px;">🌐 Abrir Grok</a>
+                <button class="rafa-tool" onclick="document.getElementById('rafa-grok-helper').style.display='none'" style="font-size:11px;margin-left:auto;">✕ Fechar</button>
               </div>
-              <div id="rsf-url-status" class="rsf-status"></div>
-              <div style="font-size:11.5px;color:#6a8aaa;margin-top:10px;line-height:1.55;">
-                💡 <strong>Hoje:</strong> o link entra na fila esperando alguém adicionar print/análise.<br>
-                💡 <strong>Quando o servidor entrar (amanhã):</strong> o sistema tira print automático e classifica sozinho.
+              <div style="font-size:11px;color:#6a8aaa;margin-top:8px;">
+                Depois de copiar a resposta do Grok, cole no campo da Rafinha acima e clique Enviar.
               </div>
             </div>
           </div>
@@ -2044,6 +2114,30 @@ body.dark .confirm-card{background:#0f2035;color:#e0e8f5;}
           <!-- ═══ LIGHTBOX (zoom de imagem) ═══ -->
           <div id="rsf-lightbox" class="rsf-lightbox" onclick="this.classList.remove('open')">
             <img id="rsf-lightbox-img" src="" alt="">
+          </div>
+
+          <!-- ═══ CHAT MODAL DA RAFINHA ═══ -->
+          <div id="rafa-chat-overlay" class="rafa-chat-overlay" onclick="if(event.target===this)rafaCloseChat()">
+            <div class="rafa-chat-panel">
+              <div class="rafa-chat-head">
+                <div class="rafa-avatar">🛡</div>
+                <div>
+                  <div class="rafa-chat-title">Rafinha</div>
+                  <div class="rafa-chat-sub">IA do GSI · Online</div>
+                </div>
+                <button class="rafa-chat-close" onclick="rafaCloseChat()">✕</button>
+              </div>
+              <div id="rafa-chat-body" class="rafa-chat-body"></div>
+              <div style="padding:6px 14px;font-size:11px;color:#6a8aaa;border-top:1px solid #eef1f5;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                <span>🔒 Conversa privada</span>
+                <button class="rafa-chat-share" onclick="rafaShareConversation()">📤 Compartilhar com a equipe</button>
+                <button class="rafa-chat-share" onclick="rafaClearConversation()" style="margin-left:auto;color:#c0392b;">🗑 Limpar</button>
+              </div>
+              <div class="rafa-chat-foot">
+                <textarea id="rafa-chat-input" class="rafa-chat-input" rows="1" placeholder="Pergunta livre… (Enter envia)"></textarea>
+                <button class="rafa-chat-send" onclick="rafaChatSend()" title="Enviar">▶</button>
+              </div>
+            </div>
           </div>
 
           <!-- Container legado preservado (histórico ainda usa) -->
@@ -6442,6 +6536,539 @@ function rsfRenderTrending(){
     : '<div class="rsf-tempty">Sem atividade ainda</div>';
 }
 
+// ═══════════════════════════════════════════════════════════════
+// ═══ RAFINHA — IA do GSI (cérebro central da rede social)     ═══
+// ═══════════════════════════════════════════════════════════════
+var rafaState = {
+  attachment: null,        // {dataUrl, mimeType, base64}
+  busy: false,
+  chatHistory: []          // [{role, content, ts}]
+};
+
+var RAFINHA_SYSTEM = (
+  'Você é a Rafinha, IA do Gabinete de Segurança Institucional do Rio de Janeiro (GSI/SSIE-RJ). '+
+  'Você trabalha junto com analistas humanos do setor (Guilherme, André, e outros) numa rede social interna '+
+  'usada pra coletar e classificar informações de OSINT sobre manifestações, política e segurança no RJ. '+
+  'Seu tom é profissional, amigável, brasileiro — você trata os colegas pelo nome, usa emojis com moderação, '+
+  'fala "beleza" e "bora" naturalmente, mas mantém compostura porque o trabalho é sério (GSI). '+
+  'Você é parceira de equipe, não um assistente formal. '+
+  'Quando alguém te manda algo, você classifica e age. Quando perguntam, você busca nos dados e responde objetiva.'
+);
+
+// ─── CONFIG DE PERFIL: pra Rafinha saber com quem fala ───
+function rafaCurrentUserContext(){
+  var p = rsfGetProfile();
+  return 'Você está conversando com '+p.name+' (papel: '+rsfRoleLabel(p.role)+').';
+}
+
+// ─── ANEXAR ARQUIVO NA CAIXA ───
+function rafaAttachFile(file){
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ rafaSetStatus('Só imagens, por favor.','err'); return; }
+  if(file.size > 5*1024*1024){ rafaSetStatus('Imagem até 5MB.','err'); return; }
+  var r = new FileReader();
+  r.onload = function(e){
+    rafaState.attachment = {
+      dataUrl: e.target.result,
+      mimeType: file.type,
+      base64: e.target.result.split(',')[1]
+    };
+    document.getElementById('rafa-attach-img').src = e.target.result;
+    document.getElementById('rafa-attach-preview').style.display = 'inline-block';
+  };
+  r.readAsDataURL(file);
+}
+function rafaRemoveAttach(){
+  rafaState.attachment = null;
+  document.getElementById('rafa-attach-preview').style.display = 'none';
+  document.getElementById('rafa-attach-img').src = '';
+}
+
+// ─── INSERIR PROMPT NO CAMPO (botões "buscar/resumir" etc.) ───
+function rafaInsertPrompt(txt){
+  var ta = document.getElementById('rafa-input');
+  ta.value = txt;
+  ta.focus();
+}
+
+// ─── ABRE HELPER DO GROK ───
+function rafaPasteGrok(){
+  var helper = document.getElementById('rafa-grok-helper');
+  var ta = document.getElementById('rafa-grok-prompt');
+  if(!ta.value) ta.value = rsfBuildGrokPrompt();
+  helper.style.display = 'block';
+  setTimeout(function(){ helper.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+}
+function rafaRegenGrokPrompt(){
+  document.getElementById('rafa-grok-prompt').value = rsfBuildGrokPrompt();
+}
+function rafaCopyGrokPrompt(btn){
+  var ta = document.getElementById('rafa-grok-prompt');
+  navigator.clipboard.writeText(ta.value).then(function(){
+    var orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copiado!';
+    setTimeout(function(){ btn.innerHTML = orig; }, 1800);
+  });
+}
+
+// ─── STATUS DA CAIXA ───
+function rafaSetStatus(msg, kind){
+  var el = document.getElementById('rafa-status');
+  if(!el) return;
+  el.className = 'rafa-status' + (kind?' '+kind:'');
+  el.innerHTML = msg;
+}
+
+// ─── ENVIO PRINCIPAL — A INTELIGÊNCIA DA RAFINHA ───
+function rafaSend(){
+  if(rafaState.busy) return;
+  var text = (document.getElementById('rafa-input').value || '').trim();
+  var attach = rafaState.attachment;
+  if(!text && !attach){ rafaSetStatus('Escreve algo ou anexa uma imagem primeiro.','err'); return; }
+
+  var apiKey = getManifApiKey();
+  if(!apiKey){
+    rafaSetStatus('⚠️ Configura a chave Anthropic na aba Manifestações primeiro.','err');
+    return;
+  }
+
+  rafaState.busy = true;
+  document.getElementById('rafa-send-btn').disabled = true;
+  rafaSetStatus('<span class="dz-spinner"></span> Rafinha analisando…','proc');
+
+  // Detecta intenção: tem imagem? tem link colado? é texto longo do Grok? é pergunta?
+  var intentHint = rafaDetectIntent(text, attach);
+
+  // Constrói o prompt da Rafinha (sistema decide entre 4 ações)
+  var imgs = attach ? [{base64: attach.base64, type: attach.mimeType}] : [];
+  var userPrompt = rafaBuildClassifyPrompt(text, intentHint);
+
+  callClaudeAI(apiKey, imgs, userPrompt, {maxTokens: 2500})
+    .then(function(raw){
+      var parsed = rafaParseJSON(raw);
+      if(!parsed){
+        rafaSetStatus('❌ Não consegui interpretar a resposta. Tenta de novo?','err');
+        rafaFinish();
+        return;
+      }
+      rafaExecuteAction(parsed, text, attach);
+    })
+    .catch(function(err){
+      console.error('rafa:', err);
+      rafaSetStatus('❌ '+(err.message||'erro'),'err');
+      rafaFinish();
+    });
+}
+function rafaFinish(){
+  rafaState.busy = false;
+  document.getElementById('rafa-send-btn').disabled = false;
+}
+
+// ─── DETECTOR DE INTENÇÃO (heurística rápida pra ajudar a Rafinha) ───
+function rafaDetectIntent(text, attach){
+  if(attach && !text) return 'imagem solo (provavelmente print)';
+  // Texto começa com bloco POSTAGEM do Grok?
+  if(/═══\s*POSTAGEM|=== POSTAGEM|─── COMENTÁRIO|--- COMENTÁRIO/i.test(text)) return 'resposta do Grok colada (estruturada)';
+  // É só uma URL?
+  if(/^https?:\/\/\S+$/i.test(text.trim())) return 'só uma URL';
+  // É pergunta?
+  if(/\?$/.test(text) || /^(o que|quem|quando|onde|como|qual|quais|me mostra|me lista|me diga|busca|procura|tem algum|tem alguma|achei|encontrei)/i.test(text)) return 'pergunta/busca';
+  return 'texto livre';
+}
+
+// ─── PROMPT DE CLASSIFICAÇÃO ───
+function rafaBuildClassifyPrompt(text, hint){
+  var ctx = rafaCurrentUserContext();
+  var feedContexto = rafaFeedSummary();
+  return RAFINHA_SYSTEM+'\n\n'+ctx+'\n\n'+
+    'Contexto do feed atual ('+rsfState.posts.length+' posts coletados): '+feedContexto+'\n\n'+
+    'O usuário acabou de te mandar:\n'+
+    '---\n'+(text || '(sem texto, só uma imagem anexada)')+'\n---\n\n'+
+    'Heurística: '+hint+'\n\n'+
+    'Sua tarefa: classificar o que é e RESPONDER APENAS em JSON válido (sem markdown, sem ```):\n\n'+
+    '{\n'+
+    '  "acao": "postar|criar_manifestacao|buscar|responder|processar_grok|erro",\n'+
+    '  "mensagemUsuario": "fala curta e amigável pra mostrar pro usuário no feed (ex: Beleza Guilherme, criei o post! 👍)",\n'+
+    '  "dados": {\n'+
+    '    // PARA acao=postar (post de rede social):\n'+
+    '    "rede": "x|instagram|facebook|tiktok|whatsapp|threads|youtube|telegram|outro",\n'+
+    '    "handle": "@autor_visivel_no_post_original",\n'+
+    '    "texto": "transcrição completa do conteúdo da postagem original",\n'+
+    '    "horarioOriginal": "data/hora da postagem se aparece",\n'+
+    '    "linkOriginal": "URL se houver",\n'+
+    '    "comentarioGSI": "frase curta de análise no estilo GSI",\n'+
+    '    "classificacao": "convocacao|denuncia|incitacao|tensao|apoio|institucional|monitoramento|desinformacao",\n'+
+    '    "risco": 0-100,\n'+
+    '    "comentarios": [{"handle":"@x","texto":"...","horario":"...","link":"..."}],\n'+
+    '\n'+
+    '    // PARA acao=criar_manifestacao (convocação detectada):\n'+
+    '    "manifestacao": {\n'+
+    '      "data": "DD/MM/YYYY (DIA)",\n'+
+    '      "hora": "HHhMM ou horário a confirmar",\n'+
+    '      "local": "endereço + bairro",\n'+
+    '      "org": "quem convoca",\n'+
+    '      "motivo": "pauta resumida",\n'+
+    '      "publico": "estimativa se houver"\n'+
+    '    },\n'+
+    '    // Se for AMBOS (post de rede social que CONVOCA), inclua os campos de "postar" E "manifestacao"\n'+
+    '\n'+
+    '    // PARA acao=buscar:\n'+
+    '    "consulta": "termo de busca pra varrer no feed local",\n'+
+    '\n'+
+    '    // PARA acao=responder (pergunta livre):\n'+
+    '    "resposta": "resposta longa em texto natural, pode usar emojis com moderação",\n'+
+    '\n'+
+    '    // PARA acao=processar_grok:\n'+
+    '    "_avisoLeve": "vamos parsear o texto bruto separadamente"\n'+
+    '  }\n'+
+    '}\n\n'+
+    'Regras importantes:\n'+
+    '- Se a imagem é um print de rede social e NÃO contém convocação: acao=postar.\n'+
+    '- Se a imagem é uma convocação de manifestação clara (cartaz, panfleto, data+local): acao=criar_manifestacao + INCLUA também os campos de postar (pq vai pro feed também).\n'+
+    '- Se é texto bruto colado do Grok com POSTAGEM/COMENTÁRIO: acao=processar_grok (vou rodar parser separado).\n'+
+    '- Se é pergunta ("o que tá rolando?", "me mostra os posts de ontem"): acao=buscar OU responder.\n'+
+    '- Se não tem como classificar: acao=erro com mensagemUsuario explicando.\n'+
+    '- mensagemUsuario SEMPRE em primeira pessoa, amigável, curto (1-2 frases).';
+}
+
+// Resumo curto do feed pra dar contexto à Rafinha
+function rafaFeedSummary(){
+  if(!rsfState.posts.length) return 'feed vazio';
+  var redes = {};
+  rsfState.posts.slice(0,20).forEach(function(p){
+    var r = (p.fonte && p.fonte.rede) || 'outro';
+    redes[r] = (redes[r]||0)+1;
+  });
+  return Object.entries(redes).map(function(e){return e[1]+' '+e[0];}).join(', ');
+}
+
+function rafaParseJSON(text){
+  if(!text) return null;
+  text = text.replace(/^```json\s*/i,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
+  try { return JSON.parse(text); } catch(e){
+    var m = text.match(/\{[\s\S]*\}/);
+    if(m){ try { return JSON.parse(m[0]); } catch(_){} }
+    return null;
+  }
+}
+
+// ─── EXECUÇÃO DA AÇÃO ESCOLHIDA PELA RAFINHA ───
+function rafaExecuteAction(parsed, originalText, attach){
+  var acao = parsed.acao;
+  var dados = parsed.dados || {};
+  var msg = parsed.mensagemUsuario || 'Pronto!';
+  var profile = rsfGetProfile();
+
+  if(acao === 'processar_grok'){
+    // Reaproveita o parser do Grok já existente
+    document.getElementById('rsf-grok-response').value = originalText;
+    rsfProcessGrokResponse();
+    rafaPostMessage(msg, 'grok');
+    rafaClearCompose();
+    rafaFinish();
+    return;
+  }
+
+  if(acao === 'responder' || acao === 'buscar'){
+    // Resposta vai pro feed como "mensagem da Rafinha"
+    var resposta = dados.resposta || rafaBuscaLocal(dados.consulta || originalText);
+    rafaPostMessage(resposta, acao === 'buscar' ? 'busca' : 'resposta');
+    rafaClearCompose();
+    rafaFinish();
+    return;
+  }
+
+  if(acao === 'erro'){
+    rafaSetStatus('❌ '+(msg||'Não consegui interpretar.'),'err');
+    rafaFinish();
+    return;
+  }
+
+  // acao = postar OU criar_manifestacao (pode ser AMBOS)
+  // Dedup por URL
+  var linkUrl = dados.linkOriginal || (function(){
+    var m = (originalText||'').match(/https?:\/\/\S+/);
+    return m ? m[0] : '';
+  })();
+  if(linkUrl){
+    var dup = rsfFindDuplicate(linkUrl);
+    if(dup){
+      rafaSetStatus('⚠️ Esse link já foi coletado por '+dup.autor+' '+rsfRelativeTime(dup.criadoEm)+'.','err');
+      rafaFinish();
+      return;
+    }
+  }
+
+  // Cria o post no feed (sempre, pra qualquer ingestão)
+  var thumb = attach ? attach.dataUrl : null;
+  var statusInicial = (thumb && (dados.texto||dados.handle)) ? 'novo' : 'rascunho';
+
+  var post = rsfMakePost({
+    autor: profile.name, autorId: profile.id, papel: profile.role,
+    fonte: {
+      rede: dados.rede || rsfGuessRedeFromUrl(linkUrl) || 'outro',
+      linkOriginal: linkUrl,
+      handle: dados.handle || '',
+      texto: dados.texto || (originalText||''),
+      horarioOriginal: dados.horarioOriginal || ''
+    },
+    gsi: {
+      comentario: dados.comentarioGSI || '',
+      classificacao: dados.classificacao || '',
+      risco: dados.risco || 0
+    },
+    comentariosOriginais: (dados.comentarios || []).map(function(c){
+      return {handle:c.handle||'',texto:c.texto||'',horario:c.horario||'',link:c.link||'',emRespostaA:'POSTAGEM'};
+    }),
+    thumb: thumb,
+    visibilidade: 'publico',
+    status: statusInicial,
+    criadoViaRafinha: true
+  });
+  rsfState.posts.unshift(post);
+
+  // Se tem manifestação detectada → ALIMENTA aba Manifestações + Agenda
+  if(acao === 'criar_manifestacao' && dados.manifestacao){
+    rafaAddToManifestacoes(dados.manifestacao);
+  }
+
+  rsfSavePosts();
+  rsfRenderFeed();
+  rsfRenderTrending();
+  rafaPostMessage(msg, acao === 'criar_manifestacao' ? 'manifestacao' : 'post');
+  rafaClearCompose();
+  rafaFinish();
+}
+
+// ─── INTEGRAÇÃO COM ABA MANIFESTAÇÕES ───
+function rafaAddToManifestacoes(m){
+  // Monta string no formato que parseB1Item espera
+  var linhas = [];
+  linhas.push('📅 '+(m.data||'sem data')+(m.hora?' — '+m.hora:''));
+  if(m.local) linhas.push('🏛 Local: '+m.local);
+  if(m.org)   linhas.push('🏷 Organização: '+m.org);
+  if(m.motivo)linhas.push('📋 Motivo: '+m.motivo);
+  if(m.publico) linhas.push('👥 Público esperado: '+m.publico);
+  linhas.push('🔗 Fontes: Rafinha · ingestão automática');
+  var bloco = linhas.join('\n');
+  // Deduplica
+  var key = bloco.slice(0,40);
+  var exists = (b1AllItems||[]).some(function(it){ return it.slice(0,40) === key; });
+  if(!exists){
+    if(typeof b1AllItems !== 'undefined') {
+      b1AllItems.push(bloco);
+      if(typeof saveB1All === 'function') saveB1All();
+      if(typeof renderB1WithCheckboxes === 'function') renderB1WithCheckboxes('', true);
+    }
+  }
+}
+
+// ─── BUSCA LOCAL NO FEED ───
+function rafaBuscaLocal(termo){
+  if(!termo) return 'Me diz o que você quer buscar.';
+  var t = termo.toLowerCase();
+  var matches = rsfState.posts.filter(function(p){
+    var hay = ((p.fonte.texto||'')+' '+(p.fonte.handle||'')+' '+(p.gsi.comentario||'')+' '+(p.autor||'')).toLowerCase();
+    return hay.indexOf(t) >= 0;
+  });
+  if(!matches.length) return 'Não achei nada no feed com "'+termo+'". 🤔';
+  return 'Achei '+matches.length+' post(s) com "'+termo+'":\n\n'+
+    matches.slice(0,5).map(function(p,i){
+      return (i+1)+'. '+(p.fonte.handle||'(sem autor)')+' · '+rsfRelativeTime(p.criadoEm)+' · por '+p.autor+
+        (p.fonte.texto?'\n   "'+p.fonte.texto.slice(0,140)+(p.fonte.texto.length>140?'…':'')+'"':'');
+    }).join('\n\n');
+}
+
+// ─── INSERE MENSAGEM DA RAFINHA NO FEED ───
+function rafaPostMessage(texto, kind){
+  rafaSetStatus('✅ Pronto!','ok');
+  // Insere uma "mensagem-card" temporária no topo do feed mostrando o que ela fez
+  var feed = document.getElementById('rsf-feed');
+  if(!feed) return;
+  var card = document.createElement('div');
+  card.className = 'rafa-msg-card';
+  card.innerHTML =
+    '<div class="rafa-msg-head">'+
+      '<div class="rafa-avatar" style="width:32px;height:32px;font-size:14px;">🛡</div>'+
+      '<div style="flex:1;line-height:1.2;">'+
+        '<div style="font-weight:800;color:#1a2d4f;font-size:13.5px;">Rafinha</div>'+
+        '<div style="font-size:10.5px;color:#6a8aaa;">há poucos instantes · '+(kind||'')+'</div>'+
+      '</div>'+
+      '<span class="rafa-msg-tag">'+(kind||'AÇÃO').toUpperCase()+'</span>'+
+      '<button onclick="this.closest(\'.rafa-msg-card\').remove()" style="background:transparent;border:none;color:#9aaabf;cursor:pointer;font-size:14px;margin-left:6px;">✕</button>'+
+    '</div>'+
+    '<div class="rafa-msg-text">'+esc(texto)+'</div>';
+  // Insere no topo (antes do primeiro card existente)
+  if(feed.firstChild) feed.insertBefore(card, feed.firstChild);
+  else feed.appendChild(card);
+  setTimeout(function(){
+    if(card && card.parentNode){
+      card.style.transition = 'opacity .8s';
+      card.style.opacity = '0';
+      setTimeout(function(){ if(card.parentNode) card.remove(); }, 900);
+    }
+  }, 12000);
+}
+
+function rafaClearCompose(){
+  document.getElementById('rafa-input').value = '';
+  rafaRemoveAttach();
+  setTimeout(function(){ rafaSetStatus('',''); }, 3000);
+}
+
+// ═══ CHAT MODAL (privado) ═══════════════════════════════════════
+function rafaOpenChat(){
+  document.getElementById('rafa-chat-overlay').classList.add('open');
+  rafaLoadChatHistory();
+  rafaRenderChat();
+  setTimeout(function(){ document.getElementById('rafa-chat-input').focus(); }, 100);
+}
+function rafaCloseChat(){
+  document.getElementById('rafa-chat-overlay').classList.remove('open');
+}
+function rafaChatStorageKey(){
+  var p = rsfGetProfile();
+  return 'gsi_rafinha_chat_'+(p.id||'anon');
+}
+function rafaLoadChatHistory(){
+  try {
+    var raw = localStorage.getItem(rafaChatStorageKey());
+    rafaState.chatHistory = raw ? JSON.parse(raw) : [];
+  } catch(e){ rafaState.chatHistory = []; }
+}
+function rafaSaveChatHistory(){
+  try { localStorage.setItem(rafaChatStorageKey(), JSON.stringify(rafaState.chatHistory)); } catch(e){}
+}
+function rafaRenderChat(){
+  var body = document.getElementById('rafa-chat-body');
+  if(!rafaState.chatHistory.length){
+    var p = rsfGetProfile();
+    body.innerHTML = '<div class="rafa-chat-msg assistant"><div class="rafa-chat-bubble">'+
+      'Beleza '+esc(p.name)+'! 👋 Sou a Rafinha, sua IA do GSI.\n\nVocê pode me perguntar coisas tipo:\n• "O que tá rolando no feed hoje?"\n• "Me lista os posts sobre Cláudio Castro"\n• "Quem postou mais essa semana?"\n• "Resume as manifestações dos próximos 7 dias"\n\nÉ tudo privado entre a gente — se quiser compartilhar com a equipe, tem o botão lá embaixo.'+
+      '</div><div class="rafa-chat-time">agora há pouco</div></div>';
+    return;
+  }
+  body.innerHTML = rafaState.chatHistory.map(function(m){
+    return '<div class="rafa-chat-msg '+m.role+'">'+
+      '<div class="rafa-chat-bubble">'+esc(m.content)+'</div>'+
+      '<div class="rafa-chat-time">'+rsfRelativeTime(m.ts||Date.now())+'</div>'+
+    '</div>';
+  }).join('');
+  body.scrollTop = body.scrollHeight;
+}
+function rafaChatSend(){
+  var inp = document.getElementById('rafa-chat-input');
+  var text = (inp.value||'').trim();
+  if(!text) return;
+  var apiKey = getManifApiKey();
+  if(!apiKey){ alert('Configure a chave Anthropic na aba Manifestações.'); return; }
+
+  rafaState.chatHistory.push({role:'user', content:text, ts:Date.now()});
+  rafaSaveChatHistory();
+  inp.value = '';
+  rafaRenderChat();
+
+  var body = document.getElementById('rafa-chat-body');
+  body.insertAdjacentHTML('beforeend',
+    '<div class="rafa-chat-msg assistant" id="rafa-typing"><div class="rafa-chat-bubble" style="opacity:.7;">Rafinha tá pensando…</div></div>');
+  body.scrollTop = body.scrollHeight;
+
+  var ctx = rafaCurrentUserContext();
+  var feedCtx = rafaFeedDump();
+  var prompt = RAFINHA_SYSTEM+'\n\n'+ctx+'\n\n'+
+    'Você tem acesso aos dados do feed da rede social interna. Use pra responder.\n\n'+
+    'FEED (resumo dos últimos 30 posts):\n'+feedCtx+'\n\n'+
+    'Pergunta de '+rsfGetProfile().name+':\n'+text+'\n\n'+
+    'Responda direto, amigável, brasileiro. Pode usar quebra de linha e listas. Sem JSON, é conversa normal.';
+
+  callClaudeAI(apiKey, [], prompt, {maxTokens: 1500})
+    .then(function(resp){
+      var t = document.getElementById('rafa-typing'); if(t) t.remove();
+      rafaState.chatHistory.push({role:'assistant', content:resp, ts:Date.now()});
+      rafaSaveChatHistory();
+      rafaRenderChat();
+    })
+    .catch(function(err){
+      var t = document.getElementById('rafa-typing'); if(t) t.remove();
+      rafaState.chatHistory.push({role:'assistant', content:'❌ Deu erro: '+(err.message||'tente de novo'), ts:Date.now()});
+      rafaSaveChatHistory();
+      rafaRenderChat();
+    });
+}
+function rafaFeedDump(){
+  if(!rsfState.posts.length) return '(feed vazio)';
+  return rsfState.posts.slice(0,30).map(function(p,i){
+    return (i+1)+'. ['+rsfRelativeTime(p.criadoEm)+' · '+p.autor+' · '+(p.fonte.rede||'outro')+'] '+
+      (p.fonte.handle?p.fonte.handle+': ':'')+
+      ((p.fonte.texto||'').slice(0,180))+
+      (p.gsi.comentario?'\n   [Coment. GSI: '+p.gsi.comentario+']':'');
+  }).join('\n');
+}
+function rafaShareConversation(){
+  if(!rafaState.chatHistory.length){ alert('Sem conversa ainda pra compartilhar.'); return; }
+  if(!confirm('Compartilhar essa conversa inteira no feed pra equipe ver?')) return;
+  var profile = rsfGetProfile();
+  var resumo = rafaState.chatHistory.map(function(m){
+    return (m.role==='user'?'👤 '+profile.name:'🛡 Rafinha')+': '+m.content;
+  }).join('\n\n');
+  var post = rsfMakePost({
+    autor: profile.name, autorId: profile.id, papel: profile.role,
+    fonte: { rede:'outro', linkOriginal:'', handle:'Conversa com Rafinha', texto: resumo, horarioOriginal:'' },
+    gsi: { comentario: '💬 Conversa compartilhada por '+profile.name+' pra equipe ajudar', classificacao:'monitoramento', risco:0 },
+    comentariosOriginais: [],
+    thumb: null,
+    visibilidade: 'publico',
+    status: 'novo',
+    criadoViaRafinha: true,
+    tipoEspecial: 'conversa'
+  });
+  rsfState.posts.unshift(post);
+  rsfSavePosts();
+  rsfRenderFeed();
+  rafaCloseChat();
+  alert('Conversa compartilhada no feed! ✅');
+}
+function rafaClearConversation(){
+  if(!confirm('Limpar essa conversa? (não afeta o feed nem o trabalho da equipe)')) return;
+  rafaState.chatHistory = [];
+  rafaSaveChatHistory();
+  rafaRenderChat();
+}
+
+// ─── DRAG-DROP DIRETO NO TEXTAREA + COLAR IMAGEM ───
+(function(){
+  function setup(){
+    var ta = document.getElementById('rafa-input');
+    if(!ta){ setTimeout(setup, 200); return; }
+    ta.addEventListener('dragover', function(e){ e.preventDefault(); ta.classList.add('dragover'); });
+    ta.addEventListener('dragleave', function(){ ta.classList.remove('dragover'); });
+    ta.addEventListener('drop', function(e){
+      e.preventDefault(); ta.classList.remove('dragover');
+      if(e.dataTransfer.files && e.dataTransfer.files[0]) rafaAttachFile(e.dataTransfer.files[0]);
+    });
+    ta.addEventListener('paste', function(e){
+      var items = e.clipboardData && e.clipboardData.items;
+      if(!items) return;
+      for(var i=0;i<items.length;i++){
+        if(items[i].type && items[i].type.indexOf('image')>=0){
+          var f = items[i].getAsFile();
+          if(f){ rafaAttachFile(f); break; }
+        }
+      }
+    });
+    // Enter envia, Shift+Enter quebra linha
+    ta.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); rafaSend(); }
+    });
+    // Chat: enter envia
+    var ci = document.getElementById('rafa-chat-input');
+    if(ci) ci.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); rafaChatSend(); }
+    });
+  }
+  setup();
+})();
+
 // ─── INIT (rodar quando entrar na aba) ───
 function rsfInit(){
   rsfLoadPosts();
@@ -6450,9 +7077,6 @@ function rsfInit(){
   if(savedMode) rsfState.commentsMode = savedMode;
   var lblEl = document.getElementById('rsf-cmt-mode-label');
   if(lblEl) lblEl.textContent = rsfState.commentsMode === 'always' ? '👁 Sempre visíveis' : '➕ Expandir ao clicar';
-  // Gera prompt do Grok inicial
-  var gp = document.getElementById('rsf-grok-prompt');
-  if(gp && !gp.value) gp.value = rsfBuildGrokPrompt();
   rsfRenderFeed();
   rsfRenderTrending();
 }

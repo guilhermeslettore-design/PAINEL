@@ -141,21 +141,21 @@
   // ─── HTML ─────────────────────────────────────────────────────────
   const HTML = `
 <style>${CSS}</style>
-<button id="_cc-btn" title="Chat com Claude AI" aria-label="Abrir chat Claude">🤖</button>
-<div id="_cc-panel" class="cc-hidden" role="dialog" aria-label="Chat Claude">
+<button id="_cc-btn" title="Conversar com a Rafinha" aria-label="Abrir Rafinha">🛡</button>
+<div id="_cc-panel" class="cc-hidden" role="dialog" aria-label="Rafinha — IA do GSI">
   <div class="_cc-hdr">
-    <span class="_cc-hdr-ico">🤖</span>
+    <span class="_cc-hdr-ico">🛡</span>
     <div>
-      <div class="_cc-hdr-title">Claude AI</div>
-      <div class="_cc-hdr-sub">Assistente Anthropic · claude-sonnet-4-6</div>
+      <div class="_cc-hdr-title">Rafinha</div>
+      <div class="_cc-hdr-sub">IA do GSI · Online</div>
     </div>
     <button class="_cc-close" id="_cc-close" aria-label="Fechar">✕</button>
   </div>
   <div class="_cc-msgs" id="_cc-msgs">
     <div class="_cc-welcome">
-      <strong>👋 Olá! Sou o Claude</strong>
-      Posso analisar dados do dashboard, responder perguntas sobre market share,
-      preços, tendências — ou qualquer outra dúvida que você tiver.
+      <strong>👋 E aí! Sou a Rafinha</strong>
+      IA do GSI. Posso responder dúvidas sobre o painel, resumir o que tá no feed,
+      buscar posts antigos — ou qualquer pergunta sua. Bora trabalhar!
     </div>
   </div>
   <div class="_cc-footer">
