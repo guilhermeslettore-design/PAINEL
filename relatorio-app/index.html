@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Relatório</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Chart.js para os gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div class="brand-text">
+        <strong>Gerador de Relatório</strong>
+        <small>Cole as informações e receba o relatório</small>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="saveStatus" class="save-status" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ENTRADA -->
+    <section class="card input-card" aria-label="Entrada de dados">
+      <div class="card-head">
+        <h2>1. Cole o texto aqui</h2>
+        <span class="hint">As informações que você quiser transformar em relatório</span>
+      </div>
+
+      <textarea
+        id="inputText"
+        class="input-text"
+        placeholder="Cole ou digite aqui o texto que você quer transformar em relatório..."
+        spellcheck="false"
+      ></textarea>
+
+      <div class="input-actions">
+        <button id="generateBtn" class="btn btn-primary" type="button">Gerar relatório</button>
+        <button id="clearBtn" class="btn btn-ghost" type="button">Limpar</button>
+        <span class="char-count" id="charCount">0 caracteres</span>
+      </div>
+    </section>
+
+    <!-- RELATÓRIO -->
+    <section class="card report-card" id="reportCard" aria-label="Relatório" hidden>
+      <div class="card-head report-head">
+        <div>
+          <h2>2. Relatório</h2>
+          <span class="hint" id="reportTimestamp"></span>
+        </div>
+        <div class="report-actions">
+          <button id="printBtn" class="btn btn-outline" type="button">Imprimir / PDF</button>
+        </div>
+      </div>
+
+      <!-- Cartões de totais/cálculos -->
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <!-- Gráfico -->
+      <div class="chart-wrap" id="chartWrap">
+        <canvas id="reportChart" height="120"></canvas>
+      </div>
+
+      <!-- Corpo do relatório -->
+      <div class="report-body" id="reportBody"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Projeto independente · cores Melitta</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
