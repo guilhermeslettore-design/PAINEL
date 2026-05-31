@@ -57,6 +57,38 @@ function atualizarContagem() {
 }
 
 /* ===========================================================
+   CONHECIMENTO embutido (café, Melitta, mercado, gestão).
+   Detecta termos no texto colado e gera dicas de leitura.
+   Consulte a Base de Conhecimento completa em conhecimento.html
+   =========================================================== */
+const CONHECIMENTO = [
+  { re: /\bruptur|falta|sem estoque|out of stock|osa\b/i,
+    tip: 'Ruptura detectada: produto faltando na gôndola é venda perdida na hora. É um dos KPIs que mais explica queda de sell-out — priorize o reabastecimento.' },
+  { re: /\bmeta|atingiment|objetivo|target/i,
+    tip: 'Há menção a metas: comece a análise pelo % de atingimento (volume e faturamento) x meta da divisão.' },
+  { re: /\bpositiva|cobertura|carteira|clientes ativos/i,
+    tip: 'Positivação/cobertura: acompanhe o % de clientes que compraram x total da carteira — baixa positivação derruba o volume mesmo com bom mix.' },
+  { re: /\bconilon|robusta|canephora/i,
+    tip: 'Conilon/robusta: forte no Espírito Santo (~69% do conilon do país). Mais cafeína e corpo; safra 2025 em alta (+37%).' },
+  { re: /\barábica|arabica|gourmet|especial/i,
+    tip: 'Arábica/gourmet: base do café fino (forte em Minas). Com a alta de preço, fique atento à migração do consumidor de gourmet → tradicional.' },
+  { re: /\bpreço|preco|pmc|encarec|aument/i,
+    tip: 'Preço: o torrado e moído subiu ~37% ao consumidor (2024). Monitore se o preço praticado x PMC está empurrando o shopper para marcas mais baratas.' },
+  { re: /\bgôndola|gondola|exposiç|share|prateleira|ponto de venda|pdv/i,
+    tip: 'Execução no PDV: share de gôndola, exposição e sortimento são o campo de batalha. A Melitta pode explorar venda casada (café + filtro + cafeteira).' },
+  { re: /\brio de janeiro|\brj\b/i,
+    tip: 'Rio de Janeiro: praça de consumo e varejo competitivo (berço histórico do café). Foco em disputa de gôndola, preço e exposição.' },
+  { re: /\bminas|\bmg\b/i,
+    tip: 'Minas Gerais: maior produtor do país (arábica) e cultura cafeeira forte — região com consumo e identidade de café elevados.' },
+  { re: /\bespírito santo|espirito santo|\bes\b/i,
+    tip: 'Espírito Santo: potência do conilon e cultura de café muito presente, tanto na produção quanto no consumo.' },
+];
+
+function gerarInsights(texto) {
+  return CONHECIMENTO.filter((k) => k.re.test(texto)).map((k) => k.tip);
+}
+
+/* ===========================================================
    GERAÇÃO DO RELATÓRIO  (base de exemplo — vamos personalizar)
    =========================================================== */
 function montarRelatorio(texto) {
@@ -84,7 +116,15 @@ function montarRelatorio(texto) {
     .map((l, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(l)}</td></tr>`)
     .join('');
 
+  /* --- Insights baseados no conhecimento embutido --- */
+  const insights = gerarInsights(texto);
+  const insightsHtml = insights.length ? `
+    <h3>Insights (base de conhecimento)</h3>
+    <ul>${insights.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>
+  ` : '';
+
   const bodyHtml = `
+    ${insightsHtml}
     <h3>Conteúdo organizado</h3>
     <table>
       <thead><tr><th>#</th><th>Linha</th></tr></thead>
