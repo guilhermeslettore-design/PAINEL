@@ -40,27 +40,16 @@
         <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" multiple hidden />
         <div class="dropzone-inner">
           <span class="dropzone-icon" aria-hidden="true">📊</span>
-          <strong>Arraste os arquivos aqui</strong>
-          <span class="hint">ou toque para selecionar (Excel ou CSV)</span>
+          <strong>Arraste vários arquivos Excel aqui</strong>
+          <span class="hint">ou toque para selecionar (pode escolher vários de uma vez · .xlsx, .xls, .csv)</span>
         </div>
       </div>
 
       <ul id="fileList" class="file-list" aria-live="polite"></ul>
 
-      <details class="text-alt">
-        <summary>Ou colar um texto manualmente</summary>
-        <textarea
-          id="inputText"
-          class="input-text"
-          placeholder="Cole ou digite aqui um texto, caso não tenha o arquivo Excel..."
-          spellcheck="false"
-        ></textarea>
-      </details>
-
       <div class="input-actions">
         <button id="generateBtn" class="btn btn-primary" type="button">Gerar relatório</button>
-        <button id="clearBtn" class="btn btn-ghost" type="button">Limpar</button>
-        <span class="char-count" id="charCount"></span>
+        <button id="clearBtn" class="btn btn-ghost" type="button">Fechar relatório</button>
       </div>
     </section>
 
