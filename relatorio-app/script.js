@@ -53,6 +53,65 @@ function paraNumero(v) {
 }
 
 /* ===========================================================
+   ARMAZENAMENTO no aparelho (IndexedDB) — a "Base de Dados".
+   Guarda os bytes originais de cada arquivo Excel/CSV para que
+   continuem disponíveis ao reabrir o site, sem subir de novo.
+   =========================================================== */
+const DB_NAME = 'relatorioApp';
+const DB_STORE = 'arquivos';
+
+function dbOpen() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(DB_STORE)) {
+        db.createObjectStore(DB_STORE, { keyPath: 'id', autoIncrement: true });
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function dbAddFile(record) {
+  const db = await dbOpen();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    const req = tx.objectStore(DB_STORE).add(record);
+    req.onsuccess = () => resolve(req.result); // id gerado
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function dbGetAll() {
+  const db = await dbOpen();
+  return new Promise((resolve, reject) => {
+    const req = db.transaction(DB_STORE, 'readonly').objectStore(DB_STORE).getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function dbDelete(id) {
+  const db = await dbOpen();
+  return new Promise((resolve, reject) => {
+    const req = db.transaction(DB_STORE, 'readwrite').objectStore(DB_STORE).delete(id);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function dbClear() {
+  const db = await dbOpen();
+  return new Promise((resolve, reject) => {
+    const req = db.transaction(DB_STORE, 'readwrite').objectStore(DB_STORE).clear();
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
+/* ===========================================================
    CONHECIMENTO embutido (café, Melitta, mercado, gestão).
    Detecta termos no conteúdo e gera dicas de leitura.
    Base completa em conhecimento.html
@@ -87,8 +146,7 @@ function gerarInsights(texto) {
 /* ===========================================================
    LEITURA DE ARQUIVOS EXCEL / CSV
    =========================================================== */
-async function lerArquivo(file) {
-  const buf = await file.arrayBuffer();
+function parseSheets(buf) {
   const wb = XLSX.read(buf, { type: 'array' });
   const sheets = wb.SheetNames.map((nome) => {
     const matriz = XLSX.utils.sheet_to_json(wb.Sheets[nome], { header: 1, blankrows: false, defval: '' });
@@ -109,14 +167,31 @@ async function lerArquivo(file) {
   return sheets;
 }
 
+// Carrega a base salva no aparelho (ao abrir o site)
+async function restaurarBase() {
+  let registros = [];
+  try { registros = await dbGetAll(); } catch (_) { registros = []; }
+  loadedFiles = registros.map((rec) => {
+    const r = { id: rec.id, name: rec.name, size: rec.size, addedAt: rec.addedAt, ok: false, error: null, sheets: [] };
+    try { r.sheets = parseSheets(rec.data); r.ok = true; }
+    catch (e) { r.error = (e && e.message) ? e.message : 'não foi possível ler'; }
+    return r;
+  });
+  renderFileList();
+}
+
 async function adicionarArquivos(fileListLike) {
   const arquivos = Array.from(fileListLike).filter((f) =>
     /\.(xlsx|xls|csv)$/i.test(f.name));
   for (const file of arquivos) {
-    const registro = { name: file.name, ok: false, error: null, sheets: [] };
+    const registro = { name: file.name, size: file.size, addedAt: Date.now(), ok: false, error: null, sheets: [] };
     try {
-      registro.sheets = await lerArquivo(file);
+      const buf = await file.arrayBuffer();
+      registro.sheets = parseSheets(buf);
       registro.ok = true;
+      // salva na base (bytes originais) e guarda o id gerado
+      try { registro.id = await dbAddFile({ name: file.name, size: file.size, addedAt: registro.addedAt, data: buf }); }
+      catch (_) { /* sem persistência: segue só em memória */ }
     } catch (e) {
       registro.error = (e && e.message) ? e.message : 'não foi possível ler o arquivo';
     }
@@ -125,25 +200,38 @@ async function adicionarArquivos(fileListLike) {
   renderFileList();
 }
 
-function removerArquivo(idx) {
+async function removerArquivo(idx) {
+  const reg = loadedFiles[idx];
+  if (reg && reg.id !== undefined) { try { await dbDelete(reg.id); } catch (_) {} }
   loadedFiles.splice(idx, 1);
   renderFileList();
 }
 
 function renderFileList() {
-  if (!loadedFiles.length) { els.fileList.innerHTML = ''; return; }
-  els.fileList.innerHTML = loadedFiles.map((f, i) => {
+  if (!loadedFiles.length) {
+    els.fileList.innerHTML = '<li class="base-vazia">Nenhum arquivo na base ainda. Suba um Excel acima — ele fica salvo neste aparelho.</li>';
+    return;
+  }
+  const ok = loadedFiles.filter((f) => f.ok).length;
+  const totalGeral = loadedFiles.reduce((a, f) => a + f.sheets.reduce((b, s) => b + s.rows.length, 0), 0);
+  const cabecalho = `<li class="base-resumo">📦 Base atual: <strong>${fmt.format(ok)} arquivo(s)</strong> · ${fmt.format(totalGeral)} linhas · salvos neste aparelho</li>`;
+
+  const itens = loadedFiles.map((f, i) => {
     const totalLinhas = f.sheets.reduce((a, s) => a + s.rows.length, 0);
+    const data = f.addedAt ? new Date(f.addedAt).toLocaleDateString('pt-BR') : '';
+    const salvo = f.id !== undefined ? ' · 💾 salvo' : '';
     const meta = f.ok
-      ? `<span class="file-meta file-status-ok">✓ ${f.sheets.length} planilha(s) · ${fmt.format(totalLinhas)} linhas</span>`
+      ? `<span class="file-meta file-status-ok">✓ ${f.sheets.length} planilha(s) · ${fmt.format(totalLinhas)} linhas${salvo}${data ? ' · ' + data : ''}</span>`
       : `<span class="file-meta file-status-err">✕ erro: ${escapeHtml(f.error)}</span>`;
     return `<li>
       <span aria-hidden="true">📄</span>
       <span class="file-name">${escapeHtml(f.name)}</span>
       ${meta}
-      <button class="file-remove" type="button" data-idx="${i}" aria-label="Remover">✕</button>
+      <button class="file-remove" type="button" data-idx="${i}" aria-label="Remover da base">✕</button>
     </li>`;
   }).join('');
+
+  els.fileList.innerHTML = cabecalho + itens;
   els.fileList.querySelectorAll('.file-remove').forEach((b) =>
     b.addEventListener('click', () => removerArquivo(parseInt(b.dataset.idx, 10))));
 }
@@ -416,20 +504,20 @@ els.dropzone.addEventListener('drop', (e) => {
 /* ---------- Eventos: texto e botões ---------- */
 els.input.addEventListener('input', salvarTexto);
 els.generate.addEventListener('click', gerar);
+// "Limpar" fecha só o relatório/texto, mas MANTÉM a base salva
 els.clear.addEventListener('click', () => {
-  loadedFiles = [];
-  renderFileList();
   els.input.value = '';
   salvarTexto();
   els.reportCard.hidden = true;
 });
 els.print.addEventListener('click', () => window.print());
 
-// 🗑️ Lixeira — apaga o relatório, os arquivos e o texto (com confirmação)
-els.trash.addEventListener('click', () => {
-  const ok = window.confirm('Apagar o relatório, os arquivos carregados e o texto? Esta ação não pode ser desfeita.');
+// 🗑️ Lixeira — apaga o relatório E a base salva no aparelho (com confirmação)
+els.trash.addEventListener('click', async () => {
+  const ok = window.confirm('Apagar o relatório E toda a base de arquivos salva neste aparelho? Esta ação não pode ser desfeita.');
   if (!ok) return;
   if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  try { await dbClear(); } catch (_) {}
   loadedFiles = [];
   renderFileList();
   els.reportBody.innerHTML = '';
@@ -446,3 +534,4 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------- Início ---------- */
 carregarTexto();
+restaurarBase(); // recarrega a base salva no aparelho
