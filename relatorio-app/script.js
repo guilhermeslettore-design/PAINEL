@@ -17,6 +17,7 @@ const els = {
   chartWrap: document.getElementById('chartWrap'),
   reportTimestamp: document.getElementById('reportTimestamp'),
   print: document.getElementById('printBtn'),
+  trash: document.getElementById('trashBtn'),
   saveStatus: document.getElementById('saveStatus'),
 };
 
@@ -164,6 +165,20 @@ els.clear.addEventListener('click', () => {
   els.input.focus();
 });
 els.print.addEventListener('click', () => window.print());
+
+// 🗑️ Lixeira — apaga o relatório e o texto salvo (com confirmação)
+els.trash.addEventListener('click', () => {
+  const ok = window.confirm('Apagar o relatório e limpar o texto? Esta ação não pode ser desfeita.');
+  if (!ok) return;
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+  els.reportBody.innerHTML = '';
+  els.statsGrid.innerHTML = '';
+  els.reportCard.hidden = true;
+  els.input.value = '';
+  atualizarContagem();
+  salvarTexto();
+  els.input.focus();
+});
 
 // Ctrl/Cmd + Enter gera o relatório
 els.input.addEventListener('keydown', (e) => {

@@ -153,6 +153,9 @@ body {
 .btn-outline { background: #fff; color: var(--melitta-green); border-color: var(--melitta-green); }
 .btn-outline:hover { background: var(--melitta-green); color: #fff; }
 
+.btn-trash { background: #fff; color: var(--melitta-red); border-color: var(--melitta-red); }
+.btn-trash:hover { background: var(--melitta-red); color: #fff; }
+
 /* ---------- Stats ---------- */
 .stats-grid {
   display: grid;
