@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="styles.css" />
   <!-- Chart.js para os gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- SheetJS para ler arquivos Excel / CSV -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -30,21 +32,35 @@
     <!-- ENTRADA -->
     <section class="card input-card" aria-label="Entrada de dados">
       <div class="card-head">
-        <h2>1. Cole o texto aqui</h2>
-        <span class="hint">As informações que você quiser transformar em relatório</span>
+        <h2>1. Envie os arquivos do Varejo 360</h2>
+        <span class="hint">Aceita Excel (.xlsx, .xls) e CSV. Pode enviar vários de uma vez. Os arquivos ficam só no seu aparelho.</span>
       </div>
 
-      <textarea
-        id="inputText"
-        class="input-text"
-        placeholder="Cole ou digite aqui o texto que você quer transformar em relatório..."
-        spellcheck="false"
-      ></textarea>
+      <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Selecionar arquivos Excel">
+        <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" multiple hidden />
+        <div class="dropzone-inner">
+          <span class="dropzone-icon" aria-hidden="true">📊</span>
+          <strong>Arraste os arquivos aqui</strong>
+          <span class="hint">ou toque para selecionar (Excel ou CSV)</span>
+        </div>
+      </div>
+
+      <ul id="fileList" class="file-list" aria-live="polite"></ul>
+
+      <details class="text-alt">
+        <summary>Ou colar um texto manualmente</summary>
+        <textarea
+          id="inputText"
+          class="input-text"
+          placeholder="Cole ou digite aqui um texto, caso não tenha o arquivo Excel..."
+          spellcheck="false"
+        ></textarea>
+      </details>
 
       <div class="input-actions">
         <button id="generateBtn" class="btn btn-primary" type="button">Gerar relatório</button>
         <button id="clearBtn" class="btn btn-ghost" type="button">Limpar</button>
-        <span class="char-count" id="charCount">0 caracteres</span>
+        <span class="char-count" id="charCount"></span>
       </div>
     </section>
 
