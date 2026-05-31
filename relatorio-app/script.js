@@ -1,19 +1,16 @@
 /* ===========================================================
    Gerador de Relatório — lógica
-   Fonte de dados: arquivos Excel (.xlsx/.xls) ou CSV — lidos no
-   próprio navegador com a biblioteca SheetJS (XLSX). Também aceita
-   texto colado como alternativa.
-   Os arquivos NÃO são enviados a nenhum servidor.
+   Fonte de dados: arquivos Excel (.xlsx/.xls) ou CSV — sempre vários
+   arquivos, lidos no próprio navegador com a biblioteca SheetJS (XLSX).
+   Os arquivos NÃO são enviados a nenhum servidor (ficam só no aparelho).
    =========================================================== */
 
 const els = {
   dropzone: document.getElementById('dropzone'),
   fileInput: document.getElementById('fileInput'),
   fileList: document.getElementById('fileList'),
-  input: document.getElementById('inputText'),
   generate: document.getElementById('generateBtn'),
   clear: document.getElementById('clearBtn'),
-  charCount: document.getElementById('charCount'),
   reportCard: document.getElementById('reportCard'),
   reportBody: document.getElementById('reportBody'),
   statsGrid: document.getElementById('statsGrid'),
@@ -24,9 +21,8 @@ const els = {
   saveStatus: document.getElementById('saveStatus'),
 };
 
-const STORAGE_KEY = 'relatorio-app:texto';
 let chartInstance = null;
-let loadedFiles = []; // { name, ok, error, sheets: [{ name, headers, rows }] }
+let loadedFiles = []; // { id, name, ok, error, sheets: [{ name, headers, rows }] }
 
 /* ---------- Util ---------- */
 const fmt = new Intl.NumberFormat('pt-BR');
@@ -198,6 +194,7 @@ async function adicionarArquivos(fileListLike) {
     loadedFiles.push(registro);
   }
   renderFileList();
+  if (loadedFiles.some((f) => f.id !== undefined)) avisarBaseSalva();
 }
 
 async function removerArquivo(idx) {
@@ -236,20 +233,11 @@ function renderFileList() {
     b.addEventListener('click', () => removerArquivo(parseInt(b.dataset.idx, 10))));
 }
 
-/* ---------- Persistência (apenas do texto alternativo) ---------- */
-function salvarTexto() {
-  try {
-    localStorage.setItem(STORAGE_KEY, els.input.value);
-    els.saveStatus.textContent = 'Texto salvo';
-    clearTimeout(salvarTexto._t);
-    salvarTexto._t = setTimeout(() => (els.saveStatus.textContent = ''), 1500);
-  } catch (_) {}
-}
-function carregarTexto() {
-  try {
-    const v = localStorage.getItem(STORAGE_KEY);
-    if (v) { els.input.value = v; }
-  } catch (_) {}
+/* ---------- Aviso visual de "base salva" ---------- */
+function avisarBaseSalva() {
+  els.saveStatus.textContent = '💾 Base salva neste aparelho';
+  clearTimeout(avisarBaseSalva._t);
+  avisarBaseSalva._t = setTimeout(() => (els.saveStatus.textContent = ''), 2000);
 }
 
 /* ===========================================================
@@ -393,38 +381,6 @@ function relatorioDeTabela() {
   };
 }
 
-/* ===========================================================
-   RELATÓRIO A PARTIR DE TEXTO (alternativa)
-   =========================================================== */
-function relatorioDeTexto(texto) {
-  const linhas = texto.split(/\r?\n/).filter((l) => l.trim() !== '');
-  const palavras = (texto.trim().match(/\S+/g) || []);
-  const numeros = (texto.match(/-?\d+(?:[.,]\d+)?/g) || []).map(paraNumero).filter((n) => !isNaN(n));
-  const soma = numeros.reduce((a, b) => a + b, 0);
-  const media = numeros.length ? soma / numeros.length : 0;
-
-  const stats = [
-    { label: 'Linhas', value: fmt.format(linhas.length) },
-    { label: 'Palavras', value: fmt.format(palavras.length), accent: 'green' },
-    { label: 'Números', value: fmt.format(numeros.length), accent: 'red' },
-    { label: 'Soma', value: fmt2.format(soma) },
-    { label: 'Média', value: fmt2.format(media), accent: 'green' },
-  ];
-
-  const insights = gerarInsights(texto);
-  const insightsHtml = insights.length ? `
-    <h3>Insights (base de conhecimento)</h3>
-    <ul>${insights.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>` : '';
-
-  const linhasHtml = linhas.map((l, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(l)}</td></tr>`).join('');
-  const bodyHtml = insightsHtml + `
-    <h3>Conteúdo organizado</h3>
-    <table><thead><tr><th>#</th><th>Linha</th></tr></thead>
-    <tbody>${linhasHtml || '<tr><td colspan="2">Sem conteúdo</td></tr>'}</tbody></table>`;
-
-  return { stats, chartData: { labels: ['Linhas', 'Palavras', 'Números'], values: [linhas.length, palavras.length, numeros.length], titulo: 'Resumo do texto' }, bodyHtml };
-}
-
 /* ---------- Renderização ---------- */
 function renderStats(stats) {
   els.statsGrid.innerHTML = stats.map((s) => `
@@ -464,15 +420,16 @@ function renderChart(data) {
 
 function gerar() {
   const temArquivos = loadedFiles.some((f) => f.ok);
-  const texto = els.input.value.trim();
 
-  if (!temArquivos && !texto) {
+  if (!temArquivos) {
+    // chama atenção para a área de upload
     els.dropzone.classList.add('dragover');
     setTimeout(() => els.dropzone.classList.remove('dragover'), 600);
+    els.dropzone.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
-  const { stats, chartData, bodyHtml } = temArquivos ? relatorioDeTabela() : relatorioDeTexto(texto);
+  const { stats, chartData, bodyHtml } = relatorioDeTabela();
 
   renderStats(stats);
   renderChart(chartData);
@@ -501,13 +458,10 @@ els.dropzone.addEventListener('drop', (e) => {
   if (e.dataTransfer && e.dataTransfer.files) adicionarArquivos(e.dataTransfer.files);
 });
 
-/* ---------- Eventos: texto e botões ---------- */
-els.input.addEventListener('input', salvarTexto);
+/* ---------- Eventos: botões ---------- */
 els.generate.addEventListener('click', gerar);
-// "Limpar" fecha só o relatório/texto, mas MANTÉM a base salva
+// "Fechar relatório" esconde o relatório, mas MANTÉM a base salva
 els.clear.addEventListener('click', () => {
-  els.input.value = '';
-  salvarTexto();
   els.reportCard.hidden = true;
 });
 els.print.addEventListener('click', () => window.print());
@@ -523,8 +477,6 @@ els.trash.addEventListener('click', async () => {
   els.reportBody.innerHTML = '';
   els.statsGrid.innerHTML = '';
   els.reportCard.hidden = true;
-  els.input.value = '';
-  salvarTexto();
 });
 
 // Ctrl/Cmd + Enter gera o relatório
@@ -533,5 +485,4 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ---------- Início ---------- */
-carregarTexto();
 restaurarBase(); // recarrega a base salva no aparelho
