@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1A1714">
+<title>Excel do Zero ao Profissional — Império Digital</title>
+<meta name="description" content="Curso gratuito de Excel: a tela, fórmulas, PROCV, gráficos e tabela dinâmica — do zero ao profissional, com voz, quiz, jogos e certificado.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Império Digital">
+<meta property="og:title" content="Excel do Zero ao Profissional — Império Digital">
+<meta property="og:description" content="Da primeira célula à tabela dinâmica: curso prático e gratuito, com voz, quiz, jogos e certificado.">
+<meta property="og:url" content="https://guilhermeslettore-design.github.io/PAINEL/excel/">
+<meta property="og:image" content="https://guilhermeslettore-design.github.io/PAINEL/capas/excel.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../fontes/fontes.css">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/png" href="../icone-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+</head>
+<body data-ctx="curso">
+
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="topo">
+  <div class="topo-inner">
+    <a class="topo-voltar" href="../" aria-label="Voltar aos cursos">←</a>
+    <a class="logo" href="../">
+      <span class="logo-marca" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E8825A"/><stop offset="1" stop-color="#B79FE0"/>
+          </linearGradient></defs>
+          <path d="M7 6 h26 a5 5 0 0 1 5 5 v15 a5 5 0 0 1 -5 5 h-13 l-8 7 v-7 h-5 a5 5 0 0 1 -5 -5 v-15 a5 5 0 0 1 5 -5 z" fill="url(#lg)"/>
+          <path d="M20 12 v13 M13.5 18.5 h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo-texto">Império <em>Digital</em></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Seções do curso">
+      <a href="#" data-nav="inicio">📋 Conteúdo</a>
+      <a href="#" data-nav="tutor">💬 Tutor</a>
+      <a href="#" data-nav="kit">🧰 Funções</a>
+      <a href="#" data-nav="jogo">🎮 Jogos</a>
+      <a href="#" data-nav="final">🏆 Certificado</a>
+    </nav>
+    <div class="acoes-top">
+      <div class="fonte-controles" aria-label="Acessibilidade">
+        <button class="fonte-btn" id="seniorBtn" aria-pressed="false" title="Modo Terceira Idade">👵</button>
+        <button class="fonte-btn" id="fonteMenor" aria-label="Diminuir letra">A−</button>
+        <button class="fonte-btn" id="fonteMaior" aria-label="Aumentar letra">A+</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu do curso" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== HOME DO CURSO ===================== -->
+<section class="tela curso-home" id="inicio" data-tela="inicio">
+  <div class="ch-banner">
+    <img class="ch-banner-img" src="../capas/excel.png" alt="Curso Excel do Zero ao Profissional">
+    <div class="ch-banner-info">
+      <span class="ch-eyebrow">CURSO · 3 níveis · ~4 horas</span>
+      <h1>Excel do Zero ao Profissional</h1>
+      <p>Da primeira célula à tabela dinâmica — domine a ferramenta mais pedida do mercado.</p>
+    </div>
+  </div>
+
+  <div class="ch-progresso">
+    <div class="ch-progresso-topo">
+      <span>Seu progresso</span><span id="progressoTexto">0%</span>
+    </div>
+    <div class="barra"><div class="barra-fill" id="barraGeral"></div></div>
+    <button class="btn btn-primario btn-bloco" id="comecarCursoBtn" data-nav="n1">▶ Começar pelo Nível 1</button>
+  </div>
+
+  <h2 class="sec-titulo"><span>📋 Conteúdo do curso</span></h2>
+  <ol class="roadmap">
+    <li class="roadmap-item" data-nav="n1" tabindex="0" role="button">
+      <span class="roadmap-num">1</span>
+      <div class="roadmap-txt">
+        <strong>Primeiros passos</strong>
+        <span>A tela, células, digitar dados, formatar com cara profissional e a 1ª fórmula.</span>
+        <span class="roadmap-prog" data-prog-nivel="n1">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n2" tabindex="0" role="button">
+      <span class="roadmap-num">2</span>
+      <div class="roadmap-txt">
+        <strong>Fórmulas e Funções</strong>
+        <span>Funções essenciais, o segredo do $, SE, SOMASE, PROCV/PROCX, texto e datas.</span>
+        <span class="roadmap-prog" data-prog-nivel="n2">0/7 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n3" tabindex="0" role="button">
+      <span class="roadmap-num">3</span>
+      <div class="roadmap-txt">
+        <strong>Análise e Profissional</strong>
+        <span>Tabelas, formatação condicional, gráficos, tabela dinâmica e produtividade.</span>
+        <span class="roadmap-prog" data-prog-nivel="n3">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+  </ol>
+
+  <h2 class="sec-titulo"><span>🧰 Ferramentas do curso</span></h2>
+  <div class="ferramentas">
+    <button class="ferramenta" data-nav="tutor"><span class="ferramenta-ic">💬</span><strong>Tutor</strong><span>Tire qualquer dúvida</span></button>
+    <button class="ferramenta" data-nav="kit"><span class="ferramenta-ic">🧰</span><strong>Guia de Funções</strong><span>Modelos prontos para copiar</span></button>
+    <button class="ferramenta" data-nav="jogo"><span class="ferramenta-ic">🎮</span><strong>Jogos</strong><span>Treine decidindo</span></button>
+    <button class="ferramenta" data-nav="final"><span class="ferramenta-ic">🏆</span><strong>Certificado</strong><span>Conclua e imprima</span></button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 1 ===================== -->
+<section class="tela nivel oculto" data-tela="n1">
+  <div class="nivel-cabecalho nivel-verde">
+    <span class="nivel-badge">🌱 Nível 1 · Primeiros passos</span>
+    <h2>Sem medo da tela quadriculada</h2>
+    <p>Entenda como o Excel pensa: células, dados, formatação e a sua primeira fórmula. A base que faz todo o resto fazer sentido.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n1"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m1-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>A tela do Excel, sem mistério</h3></div>
+    <article class="licao">
+      <p>O Excel é uma <strong>folha quadriculada gigante</strong>. Cada quadradinho é uma <strong>célula</strong> — e é nela que você digita tudo.</p>
+      <ul class="lista-cartoes">
+        <li><strong>Colunas:</strong> as faixas verticais, identificadas por <strong>letras</strong> (A, B, C...).</li>
+        <li><strong>Linhas:</strong> as faixas horizontais, identificadas por <strong>números</strong> (1, 2, 3...).</li>
+        <li><strong>Célula:</strong> o encontro de uma coluna com uma linha. O cruzamento da coluna B com a linha 3 chama-se <strong>B3</strong> — esse é o "endereço" da célula.</li>
+        <li><strong>Caixa de Nome:</strong> no canto superior esquerdo mostra qual célula está selecionada (e dá para digitar um endereço para pular até lá).</li>
+        <li><strong>Barra de Fórmulas:</strong> logo acima da planilha, mostra o conteúdo REAL da célula (ali você vê a fórmula, não só o resultado).</li>
+        <li><strong>Abas (planilhas):</strong> lá embaixo. Um arquivo (a "Pasta de Trabalho") pode ter várias planilhas — Plan1, Plan2... Clique no + para criar mais.</li>
+      </ul>
+      <div class="destaque">💡 <strong>Sacada:</strong> "Pasta de Trabalho" é o ARQUIVO inteiro; "Planilha" é cada ABA dentro dele. Muita gente confunde — agora você não confunde mais.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>Digitando dados do jeito certo</h3></div>
+    <article class="licao">
+      <p>O Excel trata 3 tipos de conteúdo de forma diferente — e reconhecer isso evita 90% das dores de cabeça:</p>
+      <ul class="lista-cartoes">
+        <li><strong>🔢 Número:</strong> encosta na DIREITA da célula sozinho. Se um "número" ficou na esquerda, o Excel o entendeu como TEXTO (e ele não vai somar!).</li>
+        <li><strong>🔤 Texto:</strong> encosta na ESQUERDA. Nomes, descrições, etc.</li>
+        <li><strong>📅 Data:</strong> digite <strong>10/03/2026</strong> e o Excel entende como data (é um número por trás — dá para somar dias!).</li>
+      </ul>
+      <h4>Regras de ouro da organização:</h4>
+      <ol class="lista-passos">
+        <li><strong>Uma informação por célula.</strong> Nome numa, telefone noutra. Nunca "João - 9999" tudo junto.</li>
+        <li><strong>Cabeçalho na primeira linha</strong> (Nome, Valor, Data...) e os dados embaixo, sem linhas em branco no meio.</li>
+        <li><strong>Não decore a planilha com células mescladas no meio dos dados</strong> — atrapalha fórmulas, filtros e tabela dinâmica.</li>
+        <li><strong>Atalhos de navegação:</strong> <code>Enter</code> desce, <code>Tab</code> vai pra direita, as <strong>setas</strong> movem, <code>Ctrl + setas</code> pula até o fim dos dados.</li>
+      </ol>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>Formatação com cara profissional</h3></div>
+    <article class="licao">
+      <p>Os mesmos dados ficam 10x melhores com formatação. O essencial (tudo na aba <strong>Página Inicial</strong>):</p>
+      <ul class="lista-cartoes">
+        <li><strong>Negrito no cabeçalho</strong> (<code>Ctrl + N</code>) e uma cor de preenchimento para destacá-lo.</li>
+        <li><strong>Bordas:</strong> dão acabamento a uma tabela. Selecione e escolha "Todas as bordas".</li>
+        <li><strong>Formato de número:</strong> moeda (R$), porcentagem (%) e separador de milhar. CUIDADO: formatar como % muda o valor exibido — 0,1 vira 10%.</li>
+        <li><strong>Largura da coluna:</strong> se aparecer <strong>#####</strong>, a coluna está estreita demais para o número. Dê duplo-clique na borda do cabeçalho da coluna para ajustar automaticamente.</li>
+        <li><strong>Congelar Painéis</strong> (Exibir → Congelar Painéis): trava o cabeçalho no topo enquanto você rola listas grandes. Indispensável.</li>
+      </ul>
+      <div class="destaque">⚠️ <strong>Mesclar células:</strong> bonito em título, veneno dentro de tabelas. Mesclar quebra a seleção de colunas, filtros e a tabela dinâmica. Use com parcimônia, só na "capa" do relatório.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Sua primeira fórmula</h3></div>
+    <article class="licao">
+      <p>Aqui o Excel deixa de ser caderno e vira calculadora viva. <strong>Toda fórmula começa com o sinal de igual <code>=</code></strong>.</p>
+      <pre class="codigo"><code>=2+2        → resultado 4
+=A1+B1      → soma o que está nas células A1 e B1
+=A1*B1      → multiplica (* multiplica, / divide)
+=SOMA(A1:A10)  → soma tudo de A1 até A10</code></pre>
+      <ul class="lista-cartoes">
+        <li><strong>Use o endereço, não o número.</strong> Em vez de <code>=150+200</code>, escreva <code>=A1+B1</code>. Assim, se o valor mudar, o resultado se atualiza sozinho. Esse é o poder do Excel.</li>
+        <li><strong>Clique em vez de digitar:</strong> digite <code>=</code>, clique na célula, digite <code>+</code>, clique na outra, <code>Enter</code>. Menos erro.</li>
+        <li><strong>SOMA é a função-rainha:</strong> <code>=SOMA(B2:B30)</code> soma a coluna inteira. Atalho mágico: selecione os números e aperte <code>Alt + =</code> (AutoSoma).</li>
+        <li><strong>Alça de preenchimento:</strong> o quadradinho no canto inferior direito da célula. Arraste-o (ou dê duplo-clique) para copiar a fórmula para a lista toda. Você escreve UMA vez e vale para 1.000 linhas.</li>
+      </ul>
+      <div class="destaque">🌎 <strong>Detalhe brasileiro:</strong> no Excel em português, os argumentos são separados por <strong>ponto e vírgula <code>;</code></strong> (não vírgula) e o decimal é vírgula. Ex.: <code>=SOMA(A1;A2;A3)</code>.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>Salvar, organizar e erros comuns</h3></div>
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>Salvar:</strong> <code>Ctrl + B</code> (Salvar) e salve cedo, salve sempre. O formato moderno é <strong>.xlsx</strong>. Use .xls só se alguém com Excel muito antigo precisar abrir.</li>
+        <li><strong>Renomeie as abas</strong> (duplo-clique no nome "Plan1") e dê cores a elas. "Vendas Jan" é melhor que "Plan1".</li>
+        <li><strong>Desfazer é seu melhor amigo:</strong> <code>Ctrl + Z</code> volta atrás. <code>Ctrl + Y</code> refaz.</li>
+        <li><strong>Não digite por cima de uma fórmula:</strong> se você apagar a fórmula e digitar o número fixo, perde a automação. Para ver onde há fórmulas, use Fórmulas → Mostrar Fórmulas.</li>
+      </ul>
+      <h4>🚑 O guia rápido dos erros (você VAI ver estes):</h4>
+      <ul class="lista-cartoes">
+        <li><strong>#####</strong> → não é erro: a coluna está estreita. Alargue.</li>
+        <li><strong>#DIV/0!</strong> → você dividiu por zero (ou por uma célula vazia).</li>
+        <li><strong>#VALOR!</strong> → tem texto onde a fórmula esperava número.</li>
+        <li><strong>#NOME?</strong> → digitou errado o nome da função (ex.: SOMAR em vez de SOMA).</li>
+        <li><strong>#N/D</strong> → o PROCV não encontrou o que procurava (veremos no Nível 2).</li>
+        <li><strong>#REF!</strong> → você apagou uma célula que a fórmula usava.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 1</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz1"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="n2">Ir para o Nível 2 →</button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 2 ===================== -->
+<section class="tela nivel oculto" data-tela="n2">
+  <div class="nivel-cabecalho nivel-azul">
+    <span class="nivel-badge">🚀 Nível 2 · Fórmulas e Funções</span>
+    <h2>Onde o Excel vira superpoder</h2>
+    <p>As funções que resolvem 95% do trabalho real — explicadas com exemplos que você usa no mesmo dia.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n2"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m2-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 7</span><h3>As 6 funções essenciais</h3></div>
+    <article class="licao">
+      <p>Decore estas seis — elas aparecem em quase toda planilha:</p>
+      <pre class="codigo"><code>=SOMA(B2:B20)          soma os valores
+=MÉDIA(B2:B20)         média (soma ÷ quantidade)
+=MÁXIMO(B2:B20)        o maior valor
+=MÍNIMO(B2:B20)        o menor valor
+=CONT.NÚM(B2:B20)      conta quantas células TÊM NÚMERO
+=CONT.VALORES(B2:B20)  conta quantas células NÃO estão vazias</code></pre>
+      <div class="destaque">🎯 <strong>A diferença que derruba gente em prova:</strong> <code>CONT.NÚM</code> conta só números; <code>CONT.VALORES</code> conta qualquer coisa preenchida (inclusive texto). Para contar "quantos clientes" (nomes), use CONT.VALORES.</div>
+      <p><strong>Dica de produtividade:</strong> selecione um intervalo de números e olhe a <strong>barra de status</strong> (rodapé): o Excel já mostra Soma, Média e Contagem na hora, sem digitar fórmula nenhuma.</p>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 7</span><h3>Referências: o segredo do cifrão $</h3></div>
+    <article class="licao">
+      <p>Esta é a etapa que separa o iniciante do intermediário. Quando você arrasta uma fórmula, as referências "andam" junto:</p>
+      <ul class="lista-cartoes">
+        <li><strong>Relativa (A1):</strong> anda junto. Arrastou para baixo, vira A2, A3... Ótimo para "preço × quantidade" linha a linha.</li>
+        <li><strong>Absoluta ($A$1):</strong> TRAVA a célula. Não importa para onde arraste, continua $A$1. Use para uma célula fixa, como a taxa de imposto ou o dólar do dia.</li>
+        <li><strong>Mista (A$1 ou $A1):</strong> trava só a linha OU só a coluna. Avançado, mas poderoso em tabelas de mão dupla.</li>
+      </ul>
+      <div class="destaque">⌨️ <strong>A tecla mágica:</strong> com o cursor na referência, aperte <strong>F4</strong> e o Excel alterna A1 → $A$1 → A$1 → $A1 → A1. Nunca digite o $ na mão.</div>
+      <pre class="codigo"><code>Tabela: preços na coluna B, desconto fixo em E1
+Errado:  =B2*E1   (ao arrastar, E1 vira E2, E3... e quebra)
+Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 7</span><h3>Tomando decisões com SE</h3></div>
+    <article class="licao">
+      <p>A função <strong>SE</strong> faz a planilha "pensar": se uma condição for verdadeira, faz uma coisa; senão, faz outra.</p>
+      <pre class="codigo"><code>=SE(condição ; valor_se_verdadeiro ; valor_se_falso)
+
+=SE(B2>=7 ; "Aprovado" ; "Reprovado")
+=SE(C2>1000 ; C2*0,05 ; 0)   → 5% de comissão só acima de 1000</code></pre>
+      <ul class="lista-cartoes">
+        <li><strong>Textos vão entre aspas</strong> ("Aprovado"); números, não.</li>
+        <li><strong>Vários SE de uma vez?</strong> Use <code>SES</code> (mais limpo que aninhar): <code>=SES(B2>=9;"A";B2>=7;"B";B2>=5;"C";VERDADEIRO;"D")</code>.</li>
+        <li><strong>Mais de uma condição junta:</strong> <code>E</code> (todas precisam ser verdadeiras) e <code>OU</code> (basta uma). Ex.: <code>=SE(E(B2>=7;C2>=75%);"Passou";"Não")</code> — nota ≥ 7 E presença ≥ 75%.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 7</span><h3>Somar e contar COM condição</h3></div>
+    <article class="licao">
+      <p>"Quanto vendi só da região Sul?" "Quantos clientes são de São Paulo?" É aqui que mora o dinheiro:</p>
+      <pre class="codigo"><code>=CONT.SE(intervalo ; critério)
+=CONT.SE(C2:C100 ; "SP")        → quantos "SP"
+
+=SOMASE(intervalo_teste ; critério ; intervalo_soma)
+=SOMASE(C2:C100 ; "Sul" ; D2:D100)  → soma D só onde C = "Sul"
+
+=SOMASES(soma ; teste1 ; crit1 ; teste2 ; crit2 ; ...)
+=SOMASES(D2:D100 ; C2:C100 ; "Sul" ; B2:B100 ; "Março")</code></pre>
+      <div class="destaque">🧠 <strong>A pegadinha clássica:</strong> no <code>SOMASE</code> a ordem é (onde testar ; o quê ; o que somar). No <code>SOMASES</code> a soma vem PRIMEIRO. Trocar a ordem é o erro nº 1 — preste atenção.</div>
+      <p>Critérios aceitam sinais: <code>"&gt;1000"</code>, <code>"&lt;&gt;Cancelado"</code> (diferente de) e curingas como <code>"São*"</code> (começa com São).</p>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 7</span><h3>PROCV e PROCX: buscar dados</h3></div>
+    <article class="licao">
+      <p>O <strong>PROCV</strong> é a função mais famosa do Excel: ele procura um valor numa tabela e traz a informação correspondente (como buscar o preço de um produto pelo código).</p>
+      <pre class="codigo"><code>=PROCV(o_que_procurar ; onde_procurar ; qual_coluna_trazer ; FALSO)
+
+=PROCV(A2 ; F2:H100 ; 3 ; FALSO)
+   procura o código de A2 na tabela F:H,
+   e traz o que estiver na 3ª coluna (H)</code></pre>
+      <ul class="lista-cartoes">
+        <li><strong>SEMPRE termine com FALSO</strong> (correspondência exata). Esquecer disso traz resultados errados sem avisar — o erro mais perigoso do Excel.</li>
+        <li><strong>Limitação:</strong> o PROCV só procura na 1ª coluna da tabela e só olha para a DIREITA. Não busca para a esquerda.</li>
+        <li><strong>#N/D</strong> significa "não encontrei" — geralmente espaço sobrando, código como texto x número, ou o item realmente não existe.</li>
+      </ul>
+      <div class="destaque">✨ <strong>O substituto moderno — PROCX:</strong> nas versões novas (Microsoft 365), use <code>=PROCX(A2;F2:F100;H2:H100)</code>. Ele busca em qualquer direção, dispensa contar colunas e tem tratamento de "não encontrado". Se tiver, prefira PROCX.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-6">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 7</span><h3>Texto e datas</h3></div>
+    <article class="licao">
+      <h4>🔤 Mexendo com texto:</h4>
+      <pre class="codigo"><code>=A2&" "&B2           junta nome e sobrenome (o & "cola" textos)
+=MAIÚSCULA(A2)      tudo em CAIXA ALTA
+=ARRUMAR(A2)        remove espaços sobrando (salva PROCV!)
+=ESQUERDA(A2;3)     os 3 primeiros caracteres
+=EXT.TEXTO(A2;4;2)  2 caracteres a partir do 4º</code></pre>
+      <h4>📅 Mexendo com datas:</h4>
+      <pre class="codigo"><code>=HOJE()             a data de hoje (sempre atualizada)
+=AGORA()            data e hora
+=B2-A2              dias entre duas datas (data é número!)
+=ANO(A2)  =MÊS(A2)  =DIA(A2)   extrai partes da data
+=DATADIF(A2;HOJE();"Y")   idade/anos completos</code></pre>
+      <div class="destaque">💡 Como data é um número por baixo, <code>=A2+30</code> te dá a data daqui a 30 dias. Perfeito para vencimentos e prazos.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-6">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 7 de 7</span><h3>Quiz do Nível 2</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz2"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n1">← Nível 1</button>
+    <button class="btn btn-primario" data-nav="n3">Ir para o Nível 3 →</button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 3 ===================== -->
+<section class="tela nivel oculto" data-tela="n3">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">🧠 Nível 3 · Análise e Profissional</span>
+    <h2>Transforme dados em decisões</h2>
+    <p>Tabelas, formatação condicional, gráficos e tabela dinâmica: o que faz seu chefe dizer "quem fez isso?".</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n3"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m3-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>Tabelas: filtrar e classificar</h3></div>
+    <article class="licao">
+      <p>Selecione seus dados (com cabeçalho) e aperte <strong><code>Ctrl + T</code></strong> para transformar num objeto "Tabela". De brinde você ganha:</p>
+      <ul class="lista-cartoes">
+        <li><strong>Filtros automáticos</strong> em cada coluna (as setinhas no cabeçalho): mostre só "região Sul", só "acima de R$ 500", etc.</li>
+        <li><strong>Classificar (ordenar):</strong> do maior para o menor, A→Z, mais recente primeiro. Use os mesmos botões de filtro.</li>
+        <li><strong>Formatação automática</strong> com linhas zebradas e a tabela "cresce sozinha" quando você adiciona linhas — fórmulas e gráficos se atualizam juntos.</li>
+        <li><strong>Linha de Totais:</strong> ative na aba Design da Tabela e escolha Soma/Média por coluna num clique.</li>
+      </ul>
+      <div class="destaque">🥇 Trabalhar com Tabela (Ctrl+T) em vez de um "amontoado" de células é o hábito profissional nº 1. Faça isso sempre.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>Formatação condicional</h3></div>
+    <article class="licao">
+      <p>É a célula que <strong>muda de cor sozinha</strong> conforme o valor — seu painel ganha vida (Página Inicial → Formatação Condicional):</p>
+      <ul class="lista-cartoes">
+        <li><strong>Realçar regras:</strong> pinte de vermelho tudo que for menor que a meta, ou maior que o orçamento.</li>
+        <li><strong>Barras de dados:</strong> uma mini-barra dentro da célula mostra a proporção — ótimo para comparar quantidades de relance.</li>
+        <li><strong>Escala de cores / Ícones (semáforo 🟢🟡🔴):</strong> verde-bom, vermelho-ruim automaticamente.</li>
+        <li><strong>Destacar duplicados:</strong> acha valores repetidos numa lista em 2 cliques.</li>
+      </ul>
+      <div class="destaque">🎛️ <strong>Pro:</strong> dá para usar uma fórmula como regra. Ex.: <code>=$E2&lt;META</code> pinta a LINHA inteira quando a coluna E está abaixo da meta. Poderoso para relatórios.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>Gráficos que comunicam</h3></div>
+    <article class="licao">
+      <p>Selecione os dados e vá em <strong>Inserir → Gráfico</strong>. O segredo não é fazer gráfico bonito — é escolher o <strong>tipo certo para a mensagem</strong>:</p>
+      <ul class="lista-cartoes">
+        <li><strong>📊 Colunas/Barras:</strong> comparar categorias (vendas por vendedor, por produto). O mais usado e seguro.</li>
+        <li><strong>📈 Linhas:</strong> evolução ao longo do TEMPO (faturamento mês a mês).</li>
+        <li><strong>🥧 Pizza:</strong> participação no total (fatia de cada produto) — use só com POUCAS fatias (até ~5). Mais que isso vira confusão.</li>
+        <li><strong>Dica de clareza:</strong> menos é mais. Tire linhas de grade desnecessárias, dê um título que diga a conclusão ("Vendas crescem 30% no trimestre", não "Gráfico 1").</li>
+      </ul>
+      <div class="destaque">⚠️ <strong>Erro comum:</strong> usar pizza para comparar valores parecidos (o olho não distingue fatias quase iguais). Para comparar, coluna sempre vence.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Tabela Dinâmica: o superpoder</h3></div>
+    <article class="licao">
+      <p>A <strong>Tabela Dinâmica</strong> resume milhares de linhas em segundos, <strong>sem fórmula nenhuma</strong>. É o recurso mais impressionante (e mais temido sem motivo) do Excel.</p>
+      <ol class="lista-passos">
+        <li>Clique em qualquer célula dos seus dados → <strong>Inserir → Tabela Dinâmica</strong> → OK.</li>
+        <li>Aparece um painel com 4 áreas. Você ARRASTA os campos:</li>
+        <li><strong>Linhas:</strong> o que você quer agrupar (ex.: Vendedor, ou Produto).</li>
+        <li><strong>Valores:</strong> o que somar/contar (ex.: Valor → ele soma sozinho).</li>
+        <li><strong>Colunas e Filtros:</strong> para cruzar (ex.: meses nas colunas) e filtrar (ex.: só 2026).</li>
+      </ol>
+      <div class="destaque">✨ Pronto: "total de vendas por vendedor por mês" sai em 30 segundos. Mudou de ideia? Arraste outro campo e o resumo se refaz. <strong>Pré-requisito:</strong> seus dados precisam estar organizados (cabeçalho, 1 info por coluna, sem células mescladas) — por isso o Nível 1 importa tanto.</div>
+      <p>Depois de criar, clique com o botão direito num valor → <strong>Atualizar</strong> sempre que os dados mudarem.</p>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>Produtividade e blindagem</h3></div>
+    <article class="licao">
+      <h4>🛡️ Planilhas à prova de erro:</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Validação de Dados</strong> (Dados → Validação): crie uma lista suspensa para a pessoa só poder escolher "Sim/Não" ou uma região válida — fim da digitação bagunçada.</li>
+        <li><strong>SEERRO</strong> esconde erros feios: <code>=SEERRO(PROCV(...);"não encontrado")</code> mostra um texto amigável em vez de #N/D.</li>
+        <li><strong>Proteger:</strong> trave as células de fórmula (Revisão → Proteger Planilha) para ninguém apagar sem querer.</li>
+      </ul>
+      <h4>⌨️ Atalhos que economizam horas:</h4>
+      <ul class="lista-cartoes">
+        <li><code>Ctrl+C / Ctrl+V</code> copiar/colar · <code>Ctrl+Shift+V</code> Colar Especial (só valores, sem fórmula).</li>
+        <li><code>Ctrl+Setas</code> pula ao fim dos dados · <code>Ctrl+Shift+Setas</code> seleciona até lá.</li>
+        <li><code>Alt+=</code> AutoSoma · <code>Ctrl+;</code> insere a data de hoje · <code>F4</code> alterna o $ (e repete a última ação).</li>
+        <li><code>Ctrl+T</code> Tabela · <code>Ctrl+Shift+L</code> liga/desliga filtros.</li>
+      </ul>
+      <div class="destaque">🤝 <strong>Bônus:</strong> travou numa fórmula? Use o curso "Domine o Claude" aqui da plataforma — cole sua planilha e peça "monte a fórmula que faz X". IA + Excel é combinação imbatível.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 3</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz3"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n2">← Nível 2</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para os Jogos →</button>
+  </div>
+</section>
+
+<!-- ===================== GUIA DE FUNÇÕES (KIT) ===================== -->
+<section class="tela oculto" data-tela="kit">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">🧰 Guia de Funções</span>
+    <h2>Modelos prontos para copiar</h2>
+    <p>As fórmulas mais usadas, prontas: copie, troque os intervalos pelos seus e cole no Excel.</p>
+  </div>
+  <div class="areas-botoes" id="kitFiltros"></div>
+  <div class="prompts-grade" id="kitGrade"></div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para os Jogos →</button>
+  </div>
+</section>
+
+<!-- ===================== TUTOR ===================== -->
+<section class="tela oculto" data-tela="tutor">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">💬 Tutor do curso</span>
+    <h2>Tire qualquer dúvida de Excel</h2>
+    <p>Pergunte sobre fórmulas, PROCV, $, SE, gráficos, tabela dinâmica, erros... <span class="tutor-modo" id="tutorModo">🤖 respondendo na hora, grátis</span></p>
+  </div>
+  <div class="chat-caixa">
+    <div class="chat-mensagens" id="chatMensagens" aria-live="polite"></div>
+    <div class="chat-sugestoes" id="chatSugestoes"></div>
+    <form class="chat-form" id="chatForm">
+      <input id="chatInput" type="text" placeholder="Ex.: como usar o PROCV?" maxlength="500" autocomplete="off" aria-label="Sua pergunta">
+      <button class="btn btn-primario chat-enviar" type="submit" aria-label="Enviar">➤</button>
+    </form>
+    <button class="chat-limpar" id="chatLimpar">🗑️ limpar conversa</button>
+  </div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+  </div>
+</section>
+
+<!-- ===================== JOGOS ===================== -->
+<section class="tela oculto" data-tela="jogo">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">🎮 Jogo 1</span>
+    <h2>Qual recurso usar?</h2>
+    <p>Para cada situação, escolha a ferramenta certa do Excel — rápido, o tempo conta pontos!</p>
+  </div>
+  <div class="jogo-caixa" id="jogoCaixa">
+    <div class="jogo-inicio" id="jogoInicio">
+      <p>Vão chegar <strong>8 situações reais</strong>. Escolha a categoria certa: <strong>🧮 Cálculo</strong> (SOMA/MÉDIA/CONT), <strong>🔀 Lógica</strong> (SE/SOMASE), <strong>🔎 Busca</strong> (PROCV/PROCX) ou <strong>📊 Análise</strong> (Tabela Dinâmica/Gráfico/Cond.).</p>
+      <p>⏱️ 15 segundos por situação (30 no Modo Terceira Idade). Acertos em sequência ganham bônus 🔥.</p>
+      <button class="btn btn-primario" id="jogoComecar">Aceitar o desafio</button>
+      <p class="quiz-recorde" id="jogoRecorde"></p>
+    </div>
+    <div class="jogo-rodada oculto" id="jogoRodada">
+      <div class="quiz-topo">
+        <span id="jogoContador">Situação 1/8</span>
+        <span class="jogo-streak" id="jogoStreak"></span>
+        <span id="jogoPontos">0 pts</span>
+      </div>
+      <div class="jogo-timer"><div class="jogo-timer-fill" id="jogoTimer"></div></div>
+      <div class="jogo-missao">
+        <span class="jogo-missao-rotulo">📨 Situação:</span>
+        <p id="jogoMissaoTexto"></p>
+      </div>
+      <div class="jogo-escolhas">
+        <button class="jogo-escolha" data-modelo="calculo">🧮<span>Cálculo</span></button>
+        <button class="jogo-escolha" data-modelo="logica">🔀<span>Lógica</span></button>
+        <button class="jogo-escolha" data-modelo="busca">🔎<span>Busca</span></button>
+        <button class="jogo-escolha" data-modelo="analise">📊<span>Análise</span></button>
+      </div>
+      <p class="jogo-feedback oculto" id="jogoFeedback"></p>
+    </div>
+    <div class="jogo-fim oculto" id="jogoFim">
+      <h3 id="jogoResultadoTitulo"></h3>
+      <p class="quiz-nota" id="jogoNota"></p>
+      <p id="jogoResultadoMsg"></p>
+      <button class="btn btn-primario" id="jogoReiniciar">Jogar de novo</button>
+    </div>
+  </div>
+
+  <div class="nivel-cabecalho nivel-azul" style="margin-top:2rem">
+    <span class="nivel-badge">🛠️ Jogo 2</span>
+    <h2>Conserta a Fórmula</h2>
+    <p>Uma fórmula com problema aparece — escolha a versão correta, e aprenda o porquê.</p>
+  </div>
+  <div class="jogo-caixa">
+    <div class="quiz-caixa" id="oficinaCaixa" style="border:0;background:transparent;padding:0"></div>
+  </div>
+
+  <div class="nivel-cabecalho nivel-roxo" style="margin-top:2rem">
+    <span class="nivel-badge">🎓 Desafio Mestre · nível especialista</span>
+    <h2>Só para quem manda no Excel</h2>
+    <p>Resultados de fórmulas, pegadinhas de referência e PROCV, diagnóstico de erros. Acerte <strong>80%+</strong> para o título de Mestre.</p>
+  </div>
+  <div class="jogo-caixa">
+    <div class="quiz-caixa" id="desafioCaixa" style="border:0;background:transparent;padding:0"></div>
+  </div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n3">← Nível 3</button>
+    <button class="btn btn-primario" data-nav="final">Ver certificado →</button>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICADO ===================== -->
+<section class="tela oculto" data-tela="final">
+  <div class="final-caixa" id="finalCaixa">
+    <h2>🏆 Conclusão do curso</h2>
+    <p id="finalTexto">Complete tudo abaixo para liberar seu certificado:</p>
+    <ul class="final-checklist" id="finalChecklist">
+      <li data-check="n1">🌱 Nível 1 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="n2">🚀 Nível 2 completo (6 etapas + quiz com 70%+)</li>
+      <li data-check="n3">🧠 Nível 3 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="jogo">🎮 Jogo com 50%+ da pontuação</li>
+    </ul>
+    <div class="certificado oculto" id="certificado">
+      <div class="cert-folha" id="certFolha">
+        <div class="cert-borda">
+          <span class="cert-selo">✳</span>
+          <p class="cert-marca">IMPÉRIO DIGITAL</p>
+          <p class="cert-titulo">Certificado de Conclusão</p>
+          <p class="cert-conferido">Conferido a</p>
+          <p class="cert-nome" id="certNome">Você</p>
+          <p class="cert-texto">por concluir com êxito o curso<br><strong>“Excel do Zero ao Profissional”</strong>,<br>
+          incluindo fórmulas, referências, SE, SOMASE, PROCV/PROCX, tabelas, formatação condicional, gráficos e tabela dinâmica.</p>
+          <div class="cert-rodape-folha">
+            <div class="cert-bloco">
+              <span class="cert-linha" id="certData">—</span>
+              <span class="cert-legenda">Data de conclusão</span>
+            </div>
+            <div class="cert-bloco">
+              <span class="cert-linha cert-assinatura">Império Digital</span>
+              <span class="cert-legenda">Plataforma de ensino</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-acoes nao-imprimir">
+        <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
+        <button class="btn btn-primario" id="certPdfBtn">📄 Baixar PDF</button>
+        <button class="btn btn-fantasma" id="certImprimirBtn">🖨️ Imprimir</button>
+        <button class="btn btn-fantasma" id="certBaixarBtn">🖼️ Imagem</button>
+      </div>
+    </div>
+  </div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início do curso</button>
+    <a class="btn btn-primario" href="../">🏛️ Todos os cursos</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <p>Feito com ✳ na <strong>Império Digital</strong> — conteúdo educativo independente.</p>
+  <p>Menus e nomes de função podem variar entre versões do Excel (Microsoft 365, 2021, etc.) e idiomas.</p>
+</footer>
+
+<!-- ===================== BARRA DE ABAS (celular) ===================== -->
+<nav class="tabbar" aria-label="Navegação principal">
+  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Curso</span></button>
+  <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
+  <button data-nav="kit" class="tab"><span class="tab-icone">🧰</span><span class="tab-rotulo">Funções</span></button>
+  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogos</span></button>
+  <button data-nav="final" class="tab"><span class="tab-icone">🏆</span><span class="tab-rotulo">Certificado</span></button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
