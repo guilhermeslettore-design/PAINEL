@@ -1672,22 +1672,174 @@
      ============================================================ */
   const sintese = window.speechSynthesis;
   let leitura = { fila: [], idx: 0, btn: null, parar: null, estado: "parado" };
+  let vozFixa = null; // sempre a MESMA voz na sessão inteira
 
+  // Escolhe a melhor voz em português do aparelho UMA vez e fixa para sempre
   function vozPortugues() {
-    const vozes = sintese ? sintese.getVoices() : [];
-    return (
-      vozes.find((v) => /pt[-_]br/i.test(v.lang)) ||
-      vozes.find((v) => /^pt/i.test(v.lang)) ||
-      null
-    );
+    if (vozFixa) return vozFixa;
+    const vozes = (sintese ? sintese.getVoices() : []).filter((v) => /^pt([-_]|$)/i.test(v.lang));
+    if (!vozes.length) return null;
+    // se já escolhemos uma voz antes neste aparelho, reusa a mesma
+    if (estado.vozNome) {
+      const salva = vozes.find((v) => v.name === estado.vozNome);
+      if (salva) { vozFixa = salva; return vozFixa; }
+    }
+    const nota = (v) => {
+      const n = v.name.toLowerCase();
+      let s = 0;
+      if (/br/i.test(v.lang)) s += 5;                                       // português do Brasil
+      if (n.includes("google")) s += 4;                                     // voz do Google (Android)
+      if (/luciana|felipe|francisca|camila|thalita|antonio/.test(n)) s += 3; // boas vozes iOS/Windows
+      if (/natural|enhanced|premium|aprimorad|neural/.test(n)) s += 3;      // versões de alta qualidade
+      if (!v.localService) s += 1;
+      return s;
+    };
+    // desempate por nome para a escolha ser sempre idêntica no mesmo aparelho
+    vozFixa = vozes.sort((a, b) => nota(b) - nota(a) || a.name.localeCompare(b.name))[0];
+    estado.vozNome = vozFixa.name;
+    salvar();
+    return vozFixa;
   }
-  if (sintese) sintese.getVoices(); // dispara o carregamento das vozes
+  if (sintese) {
+    sintese.getVoices(); // dispara o carregamento das vozes
+    if (typeof sintese.addEventListener === "function") {
+      sintese.addEventListener("voiceschanged", () => { if (!vozFixa) vozPortugues(); });
+    }
+  }
 
   function textoDaEtapa(secao) {
     const clone = secao.cloneNode(true);
     clone.querySelectorAll("pre, button, input, select, .quiz-caixa, .ouvir-controles").forEach((e) => e.remove());
     return clone.textContent.replace(/\s+/g, " ").trim();
   }
+
+  /* Narração humanizada — roteiro de professor escrito para ser OUVIDO,
+     em vez da leitura crua do texto da tela */
+  const NARRACAO = {
+    "m1-1":
+      "Olá! Que bom ter você aqui. Eu vou te acompanhar nessa jornada para dominar o Claude. " +
+      "Vamos começar pelo começo: o que é o Claude? O Claude é uma inteligência artificial criada pela Anthropic, uma empresa americana fundada em 2021, referência mundial em segurança de IA. " +
+      "Na prática, pensa assim: é um assistente super preparado, disponível vinte e quatro horas. Você escreve o que precisa, como numa conversa de WhatsApp, e ele escreve textos, resume documentos, traduz, programa, analisa fotos e planilhas. De tudo. " +
+      "Antes de seguir, guarda três palavrinhas que aparecem o curso inteiro. Primeira: prompt. É o pedido que você escreve para a IA. Quanto mais claro, melhor a resposta. " +
+      "Segunda: token. É o pedacinho de texto que a IA lê e escreve. Uma palavra tem de um a três tokens. " +
+      "Terceira: janela de contexto. É a memória de trabalho do modelo, quanto texto ele considera de uma vez. Os modelos atuais do Claude trabalham com até um milhão de tokens. Cabe um livro inteiro numa conversa! " +
+      "Agora é com você: faça as missões práticas aqui embaixo. É fazendo que se aprende!",
+    "m1-2":
+      "Nesta etapa, vamos colocar você dentro do Claude. Criar a conta é fácil: entra no site claude ponto a i, ou baixa o aplicativo Claude na loja do celular, e faz o cadastro com seu e-mail ou conta Google. Pronto: a tela principal é um chat. " +
+      "Sobre os planos: existe o gratuito, ótimo para conhecer, com limite de mensagens que renova com o tempo. O plano Pro é a assinatura de quem usa todo dia: muito mais uso, mais modelos, e recursos como Projetos e conectores. " +
+      "Para uso intenso existe o Max, e para empresas, os planos Team e Enterprise. " +
+      "Importante: no claude ponto a i você paga assinatura fixa. Pagar por token é só na A P I, coisa de desenvolvedor, que veremos no nível três. " +
+      "E saiba que o Claude vive em quatro lugares: no site e nos aplicativos, que é onde você vai usar; no Claude Code; na A P I; e nas nuvens das grandes empresas. " +
+      "Sua missão: baixar o aplicativo e mandar a primeira mensagem. Vai lá!",
+    "m1-3":
+      "Agora eu vou te mostrar a tela do Claude, botão por botão. " +
+      "Primeiro, o botão de nova conversa, o sinal de mais. Cria esse hábito de ouro: cada assunto numa conversa nova. As respostas ficam muito melhores. " +
+      "Perto do campo de digitação tem o seletor de modelo, onde você escolhe qual versão do Claude responde. Na próxima etapa eu te ensino a escolher. " +
+      "Tem o modo de raciocínio, o pensamento estendido. Ligado, o Claude pensa por mais tempo antes de responder: bom para matemática, lógica, decisões importantes. Desligado, ele responde mais rápido. " +
+      "O clipezinho anexa arquivos: PDF, foto, planilha, e ele lê tudo. Faz o teste: tira foto de um documento e pede, explica isso em linguagem simples. É mágico. " +
+      "Tem a pesquisa na web, para informação atualizada da internet. E no celular dá para falar em vez de digitar, no microfone. " +
+      "Suas conversas ficam salvas no histórico, e nas configurações você ajusta até o estilo de escrita dele. Agora explora as missões aí embaixo!",
+    "m1-4":
+      "Essa é uma das etapas mais importantes do curso: os modelos do Claude. O Claude é uma família, e cada modelo equilibra inteligência, velocidade e preço de um jeito. " +
+      "O Haiku é o veloz e econômico. Pensa num motoboy: entrega rápido e cobra pouco. Perfeito para tarefas simples e repetitivas em grande volume. " +
+      "O Sonnet é o equilibrado, um gerente competente: resolve quase tudo do dia a dia com ótimo custo. É o seu ponto de partida. " +
+      "O Opus é o especialista, um engenheiro sênior: encara trabalhos longos e difíceis, e trabalha horas sozinho. " +
+      "E o Fable cinco é o topo de linha, o cientista-chefe: chamado quando nem o Opus dá conta. " +
+      "Agora a regra de bolso que vale ouro: comece sempre pelo Sonnet. Tarefa simples e repetitiva? Desce pro Haiku e economiza. Complexa e longa? Sobe pro Opus. " +
+      "Toca nos cartões da tela para ver os detalhes, e faz a missão: compara dois modelos com a mesma pergunta!",
+    "m1-5":
+      "Chegou a hora de aprender a pedir do jeito certo. As quatro regras do bom prompt. " +
+      "Regra um: dê contexto. Em vez de, escreve um e-mail, fala: escreve um e-mail formal para um cliente, avisando que o pedido vai atrasar dois dias. Sentiu a diferença? " +
+      "Regra dois: diga o formato. Responde em lista. No máximo três parágrafos. Em tabela. " +
+      "Regra três: diga o porquê. Quando o Claude entende a intenção, a resposta melhora muito. " +
+      "Regra quatro: não gostou? Pede ajuste. A conversa continua de onde parou: deixa mais curto, usa um tom mais leve. " +
+      "E três cuidados desde já: a IA às vezes erra com confiança, é a tal da alucinação, então confere dados importantes. Para assuntos recentes, liga a pesquisa na web. E nunca compartilhe senhas ou dados sensíveis com nenhuma IA. " +
+      "Depois dessa etapa vem o quiz do nível um. Setenta por cento e você passa. Você está indo muito bem!",
+    "m2-1":
+      "Bem-vindo ao nível dois! Agora vêm os superpoderes, começando pelos Projetos. " +
+      "Um Projeto é uma pasta inteligente dentro do Claude: agrupa as conversas de um assunto, e recebe instruções fixas e arquivos de referência que valem para sempre. " +
+      "Imagina: você cria o projeto, Posts da Loja, e escreve nas instruções: você é o assistente da minha loja, escreva sempre em tom alegre. Depois sobe o catálogo e a tabela de preços. " +
+      "Pronto. Toda conversa nesse projeto já nasce sabendo tudo isso. Você só pede: faz o post do lançamento de sábado. " +
+      "Para criar: no menu lateral, toca em Projetos, novo projeto, dá um nome, escreve as instruções e adiciona os arquivos. " +
+      "Sua missão: criar seu primeiro projeto, chamado Meu Trabalho, com três linhas sobre você. Ele vai ser seu assistente pessoal daqui pra frente.",
+    "m2-2":
+      "Deixa eu te mostrar uma das coisas mais impressionantes do Claude: os Artifacts. " +
+      "Quando você pede algo que é um produto, um documento, um site, um aplicativo, um gráfico, o Claude abre um painel ao lado do chat com o resultado pronto, funcionando e editável. " +
+      "Quer ver? Pede: cria uma calculadora de gorjeta bonita e interativa. Em segundos aparece um aplicativinho de verdade na sua tela. E aí você lapida: muda a cor, adiciona divisão por pessoa. Ele atualiza na hora. " +
+      "Dá para criar relatórios formatados, páginas de venda, formulários, fluxogramas, painéis com gráficos. Sem saber programar nada. " +
+      "E ainda dá para publicar e compartilhar o link do que você criou. " +
+      "Sua missão é óbvia: vai lá e pede seu primeiro Artifact, algo útil para o seu trabalho. Depois pede uma mudança e vê a mágica.",
+    "m2-3":
+      "Essa etapa é um divisor de águas: os conectores. " +
+      "Sozinho, o Claude só enxerga o que você cola no chat. Com conectores, ele acessa as suas ferramentas de verdade: lê documentos do seu Google Drive, busca e-mails no Gmail, consulta sua agenda, cria tarefas no Notion. Sempre com a sua permissão. " +
+      "Por baixo existe uma tecnologia chamada M C P. Pensa nela como o U S B das inteligências artificiais: um plugue universal que liga qualquer ferramenta a qualquer assistente. Foi a Anthropic que criou, e hoje o mercado inteiro usa. " +
+      "Como instala? Anota: configurações, depois conectores. Lá tem um diretório, tipo uma lojinha. Escolhe a ferramenta, toca em conectar, autoriza com o login, pronto. " +
+      "Na conversa, é só pedir naturalmente: resume o documento de planejamento que está no meu Drive. " +
+      "Segurança: conectores só fazem o que você autorizar, e você desconecta quando quiser. Agora vai na missão e conecta o seu primeiro!",
+    "m2-4":
+      "Vamos completar seu arsenal com quatro recursos. " +
+      "Primeiro, a pesquisa na web: ativa quando precisar de informação atual, como preços e notícias. O Claude busca e cita as fontes. " +
+      "Quando precisar se aprofundar de verdade, existe a pesquisa profunda: ele investiga por vários minutos, cruza dezenas de fontes, e devolve um relatório completo com referências. " +
+      "Segundo, os arquivos: manda PDF, Word, Excel, fotos, e pede, compara esses dois contratos, ou, acha inconsistências nessa planilha. Ele também cria arquivos prontos para baixar. " +
+      "Terceiro, a memória: o Claude pode lembrar de você entre conversas, e você controla tudo nas configurações. " +
+      "Quarto, a voz: no celular dá para conversar falando. " +
+      "Missão: manda uma planilha de verdade para ele analisar, e se surpreende.",
+    "m2-5":
+      "Essa etapa é o coração do curso: o Claude no SEU trabalho. " +
+      "Na tela tem botões com várias profissões: vendas, marketing, administrativo, jurídico, educação, saúde, tecnologia e autônomos. Toca na sua área e aparecem ideias prontas, cada uma com um prompt para copiar com um toque. " +
+      "Por exemplo, vendas: propostas em minutos, preparação de reunião pesquisando o cliente, respostas para objeções, e o follow-up perfeito. " +
+      "O segredo: copia o prompt, cola no Claude, e troca o que está entre colchetes pelas suas informações. Uma semana usando isso e você não vai saber viver sem. " +
+      "Dica extra: na aba Meu Curso, dá para montar um plano completo personalizado para a sua profissão, com direito a um professor particular. " +
+      "Missão de hoje: escolhe um prompt da sua área e usa agora, com um caso real seu.",
+    "m2-6":
+      "Hora de subir o nível dos seus prompts, com seis técnicas profissionais. " +
+      "Um: defina um papel. Comece com, você é um contador especializado em pequenas empresas. A qualidade dispara. " +
+      "Dois: mostre exemplos. Cola dois ou três textos do jeito que você gosta e fala: siga esse padrão. " +
+      "Três: peça em etapas. Primeiro só a estrutura; aprovou, aí escreve seção por seção. " +
+      "Quatro: peça crítica. Aponte três fraquezas desse texto antes de melhorar. A IA revisando o próprio trabalho rende muito. " +
+      "Cinco: use o pensamento estendido para decisões importantes. " +
+      "Seis: o que você repete sempre vira instrução fixa de um Projeto, e você nunca mais digita. " +
+      "Depois do quiz do nível dois, você já estará na frente de noventa por cento das pessoas que usam IA. Bora!",
+    "m3-1":
+      "Bem-vindo ao nível avançado! Começando pela ferramenta mais poderosa: o Claude Code. " +
+      "A diferença para o chat é uma só, mas gigante: o Claude Code age. Ele roda no seu computador, lê e edita arquivos, executa comandos, testa o que fez e corrige sozinho. Sempre pedindo sua aprovação nas ações importantes. " +
+      "O que dá para fazer? Criar sites e sistemas inteiros só descrevendo. Corrigir problemas: você descreve, ele investiga e conserta. E o meu favorito: automatizar tarefas chatas, organizar centenas de arquivos, consolidar planilhas, gerar relatórios. " +
+      "Para instalar: primeiro o Node, no site node js ponto org. Depois roda no terminal o comando que está na tela. Aí entra numa pasta, digita, claude, e conversa: o que tem nesta pasta? " +
+      "Duas dicas: o comando barra init cria o manual do projeto, que ele lê sempre. E não tenha medo: ele mostra o plano antes de executar. " +
+      "Mesmo que você não seja de tecnologia, faz a missão de instalar. Vale muito a pena.",
+    "m3-2":
+      "Agora a A P I: o jeito como as empresas colocam o Claude dentro dos próprios sistemas. " +
+      "Pensa num chat de atendimento no site da empresa, num classificador automático de e-mails, num gerador de relatórios. Tudo isso é A P I. " +
+      "O caminho: cria uma conta de desenvolvedor no console da Anthropic, gera uma chave, que é a senha secreta do seu aplicativo, e o seu sistema passa a conversar com o Claude. " +
+      "Aqui, diferente da assinatura, você paga por uso: por milhão de tokens. Lembra da tabela de preços do nível um? É aqui que ela vale. " +
+      "E dois truques de economia: o Batch processa tarefas sem pressa com cinquenta por cento de desconto, e o cache de prompt deixa contextos repetidos até noventa por cento mais baratos. " +
+      "Mesmo sem programar, entender isso te deixa pronto para conversar de igual para igual com qualquer equipe de tecnologia.",
+    "m3-3":
+      "Lembra do M C P, o U S B das inteligências artificiais? Agora vamos abrir o capô. " +
+      "Um servidor M C P é um programa que oferece ferramentas para a IA usar. O servidor do GitHub, por exemplo, oferece: criar tarefa, ler código, abrir pull request. " +
+      "O cliente é quem consome: o claude ponto a i, o Claude Code, o aplicativo de desktop. " +
+      "Existem servidores remotos, que rodam na internet e você conecta pelo endereço, e locais, que rodam no seu computador e acessam seus arquivos. " +
+      "No Claude Code, adicionar um servidor é um comando só, que está na tela. " +
+      "E quem programa pode criar o próprio servidor: a sua empresa pode expor o sistema interno como ferramentas que o Claude usa com segurança. " +
+      "Só um alerta: servidor M C P executa ações reais nas suas contas. Instala só de fontes confiáveis, combinado?",
+    "m3-4":
+      "Essa etapa é sobre o futuro que já chegou: agentes e automações. " +
+      "Um agente é uma IA que não só responde: ela executa um objetivo. Você dá a meta, ela planeja, usa ferramentas, verifica o resultado e tenta de novo até concluir. " +
+      "Pensa em funcionários digitais cuidando das tarefas chatas: triagem de e-mails, monitoramento de planilhas, relatório toda sexta. Enquanto isso, você cuida do que importa. " +
+      "Algumas peças desse mundo: as Skills são apostilas que ensinam o Claude a fazer as coisas do jeito da sua empresa. Os subagentes são ajudantes despachados em paralelo: um pesquisa, outro escreve, outro revisa, ao mesmo tempo. " +
+      "No Claude Code dá para criar gatilhos automáticos e tarefas agendadas. " +
+      "A missão dessa etapa é poderosa: pergunta ao Claude quais três tarefas do seu trabalho dá para automatizar, e pede o passo a passo da mais fácil. Você vai se surpreender.",
+    "m3-5":
+      "Última etapa de conteúdo, e talvez a mais importante para usar IA como profissional: segurança. " +
+      "Grava essas regras. Senhas e chaves nunca entram em nenhuma IA. Nunca. " +
+      "Dados de clientes, só conforme a política da empresa e a lei de proteção de dados. Na dúvida, não manda. " +
+      "IA acelera, humano assina: documento importante, número e decisão passam pela sua revisão. " +
+      "Chave de A P I é segredo absoluto: quem tem a sua chave, gasta na sua conta. " +
+      "Conectores e agentes: só as permissões necessárias, e desconecta o que não usa. " +
+      "Transparência: muitas vezes é boa prática avisar quando um conteúdo foi feito com IA. " +
+      "E sempre confere fontes, números e fatos importantes. " +
+      "Pronto! Agora faz o quiz do nível três, fecha os jogos, e busca o seu certificado. Foi uma honra te acompanhar. Agora vai, e usa essa ferramenta para transformar o seu trabalho!",
+  };
 
   function quebrarEmFrases(texto) {
     const frases = texto.match(/[^.!?…]+[.!?…]*/g) || [texto];
@@ -1736,7 +1888,8 @@
     u.lang = "pt-BR";
     const voz = vozPortugues();
     if (voz) u.voice = voz;
-    u.rate = 1.04;
+    u.rate = 1.0;  // ritmo natural de professor, sempre igual
+    u.pitch = 1.0; // mesmo tom em todas as etapas
     u.onend = () => {
       leitura.idx++;
       if (leitura.estado === "falando" || leitura.estado === "pausado") falarProxima();
@@ -1778,7 +1931,7 @@
         pararLeitura();
         leitura.btn = btn;
         leitura.parar = parar;
-        leitura.fila = quebrarEmFrases(textoDaEtapa(secao));
+        leitura.fila = quebrarEmFrases(NARRACAO[secao.dataset.modulo] || textoDaEtapa(secao));
         leitura.idx = 0;
         leitura.estado = "falando";
         atualizarBotaoLeitura();

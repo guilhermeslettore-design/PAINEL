@@ -1,5 +1,5 @@
 /* Service worker da Academia Claude — funciona offline */
-const CACHE = "academia-claude-v5";
+const CACHE = "academia-claude-v6";
 const ARQUIVOS = [
   "./",
   "./index.html",
