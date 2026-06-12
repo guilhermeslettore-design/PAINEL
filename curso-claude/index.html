@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1A1714">
-<title>Academia Claude — Do zero ao avançado</title>
-<meta name="description" content="Curso completo e gratuito sobre o Claude da Anthropic: conta, modelos, conectores, MCP, Claude Code, API — do iniciante ao avançado, com quiz, jogo e biblioteca de prompts.">
+<title>Aprende Aí — Sua central de cursos</title>
+<meta name="description" content="Aprende Aí: central de cursos gratuita, em português, feita para o celular. O primeiro curso é o Domine o Claude — com voz, quiz, jogos e certificado.">
 
 <!-- Cartão de compartilhamento (WhatsApp, redes sociais) -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:site_name" content="Academia Claude">
-<meta property="og:title" content="Academia Claude — Domine o Claude do zero ao avançado">
+<meta property="og:site_name" content="Aprende Aí">
+<meta property="og:title" content="Aprende Aí — Sua central de cursos">
 <meta property="og:description" content="Curso gratuito em 3 níveis: missões práticas, quiz, jogos, tutor IA e plano personalizado para o seu trabalho. Feito para celular.">
 <meta property="og:url" content="https://guilhermeslettore-design.github.io/PAINEL/">
 <meta property="og:image" content="https://guilhermeslettore-design.github.io/PAINEL/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Academia Claude — Domine o Claude do zero ao avançado">
+<meta name="twitter:title" content="Aprende Aí — Sua central de cursos">
 <meta name="twitter:description" content="Curso gratuito em 3 níveis: missões práticas, quiz, jogos, tutor IA e plano personalizado.">
 <meta name="twitter:image" content="https://guilhermeslettore-design.github.io/PAINEL/og-image.png">
 
@@ -29,7 +29,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Academia Claude">
+<meta name="apple-mobile-web-app-title" content="Aprende Aí">
 </head>
 <body>
 
@@ -44,147 +44,169 @@
 <!-- ===================== CABEÇALHO ===================== -->
 <header class="topo">
   <div class="topo-inner">
+    <button class="topo-voltar" data-nav="catalogo" aria-label="Voltar aos cursos">←</button>
     <a class="logo" href="#catalogo" data-nav="catalogo">
-      <span class="logo-marca">✳</span>
-      <span class="logo-texto"><em>Academia</em> de Cursos</span>
+      <span class="logo-marca" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E8825A"/><stop offset="1" stop-color="#B79FE0"/>
+          </linearGradient></defs>
+          <path d="M7 6 h26 a5 5 0 0 1 5 5 v15 a5 5 0 0 1 -5 5 h-13 l-8 7 v-7 h-5 a5 5 0 0 1 -5 -5 v-15 a5 5 0 0 1 5 -5 z" fill="url(#lg)"/>
+          <path d="M20 12 v13 M13.5 18.5 h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo-texto">Aprende <em>Aí</em></span>
     </a>
-    <nav class="menu" id="menu">
-      <a href="#" data-nav="catalogo">🏛️ Cursos</a>
-      <a href="#" data-nav="tutor">💬 Tutor IA</a>
-      <a href="#" data-nav="meucurso">🎯 Meu curso</a>
-      <a href="#" data-nav="n1">🌱 Iniciante</a>
-      <a href="#" data-nav="n2">🚀 Intermediário</a>
-      <a href="#" data-nav="n3">🧠 Avançado</a>
+    <nav class="menu" id="menu" aria-label="Seções do curso">
+      <a href="#" data-nav="inicio">📋 Conteúdo</a>
+      <a href="#" data-nav="tutor">💬 Tutor</a>
+      <a href="#" data-nav="meucurso">🎯 Meu plano</a>
       <a href="#" data-nav="prompts">📚 Prompts</a>
       <a href="#" data-nav="jogo">🎮 Jogos</a>
       <a href="#" data-nav="final">🏆 Certificado</a>
     </nav>
-    <div class="fonte-controles" aria-label="Acessibilidade">
-      <button class="fonte-btn" id="seniorBtn" aria-pressed="false" title="Modo Terceira Idade">👵</button>
-      <button class="fonte-btn" id="fonteMenor" aria-label="Diminuir letra">A−</button>
-      <button class="fonte-btn" id="fonteMaior" aria-label="Aumentar letra">A+</button>
+    <div class="acoes-top">
+      <div class="fonte-controles" aria-label="Acessibilidade">
+        <button class="fonte-btn" id="seniorBtn" aria-pressed="false" title="Modo Terceira Idade">👵</button>
+        <button class="fonte-btn" id="fonteMenor" aria-label="Diminuir letra">A−</button>
+        <button class="fonte-btn" id="fonteMaior" aria-label="Aumentar letra">A+</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu do curso" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
 <!-- ===================== VITRINE DE CURSOS ===================== -->
 <section class="tela catalogo" data-tela="catalogo">
-  <div class="catalogo-hero">
-    <p class="hero-tag">Plataforma de cursos · 100% em português · grátis</p>
-    <h1>Aprenda de um jeito <em>que funciona</em></h1>
-    <p class="hero-sub">
-      Cursos práticos, com lições curtas, voz, quiz, jogos e certificado.
-      Escolha um curso abaixo e comece agora — no seu ritmo, do celular.
-    </p>
-    <button class="btn btn-fantasma" id="seniorCatBtn" style="margin-top:.4rem">👵 Modo Terceira Idade</button>
+  <div class="cat-hero">
+    <span class="cat-hero-logo" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="64" height="64">
+        <path d="M7 6 h26 a5 5 0 0 1 5 5 v15 a5 5 0 0 1 -5 5 h-13 l-8 7 v-7 h-5 a5 5 0 0 1 -5 -5 v-15 a5 5 0 0 1 5 -5 z" fill="url(#lg)"/>
+        <path d="M20 12 v13 M13.5 18.5 h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <h1>Aprende <em>Aí</em></h1>
+    <p class="cat-hero-sub">Sua central de cursos — grátis e feita para o celular.<br>Aprenda no seu ritmo, com voz, exercícios e certificado.</p>
   </div>
 
-  <h2 class="catalogo-titulo">📚 Cursos disponíveis</h2>
-  <div class="catalogo-grade">
-    <button class="curso-card disponivel" data-nav="inicio">
-      <div class="curso-capa" style="--c1:#E8825A;--c2:#B79FE0">✳</div>
-      <div class="curso-corpo">
-        <span class="curso-tag">Disponível agora</span>
-        <h3>Domine o Claude</h3>
-        <p>Do zero ao avançado: o que é, como usar no trabalho, criar ferramentas, automatizar tarefas. Com tutor, jogos e certificado.</p>
-        <div class="curso-meta">
-          <span>🌱🚀🧠 3 níveis</span><span>🔊 com voz</span><span>🏆 certificado</span>
-        </div>
-        <span class="curso-progresso" id="catProgClaude">Começar curso →</span>
+  <h2 class="sec-titulo"><span>🚀 Comece agora</span></h2>
+  <button class="curso-card destaque disponivel" data-nav="inicio">
+    <div class="curso-capa-wrap">
+      <img class="curso-capa-img" src="capas/claude.png" alt="Curso Domine o Claude" loading="lazy">
+      <span class="curso-selo">● Disponível</span>
+    </div>
+    <div class="curso-corpo">
+      <h3>Domine o Claude</h3>
+      <p>Aprenda a usar a inteligência artificial Claude do zero ao avançado: no trabalho, criando ferramentas e automatizando tarefas. Com tutor, jogos e certificado.</p>
+      <div class="curso-meta">
+        <span>⏱️ ~3 horas</span><span>📚 16 aulas</span><span>🌱 do zero</span><span>🏆 certificado</span>
       </div>
-    </button>
-  </div>
+      <span class="curso-cta" id="catProgClaude">Começar curso →</span>
+    </div>
+  </button>
 
-  <h2 class="catalogo-titulo">🔜 Em breve</h2>
+  <h2 class="sec-titulo"><span>🔜 Em breve</span></h2>
   <div class="catalogo-grade">
     <div class="curso-card breve">
-      <div class="curso-capa" style="--c1:#1E6B2E;--c2:#7FB97F">📊</div>
+      <div class="curso-capa-wrap">
+        <img class="curso-capa-img" src="capas/excel.png" alt="Curso Excel do Zero" loading="lazy">
+        <span class="curso-selo breve-selo">🔒 Em breve</span>
+      </div>
       <div class="curso-corpo">
-        <span class="curso-tag breve-tag">Em breve</span>
         <h3>Excel do Zero</h3>
-        <p>Planilhas, fórmulas e gráficos do básico ao profissional, com exemplos do dia a dia.</p>
+        <p>Planilhas, fórmulas e gráficos do básico ao profissional.</p>
+        <div class="curso-meta"><span>⏱️ ~4 horas</span><span>📚 18 aulas</span></div>
       </div>
     </div>
     <div class="curso-card breve">
-      <div class="curso-capa" style="--c1:#16508F;--c2:#7FA8D9">💬</div>
+      <div class="curso-capa-wrap">
+        <img class="curso-capa-img" src="capas/whatsapp.png" alt="Curso WhatsApp Business" loading="lazy">
+        <span class="curso-selo breve-selo">🔒 Em breve</span>
+      </div>
       <div class="curso-corpo">
-        <span class="curso-tag breve-tag">Em breve</span>
         <h3>WhatsApp Business</h3>
-        <p>Atendimento, catálogo, automações e vendas pelo WhatsApp para o seu negócio.</p>
+        <p>Atendimento, catálogo, automações e vendas pelo WhatsApp.</p>
+        <div class="curso-meta"><span>⏱️ ~2 horas</span><span>📚 12 aulas</span></div>
       </div>
     </div>
     <div class="curso-card breve">
-      <div class="curso-capa" style="--c1:#A85A00;--c2:#E8B05A">📣</div>
+      <div class="curso-capa-wrap">
+        <img class="curso-capa-img" src="capas/marketing.png" alt="Curso Marketing Digital" loading="lazy">
+        <span class="curso-selo breve-selo">🔒 Em breve</span>
+      </div>
       <div class="curso-corpo">
-        <span class="curso-tag breve-tag">Em breve</span>
         <h3>Marketing Digital</h3>
-        <p>Redes sociais, anúncios e conteúdo para divulgar o seu trabalho sem agência.</p>
+        <p>Redes sociais, anúncios e conteúdo para divulgar seu trabalho.</p>
+        <div class="curso-meta"><span>⏱️ ~3 horas</span><span>📚 15 aulas</span></div>
       </div>
     </div>
   </div>
 
-  <p class="catalogo-rodape">Novos cursos chegando. Sugira um tema no Tutor IA! 💡</p>
+  <div class="cat-acesso">
+    <p>👵 É da terceira idade ou prefere <strong>letras grandes e explicações fáceis</strong>?</p>
+    <button class="btn btn-fantasma" id="seniorCatBtn">Ativar Modo Terceira Idade</button>
+  </div>
 </section>
 
-<!-- ===================== HERO DO CURSO DO CLAUDE ===================== -->
-<section class="hero tela oculto" id="inicio" data-tela="inicio">
-  <button class="voltar-cursos" data-nav="catalogo">← Todos os cursos</button>
-  <p class="hero-tag">Curso gratuito · 100% em português · feito para celular</p>
-  <h1>Domine o <em>Claude</em> de verdade</h1>
-  <p class="hero-sub">
-    Do primeiro "olá" até conectores, automações e API. Três níveis, lições práticas,
-    <strong>quiz em cada etapa</strong>, <strong>biblioteca de prompts</strong> e um
-    <strong>jogo</strong> para treinar. Quando terminar, você vai saber aplicar o Claude
-    no <strong>seu trabalho</strong>.
-  </p>
-
-  <div class="hero-acoes">
-    <button class="btn btn-primario" data-nav="meucurso">🎯 Montar meu curso personalizado</button>
-    <button class="btn btn-fantasma" id="seniorHeroBtn">👵 Modo Terceira Idade</button>
-    <button class="btn btn-fantasma oculto" id="continuarBtn" data-nav="inicio">▶ Continuar de onde parei</button>
+<!-- ===================== HOME DO CURSO DO CLAUDE ===================== -->
+<section class="tela curso-home oculto" id="inicio" data-tela="inicio">
+  <div class="ch-banner">
+    <img class="ch-banner-img" src="capas/claude.png" alt="Curso Domine o Claude">
+    <div class="ch-banner-info">
+      <span class="ch-eyebrow">CURSO · 3 níveis · ~3 horas</span>
+      <h1>Domine o Claude</h1>
+      <p>Do primeiro "olá" até criar ferramentas e automatizar o seu trabalho.</p>
+    </div>
   </div>
 
-  <div class="trilha">
-    <button class="trilha-card" data-nav="n1">
-      <span class="trilha-emoji">🌱</span>
-      <span class="trilha-nivel">Nível 1</span>
-      <h2>Iniciante</h2>
-      <p>O que é o Claude, conta e planos, a tela do app, os modelos e seus primeiros prompts.</p>
-      <span class="trilha-prog" data-prog-nivel="n1">0/6 etapas</span>
-    </button>
-    <button class="trilha-card" data-nav="n2">
-      <span class="trilha-emoji">🚀</span>
-      <span class="trilha-nivel">Nível 2</span>
-      <h2>Intermediário</h2>
-      <p>Projetos, Artifacts, conectores (MCP), memória, pesquisa e o Claude aplicado à sua profissão.</p>
-      <span class="trilha-prog" data-prog-nivel="n2">0/7 etapas</span>
-    </button>
-    <button class="trilha-card" data-nav="n3">
-      <span class="trilha-emoji">🧠</span>
-      <span class="trilha-nivel">Nível 3</span>
-      <h2>Avançado</h2>
-      <p>Claude Code, API, servidores MCP, agentes e automações, segurança profissional.</p>
-      <span class="trilha-prog" data-prog-nivel="n3">0/6 etapas</span>
-    </button>
-  </div>
-
-  <div class="atalhos">
-    <button class="atalho" data-nav="tutor">💬 <span>Tutor IA — tire dúvidas</span></button>
-    <button class="atalho" data-nav="meucurso">🎯 <span>Curso personalizado</span></button>
-    <button class="atalho" data-nav="prompts">📚 <span>Biblioteca de Prompts</span></button>
-    <button class="atalho" data-nav="jogo">🎮 <span>Jogos</span></button>
-    <button class="atalho" data-nav="final">🏆 <span>Meu certificado</span></button>
-  </div>
-
-  <div class="progresso-geral">
-    <div class="progresso-rotulo">
-      <span>Progresso total do curso</span>
-      <span id="progressoTexto">0%</span>
+  <div class="ch-progresso">
+    <div class="ch-progresso-topo">
+      <span>Seu progresso</span><span id="progressoTexto">0%</span>
     </div>
     <div class="barra"><div class="barra-fill" id="barraGeral"></div></div>
+    <button class="btn btn-primario btn-bloco" id="comecarCursoBtn">▶ Começar pelo Nível 1</button>
+  </div>
+
+  <h2 class="sec-titulo"><span>📋 Conteúdo do curso</span></h2>
+  <ol class="roadmap">
+    <li class="roadmap-item" data-nav="n1" tabindex="0" role="button">
+      <span class="roadmap-num">1</span>
+      <div class="roadmap-txt">
+        <strong>Iniciante</strong>
+        <span>O que é o Claude, conta e planos, a tela do app, os modelos e os primeiros prompts.</span>
+        <span class="roadmap-prog" data-prog-nivel="n1">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n2" tabindex="0" role="button">
+      <span class="roadmap-num">2</span>
+      <div class="roadmap-txt">
+        <strong>Intermediário</strong>
+        <span>Projetos, Artifacts, conectores (MCP), memória e o Claude na sua profissão.</span>
+        <span class="roadmap-prog" data-prog-nivel="n2">0/7 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n3" tabindex="0" role="button">
+      <span class="roadmap-num">3</span>
+      <div class="roadmap-txt">
+        <strong>Avançado</strong>
+        <span>Claude Code, API, servidores MCP, agentes, automações e segurança.</span>
+        <span class="roadmap-prog" data-prog-nivel="n3">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+  </ol>
+
+  <h2 class="sec-titulo"><span>🧰 Ferramentas do curso</span></h2>
+  <div class="ferramentas">
+    <button class="ferramenta" data-nav="tutor"><span class="ferramenta-ic">💬</span><strong>Tutor IA</strong><span>Tire qualquer dúvida</span></button>
+    <button class="ferramenta" data-nav="meucurso"><span class="ferramenta-ic">🎯</span><strong>Meu plano</strong><span>Curso para a sua profissão</span></button>
+    <button class="ferramenta" data-nav="prompts"><span class="ferramenta-ic">📚</span><strong>Prompts</strong><span>Modelos prontos para copiar</span></button>
+    <button class="ferramenta" data-nav="jogo"><span class="ferramenta-ic">🎮</span><strong>Jogos</strong><span>Treine brincando</span></button>
+    <button class="ferramenta" data-nav="final"><span class="ferramenta-ic">🏆</span><strong>Certificado</strong><span>Conclua e imprima</span></button>
   </div>
 </section>
 
@@ -1034,7 +1056,7 @@ claude mcp list</code></pre>
       <div class="cert-folha" id="certFolha">
         <div class="cert-borda">
           <span class="cert-selo">✳</span>
-          <p class="cert-marca">ACADEMIA DE CURSOS</p>
+          <p class="cert-marca">APRENDE AÍ</p>
           <p class="cert-titulo">Certificado de Conclusão</p>
           <p class="cert-conferido">Conferido a</p>
           <p class="cert-nome" id="certNome">Você</p>
@@ -1046,7 +1068,7 @@ claude mcp list</code></pre>
               <span class="cert-legenda">Data de conclusão</span>
             </div>
             <div class="cert-bloco">
-              <span class="cert-linha cert-assinatura">Academia de Cursos</span>
+              <span class="cert-linha cert-assinatura">Aprende Aí</span>
               <span class="cert-legenda">Plataforma de ensino</span>
             </div>
           </div>
@@ -1054,8 +1076,9 @@ claude mcp list</code></pre>
       </div>
       <div class="cert-acoes nao-imprimir">
         <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
-        <button class="btn btn-primario" id="certImprimirBtn">🖨️ Imprimir certificado</button>
-        <button class="btn btn-fantasma" id="certBaixarBtn">⬇️ Baixar imagem</button>
+        <button class="btn btn-primario" id="certPdfBtn">📄 Baixar PDF</button>
+        <button class="btn btn-fantasma" id="certImprimirBtn">🖨️ Imprimir</button>
+        <button class="btn btn-fantasma" id="certBaixarBtn">🖼️ Imagem</button>
       </div>
     </div>
   </div>
@@ -1068,19 +1091,17 @@ claude mcp list</code></pre>
 </main>
 
 <footer class="rodape">
-  <p>Feito com ✳ na Academia Claude — curso independente, sem vínculo oficial com a Anthropic.</p>
+  <p>Feito com ✳ na <strong>Aprende Aí</strong> — plataforma de cursos independente, sem vínculo oficial com a Anthropic.</p>
   <p>Modelos e preços conforme documentação pública da Anthropic (junho/2026). Telas e menus podem mudar com as atualizações dos apps.</p>
 </footer>
 
 <!-- ===================== BARRA DE ABAS (celular) ===================== -->
 <nav class="tabbar" aria-label="Navegação principal">
-  <button data-nav="catalogo" class="tab ativo"><span class="tab-icone">🏛️</span><span class="tab-rotulo">Cursos</span></button>
+  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Curso</span></button>
   <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
-  <button data-nav="meucurso" class="tab"><span class="tab-icone">🎯</span><span class="tab-rotulo">Meu curso</span></button>
-  <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
-  <button data-nav="n2" class="tab"><span class="tab-icone">🚀</span><span class="tab-rotulo">Nível 2</span></button>
-  <button data-nav="n3" class="tab"><span class="tab-icone">🧠</span><span class="tab-rotulo">Nível 3</span></button>
+  <button data-nav="prompts" class="tab"><span class="tab-icone">📚</span><span class="tab-rotulo">Prompts</span></button>
   <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogos</span></button>
+  <button data-nav="final" class="tab"><span class="tab-icone">🏆</span><span class="tab-rotulo">Certificado</span></button>
 </nav>
 
 <script src="app.js"></script>
