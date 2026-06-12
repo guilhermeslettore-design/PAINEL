@@ -129,6 +129,8 @@
 
   function mostrarTela(id) {
     telas.forEach((t) => t.classList.toggle("oculto", t.dataset.tela !== id));
+    // contexto: vitrine (catálogo) x dentro de um curso → controla o que a interface mostra
+    document.body.dataset.ctx = (id === "catalogo") ? "catalogo" : "curso";
     document.querySelectorAll(".menu a").forEach((a) =>
       a.classList.toggle("ativo", a.dataset.nav === id)
     );
@@ -138,20 +140,23 @@
     menu.classList.remove("aberto");
     menuBtn.setAttribute("aria-expanded", "false");
     window.scrollTo(0, 0);
-    if (id !== "inicio") { estado.ultimaTela = id; salvar(); }
+    if (id !== "inicio" && id !== "catalogo") { estado.ultimaTela = id; salvar(); }
     atualizarContinuar();
   }
 
+  // Botão "Começar/Continuar" na home do curso: aponta para o nível certo
   function atualizarContinuar() {
-    const btn = document.getElementById("continuarBtn");
+    const btn = document.getElementById("comecarCursoBtn");
     if (!btn) return;
-    if (estado.ultimaTela && NOME_TELA[estado.ultimaTela]) {
-      btn.classList.remove("oculto");
-      btn.dataset.nav = estado.ultimaTela;
-      btn.textContent = "▶ Continuar: " + NOME_TELA[estado.ultimaTela];
-    } else {
-      btn.classList.add("oculto");
-    }
+    let alvo = "n1", rotulo = "▶ Começar pelo Nível 1";
+    const niveis = ["n1", "n2", "n3"];
+    const proximo = niveis.find((n) => !nivelCompleto(n));
+    if (!proximo) { alvo = "final"; rotulo = "🏆 Ver meu certificado"; }
+    else if (estado.ultimaTela && niveis.includes(estado.ultimaTela)) {
+      alvo = estado.ultimaTela; rotulo = "▶ Continuar no " + NOME_TELA[alvo];
+    } else if (proximo !== "n1") { alvo = proximo; rotulo = "▶ Continuar no " + NOME_TELA[proximo]; }
+    btn.dataset.nav = alvo;
+    btn.textContent = rotulo;
   }
 
   document.addEventListener("click", (ev) => {
@@ -193,7 +198,8 @@
         prog.textContent = feitosNivel >= totalNivel
           ? "✓ Nível completo!"
           : `${feitosNivel}/${totalNivel} etapas`;
-        prog.closest(".trilha-card").classList.toggle("completo", feitosNivel >= totalNivel);
+        const cartao = prog.closest(".roadmap-item, .trilha-card");
+        if (cartao) cartao.classList.toggle("completo", feitosNivel >= totalNivel);
       }
     });
 
@@ -822,76 +828,94 @@
   }
   window.addEventListener("afterprint", () => document.body.classList.remove("imprimindo-cert"));
 
-  /* Certificado em imagem (canvas → PNG) */
-  const certBaixarBtn = document.getElementById("certBaixarBtn");
-  if (certBaixarBtn) {
-    certBaixarBtn.addEventListener("click", () => {
+  /* Desenha o certificado num canvas (reutilizado por PNG e PDF) */
+  function desenharCertificado(cb) {
+    const fontes = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    fontes.then(() => {
       const c = document.createElement("canvas");
       c.width = 1200; c.height = 850;
       const g = c.getContext("2d");
-
-      // fundo
       const grad = g.createLinearGradient(0, 0, 1200, 850);
-      grad.addColorStop(0, "#221E1A");
-      grad.addColorStop(1, "#1A1714");
-      g.fillStyle = grad;
-      g.fillRect(0, 0, 1200, 850);
-
-      // brilho terracota
+      grad.addColorStop(0, "#221E1A"); grad.addColorStop(1, "#1A1714");
+      g.fillStyle = grad; g.fillRect(0, 0, 1200, 850);
       const halo = g.createRadialGradient(950, 80, 30, 950, 80, 500);
-      halo.addColorStop(0, "rgba(232,130,90,.22)");
-      halo.addColorStop(1, "rgba(232,130,90,0)");
-      g.fillStyle = halo;
-      g.fillRect(0, 0, 1200, 850);
-
-      // moldura dupla
-      g.strokeStyle = "#E8825A"; g.lineWidth = 6;
-      g.strokeRect(40, 40, 1120, 770);
-      g.strokeStyle = "rgba(232,130,90,.35)"; g.lineWidth = 2;
-      g.strokeRect(58, 58, 1084, 734);
-
+      halo.addColorStop(0, "rgba(232,130,90,.22)"); halo.addColorStop(1, "rgba(232,130,90,0)");
+      g.fillStyle = halo; g.fillRect(0, 0, 1200, 850);
+      g.strokeStyle = "#E8825A"; g.lineWidth = 6; g.strokeRect(40, 40, 1120, 770);
+      g.strokeStyle = "rgba(232,130,90,.35)"; g.lineWidth = 2; g.strokeRect(58, 58, 1084, 734);
       g.textAlign = "center";
-      g.fillStyle = "#F2A05E";
-      g.font = "700 26px Outfit, sans-serif";
-      g.fillText("✳  ACADEMIA CLAUDE", 600, 140);
-
-      g.fillStyle = "#B8AC9B";
-      g.font = "22px Outfit, sans-serif";
+      g.fillStyle = "#F2A05E"; g.font = "700 26px Outfit, sans-serif";
+      g.fillText("✳  APRENDE AÍ", 600, 140);
+      g.fillStyle = "#B8AC9B"; g.font = "22px Outfit, sans-serif";
       g.fillText("CERTIFICADO DE CONCLUSÃO", 600, 185);
-
-      g.fillStyle = "#F2EBE0";
-      g.font = "italic 600 64px Fraunces, Georgia, serif";
-      g.fillText(estado.nome || "Aluno(a) da Academia", 600, 320);
-
-      g.fillStyle = "#B8AC9B";
-      g.font = "26px Outfit, sans-serif";
+      g.fillStyle = "#F2EBE0"; g.font = "italic 600 64px Fraunces, Georgia, serif";
+      g.fillText(estado.nome || "Aluno(a)", 600, 320);
+      g.fillStyle = "#B8AC9B"; g.font = "26px Outfit, sans-serif";
       g.fillText("concluiu o curso", 600, 390);
-
-      g.fillStyle = "#F2EBE0";
-      g.font = "600 34px Fraunces, Georgia, serif";
+      g.fillStyle = "#F2EBE0"; g.font = "600 34px Fraunces, Georgia, serif";
       g.fillText("“Domine o Claude — do zero ao avançado”", 600, 445);
-
-      g.fillStyle = "#B8AC9B";
-      g.font = "22px Outfit, sans-serif";
+      g.fillStyle = "#B8AC9B"; g.font = "22px Outfit, sans-serif";
       g.fillText("Modelos · Projetos · Artifacts · Conectores MCP · Claude Code · API · Agentes", 600, 505);
-
       const data = new Date();
       const meses = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
       g.fillText(`Concluído em ${data.getDate()} de ${meses[data.getMonth()]} de ${data.getFullYear()}`, 600, 580);
-
-      g.fillStyle = "#E8825A";
-      g.font = "700 24px Outfit, sans-serif";
+      g.fillStyle = "#E8825A"; g.font = "700 24px Outfit, sans-serif";
       g.fillText("🌱 Iniciante   ·   🚀 Intermediário   ·   🧠 Avançado   ·   🎮 Desafio final", 600, 660);
+      g.fillStyle = "rgba(184,172,155,.7)"; g.font = "16px Outfit, sans-serif";
+      g.fillText("Aprende Aí · plataforma independente, sem vínculo oficial com a Anthropic", 600, 760);
+      cb(c);
+    });
+  }
 
-      g.fillStyle = "rgba(184,172,155,.7)";
-      g.font = "16px Outfit, sans-serif";
-      g.fillText("Curso independente, sem vínculo oficial com a Anthropic", 600, 760);
+  /* Monta um PDF (1 página paisagem) com o JPEG do certificado embutido — sem bibliotecas */
+  function canvasParaPDF(canvas) {
+    const jpeg = canvas.toDataURL("image/jpeg", 0.92).split(",")[1];
+    const bin = atob(jpeg), len = bin.length, W = canvas.width, H = canvas.height;
+    let pdf = "%PDF-1.3\n"; const off = [];
+    const add = (s) => { off.push(pdf.length); pdf += s; };
+    add("1 0 obj\n<</Type/Catalog/Pages 2 0 R>>\nendobj\n");
+    add("2 0 obj\n<</Type/Pages/Kids[3 0 R]/Count 1>>\nendobj\n");
+    add(`3 0 obj\n<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${W} ${H}]/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>\nendobj\n`);
+    add(`4 0 obj\n<</Type/XObject/Subtype/Image/Width ${W}/Height ${H}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${len}>>\nstream\n` + bin + "\nendstream\nendobj\n");
+    const cont = `q ${W} 0 0 ${H} 0 0 cm /Im0 Do Q`;
+    add(`5 0 obj\n<</Length ${cont.length}>>\nstream\n${cont}\nendstream\nendobj\n`);
+    const xrefPos = pdf.length;
+    let xref = "xref\n0 6\n0000000000 65535 f \n";
+    off.forEach((o) => { xref += String(o).padStart(10, "0") + " 00000 n \n"; });
+    pdf += xref + `trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${xrefPos}\n%%EOF`;
+    const bytes = new Uint8Array(pdf.length);
+    for (let i = 0; i < pdf.length; i++) bytes[i] = pdf.charCodeAt(i) & 0xff;
+    return new Blob([bytes], { type: "application/pdf" });
+  }
 
-      const link = document.createElement("a");
-      link.download = "certificado-academia-claude.png";
-      link.href = c.toDataURL("image/png");
-      link.click();
-      avisar("🏆 Certificado baixado!");
+  function baixarArquivo(href, nome, revogar) {
+    const link = document.createElement("a");
+    link.download = nome; link.href = href; link.click();
+    if (revogar) setTimeout(() => URL.revokeObjectURL(href), 4000);
+  }
+
+  const certBaixarBtn = document.getElementById("certBaixarBtn");
+  if (certBaixarBtn) {
+    certBaixarBtn.addEventListener("click", () => {
+      desenharCertificado((c) => {
+        baixarArquivo(c.toDataURL("image/png"), "certificado-aprende-ai.png");
+        avisar("🏆 Certificado (imagem) baixado!");
+      });
+    });
+  }
+
+  const certPdfBtn = document.getElementById("certPdfBtn");
+  if (certPdfBtn) {
+    certPdfBtn.addEventListener("click", () => {
+      if (!estado.nome) {
+        const nome = prompt("Antes de baixar, digite seu nome para o certificado:");
+        if (nome && nome.trim()) { estado.nome = nome.trim().slice(0, 60); salvar(); atualizarCertificado(); }
+      }
+      desenharCertificado((c) => {
+        const url = URL.createObjectURL(canvasParaPDF(c));
+        baixarArquivo(url, "certificado-aprende-ai.pdf", true);
+        avisar("📄 Certificado em PDF baixado!");
+      });
     });
   }
 
@@ -1878,8 +1902,8 @@
       b.setAttribute("aria-pressed", String(estado.senior));
       b.classList.toggle("ativo", estado.senior);
     });
-    const heroBtn = document.getElementById("seniorHeroBtn");
-    if (heroBtn) heroBtn.textContent = estado.senior ? "👵 Sair do Modo Terceira Idade" : "👵 Modo Terceira Idade";
+    const catBtn = document.getElementById("seniorCatBtn");
+    if (catBtn) catBtn.textContent = estado.senior ? "Sair do Modo Terceira Idade" : "Ativar Modo Terceira Idade";
 
     if (estado.senior) {
       // injeta a explicação simples no topo de cada etapa
@@ -2221,6 +2245,8 @@
     });
   }
 
+  // contexto inicial: a vitrine de cursos
+  if (!document.body.dataset.ctx) document.body.dataset.ctx = "catalogo";
   atualizarContinuar();
   atualizarTudo();
 
