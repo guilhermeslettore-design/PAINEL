@@ -16,14 +16,18 @@
   };
   const QUIZ_DO_NIVEL = { n1: "quiz1", n2: "quiz2", n3: "quiz3" };
   const NOME_TELA = {
-    inicio: "Início", n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
-    n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogo", final: "Certificado",
+    inicio: "Início", meucurso: "Meu curso personalizado",
+    n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
+    n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogos", final: "Certificado",
   };
 
   let estado = {
     feitos: {},
     quizes: {},
+    missoes: {},
     jogo: { recorde: 0, passou: false },
+    oficina: { melhor: 0, passou: false },
+    perfil: null,
     nome: "",
     ultimaTela: "",
     certComemorado: false,
@@ -800,6 +804,513 @@
     atualizarModulos();
     atualizarProgresso();
     atualizarCertificado();
+  }
+
+  /* ============================================================
+     MISSÕES PRÁTICAS — aprender FAZENDO no Claude de verdade
+     ============================================================ */
+  const MISSOES_PRATICAS = {
+    "m1-1": [
+      "Abra o claude.ai (ou o app) e mande sua primeira mensagem: \"o que você consegue fazer por alguém da minha profissão?\"",
+      "Peça: \"me dê 3 exemplos práticos de como você pode me ajudar HOJE\" — e teste um deles.",
+    ],
+    "m1-2": [
+      "Baixe o app Claude no celular e entre com sua conta.",
+      "Abra o claude.ai no computador também e veja a mesma conversa nos dois lugares.",
+    ],
+    "m1-3": [
+      "Tire uma foto de qualquer documento ou anotação e peça: \"explica isso em linguagem simples\".",
+      "Toque no microfone e faça uma pergunta FALANDO, sem digitar nada.",
+      "Ligue o pensamento estendido e peça para resolver um problema de lógica ou cálculo.",
+    ],
+    "m1-4": [
+      "Troque o modelo no seletor e faça a MESMA pergunta para dois modelos diferentes. Compare a resposta.",
+    ],
+    "m1-5": [
+      "Pegue um pedido que você faria \"de qualquer jeito\" e reescreva usando as 4 regras. Compare o antes e o depois.",
+    ],
+    "m2-1": [
+      "Crie um Projeto chamado \"Meu trabalho\" com 3 linhas de instruções sobre quem você é e o que precisa.",
+      "Suba 1 arquivo do seu trabalho no Projeto e faça uma pergunta sobre ele.",
+    ],
+    "m2-2": [
+      "Peça: \"crie uma calculadora interativa de [algo útil pra você]\" e veja o Artifact nascer.",
+      "Peça uma mudança no que ele criou (\"muda a cor\", \"adiciona um campo\") e veja atualizar.",
+    ],
+    "m2-3": [
+      "Abra Configurações → Conectores e veja o diretório. Conecte o que você usa (ex.: Google Drive).",
+      "Com um conector ativo, peça algo real: \"busca no meu Drive o arquivo X e resume\".",
+    ],
+    "m2-4": [
+      "Ative a pesquisa na web e pergunte sobre algo desta semana. Confira as fontes citadas.",
+      "Envie uma planilha ou PDF do seu trabalho e peça: \"3 conclusões e 1 alerta sobre este arquivo\".",
+    ],
+    "m2-5": [
+      "Copie um dos prompts da sua área (acima) e use AGORA no Claude, adaptando os [colchetes].",
+    ],
+    "m2-6": [
+      "Use a técnica da persona num pedido real: \"Você é um [especialista]. Analise...\".",
+      "Peça crítica: \"aponte 3 fraquezas desta resposta e melhore-a\".",
+    ],
+    "m3-1": [
+      "Instale o Node.js (nodejs.org) e rode no terminal: npm install -g @anthropic-ai/claude-code",
+      "Entre numa pasta e digite \"claude\". Pergunte: \"o que tem nesta pasta?\"",
+      "Peça uma automação de verdade: \"organize os arquivos desta pasta por tipo e me mostre o plano antes\".",
+    ],
+    "m3-2": [
+      "Crie sua conta de desenvolvedor em platform.claude.com e explore o console (não precisa pagar nada para olhar).",
+    ],
+    "m3-3": [
+      "No Claude Code, rode: claude mcp list — e veja seus servidores configurados.",
+    ],
+    "m3-4": [
+      "Pergunte ao Claude: \"quais 3 tarefas do meu trabalho dá para automatizar? monte o passo a passo da mais fácil\" — e execute o passo 1.",
+    ],
+    "m3-5": [
+      "Defina sua regra pessoal de segurança: escreva o que você NUNCA vai enviar para uma IA.",
+    ],
+  };
+
+  function injetarMissoes() {
+    Object.keys(MISSOES_PRATICAS).forEach((mod) => {
+      const secao = document.querySelector(`[data-modulo="${mod}"]`);
+      if (!secao) return;
+      const btn = secao.querySelector(".btn-concluir");
+      if (!btn) return;
+      const bloco = document.createElement("div");
+      bloco.className = "missoes";
+      bloco.innerHTML =
+        `<span class="missoes-titulo">🔥 Missões práticas — faça no Claude agora:</span>` +
+        MISSOES_PRATICAS[mod]
+          .map((t, i) => {
+            const id = `${mod}-x${i}`;
+            const ok = estado.missoes[id] ? "checked" : "";
+            return `<label class="missao"><input type="checkbox" data-missao="${id}" ${ok}><span>${t}</span></label>`;
+          })
+          .join("");
+      secao.insertBefore(bloco, btn);
+    });
+  }
+
+  function totalMissoes() {
+    let total = 0, feitas = 0;
+    Object.keys(MISSOES_PRATICAS).forEach((mod) => {
+      MISSOES_PRATICAS[mod].forEach((_, i) => {
+        total++;
+        if (estado.missoes[`${mod}-x${i}`]) feitas++;
+      });
+    });
+    return { total, feitas };
+  }
+
+  function atualizarMissoesChip() {
+    const { total, feitas } = totalMissoes();
+    document.querySelectorAll(".missoes-chip").forEach((el) => el.remove());
+    document.querySelectorAll(".nivel-cabecalho .nivel-badge").forEach((badge) => {
+      const tela = badge.closest("[data-tela]");
+      if (!tela || !["n1", "n2", "n3"].includes(tela.dataset.tela)) return;
+      const chip = document.createElement("span");
+      chip.className = "missoes-chip";
+      chip.textContent = ` · 🔥 ${feitas}/${total} missões no total`;
+      badge.appendChild(chip);
+    });
+  }
+
+  document.addEventListener("change", (ev) => {
+    const cb = ev.target.closest("[data-missao]");
+    if (!cb) return;
+    estado.missoes[cb.dataset.missao] = cb.checked;
+    salvar();
+    atualizarMissoesChip();
+    if (cb.checked) avisar("🔥 Missão cumprida! É assim que se aprende.");
+  });
+
+  injetarMissoes();
+  atualizarMissoesChip();
+
+  /* ============================================================
+     MEU CURSO — gerador de plano personalizado
+     ============================================================ */
+  const TAREFA_NOME = {
+    emails: "e-mails", planilhas: "planilhas", relatorios: "relatórios",
+    reunioes: "reuniões", apresentacoes: "apresentações", vendas: "vendas e visitas",
+    equipe: "gestão de equipe", atendimento: "atendimento", documentos: "documentos e contratos",
+    social: "redes sociais",
+  };
+
+  const PROMPTS_TAREFA = {
+    emails: ["Responder e-mails em segundos", "Você é meu assistente de e-mails. Sou {CARGO}{EMPRESA}. Vou colar um e-mail recebido; escreva uma resposta profissional, cordial e pronta para enviar, com no máximo 8 linhas. E-mail: [cole aqui]"],
+    planilhas: ["Analisar planilhas na hora", "Sou {CARGO}{EMPRESA}. Vou enviar uma planilha. Analise e me entregue: as 3 conclusões mais importantes, qualquer inconsistência nos dados e qual gráfico eu deveria montar para apresentar à diretoria."],
+    relatorios: ["Relatório pronto em minutos", "Sou {CARGO}{EMPRESA}. Monte a estrutura do meu relatório de [período/assunto]: seções, o que escrever em cada uma e os indicadores que não podem faltar. Depois vamos preencher seção por seção."],
+    reunioes: ["Atas e follow-ups automáticos", "Vou colar minhas anotações de reunião. Transforme em ata profissional (decisões, pendências, responsáveis, prazos) e rascunhe o e-mail de follow-up para os participantes. Anotações: [cole aqui]"],
+    apresentacoes: ["Apresentações que impressionam", "Sou {CARGO}{EMPRESA} e preciso apresentar [tema] para [público]. Monte slide a slide: título, 3 bullets e sugestão visual. Máximo 10 slides, tom executivo."],
+    vendas: ["Preparar visitas e clientes", "Sou {CARGO}{EMPRESA}. Pesquise na web o cliente [nome] e me dê: o que fazem, notícias recentes, possíveis necessidades e 3 ganchos de conversa para minha visita."],
+    equipe: ["Liderar com método", "Sou {CARGO}{EMPRESA}. Me ajude a preparar uma conversa de feedback com um membro da equipe sobre [situação]: estrutura da conversa, frases para abrir bem e como fechar com plano de ação."],
+    atendimento: ["Atendimento padronizado", "Sou {CARGO}{EMPRESA}. Crie respostas-modelo para as 6 perguntas mais comuns dos meus clientes sobre [produto/serviço], em tom simpático e profissional."],
+    documentos: ["Documentos sem dor de cabeça", "Sou {CARGO}{EMPRESA}. Vou enviar um documento/contrato. Resuma destacando: partes, obrigações, prazos, valores e cláusulas que merecem atenção — em linguagem simples."],
+    social: ["Conteúdo para redes", "Sou {CARGO}{EMPRESA}. Crie um calendário de 2 semanas de posts sobre [tema], com legenda pronta e ideia visual para cada um."],
+  };
+
+  const AUTOMACOES_TAREFA = {
+    planilhas: "Consolidar várias planilhas (regionais, filiais, meses) em um resumo único — o Claude Code lê todas de uma pasta e gera o consolidado com gráficos.",
+    relatorios: "Relatório semanal automático: você joga os arquivos numa pasta, roda um comando e o relatório sai pronto no seu modelo.",
+    emails: "Rascunhos em lote: gerar respostas-padrão personalizadas para uma lista de contatos a partir de uma planilha.",
+    documentos: "Organizar e renomear centenas de arquivos por data/cliente/assunto em segundos.",
+    vendas: "Comparativo metas x realizado por região, gerado automaticamente a partir das suas planilhas de vendas.",
+    reunioes: "Banco de atas pesquisável: todas as suas atas numa pasta e o Claude responde \"o que decidimos sobre X em março?\".",
+    apresentacoes: "Gerar a base da apresentação mensal automaticamente a partir do relatório do período.",
+    equipe: "Acompanhamento de time: consolidar apontamentos da equipe numa visão única semanal.",
+    atendimento: "Classificar mensagens de clientes por assunto e urgência automaticamente.",
+    social: "Gerar variações de posts para o mês inteiro a partir de uma lista de temas.",
+  };
+
+  const API_IA = "https://painel-melitta.vercel.app/api/chat";
+
+  function lerPerfilDoForm() {
+    const tarefas = Array.from(document.querySelectorAll("#perfTarefas .chip.ativo"))
+      .map((c) => c.dataset.valor);
+    return {
+      nome: document.getElementById("perfNome").value.trim(),
+      cargo: document.getElementById("perfCargo").value.trim(),
+      empresa: document.getElementById("perfEmpresa").value.trim(),
+      tarefas,
+      ferramentas: document.getElementById("perfFerramentas").value.trim(),
+      nivel: document.getElementById("perfNivel").value,
+      objetivo: document.getElementById("perfObjetivo").value,
+    };
+  }
+
+  function preencherForm(p) {
+    document.getElementById("perfNome").value = p.nome || "";
+    document.getElementById("perfCargo").value = p.cargo || "";
+    document.getElementById("perfEmpresa").value = p.empresa || "";
+    document.getElementById("perfFerramentas").value = p.ferramentas || "";
+    document.getElementById("perfNivel").value = p.nivel || "pouco";
+    document.getElementById("perfObjetivo").value = p.objetivo || "automatizar";
+    document.querySelectorAll("#perfTarefas .chip").forEach((c) =>
+      c.classList.toggle("ativo", (p.tarefas || []).includes(c.dataset.valor))
+    );
+  }
+
+  function montarTutorPrompt(p) {
+    const tarefas = p.tarefas.map((t) => TAREFA_NOME[t]).join(", ") || "tarefas variadas de escritório";
+    const nivelTxt = { nunca: "nunca usei IA", pouco: "já usei um pouco", bastante: "uso bastante" }[p.nivel];
+    const objTxt = {
+      tempo: "ganhar tempo no dia a dia", automatizar: "automatizar tarefas repetidas",
+      code: "aprender Claude Code para automatizar meu trabalho", conteudo: "criar conteúdo melhor",
+      organizar: "organizar meu trabalho",
+    }[p.objetivo];
+    return (
+      `Você é meu professor particular de Claude e consultor de produtividade. ` +
+      `Meu nome é ${p.nome || "[seu nome]"} e trabalho como ${p.cargo}${p.empresa ? " na " + p.empresa : ""}. ` +
+      `As tarefas que mais tomam meu tempo: ${tarefas}. ` +
+      (p.ferramentas ? `Ferramentas que uso: ${p.ferramentas}. ` : "") +
+      `Meu nível com IA: ${nivelTxt}. Meu objetivo: ${objTxt}.\n\n` +
+      `Sua missão:\n` +
+      `1. Me ensinar a usar o Claude na prática, UMA aula curta por vez, sempre com exercício real do MEU trabalho.\n` +
+      `2. Sempre que eu descrever uma tarefa, me mostrar o jeito mais rápido de fazê-la com você.\n` +
+      `3. Me sugerir automações possíveis (inclusive com Claude Code) e me guiar passo a passo, sem jargão técnico.\n` +
+      `4. Ao final de cada aula, me dar UMA missão prática curta e perguntar se quero a próxima aula.\n\n` +
+      `Comece agora com a Aula 1: me faça 3 perguntas rápidas para avaliar o que eu já sei.`
+    );
+  }
+
+  function esc(t) { return t.replace(/"/g, "&quot;"); }
+
+  function geraPlano(p) {
+    const cargoTxt = p.cargo || "profissional";
+    const empTxt = p.empresa ? ` na ${p.empresa}` : "";
+    const focoAuto = p.objetivo === "automatizar" || p.objetivo === "code";
+    const t1 = p.tarefas[0] ? TAREFA_NOME[p.tarefas[0]] : "uma tarefa sua";
+
+    const prompts = p.tarefas.slice(0, 6).map((t) => {
+      const [titulo, modelo] = PROMPTS_TAREFA[t];
+      const texto = modelo.replace("{CARGO}", cargoTxt).replace("{EMPRESA}", empTxt);
+      return `<div class="prompt-card"><div class="prompt-card-topo"><h5>${titulo}</h5><span class="prompt-card-cat">sob medida</span></div><p class="prompt-card-texto">${texto}</p><button class="btn-copiar" data-copiar="${esc(texto)}">📋 copiar</button></div>`;
+    }).join("");
+
+    const autos = p.tarefas.filter((t) => AUTOMACOES_TAREFA[t]).slice(0, 5)
+      .map((t) => `<li><strong>${TAREFA_NOME[t].charAt(0).toUpperCase() + TAREFA_NOME[t].slice(1)}:</strong> ${AUTOMACOES_TAREFA[t]}</li>`).join("");
+
+    const dias = [
+      ["Dia 1 — Primeiros passos", `Crie a conta no claude.ai e no app do celular. Pergunte: "o que você consegue fazer por um(a) ${cargoTxt}?". Tire foto de um documento do trabalho e peça um resumo.`],
+      ["Dia 2 — Prompts de gente grande", `Aplique as 4 regras (contexto, formato, porquê, iterar) num pedido real de ${t1}. Use um dos prompts sob medida abaixo.`],
+      ["Dia 3 — Seu Projeto", `Crie o Projeto "${p.empresa || "Meu trabalho"} — ${cargoTxt}" com instruções fixas sobre você. Suba 2 arquivos que você sempre consulta.`],
+      ["Dia 4 — Arquivos e Artifacts", `Envie uma planilha ou relatório de verdade e peça 3 conclusões + 1 alerta. Depois peça um Artifact útil (calculadora, painel, formulário).`],
+      ["Dia 5 — Conectores", `Configurações → Conectores: conecte Google Drive/Gmail. Peça: "resume o documento X do meu Drive" ou "o que tenho na agenda amanhã?".`],
+      focoAuto
+        ? ["Dia 6 — Automação com Claude Code", `Instale o Node.js e o Claude Code (Nível 3, etapa 1). Rode "claude" numa pasta de trabalho e peça: "organize estes arquivos e me diga o que dá para automatizar aqui".`]
+        : ["Dia 6 — Pesquisa profunda e memória", `Use a pesquisa na web para investigar um tema do seu mercado e peça um mini-relatório com fontes.`],
+      ["Dia 7 — Projeto final", `Junte tudo: monte o "assistente definitivo" no seu Projeto — instruções completas + arquivos + 3 prompts salvos. Cole também o Professor Particular abaixo. 🎓`],
+    ].map(([t, d]) => `<div class="plano-dia"><strong>${t}</strong><p>${d}</p></div>`).join("");
+
+    const tutor = montarTutorPrompt(p);
+
+    return `
+      <div class="modulo plano-pronto">
+        <div class="modulo-cabecalho"><span class="modulo-numero">Curso personalizado</span>
+        <h3>${p.nome ? p.nome + ", aqui" : "Aqui"} está seu plano, ${cargoTxt}${empTxt}! 🎯</h3></div>
+
+        <article class="licao"><h4>📅 Seu plano de 7 dias (15 min por dia)</h4>${dias}</article>
+
+        ${prompts ? `<article class="licao"><h4>✂️ Prompts sob medida para o seu dia a dia</h4><div class="prompts-grade">${prompts}</div></article>` : ""}
+
+        ${autos ? `<article class="licao"><h4>🤖 O que dá para AUTOMATIZAR no seu trabalho</h4>
+          <p>Com o <strong>Claude Code</strong> (Nível 3), estas tarefas suas podem virar um comando só:</p>
+          <ul class="lista-cartoes">${autos}</ul>
+          <div class="destaque">💡 Comece pela mais simples. No Nível 3, etapa 1, você instala o Claude Code e pede exatamente isso para ele.</div></article>` : ""}
+
+        <article class="licao"><h4>🎓 Seu Professor Particular (cole isto no Claude!)</h4>
+          <p>Este é o segredo do curso: cole o texto abaixo numa conversa nova no Claude e ele vira o seu instrutor pessoal, com aulas feitas para o SEU trabalho.</p>
+          <p class="prompt-card-texto" style="white-space:pre-wrap">${tutor}</p>
+          <button class="btn btn-primario" data-copiar="${esc(tutor)}">📋 Copiar Professor Particular</button>
+        </article>
+
+        <article class="licao">
+          <h4>✨ Versão turbinada com IA</h4>
+          <p>Se a IA do site estiver ativa, posso gerar um plano ainda mais detalhado e exclusivo para você:</p>
+          <button class="btn btn-fantasma" id="btnTurbinarIA">✨ Gerar com IA agora</button>
+          <div class="ia-saida oculto" id="iaSaida"></div>
+        </article>
+      </div>`;
+  }
+
+  const formPerfil = document.getElementById("formPerfil");
+  const planoResultado = document.getElementById("planoResultado");
+
+  if (formPerfil) {
+    // chips de tarefas
+    document.querySelectorAll("#perfTarefas .chip").forEach((c) =>
+      c.addEventListener("click", () => c.classList.toggle("ativo"))
+    );
+
+    // preset do tio 😄
+    document.getElementById("presetMelitta").addEventListener("click", () => {
+      preencherForm({
+        nome: "", cargo: "Gerente Divisional", empresa: "Melitta",
+        tarefas: ["relatorios", "planilhas", "emails", "reunioes", "apresentacoes", "vendas", "equipe"],
+        ferramentas: "Excel, Outlook, PowerPoint, WhatsApp",
+        nivel: "nunca", objetivo: "automatizar",
+      });
+      avisar("⭐ Exemplo carregado! Ajuste o que quiser e toque em Montar.");
+    });
+
+    formPerfil.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const p = lerPerfilDoForm();
+      if (!p.cargo) { avisar("Preencha pelo menos o cargo/função 😉"); return; }
+      estado.perfil = p;
+      if (p.nome && !estado.nome) estado.nome = p.nome;
+      salvar();
+      planoResultado.innerHTML = geraPlano(p);
+      saudacao();
+      planoResultado.scrollIntoView({ behavior: "smooth", block: "start" });
+      festejar();
+    });
+
+    // restaura perfil salvo
+    if (estado.perfil) {
+      preencherForm(estado.perfil);
+      planoResultado.innerHTML = geraPlano(estado.perfil);
+    }
+
+    // modo IA (usa a função /api/chat do seu painel na Vercel, com a chave segura no servidor)
+    planoResultado.addEventListener("click", async (ev) => {
+      const btn = ev.target.closest("#btnTurbinarIA");
+      if (!btn || !estado.perfil) return;
+      const saida = document.getElementById("iaSaida");
+      saida.classList.remove("oculto");
+      saida.textContent = "✨ Gerando seu plano com IA...";
+      btn.disabled = true;
+      try {
+        const p = estado.perfil;
+        const pedido =
+          `Monte um mini-curso personalizado de Claude (a IA da Anthropic) para esta pessoa: ` +
+          `cargo: ${p.cargo}; empresa: ${p.empresa || "não informada"}; ` +
+          `tarefas que mais tomam tempo: ${p.tarefas.map((t) => TAREFA_NOME[t]).join(", ") || "variadas"}; ` +
+          `ferramentas: ${p.ferramentas || "não informadas"}; nível com IA: ${p.nivel}; objetivo: ${p.objetivo}. ` +
+          `Responda em português, direto ao ponto, com: 1) os 5 maiores ganhos de tempo para essa pessoa com o Claude; ` +
+          `2) um exercício prático para fazer agora; 3) duas automações que valem a pena com Claude Code, explicadas sem jargão; ` +
+          `4) um conselho final motivador. Máximo 400 palavras.`;
+        const resp = await fetch(API_IA, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: [{ role: "user", content: pedido }] }),
+        });
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        saida.textContent = "";
+        const leitor = resp.body.getReader();
+        const dec = new TextDecoder();
+        let buffer = "";
+        while (true) {
+          const { done, value } = await leitor.read();
+          if (done) break;
+          buffer += dec.decode(value, { stream: true });
+          const linhas = buffer.split("\n");
+          buffer = linhas.pop();
+          for (const linha of linhas) {
+            if (!linha.startsWith("data: ")) continue;
+            try {
+              const ev2 = JSON.parse(linha.slice(6));
+              if (ev2.type === "content_block_delta" && ev2.delta && ev2.delta.type === "text_delta") {
+                saida.textContent += ev2.delta.text;
+              }
+            } catch (e) { /* linha incompleta */ }
+          }
+        }
+        if (!saida.textContent.trim()) throw new Error("vazio");
+      } catch (e) {
+        saida.textContent =
+          "⚠️ A IA do site ainda não está liberada (o servidor na Vercel está com login obrigatório). " +
+          "Sem problema: o plano acima já é completo — e o Professor Particular faz a mesma coisa dentro do próprio Claude!";
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
+  function saudacao() {
+    const h1 = document.querySelector(".hero h1");
+    if (h1 && estado.perfil && estado.perfil.nome) {
+      h1.innerHTML = `Bora, <em>${estado.perfil.nome}</em>? Domine o Claude de verdade`;
+    }
+  }
+  saudacao();
+
+  /* ============================================================
+     OFICINA DE PROMPTS — jogo 2 (melhore o prompt fraco)
+     ============================================================ */
+  const OFICINA = [
+    { c: "Você precisa cobrar um cliente sem estragar a relação.",
+      f: "faz um email de cobrança",
+      o: ["Escreva um e-mail educado cobrando a fatura vencida há 15 dias do cliente Silva, mantendo o bom relacionamento. Máximo 6 linhas.",
+          "EMAIL DE COBRANÇA. URGENTE. AGORA.",
+          "faz um email de cobrança bem feito por favor, obrigado"],
+      r: 0, e: "Contexto (15 dias, cliente Silva), objetivo (manter a relação) e formato (6 linhas). Educação não substitui informação!" },
+    { c: "Você quer um post para o Instagram da empresa.",
+      f: "faz um post",
+      o: ["faz um post legal para o instagram",
+          "Crie 3 opções de legenda para Instagram sobre [produto], para um público jovem, tom divertido, com 1 emoji e chamada para ação no final.",
+          "Você é o melhor marketeiro do mundo. Faça o melhor post já feito."],
+      r: 1, e: "Pedir 3 opções te dá escolha; público, tom e formato definidos geram o post certo de primeira. Elogiar a IA não melhora nada. 😄" },
+    { c: "Você recebeu uma planilha gigante de vendas para analisar.",
+      f: "analisa essa planilha",
+      o: ["analisa essa planilha aí completa",
+          "me fala tudo sobre esses dados",
+          "Analise esta planilha de vendas e me dê: as 3 conclusões mais importantes, qualquer número estranho e qual região precisa de atenção. Vou apresentar para a diretoria."],
+      r: 2, e: "Dizer O QUE você quer da análise (3 conclusões, alertas) e PARA QUE (diretoria) transforma a resposta." },
+    { c: "Você quer aprender um assunto difícil do zero.",
+      f: "me explica física quântica",
+      o: ["Me explique física quântica como se eu tivesse 12 anos, usando analogias do dia a dia. Depois me faça 3 perguntas para ver se entendi.",
+          "me explica física quântica inteira agora",
+          "física quântica. resumo. vai."],
+      r: 0, e: "Definir o nível (12 anos), pedir analogias e um teste no final é o método do professor particular." },
+    { c: "Você precisa preparar uma reunião importante amanhã.",
+      f: "me ajuda com a reunião",
+      o: ["me ajuda com uma reunião que tenho amanhã",
+          "Tenho reunião amanhã com [cliente] sobre [assunto]. Monte: agenda de 30 min, 3 perguntas-chave para fazer e possíveis objeções com respostas.",
+          "o que falar em reuniões?"],
+      r: 1, e: "Contexto (quem, sobre o quê) + entregáveis claros (agenda, perguntas, objeções) = reunião preparada em 2 minutos." },
+    { c: "A primeira resposta veio boa, mas longa demais.",
+      f: "(você não gostou do tamanho)",
+      o: ["refaz",
+          "tá ruim",
+          "Ficou ótimo, mas está longo. Reduza para 3 parágrafos mantendo os números e o tom."],
+      r: 2, e: "Iterar com instrução específica (o que manter, o que mudar) aproveita a conversa. 'Refaz' joga fora o que estava bom." },
+    { c: "Você quer ideias para o aniversário da sua mãe.",
+      f: "ideias de presente",
+      o: ["ideias de presente de aniversário",
+          "Minha mãe faz 60 anos, adora jardinagem e café, orçamento de R$ 200. Me dê 5 ideias de presente criativas, da mais segura à mais ousada.",
+          "o que dar de presente para mães?"],
+      r: 1, e: "Detalhes pessoais (60 anos, jardinagem, café, orçamento) transformam ideias genéricas em ideias certeiras." },
+    { c: "Você quer que o texto saia no estilo da sua empresa.",
+      f: "escreve no nosso estilo",
+      o: ["escreve do jeito que a gente escreve",
+          "escreve formal mas nem tanto, sabe?",
+          "Aqui estão 2 exemplos de textos nossos: [cola]. Escreva o novo comunicado seguindo exatamente este estilo e tom."],
+      r: 2, e: "Mostrar exemplos reais é a forma mais poderosa de transferir estilo — vale mais que qualquer descrição." },
+  ];
+
+  const oficinaCaixa = document.getElementById("oficinaCaixa");
+  if (oficinaCaixa) {
+    let ofOrdem = [], ofAtual = 0, ofPontos = 0;
+
+    function ofInicio() {
+      const info = estado.oficina;
+      oficinaCaixa.innerHTML = `
+        <div class="quiz-inicio">
+          <p>São <strong>${OFICINA.length} rodadas</strong>. Em cada uma: um prompt fraco e 3 versões — toque na melhor. Acerte <strong>6 ou mais</strong> para ganhar o selo de Engenheiro(a) de Prompts. 🛠️</p>
+          <button class="btn btn-primario" data-of="comecar">Começar a oficina</button>
+          ${info.melhor ? `<p class="quiz-recorde">Seu recorde: <strong>${info.melhor}/${OFICINA.length}</strong>${info.passou ? " · ✅ selo conquistado" : ""}</p>` : ""}
+        </div>`;
+    }
+
+    function ofRodada() {
+      const q = ofOrdem[ofAtual];
+      const idx = embaralhar(q.o.map((_, i) => i));
+      oficinaCaixa.innerHTML = `
+        <div class="quiz-jogo">
+          <div class="quiz-topo"><span>Rodada ${ofAtual + 1}/${ofOrdem.length}</span><span>${ofPontos} acerto${ofPontos === 1 ? "" : "s"}</span></div>
+          <div class="barra barra-quiz"><div class="barra-fill" style="width:${(ofAtual / ofOrdem.length) * 100}%"></div></div>
+          <p class="oficina-cenario">📌 ${q.c}</p>
+          <p class="oficina-fraco">Prompt fraco: <em>"${q.f}"</em></p>
+          <h3 class="quiz-pergunta" style="font-size:1rem">Qual é a melhor versão?</h3>
+          <div class="quiz-opcoes">
+            ${idx.map((i) => `<button class="quiz-opcao" data-of-op="${i}">${q.o[i]}</button>`).join("")}
+          </div>
+          <p class="quiz-feedback oculto"></p>
+          <button class="btn btn-primario oculto" data-of="proxima">Próxima →</button>
+        </div>`;
+    }
+
+    function ofResponder(i) {
+      const q = ofOrdem[ofAtual];
+      const certo = i === q.r;
+      if (certo) ofPontos++;
+      oficinaCaixa.querySelectorAll("[data-of-op]").forEach((b) => {
+        b.disabled = true;
+        const idx = Number(b.dataset.ofOp);
+        if (idx === q.r) b.classList.add("correta");
+        else if (idx === i) b.classList.add("errada");
+      });
+      const fb = oficinaCaixa.querySelector(".quiz-feedback");
+      fb.textContent = (certo ? "✅ Boa! " : "❌ Quase. ") + q.e;
+      fb.classList.remove("oculto");
+      const btn = oficinaCaixa.querySelector('[data-of="proxima"]');
+      btn.textContent = ofAtual + 1 < ofOrdem.length ? "Próxima →" : "Ver resultado 🏁";
+      btn.classList.remove("oculto");
+    }
+
+    function ofFim() {
+      const passou = ofPontos >= 6;
+      estado.oficina.melhor = Math.max(estado.oficina.melhor, ofPontos);
+      estado.oficina.passou = estado.oficina.passou || passou;
+      salvar();
+      if (passou) festejar();
+      oficinaCaixa.innerHTML = `
+        <div class="quiz-fim">
+          <h3>${ofPontos === OFICINA.length ? "🏆 Prompts perfeitos!" : passou ? "🛠️ Selo conquistado!" : "💪 Treina mais um pouco!"}</h3>
+          <p class="quiz-nota">${ofPontos}/${OFICINA.length}</p>
+          <p>${passou ? "Você agora pensa como engenheiro(a) de prompts. Use isso em TODO pedido que fizer ao Claude." : "Acerte 6 para o selo. Releia as 4 regras do Nível 1 e volte!"}</p>
+          ${passou ? '<p class="quiz-selo">✅ Engenheiro(a) de Prompts</p>' : ""}
+          <button class="btn btn-primario" data-of="comecar" style="margin-top:.8rem">Jogar de novo</button>
+        </div>`;
+    }
+
+    oficinaCaixa.addEventListener("click", (ev) => {
+      const acao = ev.target.closest("[data-of]");
+      const op = ev.target.closest("[data-of-op]");
+      if (acao && acao.dataset.of === "comecar") {
+        ofOrdem = embaralhar(OFICINA); ofAtual = 0; ofPontos = 0; ofRodada();
+      } else if (acao && acao.dataset.of === "proxima") {
+        ofAtual++;
+        if (ofAtual < ofOrdem.length) ofRodada(); else ofFim();
+      } else if (op && !op.disabled) {
+        ofResponder(Number(op.dataset.ofOp));
+      }
+    });
+
+    ofInicio();
   }
 
   atualizarContinuar();
