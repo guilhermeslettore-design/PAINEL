@@ -1,7 +1,7 @@
 {
-  "name": "Aprende Aí — Central de Cursos",
-  "short_name": "Aprende Aí",
-  "description": "Central de cursos gratuita em português, feita para o celular. Primeiro curso: Domine o Claude.",
+  "name": "Império Digital — Central de Cursos",
+  "short_name": "Império Digital",
+  "description": "Central de cursos gratuita em português, feita para o celular. Cursos: Claude, Marketing Digital e Excel.",
   "lang": "pt-BR",
   "start_url": "./",
   "scope": "./",

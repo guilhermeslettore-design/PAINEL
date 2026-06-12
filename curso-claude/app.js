@@ -846,7 +846,7 @@
       g.strokeStyle = "rgba(232,130,90,.35)"; g.lineWidth = 2; g.strokeRect(58, 58, 1084, 734);
       g.textAlign = "center";
       g.fillStyle = "#F2A05E"; g.font = "700 26px Outfit, sans-serif";
-      g.fillText("✳  APRENDE AÍ", 600, 140);
+      g.fillText("✳  IMPÉRIO DIGITAL", 600, 140);
       g.fillStyle = "#B8AC9B"; g.font = "22px Outfit, sans-serif";
       g.fillText("CERTIFICADO DE CONCLUSÃO", 600, 185);
       g.fillStyle = "#F2EBE0"; g.font = "italic 600 64px Fraunces, Georgia, serif";
@@ -863,7 +863,7 @@
       g.fillStyle = "#E8825A"; g.font = "700 24px Outfit, sans-serif";
       g.fillText("🌱 Iniciante   ·   🚀 Intermediário   ·   🧠 Avançado   ·   🎮 Desafio final", 600, 660);
       g.fillStyle = "rgba(184,172,155,.7)"; g.font = "16px Outfit, sans-serif";
-      g.fillText("Aprende Aí · plataforma independente, sem vínculo oficial com a Anthropic", 600, 760);
+      g.fillText("Império Digital · plataforma independente, sem vínculo oficial com a Anthropic", 600, 760);
       cb(c);
     });
   }
