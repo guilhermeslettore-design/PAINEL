@@ -1,6 +1,7 @@
 /* ============================================================
    ACADEMIA CLAUDE — lógica do curso
-   Navegação · progresso (localStorage) · quizzes · jogo
+   Navegação · progresso (localStorage) · quizzes · jogo ·
+   biblioteca de prompts · certificado em imagem · confete
    ============================================================ */
 (function () {
   "use strict";
@@ -14,12 +15,18 @@
     n3: ["m3-1", "m3-2", "m3-3", "m3-4", "m3-5"],
   };
   const QUIZ_DO_NIVEL = { n1: "quiz1", n2: "quiz2", n3: "quiz3" };
+  const NOME_TELA = {
+    inicio: "Início", n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
+    n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogo", final: "Certificado",
+  };
 
   let estado = {
-    feitos: {},            // {"m1-1": true, ...}
-    quizes: {},            // {"quiz1": {melhor: 80, passou: true}}
+    feitos: {},
+    quizes: {},
     jogo: { recorde: 0, passou: false },
     nome: "",
+    ultimaTela: "",
+    certComemorado: false,
   };
 
   try {
@@ -29,6 +36,79 @@
 
   function salvar() {
     try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {}
+  }
+
+  /* ---------------- Toast ---------------- */
+  const toast = document.getElementById("toast");
+  let toastTimer = null;
+  function avisar(msg) {
+    toast.textContent = msg;
+    toast.classList.add("visivel");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("visivel"), 2200);
+  }
+
+  /* ---------------- Confete ---------------- */
+  const canvas = document.getElementById("confettiCanvas");
+  const ctx = canvas.getContext("2d");
+  let confetes = [], confeteAnim = null;
+
+  function festejar() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const cores = ["#E8825A", "#F2A05E", "#7FB97F", "#7FA8D9", "#B79FE0", "#E8B05A"];
+    for (let i = 0; i < 120; i++) {
+      confetes.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * canvas.height * 0.4,
+        vx: (Math.random() - 0.5) * 2.2,
+        vy: 2 + Math.random() * 3.5,
+        tam: 5 + Math.random() * 6,
+        cor: cores[(Math.random() * cores.length) | 0],
+        rot: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.25,
+      });
+    }
+    if (!confeteAnim) animarConfete();
+  }
+
+  function animarConfete() {
+    confeteAnim = requestAnimationFrame(animarConfete);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confetes.forEach((c) => {
+      c.x += c.vx; c.y += c.vy; c.rot += c.vr;
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(c.rot);
+      ctx.fillStyle = c.cor;
+      ctx.fillRect(-c.tam / 2, -c.tam / 2, c.tam, c.tam * 0.6);
+      ctx.restore();
+    });
+    confetes = confetes.filter((c) => c.y < canvas.height + 30);
+    if (confetes.length === 0) {
+      cancelAnimationFrame(confeteAnim);
+      confeteAnim = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  /* ---------------- Copiar para a área de transferência ---------------- */
+  function copiarTexto(texto) {
+    const finaliza = () => avisar("📋 Prompt copiado! Cole no Claude.");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(finaliza).catch(() => copiarFallback(texto, finaliza));
+    } else {
+      copiarFallback(texto, finaliza);
+    }
+  }
+  function copiarFallback(texto, depois) {
+    const ta = document.createElement("textarea");
+    ta.value = texto;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); depois(); } catch (e) { avisar("Não consegui copiar 😕"); }
+    document.body.removeChild(ta);
   }
 
   /* ---------------- Navegação entre telas ---------------- */
@@ -41,9 +121,26 @@
     document.querySelectorAll(".menu a").forEach((a) =>
       a.classList.toggle("ativo", a.dataset.nav === id)
     );
+    document.querySelectorAll(".tabbar .tab").forEach((b) =>
+      b.classList.toggle("ativo", b.dataset.nav === id)
+    );
     menu.classList.remove("aberto");
     menuBtn.setAttribute("aria-expanded", "false");
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    window.scrollTo(0, 0);
+    if (id !== "inicio") { estado.ultimaTela = id; salvar(); }
+    atualizarContinuar();
+  }
+
+  function atualizarContinuar() {
+    const btn = document.getElementById("continuarBtn");
+    if (!btn) return;
+    if (estado.ultimaTela && NOME_TELA[estado.ultimaTela]) {
+      btn.classList.remove("oculto");
+      btn.dataset.nav = estado.ultimaTela;
+      btn.textContent = "▶ Continuar: " + NOME_TELA[estado.ultimaTela];
+    } else {
+      btn.classList.add("oculto");
+    }
   }
 
   document.addEventListener("click", (ev) => {
@@ -89,7 +186,6 @@
       }
     });
 
-    // jogo conta no total geral
     total += 1; if (estado.jogo.passou) feitos += 1;
 
     const pct = Math.round((feitos / total) * 100);
@@ -185,19 +281,90 @@
       <div class="area-ideia">
         <h5>${titulo}</h5>
         <p>${desc}</p>
-        <div class="area-prompt"><b>Prompt:</b> ${prompt}</div>
+        <div class="area-prompt"><b>Prompt:</b> <span class="texto-prompt">${prompt}</span>
+          <button class="btn-copiar" data-copiar="${prompt.replace(/"/g, "&quot;")}">copiar</button>
+        </div>
       </div>`
       )
       .join("");
   }
   document.querySelectorAll(".area-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".area-btn").forEach((b) => b.classList.remove("ativo"));
+      document.querySelectorAll("#areasBotoes .area-btn").forEach((b) => b.classList.remove("ativo"));
       btn.classList.add("ativo");
       mostrarArea(btn.dataset.area);
     });
   });
   mostrarArea("vendas");
+
+  /* Botões "copiar" (delegação global — funciona em prompts e biblioteca) */
+  document.addEventListener("click", (ev) => {
+    const btn = ev.target.closest("[data-copiar]");
+    if (!btn) return;
+    ev.stopPropagation();
+    copiarTexto(btn.dataset.copiar);
+  });
+
+  /* ---------------- Biblioteca de prompts ---------------- */
+  const PROMPTS = [
+    ["Trabalho", "Resumo executivo", "Resuma este documento em 5 pontos para um executivo sem tempo: o essencial, os números importantes e a decisão que precisa ser tomada."],
+    ["Trabalho", "E-mail profissional", "Escreva um e-mail [formal/descontraído] para [destinatário] sobre [assunto]. Objetivo: [o que você quer que aconteça]. Máximo 6 linhas."],
+    ["Trabalho", "Apresentação pronta", "Estruture uma apresentação de [N] slides sobre [tema] para [público]. Para cada slide: título, 3 bullets e sugestão visual."],
+    ["Trabalho", "Ata de reunião", "Transforme estas anotações em ata profissional: participantes, decisões tomadas, pendências com responsável e prazo. Anotações: [cole aqui]."],
+    ["Estudos", "Professor particular", "Me explique [assunto] como se eu tivesse [idade/nível]. Use analogias do dia a dia. Depois, faça 3 perguntas para testar se eu entendi."],
+    ["Estudos", "Plano de estudos", "Crie um plano de estudos de [N semanas] para aprender [assunto], com [X horas] por semana. Divida por semana e inclua metas verificáveis."],
+    ["Estudos", "Simulado de prova", "Crie um simulado de 10 questões sobre [matéria] no estilo [ENEM/concurso/prova da faculdade], com gabarito comentado no final."],
+    ["Estudos", "Resumo de aula", "Transforme este texto/transcrição em um resumo de estudo: conceitos-chave em negrito, exemplos e um mapa mental em texto. Material: [cole aqui]."],
+    ["Escrita", "Destravar texto", "Estou travado neste texto: [cole o que tem]. Me dê 3 caminhos diferentes para continuar, com o primeiro parágrafo de cada um."],
+    ["Escrita", "Revisão completa", "Revise este texto em 3 níveis: erros de português, clareza das frases e força dos argumentos. Mostre as mudanças e explique as principais."],
+    ["Escrita", "Adaptar o tom", "Reescreva este texto em tom [formal/descontraído/vendedor/acadêmico], mantendo todas as informações: [cole aqui]."],
+    ["Dia a dia", "Decisão difícil", "Estou decidindo entre [opção A] e [opção B]. Considere [seus critérios]. Monte uma tabela de prós e contras e me faça as perguntas que eu não pensei."],
+    ["Dia a dia", "Planejar viagem", "Monte um roteiro de [N] dias em [destino] com orçamento de R$ [valor]: o que fazer por dia, onde comer e dicas locais. Estilo: [praia/cultura/família]."],
+    ["Dia a dia", "Cardápio da semana", "Crie um cardápio semanal para [N pessoas], orçamento de R$ [valor], considerando [restrições]. Inclua a lista de compras consolidada."],
+    ["Negócios", "Plano simples de negócio", "Tenho a ideia de [descreva]. Monte um mini-plano: público, proposta de valor, como cobrar, custos iniciais, 3 riscos e primeiros 5 passos."],
+    ["Negócios", "Pesquisa de concorrentes", "Pesquise na web os principais concorrentes de [negócio] em [cidade/segmento] e compare: preços, pontos fortes e onde posso me diferenciar."],
+    ["Negócios", "Descrição de vaga", "Crie a descrição da vaga de [cargo]: responsabilidades, requisitos (separando obrigatórios de desejáveis) e um parágrafo vendendo a empresa."],
+    ["Criativo", "Ideias fora da caixa", "Me dê 10 ideias criativas para [objetivo]. As 5 primeiras seguras, as 5 últimas bem ousadas. Uma frase explicando cada."],
+    ["Criativo", "História personalizada", "Crie uma história infantil de 5 minutos para [nome], de [idade] anos, que adora [tema]. Com moral sobre [valor] e final feliz."],
+    ["Criativo", "Nomes e slogans", "Gere 15 opções de nome para [negócio/produto], em 3 estilos: descritivos, criativos e curtos. Para os 3 melhores, sugira um slogan."],
+  ];
+
+  const promptsGrade = document.getElementById("promptsGrade");
+  const promptsFiltros = document.getElementById("promptsFiltros");
+
+  if (promptsGrade && promptsFiltros) {
+    const categorias = ["Todos"].concat([...new Set(PROMPTS.map((p) => p[0]))]);
+    promptsFiltros.innerHTML = categorias
+      .map((c, i) => `<button class="area-btn ${i === 0 ? "ativo" : ""}" data-cat="${c}">${c}</button>`)
+      .join("");
+
+    function renderPrompts(cat) {
+      const lista = cat === "Todos" ? PROMPTS : PROMPTS.filter((p) => p[0] === cat);
+      promptsGrade.innerHTML = lista
+        .map(
+          ([categoria, titulo, texto]) => `
+        <div class="prompt-card">
+          <div class="prompt-card-topo">
+            <h5>${titulo}</h5>
+            <span class="prompt-card-cat">${categoria}</span>
+          </div>
+          <p class="prompt-card-texto">${texto}</p>
+          <button class="btn-copiar" data-copiar="${texto.replace(/"/g, "&quot;")}">📋 copiar</button>
+        </div>`
+        )
+        .join("");
+    }
+
+    promptsFiltros.addEventListener("click", (ev) => {
+      const btn = ev.target.closest("[data-cat]");
+      if (!btn) return;
+      promptsFiltros.querySelectorAll(".area-btn").forEach((b) => b.classList.remove("ativo"));
+      btn.classList.add("ativo");
+      renderPrompts(btn.dataset.cat);
+    });
+
+    renderPrompts("Todos");
+  }
 
   /* ---------------- Perguntas dos quizzes ---------------- */
   const PERGUNTAS = {
@@ -218,6 +385,10 @@
         e: "Assinatura é no claude.ai; pagar por token é só na API, para desenvolvedores." },
       { p: "A IA 'alucinou'. O que isso significa?", o: ["Travou", "Inventou uma informação com confiança", "Repetiu a resposta", "Mudou de idioma"], c: 1,
         e: "Alucinação é quando a IA afirma algo falso com convicção — por isso, confira dados importantes." },
+      { p: "Qual hábito melhora a qualidade das respostas?", o: ["Misturar todos os assuntos numa conversa só", "Um assunto por conversa", "Escrever sempre em inglês", "Usar frases de uma palavra"], c: 1,
+        e: "Um assunto = uma conversa. Contexto focado gera resposta focada." },
+      { p: "O que é o Fable 5?", o: ["Um plano de assinatura", "O modelo mais avançado, primeiro da família Claude 5", "Um conector", "O app de desktop"], c: 1,
+        e: "Fable 5 é o topo de linha — primeiro modelo da família Claude 5, para os problemas mais difíceis." },
     ],
     quiz2: [
       { p: "O que é um Projeto no claude.ai?", o: ["Um arquivo de código", "Uma pasta inteligente com instruções e arquivos fixos", "Um modelo personalizado", "Um plano pago"], c: 1,
@@ -230,10 +401,14 @@
         e: "Settings/Configurações → Conectores: escolha no diretório, conecte e autorize." },
       { p: "Com o conector do Google Drive ativo, você pode pedir…", o: ["'Formate meu computador'", "'Resuma o documento X que está no meu Drive'", "'Aumente minha internet'", "Nada muda"], c: 1,
         e: "Conectores deixam o Claude acessar suas ferramentas reais — sempre com sua autorização." },
+      { p: "Como se adiciona um conector que não está no diretório?", o: ["Não tem como", "Pelo endereço (URL) do servidor MCP dele, em 'conector personalizado'", "Baixando um .exe", "Pedindo por e-mail à Anthropic"], c: 1,
+        e: "Se a ferramenta tem servidor MCP, dá para adicionar pela URL em Configurações → Conectores." },
       { p: "Qual técnica melhora MUITO um prompt profissional?", o: ["Escrever tudo em maiúsculas", "Definir um papel/persona e mostrar exemplos", "Usar frases bem curtas sempre", "Repetir o pedido 3 vezes"], c: 1,
         e: "Persona + exemplos + formato definido = respostas no padrão que você precisa." },
       { p: "Para saber a cotação do dólar de hoje, o ideal é…", o: ["Perguntar direto, ele sempre sabe", "Ativar a pesquisa na web", "Usar o Haiku", "Criar um Projeto"], c: 1,
         e: "O conhecimento do modelo tem data de corte; para informação atual, use a pesquisa na web." },
+      { p: "A 'pesquisa profunda' serve para…", o: ["Buscar arquivos no seu celular", "Investigar um tema por vários minutos e entregar relatório com fontes", "Apagar histórico", "Acelerar respostas"], c: 1,
+        e: "É o modo de pesquisa avançada: o Claude investiga a fundo e devolve um relatório com referências." },
       { p: "A 'memória' do Claude serve para…", o: ["Gravar sua tela", "Lembrar informações suas entre conversas (e você pode apagar)", "Acelerar o wi-fi", "Salvar senhas"], c: 1,
         e: "Ele pode lembrar preferências e contexto entre conversas — com transparência e controle seu." },
     ],
@@ -248,20 +423,33 @@
         e: "API é pagamento por uso: ex. Sonnet 4.6 custa US$ 3 (entrada) / US$ 15 (saída) por milhão de tokens." },
       { p: "O que oferece 50% de desconto na API?", o: ["Cupom de primeiro uso", "O Batch API (tarefas sem pressa)", "Pagar em dólar", "Usar de madrugada"], c: 1,
         e: "O processamento em lote (Batch) custa metade do preço para tarefas que podem esperar." },
+      { p: "O 'cache de prompt' da API serve para…", o: ["Salvar suas conversas", "Baratear (até ~90%) contextos que se repetem em cada chamada", "Aumentar a velocidade da internet", "Esconder dados"], c: 1,
+        e: "Contexto repetido (instruções, documentos) é cacheado e cobrado muito mais barato nas chamadas seguintes." },
       { p: "Um 'servidor MCP' é…", o: ["Um computador da Anthropic", "Um programa que expõe ferramentas/dados para a IA usar", "Um plano enterprise", "Um antivírus"], c: 1,
         e: "Servidores MCP oferecem ferramentas (ações) e recursos (dados); o Claude é o cliente que os consome." },
       { p: "O que é um 'agente' de IA?", o: ["Um funcionário da Anthropic", "Uma IA que executa um objetivo: planeja, usa ferramentas e verifica", "Um vírus", "Um atalho de teclado"], c: 1,
         e: "Agentes não só respondem: trabalham até concluir a tarefa, usando ferramentas e se auto-corrigindo." },
+      { p: "Subagentes servem para…", o: ["Vigiar o usuário", "Dividir um trabalho grande em ajudantes paralelos", "Trocar de idioma", "Economizar bateria"], c: 1,
+        e: "O Claude despacha 'ajudantes' em paralelo: um pesquisa, outro escreve, outro revisa." },
       { p: "Qual prática de segurança está ERRADA?", o: ["Revisar documentos importantes", "Colocar a chave da API dentro do código publicado", "Dar permissões mínimas aos conectores", "Conferir números gerados"], c: 1,
         e: "Chave de API é segredo: use variáveis de ambiente e nunca exponha no código." },
     ],
   };
 
   /* ---------------- Motor de quiz ---------------- */
+  function embaralhar(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   function montarQuiz(caixa) {
     const id = caixa.dataset.quiz;
     const perguntas = PERGUNTAS[id];
-    let atual = 0, pontos = 0;
+    let ordem = [], atual = 0, pontos = 0;
 
     function telaInicio() {
       const info = estado.quizes[id];
@@ -275,17 +463,18 @@
     }
 
     function telaPergunta() {
-      const q = perguntas[atual];
+      const q = ordem[atual];
+      const indices = embaralhar(q.o.map((_, i) => i));
       caixa.innerHTML = `
         <div class="quiz-jogo">
           <div class="quiz-topo">
-            <span>Pergunta ${atual + 1}/${perguntas.length}</span>
+            <span>Pergunta ${atual + 1}/${ordem.length}</span>
             <span>${pontos} acerto${pontos === 1 ? "" : "s"}</span>
           </div>
-          <div class="barra barra-quiz"><div class="barra-fill" style="width:${(atual / perguntas.length) * 100}%"></div></div>
+          <div class="barra barra-quiz"><div class="barra-fill" style="width:${(atual / ordem.length) * 100}%"></div></div>
           <h3 class="quiz-pergunta">${q.p}</h3>
           <div class="quiz-opcoes">
-            ${q.o.map((op, i) => `<button class="quiz-opcao" data-opcao="${i}">${op}</button>`).join("")}
+            ${indices.map((i) => `<button class="quiz-opcao" data-opcao="${i}">${q.o[i]}</button>`).join("")}
           </div>
           <p class="quiz-feedback oculto"></p>
           <button class="btn btn-primario oculto" data-acao="proxima">Próxima →</button>
@@ -293,11 +482,12 @@
     }
 
     function responder(i) {
-      const q = perguntas[atual];
+      const q = ordem[atual];
       const certo = i === q.c;
       if (certo) pontos++;
-      caixa.querySelectorAll(".quiz-opcao").forEach((b, idx) => {
+      caixa.querySelectorAll(".quiz-opcao").forEach((b) => {
         b.disabled = true;
+        const idx = Number(b.dataset.opcao);
         if (idx === q.c) b.classList.add("correta");
         else if (idx === i) b.classList.add("errada");
       });
@@ -305,12 +495,12 @@
       fb.textContent = (certo ? "✅ Acertou! " : "❌ Quase! ") + q.e;
       fb.classList.remove("oculto");
       const btn = caixa.querySelector('[data-acao="proxima"]');
-      btn.textContent = atual + 1 < perguntas.length ? "Próxima →" : "Ver resultado 🏁";
+      btn.textContent = atual + 1 < ordem.length ? "Próxima →" : "Ver resultado 🏁";
       btn.classList.remove("oculto");
     }
 
     function telaFim() {
-      const pct = Math.round((pontos / perguntas.length) * 100);
+      const pct = Math.round((pontos / ordem.length) * 100);
       const passou = pct >= 70;
       const info = estado.quizes[id] || { melhor: 0, passou: false };
       info.melhor = Math.max(info.melhor, pct);
@@ -318,6 +508,7 @@
       estado.quizes[id] = info;
       salvar();
       atualizarTudo();
+      if (passou) festejar();
 
       const titulo = pct === 100 ? "🏆 Perfeito!" : passou ? "🎉 Mandou bem!" : "💪 Quase lá!";
       const msg = passou
@@ -327,7 +518,7 @@
         <div class="quiz-fim">
           <h3>${titulo}</h3>
           <p class="quiz-nota">${pct}%</p>
-          <p>${pontos} de ${perguntas.length} perguntas certas. ${msg}</p>
+          <p>${pontos} de ${ordem.length} perguntas certas. ${msg}</p>
           ${passou ? '<p class="quiz-selo">✅ Quiz aprovado</p>' : ""}
           <button class="btn btn-primario" data-acao="comecar" style="margin-top:.8rem">Tentar de novo</button>
         </div>`;
@@ -337,10 +528,12 @@
       const acao = ev.target.closest("[data-acao]");
       const opcao = ev.target.closest("[data-opcao]");
       if (acao && acao.dataset.acao === "comecar") {
-        atual = 0; pontos = 0; telaPergunta();
+        ordem = embaralhar(perguntas);
+        atual = 0; pontos = 0;
+        telaPergunta();
       } else if (acao && acao.dataset.acao === "proxima") {
         atual++;
-        if (atual < perguntas.length) telaPergunta(); else telaFim();
+        if (atual < ordem.length) telaPergunta(); else telaFim();
       } else if (opcao && !opcao.disabled) {
         responder(Number(opcao.dataset.opcao));
       }
@@ -383,9 +576,10 @@
     const elTimer = document.getElementById("jogoTimer");
     const elMissao = document.getElementById("jogoMissaoTexto");
     const elFeedback = document.getElementById("jogoFeedback");
+    const elStreak = document.getElementById("jogoStreak");
     const escolhas = Array.from(document.querySelectorAll(".jogo-escolha"));
 
-    let rodada = 0, pontos = 0, restante = TEMPO_MISSAO, cronometro = null, ordem = [];
+    let rodada = 0, pontos = 0, sequencia = 0, restante = TEMPO_MISSAO, cronometro = null, ordem = [];
 
     function mostrarRecorde() {
       const el = document.getElementById("jogoRecorde");
@@ -396,18 +590,9 @@
     }
     mostrarRecorde();
 
-    function embaralhar(arr) {
-      const a = arr.slice();
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    }
-
     function iniciarJogo() {
       ordem = embaralhar(MISSOES);
-      rodada = 0; pontos = 0;
+      rodada = 0; pontos = 0; sequencia = 0;
       jogoInicio.classList.add("oculto");
       jogoFim.classList.add("oculto");
       jogoRodada.classList.remove("oculto");
@@ -418,6 +603,7 @@
       const m = ordem[rodada];
       elContador.textContent = `Missão ${rodada + 1}/${ordem.length}`;
       elPontos.textContent = `${pontos} pts`;
+      elStreak.textContent = sequencia >= 2 ? `🔥 x${sequencia}` : "";
       elMissao.textContent = m.t;
       elFeedback.classList.add("oculto");
       escolhas.forEach((b) => { b.disabled = false; b.classList.remove("correta", "errada"); });
@@ -436,9 +622,17 @@
       clearInterval(cronometro);
       const m = ordem[rodada];
       const certo = modelo === m.r;
-      const ganho = certo ? Math.max(20, Math.round((restante / TEMPO_MISSAO) * 100)) : 0;
-      pontos += ganho;
+      let ganho = 0, bonus = 0;
+      if (certo) {
+        sequencia++;
+        ganho = Math.max(20, Math.round((restante / TEMPO_MISSAO) * 100));
+        bonus = Math.min(30, (sequencia - 1) * 10);
+        pontos += ganho + bonus;
+      } else {
+        sequencia = 0;
+      }
       elPontos.textContent = `${pontos} pts`;
+      elStreak.textContent = sequencia >= 2 ? `🔥 x${sequencia}` : "";
 
       escolhas.forEach((b) => {
         b.disabled = true;
@@ -448,7 +642,9 @@
 
       elFeedback.textContent = modelo === null
         ? `⏰ Tempo esgotado! ${m.e}`
-        : (certo ? `✅ Certo! +${ganho} pts. ` : "❌ Não foi dessa vez. ") + m.e;
+        : (certo
+            ? `✅ Certo! +${ganho} pts${bonus ? ` (+${bonus} de bônus 🔥)` : ""}. `
+            : "❌ Não foi dessa vez. ") + m.e;
       elFeedback.classList.remove("oculto");
 
       setTimeout(() => {
@@ -460,19 +656,20 @@
     function fimDeJogo() {
       jogoRodada.classList.add("oculto");
       jogoFim.classList.remove("oculto");
-      const pct = Math.round((pontos / PONTUACAO_MAXIMA) * 100);
+      const pct = Math.min(100, Math.round((pontos / PONTUACAO_MAXIMA) * 100));
       const passou = pct >= 50;
 
       estado.jogo.recorde = Math.max(estado.jogo.recorde, pontos);
       estado.jogo.passou = estado.jogo.passou || passou;
       salvar();
       atualizarTudo();
+      if (passou) festejar();
 
       document.getElementById("jogoResultadoTitulo").textContent =
         pct >= 85 ? "🏆 Gestor de IA lendário!" : passou ? "🎉 Missões cumpridas!" : "💪 Treine e volte!";
       document.getElementById("jogoNota").textContent = `${pontos} pts`;
       document.getElementById("jogoResultadoMsg").textContent =
-        `Você fez ${pct}% da pontuação máxima (${PONTUACAO_MAXIMA} pts). ` +
+        `Você fez ${pct}% da pontuação base (${PONTUACAO_MAXIMA} pts, fora os bônus). ` +
         (passou ? "Desafio concluído para o certificado! ✅"
                 : "Alcance 50% para contar no certificado.");
       mostrarRecorde();
@@ -502,9 +699,15 @@
     if (cert) cert.classList.toggle("oculto", !tudo);
     if (texto) texto.textContent = tudo
       ? "Parabéns! Você completou tudo. 👏"
-      : "Complete tudo abaixo para liberar seu certificado simbólico:";
+      : "Complete tudo abaixo para liberar seu certificado:";
     const nome = document.getElementById("certNome");
     if (nome && estado.nome) nome.textContent = estado.nome;
+
+    if (tudo && !estado.certComemorado) {
+      estado.certComemorado = true;
+      salvar();
+      festejar();
+    }
   }
 
   const certBtn = document.getElementById("certNomeBtn");
@@ -519,6 +722,79 @@
     });
   }
 
+  /* Certificado em imagem (canvas → PNG) */
+  const certBaixarBtn = document.getElementById("certBaixarBtn");
+  if (certBaixarBtn) {
+    certBaixarBtn.addEventListener("click", () => {
+      const c = document.createElement("canvas");
+      c.width = 1200; c.height = 850;
+      const g = c.getContext("2d");
+
+      // fundo
+      const grad = g.createLinearGradient(0, 0, 1200, 850);
+      grad.addColorStop(0, "#221E1A");
+      grad.addColorStop(1, "#1A1714");
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 1200, 850);
+
+      // brilho terracota
+      const halo = g.createRadialGradient(950, 80, 30, 950, 80, 500);
+      halo.addColorStop(0, "rgba(232,130,90,.22)");
+      halo.addColorStop(1, "rgba(232,130,90,0)");
+      g.fillStyle = halo;
+      g.fillRect(0, 0, 1200, 850);
+
+      // moldura dupla
+      g.strokeStyle = "#E8825A"; g.lineWidth = 6;
+      g.strokeRect(40, 40, 1120, 770);
+      g.strokeStyle = "rgba(232,130,90,.35)"; g.lineWidth = 2;
+      g.strokeRect(58, 58, 1084, 734);
+
+      g.textAlign = "center";
+      g.fillStyle = "#F2A05E";
+      g.font = "700 26px Outfit, sans-serif";
+      g.fillText("✳  ACADEMIA CLAUDE", 600, 140);
+
+      g.fillStyle = "#B8AC9B";
+      g.font = "22px Outfit, sans-serif";
+      g.fillText("CERTIFICADO DE CONCLUSÃO", 600, 185);
+
+      g.fillStyle = "#F2EBE0";
+      g.font = "italic 600 64px Fraunces, Georgia, serif";
+      g.fillText(estado.nome || "Aluno(a) da Academia", 600, 320);
+
+      g.fillStyle = "#B8AC9B";
+      g.font = "26px Outfit, sans-serif";
+      g.fillText("concluiu o curso", 600, 390);
+
+      g.fillStyle = "#F2EBE0";
+      g.font = "600 34px Fraunces, Georgia, serif";
+      g.fillText("“Domine o Claude — do zero ao avançado”", 600, 445);
+
+      g.fillStyle = "#B8AC9B";
+      g.font = "22px Outfit, sans-serif";
+      g.fillText("Modelos · Projetos · Artifacts · Conectores MCP · Claude Code · API · Agentes", 600, 505);
+
+      const data = new Date();
+      const meses = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+      g.fillText(`Concluído em ${data.getDate()} de ${meses[data.getMonth()]} de ${data.getFullYear()}`, 600, 580);
+
+      g.fillStyle = "#E8825A";
+      g.font = "700 24px Outfit, sans-serif";
+      g.fillText("🌱 Iniciante   ·   🚀 Intermediário   ·   🧠 Avançado   ·   🎮 Desafio final", 600, 660);
+
+      g.fillStyle = "rgba(184,172,155,.7)";
+      g.font = "16px Outfit, sans-serif";
+      g.fillText("Curso independente, sem vínculo oficial com a Anthropic", 600, 760);
+
+      const link = document.createElement("a");
+      link.download = "certificado-academia-claude.png";
+      link.href = c.toDataURL("image/png");
+      link.click();
+      avisar("🏆 Certificado baixado!");
+    });
+  }
+
   /* ---------------- Atualização geral ---------------- */
   function atualizarTudo() {
     atualizarModulos();
@@ -526,5 +802,6 @@
     atualizarCertificado();
   }
 
+  atualizarContinuar();
   atualizarTudo();
 })();

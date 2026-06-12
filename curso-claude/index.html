@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1A1714">
 <title>Academia Claude — Do zero ao avançado</title>
-<meta name="description" content="Curso completo e gratuito sobre o Claude da Anthropic: conta, modelos, conectores, MCP, Claude Code, API — do iniciante ao avançado, com quiz e jogo.">
+<meta name="description" content="Curso completo e gratuito sobre o Claude da Anthropic: conta, modelos, conectores, MCP, Claude Code, API — do iniciante ao avançado, com quiz, jogo e biblioteca de prompts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Outfit:wght@300..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- ===================== CABEÇALHO ===================== -->
 <header class="topo">
@@ -24,6 +27,7 @@
       <a href="#" data-nav="n1">🌱 Iniciante</a>
       <a href="#" data-nav="n2">🚀 Intermediário</a>
       <a href="#" data-nav="n3">🧠 Avançado</a>
+      <a href="#" data-nav="prompts">📚 Prompts</a>
       <a href="#" data-nav="jogo">🎮 Jogo</a>
       <a href="#" data-nav="final">🏆 Certificado</a>
     </nav>
@@ -39,9 +43,14 @@
   <h1>Domine o <em>Claude</em> de verdade</h1>
   <p class="hero-sub">
     Do primeiro "olá" até conectores, automações e API. Três níveis, lições práticas,
-    <strong>quiz em cada etapa</strong> e um <strong>jogo</strong> para treinar.
-    Quando terminar, você vai saber aplicar o Claude no <strong>seu trabalho</strong>.
+    <strong>quiz em cada etapa</strong>, <strong>biblioteca de prompts</strong> e um
+    <strong>jogo</strong> para treinar. Quando terminar, você vai saber aplicar o Claude
+    no <strong>seu trabalho</strong>.
   </p>
+
+  <div class="hero-acoes">
+    <button class="btn btn-primario oculto" id="continuarBtn" data-nav="inicio">▶ Continuar de onde parei</button>
+  </div>
 
   <div class="trilha">
     <button class="trilha-card" data-nav="n1">
@@ -55,7 +64,7 @@
       <span class="trilha-emoji">🚀</span>
       <span class="trilha-nivel">Nível 2</span>
       <h2>Intermediário</h2>
-      <p>Projetos, Artifacts, conectores (MCP), pesquisa na web, memória e o Claude aplicado à sua profissão.</p>
+      <p>Projetos, Artifacts, conectores (MCP), memória, pesquisa e o Claude aplicado à sua profissão.</p>
       <span class="trilha-prog" data-prog-nivel="n2">0/7 etapas</span>
     </button>
     <button class="trilha-card" data-nav="n3">
@@ -65,6 +74,12 @@
       <p>Claude Code, API, servidores MCP, agentes e automações, segurança profissional.</p>
       <span class="trilha-prog" data-prog-nivel="n3">0/6 etapas</span>
     </button>
+  </div>
+
+  <div class="atalhos">
+    <button class="atalho" data-nav="prompts">📚 <span>Biblioteca de Prompts</span></button>
+    <button class="atalho" data-nav="jogo">🎮 <span>Jogo Missão Certa</span></button>
+    <button class="atalho" data-nav="final">🏆 <span>Meu certificado</span></button>
   </div>
 
   <div class="progresso-geral">
@@ -523,6 +538,10 @@
       <div class="exemplo-prompt">
         <p class="exemplo-bom"><span>✅ Prompt profissional:</span> "Você é um consultor de RH. Com base na descrição de vaga em anexo, crie 10 perguntas de entrevista: 4 técnicas, 4 comportamentais e 2 sobre cultura. Formato: tabela com a pergunta e o que avaliar na resposta."</p>
       </div>
+      <div class="destaque">
+        📚 <strong>Quer mais?</strong> Na <button class="link-interno" data-nav="prompts">Biblioteca de Prompts</button>
+        tem dezenas de prompts prontos para copiar, organizados por categoria.
+      </div>
     </article>
 
     <button class="btn btn-concluir" data-concluir="m2-6">✓ Concluir etapa</button>
@@ -718,6 +737,25 @@ claude mcp list</code></pre>
 </section>
 
 <!-- ############################################################ -->
+<!-- ################## BIBLIOTECA DE PROMPTS ################### -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="prompts">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">📚 Biblioteca</span>
+    <h2>Prompts prontos para copiar</h2>
+    <p>Toque em <strong>copiar</strong>, cole no Claude e adapte os trechos entre [colchetes]. Salve esta página nos favoritos!</p>
+  </div>
+
+  <div class="areas-botoes" id="promptsFiltros"></div>
+  <div class="prompts-grade" id="promptsGrade"></div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para o Jogo →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
 <!-- ########################### JOGO ########################### -->
 <!-- ############################################################ -->
 <section class="tela oculto" data-tela="jogo">
@@ -734,7 +772,7 @@ claude mcp list</code></pre>
         <strong>Haiku</strong> ⚡ (rápido e barato), <strong>Sonnet</strong> ⚖️ (equilibrado),
         <strong>Opus</strong> 🎻 (especialista) ou <strong>Fable</strong> 🌟 (topo de linha).
       </p>
-      <p>⏱️ Cada missão tem 15 segundos. Resposta certa: até 100 pts (quanto mais rápido, mais pontos).</p>
+      <p>⏱️ Cada missão tem 15 segundos. Resposta certa: até 100 pts — e acertos em sequência ganham <strong>bônus 🔥</strong>.</p>
       <button class="btn btn-primario" id="jogoComecar">Aceitar as missões</button>
       <p class="quiz-recorde" id="jogoRecorde"></p>
     </div>
@@ -742,6 +780,7 @@ claude mcp list</code></pre>
     <div class="jogo-rodada oculto" id="jogoRodada">
       <div class="quiz-topo">
         <span id="jogoContador">Missão 1/8</span>
+        <span class="jogo-streak" id="jogoStreak"></span>
         <span id="jogoPontos">0 pts</span>
       </div>
       <div class="jogo-timer"><div class="jogo-timer-fill" id="jogoTimer"></div></div>
@@ -778,7 +817,7 @@ claude mcp list</code></pre>
 <section class="tela oculto" data-tela="final">
   <div class="final-caixa" id="finalCaixa">
     <h2>🏆 Conclusão do curso</h2>
-    <p id="finalTexto">Complete tudo abaixo para liberar seu certificado simbólico:</p>
+    <p id="finalTexto">Complete tudo abaixo para liberar seu certificado:</p>
     <ul class="final-checklist" id="finalChecklist">
       <li data-check="n1">🌱 Nível 1 completo (5 etapas + quiz com 70%+)</li>
       <li data-check="n2">🚀 Nível 2 completo (6 etapas + quiz com 70%+)</li>
@@ -789,7 +828,10 @@ claude mcp list</code></pre>
       <p class="cert-titulo">Certificado · Academia Claude</p>
       <p class="cert-nome" id="certNome">Você</p>
       <p class="cert-texto">concluiu o curso <strong>"Domine o Claude — do zero ao avançado"</strong>: modelos, Projetos, Artifacts, conectores MCP, Claude Code, API e agentes.</p>
-      <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
+      <div class="cert-acoes">
+        <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
+        <button class="btn btn-primario" id="certBaixarBtn">⬇️ Baixar certificado</button>
+      </div>
     </div>
   </div>
 
@@ -804,6 +846,16 @@ claude mcp list</code></pre>
   <p>Feito com ✳ na Academia Claude — curso independente, sem vínculo oficial com a Anthropic.</p>
   <p>Modelos e preços conforme documentação pública da Anthropic (junho/2026). Telas e menus podem mudar com as atualizações dos apps.</p>
 </footer>
+
+<!-- ===================== BARRA DE ABAS (celular) ===================== -->
+<nav class="tabbar" aria-label="Navegação principal">
+  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Início</span></button>
+  <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
+  <button data-nav="n2" class="tab"><span class="tab-icone">🚀</span><span class="tab-rotulo">Nível 2</span></button>
+  <button data-nav="n3" class="tab"><span class="tab-icone">🧠</span><span class="tab-rotulo">Nível 3</span></button>
+  <button data-nav="prompts" class="tab"><span class="tab-icone">📚</span><span class="tab-rotulo">Prompts</span></button>
+  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogo</span></button>
+</nav>
 
 <script src="app.js"></script>
 </body>
