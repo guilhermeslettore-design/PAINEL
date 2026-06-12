@@ -34,6 +34,8 @@
     certComemorado: false,
     fonte: 16,
     iosBannerFechado: false,
+    senior: false,
+    vozNome: "",
   };
 
   try {
@@ -570,7 +572,9 @@
     { t: "Projetar do zero a arquitetura de um sistema criticamente complexo — o desafio técnico mais difícil da história da empresa.", r: "fable",
       e: "O problema mais difícil de todos pede o modelo mais capaz de todos: Fable 5." },
   ];
-  const TEMPO_MISSAO = 15; // segundos
+  // 15 segundos no normal; 30 no Modo Terceira Idade (mais tempo para ler com calma)
+  function tempoMissaoAtual() { return estado.senior ? 30 : 15; }
+  let TEMPO_MISSAO = tempoMissaoAtual();
   const PONTUACAO_MAXIMA = MISSOES.length * 100;
 
   const jogoInicio = document.getElementById("jogoInicio");
@@ -615,6 +619,7 @@
       elFeedback.classList.add("oculto");
       escolhas.forEach((b) => { b.disabled = false; b.classList.remove("correta", "errada"); });
 
+      TEMPO_MISSAO = tempoMissaoAtual();
       restante = TEMPO_MISSAO;
       elTimer.style.width = "100%";
       clearInterval(cronometro);
@@ -1653,6 +1658,177 @@
   }
   if (estado.fonte !== 16) aplicarFonte();
 
+  /* ============================================================
+     MODO TERCEIRA IDADE — muda tudo para facilitar os mais velhos:
+     tema claro de alto contraste, letras e botões grandes,
+     explicações em palavras simples, voz mais devagar, mais tempo no jogo
+     ============================================================ */
+
+  // Explicação bem simples de cada etapa, em letras grandes, para quem
+  // está conhecendo a tecnologia agora. Linguagem do dia a dia, sem termos difíceis.
+  const SENIOR_EXPLICACAO = {
+    "m1-1":
+      "<p><strong>O que é o Claude?</strong></p>" +
+      "<p>O Claude é um ajudante inteligente que mora no seu celular ou computador. " +
+      "Ele é parecido com uma pessoa muito estudada que está sempre disponível para conversar com você.</p>" +
+      "<p>Você <strong>escreve uma pergunta ou um pedido</strong>, como se estivesse mandando uma mensagem no WhatsApp, " +
+      "e ele responde na hora. Ele pode escrever textos, explicar coisas, ajudar a resolver problemas e muito mais.</p>" +
+      "<p>👉 <strong>Não precisa ter medo:</strong> você não estraga nada. É só conversar. Se errar, é só perguntar de novo.</p>",
+    "m1-2":
+      "<p><strong>Como começar a usar</strong></p>" +
+      "<p>É parecido com criar um WhatsApp novo. Você precisa de um e-mail e uma senha.</p>" +
+      "<p><strong>Passo a passo:</strong></p>" +
+      "<p>1. No celular, abra a loja de aplicativos (a mesma onde você baixa outros apps).</p>" +
+      "<p>2. Procure por <strong>Claude</strong> e instale.</p>" +
+      "<p>3. Abra o aplicativo e crie sua conta com seu e-mail.</p>" +
+      "<p>4. Pronto! Já pode conversar. É de graça para começar.</p>" +
+      "<p>👉 Se precisar, peça para um filho ou neto ajudar na primeira vez.</p>",
+    "m1-3":
+      "<p><strong>Conhecendo a tela</strong></p>" +
+      "<p>A tela do Claude é simples, parecida com a de uma conversa de WhatsApp.</p>" +
+      "<p>• Lá embaixo tem um espaço para você <strong>escrever sua pergunta</strong>.</p>" +
+      "<p>• Tem um <strong>botãozinho de microfone</strong> 🎤: se você apertar, pode <strong>falar em vez de digitar</strong>. Ótimo para quem não gosta de teclado!</p>" +
+      "<p>• Tem um <strong>clipe</strong> 📎 para anexar uma foto. Você pode tirar foto de uma carta, uma receita de remédio ou um documento e pedir para ele explicar.</p>" +
+      "<p>👉 <strong>Dica:</strong> para cada assunto novo, comece uma conversa nova (o botão com o sinal de mais ➕).</p>",
+    "m1-4":
+      "<p><strong>Os tipos de Claude</strong></p>" +
+      "<p>Existe mais de uma versão do Claude, como se fossem ajudantes diferentes. Não se preocupe em decorar!</p>" +
+      "<p>• Um é mais <strong>rápido</strong>, bom para perguntas simples.</p>" +
+      "<p>• Outro é <strong>equilibrado</strong>, bom para quase tudo.</p>" +
+      "<p>• Outro é o mais <strong>inteligente</strong>, para tarefas difíceis.</p>" +
+      "<p>👉 <strong>O mais importante:</strong> não precisa escolher nada agora. O aplicativo já vem com um bom ajudante pronto. " +
+      "Só comece a conversar normalmente.</p>",
+    "m1-5":
+      "<p><strong>Como pedir as coisas</strong></p>" +
+      "<p>Quanto mais você explica o que quer, melhor ele ajuda. É como pedir uma informação na rua: " +
+      "se você dá detalhes, a pessoa te ajuda melhor.</p>" +
+      "<p><strong>Em vez de:</strong> \"escreve uma carta\"</p>" +
+      "<p><strong>Diga:</strong> \"escreve uma carta para meu neto, com carinho, contando que estou com saudade\".</p>" +
+      "<p>👉 Se a resposta não ficou boa, é só pedir: \"deixa mais curto\" ou \"explica mais fácil\". Ele refaz na hora, sem reclamar.</p>" +
+      "<p>⚠️ <strong>Cuidado importante:</strong> nunca digite senhas de banco ou número de cartão. Nenhum aplicativo de conversa precisa disso.</p>",
+    "m2-1":
+      "<p><strong>Guardando suas coisas</strong></p>" +
+      "<p>O Claude deixa você criar \"pastinhas\" para organizar conversas do mesmo assunto. " +
+      "É como ter uma gaveta separada para cada tema.</p>" +
+      "<p>Por exemplo: uma pasta para receitas de comida, outra para assuntos da família, outra para a igreja.</p>" +
+      "<p>👉 Isso é um recurso mais avançado. Por enquanto, não se preocupe: " +
+      "use o Claude conversando normalmente. Quando quiser organizar, esta pasta estará aqui.</p>",
+    "m2-2":
+      "<p><strong>Ele cria coisas prontas para você</strong></p>" +
+      "<p>O Claude não só responde com texto. Ele pode <strong>montar coisas prontas</strong>, como:</p>" +
+      "<p>• Uma lista de compras organizada</p>" +
+      "<p>• Um convite de aniversário bonito</p>" +
+      "<p>• Uma cartinha já formatada</p>" +
+      "<p>👉 É só pedir, por exemplo: \"faça um convite para o meu aniversário de 70 anos, no domingo, na minha casa\". " +
+      "Ele monta tudo prontinho.</p>",
+    "m2-3":
+      "<p><strong>Ligando com outros aplicativos</strong></p>" +
+      "<p>O Claude pode se conectar com outras coisas suas, como seus e-mails ou suas fotos guardadas na internet — " +
+      "<strong>só se você permitir</strong>.</p>" +
+      "<p>Por exemplo, ele pode te ajudar a achar um e-mail importante ou resumir um documento longo.</p>" +
+      "<p>👉 Este é um recurso avançado. Não precisa mexer nisso agora. " +
+      "Quando você já estiver acostumado, peça ajuda de um familiar para configurar.</p>",
+    "m2-4":
+      "<p><strong>Buscar, fotos e voz</strong></p>" +
+      "<p>Três coisas muito úteis:</p>" +
+      "<p>• <strong>Buscar na internet:</strong> ele pode procurar coisas novas, como o preço de um remédio ou uma notícia de hoje.</p>" +
+      "<p>• <strong>Fotos:</strong> tire foto de um papel e peça para ele ler ou explicar. Ótimo para letras pequenas!</p>" +
+      "<p>• <strong>Voz:</strong> aperte o microfone e fale. Ele entende e responde.</p>" +
+      "<p>👉 A foto é maravilhosa para entender bulas de remédio e contas com letra miúda.</p>",
+    "m2-5":
+      "<p><strong>Como o Claude ajuda no seu dia a dia</strong></p>" +
+      "<p>Veja coisas práticas que ele faz por você:</p>" +
+      "<p>• Escrever mensagens carinhosas para a família</p>" +
+      "<p>• Explicar uma palavra difícil ou uma notícia</p>" +
+      "<p>• Ajudar a montar a lista de compras do mês</p>" +
+      "<p>• Dar ideias de receitas com o que você tem em casa</p>" +
+      "<p>• Lembrar como se faz alguma coisa no celular</p>" +
+      "<p>👉 Pense nele como um neto paciente, que nunca se cansa de explicar.</p>",
+    "m2-6":
+      "<p><strong>Dicas para pedir melhor</strong></p>" +
+      "<p>Um truque simples: peça para ele <strong>explicar como se você tivesse pouca intimidade com tecnologia</strong>. " +
+      "Ele vai usar palavras fáceis.</p>" +
+      "<p>Por exemplo: \"me explique isso de um jeito bem simples, passo a passo, como se eu nunca tivesse usado\".</p>" +
+      "<p>👉 Não tenha pressa. Pode perguntar quantas vezes quiser. Ele tem toda a paciência do mundo.</p>",
+    "m3-1":
+      "<p><strong>Recursos mais avançados</strong></p>" +
+      "<p>Esta parte é para quem quer ir além e usar o Claude no computador para fazer tarefas mais complicadas.</p>" +
+      "<p>👉 <strong>Você não precisa disto para aproveitar o Claude!</strong> " +
+      "Esta parte é mais técnica, usada por pessoas que trabalham com computador. " +
+      "Pode pular sem problema nenhum e continuar usando o aplicativo normalmente.</p>",
+    "m3-2":
+      "<p><strong>Para empresas e programadores</strong></p>" +
+      "<p>Existe uma forma de empresas colocarem o Claude dentro dos sistemas delas. " +
+      "É coisa de gente que trabalha com computador.</p>" +
+      "<p>👉 Pode pular tranquilo. Isto não muda em nada o seu uso do dia a dia. " +
+      "O importante você já aprendeu nas partes anteriores.</p>",
+    "m3-3":
+      "<p><strong>Conexões avançadas</strong></p>" +
+      "<p>Esta parte explica como o Claude se liga, por dentro, a outros programas. " +
+      "É bem técnico.</p>" +
+      "<p>👉 Não precisa entender isto para usar o Claude no seu dia a dia. " +
+      "Sinta-se à vontade para pular.</p>",
+    "m3-4":
+      "<p><strong>O Claude trabalhando sozinho</strong></p>" +
+      "<p>O Claude pode fazer tarefas mais longas sozinho, como um funcionário cuidando de coisas repetitivas. " +
+      "Isso é mais usado em empresas.</p>" +
+      "<p>👉 Para você, o mais útil é saber que ele pode te ajudar com várias tarefas. " +
+      "Esta parte mais técnica pode ser pulada.</p>",
+    "m3-5":
+      "<p><strong>Segurança — isto SIM é importante para você!</strong></p>" +
+      "<p>Algumas regras simples para ficar seguro:</p>" +
+      "<p>• <strong>Nunca</strong> digite senha de banco, número de cartão ou senha do PIX.</p>" +
+      "<p>• Desconfie se alguém pedir esses dados — golpistas existem.</p>" +
+      "<p>• O Claude pode errar às vezes. Para coisas sérias, como remédios, sempre confirme com seu médico.</p>" +
+      "<p>👉 Use o Claude para te ajudar e tirar dúvidas, mas para decisões importantes, " +
+      "confie sempre numa pessoa de confiança também.</p>",
+  };
+
+  let seniorBoxes = [];
+
+  function aplicarSenior() {
+    document.body.classList.toggle("senior", estado.senior);
+
+    document.querySelectorAll("#seniorBtn, #seniorHeroBtn").forEach((b) => {
+      b.setAttribute("aria-pressed", String(estado.senior));
+      b.classList.toggle("ativo", estado.senior);
+    });
+    const heroBtn = document.getElementById("seniorHeroBtn");
+    if (heroBtn) heroBtn.textContent = estado.senior ? "👵 Sair do Modo Terceira Idade" : "👵 Modo Terceira Idade";
+
+    if (estado.senior) {
+      // injeta a explicação simples no topo de cada etapa
+      document.querySelectorAll(".modulo[data-modulo]").forEach((secao) => {
+        const mod = secao.dataset.modulo;
+        if (!SENIOR_EXPLICACAO[mod] || secao.querySelector(".senior-box")) return;
+        const box = document.createElement("div");
+        box.className = "senior-box";
+        box.innerHTML =
+          '<span class="senior-box-tag">👵 Explicação fácil</span>' + SENIOR_EXPLICACAO[mod];
+        const cab = secao.querySelector(".modulo-cabecalho");
+        cab.insertAdjacentElement("afterend", box);
+        seniorBoxes.push(box);
+      });
+    } else {
+      seniorBoxes.forEach((b) => b.remove());
+      seniorBoxes = [];
+    }
+  }
+
+  document.querySelectorAll("#seniorBtn, #seniorHeroBtn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      estado.senior = !estado.senior;
+      if (estado.senior && estado.fonte < 20) { estado.fonte = 20; aplicarFonte(); }
+      if (!estado.senior && estado.fonte === 20) { estado.fonte = 16; aplicarFonte(); }
+      salvar();
+      aplicarSenior();
+      avisar(estado.senior
+        ? "👵 Modo Terceira Idade ligado: letras grandes e explicações fáceis!"
+        : "Modo normal de volta.");
+    });
+  });
+  if (estado.senior) aplicarSenior();
+
   /* ---------------- Banner de instalação no iPhone/iPad ---------------- */
   const ehIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
   const emApp = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
@@ -1888,7 +2064,7 @@
     u.lang = "pt-BR";
     const voz = vozPortugues();
     if (voz) u.voice = voz;
-    u.rate = 1.0;  // ritmo natural de professor, sempre igual
+    u.rate = estado.senior ? 0.85 : 1.0;  // mais devagar no Modo Terceira Idade
     u.pitch = 1.0; // mesmo tom em todas as etapas
     u.onend = () => {
       leitura.idx++;
