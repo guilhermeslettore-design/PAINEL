@@ -16,7 +16,7 @@
   };
   const QUIZ_DO_NIVEL = { n1: "quiz1", n2: "quiz2", n3: "quiz3" };
   const NOME_TELA = {
-    inicio: "Início", tutor: "Tutor IA", meucurso: "Meu curso personalizado",
+    catalogo: "Cursos", inicio: "Curso do Claude", tutor: "Tutor IA", meucurso: "Meu curso personalizado",
     n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
     n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogos", final: "Certificado",
   };
@@ -36,7 +36,9 @@
     iosBannerFechado: false,
     senior: false,
     vozNome: "",
+    vozVel: 1,
   };
+  const VOZ_VELOCIDADES = [0.5, 1, 1.5, 2];
 
   try {
     const salvo = JSON.parse(localStorage.getItem(CHAVE));
@@ -202,6 +204,11 @@
     const texto = document.getElementById("progressoTexto");
     if (barraGeral) barraGeral.style.width = pct + "%";
     if (texto) texto.textContent = pct + "%";
+
+    // rótulo no card do curso, na vitrine
+    const catProg = document.getElementById("catProgClaude");
+    if (catProg) catProg.textContent = pct === 0 ? "Começar curso →"
+      : pct >= 100 ? "✓ Concluído — rever" : `Continuar (${pct}%) →`;
   }
 
   function atualizarModulos() {
@@ -398,6 +405,24 @@
         e: "Um assunto = uma conversa. Contexto focado gera resposta focada." },
       { p: "O que é o Fable 5?", o: ["Um plano de assinatura", "O modelo mais avançado, primeiro da família Claude 5", "Um conector", "O app de desktop"], c: 1,
         e: "Fable 5 é o topo de linha — primeiro modelo da família Claude 5, para os problemas mais difíceis." },
+      { p: "Você precisa classificar 5.000 mensagens de clientes como 'elogio' ou 'reclamação'. Qual modelo é o mais indicado?", o: ["Opus, é o mais inteligente", "Haiku, rápido e barato para volume", "Fable, custo não importa", "Nenhum consegue"], c: 1,
+        e: "Tarefa simples em grande volume é a especialidade do Haiku: rápido e econômico." },
+      { p: "Qual prompt vai gerar a MELHOR resposta?", o: ["'escreve sobre cachorro'", "'Escreva um texto de 3 parágrafos para um folheto de adoção de cães, tom emocional'", "'cachorro'", "'me ajuda aí'"], c: 1,
+        e: "Contexto + formato + objetivo = resposta certeira. Detalhes melhoram tudo." },
+      { p: "A Anthropic foi fundada em que ano?", o: ["2015", "2021", "2024", "1999"], c: 1,
+        e: "A Anthropic foi fundada em 2021, com foco em segurança de IA." },
+      { p: "Você quer uma resposta mais rápida e não precisa de raciocínio profundo. O que fazer?", o: ["Desligar o pensamento estendido", "Ligar o pensamento estendido", "Trocar de idioma", "Apagar o histórico"], c: 0,
+        e: "Pensamento estendido desligado = respostas mais rápidas, ideal para perguntas simples." },
+      { p: "Aproximadamente quantos tokens tem a palavra 'computador'?", o: ["Exatamente 1", "Entre 1 e 3", "Mais de 50", "Nenhum"], c: 1,
+        e: "Em média uma palavra tem de 1 a 3 tokens." },
+      { p: "Onde NÃO se paga por token, e sim assinatura fixa?", o: ["No claude.ai (site e app)", "Na API", "No Claude Code com chave de API", "Em lugar nenhum"], c: 0,
+        e: "No claude.ai você paga assinatura. Pagar por token é só na API." },
+      { p: "Você está num projeto difícil de matemática. Qual recurso ajuda mais?", o: ["A pesquisa na web", "O pensamento estendido (modo de raciocínio)", "Mudar a fonte", "O modo escuro"], c: 1,
+        e: "Para lógica e cálculo, ligue o pensamento estendido — ele raciocina com mais cuidado." },
+      { p: "Por que é bom começar uma conversa nova para cada assunto?", o: ["Para gastar menos bateria", "Para manter o contexto focado e melhorar as respostas", "Porque é obrigatório", "Para deixar o app mais bonito"], c: 1,
+        e: "Um assunto por conversa mantém o contexto limpo e as respostas mais precisas." },
+      { p: "O que você deve fazer com uma informação importante que a IA te deu?", o: ["Confiar 100% sempre", "Conferir, pois a IA pode 'alucinar'", "Ignorar", "Apagar"], c: 1,
+        e: "A IA pode inventar com confiança. Sempre confira dados importantes." },
     ],
     quiz2: [
       { p: "O que é um Projeto no claude.ai?", o: ["Um arquivo de código", "Uma pasta inteligente com instruções e arquivos fixos", "Um modelo personalizado", "Um plano pago"], c: 1,
@@ -420,6 +445,24 @@
         e: "É o modo de pesquisa avançada: o Claude investiga a fundo e devolve um relatório com referências." },
       { p: "A 'memória' do Claude serve para…", o: ["Gravar sua tela", "Lembrar informações suas entre conversas (e você pode apagar)", "Acelerar o wi-fi", "Salvar senhas"], c: 1,
         e: "Ele pode lembrar preferências e contexto entre conversas — com transparência e controle seu." },
+      { p: "Você quer que o Claude sempre responda no tom da sua empresa, sem repetir as regras toda vez. O que usar?", o: ["Um Artifact", "Um Projeto com instruções fixas", "A pesquisa na web", "O modo de voz"], c: 1,
+        e: "Projetos guardam instruções fixas que valem para todas as conversas daquele tema." },
+      { p: "Você pede 'crie uma calculadora de orçamento interativa'. O que aparece?", o: ["Um erro", "Um Artifact: um mini-app funcionando ao lado do chat", "Um conector", "Uma cobrança extra"], c: 1,
+        e: "Pedidos de 'produtos prontos' viram Artifacts — editáveis e até compartilháveis." },
+      { p: "Qual a forma mais poderosa de fazer o Claude escrever no SEU estilo?", o: ["Pedir 'capricha'", "Colar 2-3 exemplos seus e pedir para seguir o padrão", "Escrever em maiúsculas", "Repetir 3 vezes"], c: 1,
+        e: "Mostrar exemplos reais transfere o estilo melhor do que qualquer descrição." },
+      { p: "Quem criou o padrão MCP que conecta IAs a ferramentas?", o: ["A Microsoft", "A Anthropic", "A Apple", "A Google"], c: 1,
+        e: "A Anthropic criou o MCP, hoje usado pelo mercado inteiro — o 'USB das IAs'." },
+      { p: "Você tem um relatório grande e uma tarefa enorme e complexa. Qual modelo encara melhor?", o: ["Haiku", "Opus, o especialista autônomo", "Nenhum", "Só humanos"], c: 1,
+        e: "Trabalhos longos e complexos são a especialidade do Opus." },
+      { p: "Antes de visitar um cliente novo, o que pedir ao Claude?", o: ["Para formatar o PC", "Pesquisar a empresa na web e dar ganchos de conversa", "Apagar a agenda", "Nada útil"], c: 1,
+        e: "Com a pesquisa na web, ele levanta dados recentes do cliente para você se preparar." },
+      { p: "Como o Claude pode te ajudar com uma planilha de vendas?", o: ["Não trabalha com planilhas", "Você envia o arquivo e ele analisa, acha erros e sugere gráficos", "Só se você digitar tudo de novo", "Apaga a planilha"], c: 1,
+        e: "Envie o arquivo e peça conclusões, inconsistências e visualizações." },
+      { p: "Uma boa técnica para tarefas grandes é…", o: ["Pedir tudo de uma vez", "Pedir em etapas: primeiro a estrutura, depois cada parte", "Nunca revisar", "Usar uma palavra só"], c: 1,
+        e: "Quebrar em etapas e aprovar a estrutura antes garante um resultado muito melhor." },
+      { p: "Os conectores acessam suas ferramentas…", o: ["Sem você saber", "Somente com a sua autorização, e você pode desconectar", "De graça e sem limite", "Apenas no Windows"], c: 1,
+        e: "Você autoriza cada conector e pode revogar o acesso quando quiser." },
     ],
     quiz3: [
       { p: "Qual a grande diferença do Claude Code para o chat?", o: ["É mais bonito", "Ele AGE: lê arquivos, roda comandos e corrige sozinho", "É grátis", "Só funciona online"], c: 1,
@@ -442,8 +485,27 @@
         e: "O Claude despacha 'ajudantes' em paralelo: um pesquisa, outro escreve, outro revisa." },
       { p: "Qual prática de segurança está ERRADA?", o: ["Revisar documentos importantes", "Colocar a chave da API dentro do código publicado", "Dar permissões mínimas aos conectores", "Conferir números gerados"], c: 1,
         e: "Chave de API é segredo: use variáveis de ambiente e nunca exponha no código." },
+      { p: "Você quer automatizar a organização de centenas de arquivos no PC. Qual ferramenta?", o: ["O chat do claude.ai", "O Claude Code (roda e age no seu computador)", "A pesquisa na web", "Um Artifact"], c: 1,
+        e: "O Claude Code executa ações no seu computador — perfeito para automatizar tarefas." },
+      { p: "Antes de o Claude Code executar uma ação importante, o que acontece?", o: ["Ele faz sem avisar", "Ele mostra o plano e pede sua aprovação", "Ele desliga o PC", "Nada, é automático"], c: 1,
+        e: "Você sempre aprova as ações importantes antes de ele executar." },
+      { p: "O que você precisa instalar antes do Claude Code?", o: ["O Node.js", "Um antivírus pago", "O Microsoft Word", "Nada"], c: 0,
+        e: "Com o Node.js instalado, rode: npm install -g @anthropic-ai/claude-code." },
+      { p: "Sua empresa tem milhares de tarefas iguais por mês, sem pressa. O que reduz o custo na API pela metade?", o: ["Pagar em dólar", "O Batch API", "Usar de madrugada", "Trocar de senha"], c: 1,
+        e: "O Batch processa em lote com 50% de desconto para tarefas que podem esperar." },
+      { p: "Você manda sempre o mesmo manual gigante em cada chamada da API. O que barateia isso?", o: ["O cache de prompt", "Apagar o manual", "Usar o Haiku", "Nada"], c: 0,
+        e: "O cache de prompt reaproveita o conteúdo repetido, cobrando até 90% mais barato." },
+      { p: "Pense em 'funcionários digitais' cuidando de tarefas repetitivas sozinhos. Isso é…", o: ["Um conector", "Um agente de IA", "Um Artifact", "Um token"], c: 1,
+        e: "Agentes executam objetivos: planejam, usam ferramentas e se corrigem até concluir." },
+      { p: "Uma 'Skill' no Claude é…", o: ["Um jogo", "Uma apostila que ensina o Claude a fazer algo do jeito da sua empresa", "Um vírus", "Um plano pago"], c: 1,
+        e: "Skills dão ao Claude instruções e exemplos do seu padrão, que ele usa quando a tarefa pede." },
+      { p: "Pode mandar dados de clientes para a IA?", o: ["Sempre, sem limite", "Só conforme a política da empresa e a LGPD", "Nunca, em hipótese alguma", "Só de madrugada"], c: 1,
+        e: "Dados sensíveis seguem a política da empresa e a LGPD. Senhas e chaves, jamais." },
+      { p: "Por que só instalar servidores MCP de fontes confiáveis?", o: ["Para economizar internet", "Porque eles executam ações reais nas suas contas e PC", "Para o app ficar bonito", "Não importa a fonte"], c: 1,
+        e: "Servidores MCP têm poder real — instale apenas de fontes em que você confia." },
     ],
   };
+  const QUIZ_TAM = 10; // perguntas sorteadas por tentativa (de um banco maior)
 
   /* ---------------- Motor de quiz ---------------- */
   function embaralhar(arr) {
@@ -460,12 +522,14 @@
     const perguntas = PERGUNTAS[id];
     let ordem = [], atual = 0, pontos = 0;
 
+    const totalSorteado = Math.min(QUIZ_TAM, perguntas.length);
+
     function telaInicio() {
       const info = estado.quizes[id];
       caixa.innerHTML = `
         <div class="quiz-inicio">
-          <p>São <strong>${perguntas.length} perguntas</strong> de múltipla escolha.
-          Acerte <strong>70% ou mais</strong> para concluir esta etapa. Sem tempo, sem pressão. 😉</p>
+          <p><strong>${totalSorteado} perguntas</strong> sorteadas de um banco de ${perguntas.length} — então
+          cada vez que você refizer, vêm perguntas diferentes! Acerte <strong>70% ou mais</strong> para concluir. 😉</p>
           <button class="btn btn-primario" data-acao="comecar">Começar o quiz</button>
           ${info ? `<p class="quiz-recorde">Sua melhor nota: <strong>${info.melhor}%</strong>${info.passou ? " · ✅ etapa concluída" : ""}</p>` : ""}
         </div>`;
@@ -537,7 +601,7 @@
       const acao = ev.target.closest("[data-acao]");
       const opcao = ev.target.closest("[data-opcao]");
       if (acao && acao.dataset.acao === "comecar") {
-        ordem = embaralhar(perguntas);
+        ordem = embaralhar(perguntas).slice(0, totalSorteado);
         atual = 0; pontos = 0;
         telaPergunta();
       } else if (acao && acao.dataset.acao === "proxima") {
@@ -717,6 +781,12 @@
       : "Complete tudo abaixo para liberar seu certificado:";
     const nome = document.getElementById("certNome");
     if (nome && estado.nome) nome.textContent = estado.nome;
+    const dataEl = document.getElementById("certData");
+    if (dataEl) {
+      const d = new Date();
+      const meses = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+      dataEl.textContent = `${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+    }
 
     if (tudo && !estado.certComemorado) {
       estado.certComemorado = true;
@@ -736,6 +806,21 @@
       }
     });
   }
+
+  /* Imprimir certificado (usa a impressão do navegador → papel ou PDF) */
+  const certImprimirBtn = document.getElementById("certImprimirBtn");
+  if (certImprimirBtn) {
+    certImprimirBtn.addEventListener("click", () => {
+      if (!estado.nome) {
+        const nome = prompt("Antes de imprimir, digite seu nome para o certificado:");
+        if (nome && nome.trim()) { estado.nome = nome.trim().slice(0, 60); salvar(); atualizarCertificado(); }
+      }
+      document.body.classList.add("imprimindo-cert");
+      window.print();
+      setTimeout(() => document.body.classList.remove("imprimindo-cert"), 500);
+    });
+  }
+  window.addEventListener("afterprint", () => document.body.classList.remove("imprimindo-cert"));
 
   /* Certificado em imagem (canvas → PNG) */
   const certBaixarBtn = document.getElementById("certBaixarBtn");
@@ -1789,7 +1874,7 @@
   function aplicarSenior() {
     document.body.classList.toggle("senior", estado.senior);
 
-    document.querySelectorAll("#seniorBtn, #seniorHeroBtn").forEach((b) => {
+    document.querySelectorAll("#seniorBtn, #seniorHeroBtn, #seniorCatBtn").forEach((b) => {
       b.setAttribute("aria-pressed", String(estado.senior));
       b.classList.toggle("ativo", estado.senior);
     });
@@ -1815,7 +1900,7 @@
     }
   }
 
-  document.querySelectorAll("#seniorBtn, #seniorHeroBtn").forEach((btn) => {
+  document.querySelectorAll("#seniorBtn, #seniorHeroBtn, #seniorCatBtn").forEach((btn) => {
     btn.addEventListener("click", () => {
       estado.senior = !estado.senior;
       if (estado.senior && estado.fonte < 20) { estado.fonte = 20; aplicarFonte(); }
@@ -2064,7 +2149,7 @@
     u.lang = "pt-BR";
     const voz = vozPortugues();
     if (voz) u.voice = voz;
-    u.rate = estado.senior ? 0.85 : 1.0;  // mais devagar no Modo Terceira Idade
+    u.rate = estado.vozVel || 1;  // velocidade escolhida pelo usuário (0.5x a 2x)
     u.pitch = 1.0; // mesmo tom em todas as etapas
     u.onend = () => {
       leitura.idx++;
@@ -2083,11 +2168,28 @@
       wrap.className = "ouvir-controles";
       wrap.innerHTML =
         '<button type="button" class="ouvir-btn">🔊 Ouvir esta etapa</button>' +
-        '<button type="button" class="ouvir-parar oculto" aria-label="Parar leitura">⏹ Parar</button>';
+        '<button type="button" class="ouvir-parar oculto" aria-label="Parar leitura">⏹ Parar</button>' +
+        '<button type="button" class="ouvir-vel" aria-label="Velocidade da voz">⚡ ' + (estado.vozVel || 1) + 'x</button>';
       cab.appendChild(wrap);
 
       const btn = wrap.querySelector(".ouvir-btn");
       const parar = wrap.querySelector(".ouvir-parar");
+      const vel = wrap.querySelector(".ouvir-vel");
+
+      vel.addEventListener("click", () => {
+        const i = VOZ_VELOCIDADES.indexOf(estado.vozVel || 1);
+        estado.vozVel = VOZ_VELOCIDADES[(i + 1) % VOZ_VELOCIDADES.length];
+        salvar();
+        document.querySelectorAll(".ouvir-vel").forEach((b) => { b.textContent = "⚡ " + estado.vozVel + "x"; });
+        avisar("Velocidade da voz: " + estado.vozVel + "x");
+        // se estiver lendo, aplica já na próxima frase reiniciando a fala atual
+        if (leitura.estado === "falando") {
+          const retomarIdx = leitura.idx;
+          sintese.cancel();
+          leitura.idx = retomarIdx;
+          falarProxima();
+        }
+      });
 
       btn.addEventListener("click", () => {
         // tocando ESTA etapa: alterna pausa/continua
