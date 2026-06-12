@@ -16,7 +16,11 @@
   };
   const QUIZ_DO_NIVEL = { n1: "quiz1", n2: "quiz2", n3: "quiz3" };
   const NOME_TELA = {
+<<<<<<< HEAD
     inicio: "Início", tutor: "Tutor IA", meucurso: "Meu curso personalizado",
+=======
+    inicio: "Início", meucurso: "Meu curso personalizado",
+>>>>>>> origin/main
     n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
     n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogos", final: "Certificado",
   };
@@ -27,7 +31,10 @@
     missoes: {},
     jogo: { recorde: 0, passou: false },
     oficina: { melhor: 0, passou: false },
+<<<<<<< HEAD
     tutorHistorico: [],
+=======
+>>>>>>> origin/main
     perfil: null,
     nome: "",
     ultimaTela: "",
@@ -1179,6 +1186,7 @@
   saudacao();
 
   /* ============================================================
+<<<<<<< HEAD
      TUTOR IA — chat com base de conhecimento completa sobre o Claude
      Modo local (grátis, instantâneo) + upgrade automático para o
      Claude real via /api/chat quando o servidor estiver liberado.
@@ -1495,6 +1503,8 @@
   }
 
   /* ============================================================
+=======
+>>>>>>> origin/main
      OFICINA DE PROMPTS — jogo 2 (melhore o prompt fraco)
      ============================================================ */
   const OFICINA = [
