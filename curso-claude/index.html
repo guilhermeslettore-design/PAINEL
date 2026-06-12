@@ -30,11 +30,12 @@
       <span class="logo-texto">Academia <em>Claude</em></span>
     </a>
     <nav class="menu" id="menu">
+      <a href="#" data-nav="meucurso">🎯 Meu curso</a>
       <a href="#" data-nav="n1">🌱 Iniciante</a>
       <a href="#" data-nav="n2">🚀 Intermediário</a>
       <a href="#" data-nav="n3">🧠 Avançado</a>
       <a href="#" data-nav="prompts">📚 Prompts</a>
-      <a href="#" data-nav="jogo">🎮 Jogo</a>
+      <a href="#" data-nav="jogo">🎮 Jogos</a>
       <a href="#" data-nav="final">🏆 Certificado</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
@@ -55,7 +56,8 @@
   </p>
 
   <div class="hero-acoes">
-    <button class="btn btn-primario oculto" id="continuarBtn" data-nav="inicio">▶ Continuar de onde parei</button>
+    <button class="btn btn-primario" data-nav="meucurso">🎯 Montar meu curso personalizado</button>
+    <button class="btn btn-fantasma oculto" id="continuarBtn" data-nav="inicio">▶ Continuar de onde parei</button>
   </div>
 
   <div class="trilha">
@@ -83,8 +85,9 @@
   </div>
 
   <div class="atalhos">
+    <button class="atalho" data-nav="meucurso">🎯 <span>Curso personalizado</span></button>
     <button class="atalho" data-nav="prompts">📚 <span>Biblioteca de Prompts</span></button>
-    <button class="atalho" data-nav="jogo">🎮 <span>Jogo Missão Certa</span></button>
+    <button class="atalho" data-nav="jogo">🎮 <span>Jogos</span></button>
     <button class="atalho" data-nav="final">🏆 <span>Meu certificado</span></button>
   </div>
 
@@ -743,6 +746,79 @@ claude mcp list</code></pre>
 </section>
 
 <!-- ############################################################ -->
+<!-- ##################### MEU CURSO (PERSONALIZADO) ############ -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="meucurso">
+  <div class="nivel-cabecalho nivel-verde">
+    <span class="nivel-badge">🎯 Curso sob medida</span>
+    <h2>Monte o curso para o SEU trabalho</h2>
+    <p>Me conte quem você é e o que faz. Eu monto na hora um plano de 7 dias, prompts sob medida, automações possíveis e um "professor particular" para colar no Claude.</p>
+  </div>
+
+  <div class="modulo">
+    <button class="btn btn-fantasma preset-btn" id="presetMelitta">⭐ Carregar exemplo pronto: Gerente Divisional · Melitta</button>
+
+    <form class="formulario" id="formPerfil">
+      <label>Seu nome
+        <input type="text" id="perfNome" placeholder="Ex.: Guilherme" maxlength="60" autocomplete="off">
+      </label>
+      <label>Seu cargo ou função *
+        <input type="text" id="perfCargo" placeholder="Ex.: Gerente Divisional" maxlength="80" required autocomplete="off">
+      </label>
+      <label>Empresa ou ramo
+        <input type="text" id="perfEmpresa" placeholder="Ex.: Melitta" maxlength="80" autocomplete="off">
+      </label>
+
+      <span class="form-rotulo">O que mais toma seu tempo? (toque em tudo que se aplica)</span>
+      <div class="chips" id="perfTarefas">
+        <button type="button" class="chip" data-valor="emails">📧 E-mails</button>
+        <button type="button" class="chip" data-valor="planilhas">📊 Planilhas</button>
+        <button type="button" class="chip" data-valor="relatorios">📑 Relatórios</button>
+        <button type="button" class="chip" data-valor="reunioes">🗓️ Reuniões</button>
+        <button type="button" class="chip" data-valor="apresentacoes">📽️ Apresentações</button>
+        <button type="button" class="chip" data-valor="vendas">💼 Vendas e visitas</button>
+        <button type="button" class="chip" data-valor="equipe">👥 Gestão de equipe</button>
+        <button type="button" class="chip" data-valor="atendimento">💬 Atendimento</button>
+        <button type="button" class="chip" data-valor="documentos">📄 Documentos e contratos</button>
+        <button type="button" class="chip" data-valor="social">📱 Redes sociais</button>
+      </div>
+
+      <label>Ferramentas que você usa no dia a dia
+        <input type="text" id="perfFerramentas" placeholder="Ex.: Excel, Outlook, SAP, WhatsApp" maxlength="120" autocomplete="off">
+      </label>
+
+      <div class="form-duplo">
+        <label>Seu nível com IA
+          <select id="perfNivel">
+            <option value="nunca">Nunca usei</option>
+            <option value="pouco" selected>Já usei um pouco</option>
+            <option value="bastante">Uso bastante</option>
+          </select>
+        </label>
+        <label>Objetivo principal
+          <select id="perfObjetivo">
+            <option value="tempo">Ganhar tempo no dia a dia</option>
+            <option value="automatizar" selected>Automatizar tarefas repetidas</option>
+            <option value="code">Aprender Claude Code</option>
+            <option value="conteudo">Criar conteúdo melhor</option>
+            <option value="organizar">Organizar meu trabalho</option>
+          </select>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primario">🎯 Montar meu curso agora</button>
+    </form>
+  </div>
+
+  <div id="planoResultado"></div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="n1">Começar pelo Nível 1 →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
 <!-- ################## BIBLIOTECA DE PROMPTS ################### -->
 <!-- ############################################################ -->
 <section class="tela oculto" data-tela="prompts">
@@ -811,6 +887,16 @@ claude mcp list</code></pre>
     </div>
   </div>
 
+  <!-- ===== JOGO 2: OFICINA DE PROMPTS ===== -->
+  <div class="nivel-cabecalho nivel-azul" style="margin-top:2rem">
+    <span class="nivel-badge">🛠️ Jogo 2</span>
+    <h2>Oficina de Prompts</h2>
+    <p>Em cada rodada aparece um prompt fraco. Escolha a melhor versão melhorada — e aprenda o porquê. Treino direto da habilidade nº 1.</p>
+  </div>
+  <div class="jogo-caixa">
+    <div class="quiz-caixa" id="oficinaCaixa" style="border:0;background:transparent;padding:0"></div>
+  </div>
+
   <div class="nivel-rodape">
     <button class="btn btn-fantasma" data-nav="n3">← Nível 3</button>
     <button class="btn btn-primario" data-nav="final">Ver certificado →</button>
@@ -856,11 +942,11 @@ claude mcp list</code></pre>
 <!-- ===================== BARRA DE ABAS (celular) ===================== -->
 <nav class="tabbar" aria-label="Navegação principal">
   <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Início</span></button>
+  <button data-nav="meucurso" class="tab"><span class="tab-icone">🎯</span><span class="tab-rotulo">Meu curso</span></button>
   <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
   <button data-nav="n2" class="tab"><span class="tab-icone">🚀</span><span class="tab-rotulo">Nível 2</span></button>
   <button data-nav="n3" class="tab"><span class="tab-icone">🧠</span><span class="tab-rotulo">Nível 3</span></button>
-  <button data-nav="prompts" class="tab"><span class="tab-icone">📚</span><span class="tab-rotulo">Prompts</span></button>
-  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogo</span></button>
+  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogos</span></button>
 </nav>
 
 <script src="app.js"></script>
