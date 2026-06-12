@@ -148,14 +148,16 @@ body.senior pre.codigo code{ color:#F4E9D6; }
 
 /* ---------------- Leitura em voz alta ---------------- */
 .ouvir-controles{ display:flex; gap:.45rem; margin-top:.6rem; }
-.ouvir-btn, .ouvir-parar{
+.ouvir-controles{ flex-wrap:wrap; }
+.ouvir-btn, .ouvir-parar, .ouvir-vel{
   background:rgba(183,159,224,.12); color:var(--roxo);
   border:1px solid rgba(183,159,224,.45); border-radius:999px;
   padding:.45rem .9rem; font-size:.85rem; font-weight:700;
   cursor:pointer; font-family:var(--fonte-corpo); transition:border-color .15s;
 }
-.ouvir-btn:hover, .ouvir-parar:hover{ border-color:var(--roxo); }
+.ouvir-btn:hover, .ouvir-parar:hover, .ouvir-vel:hover{ border-color:var(--roxo); }
 .ouvir-parar{ color:var(--erro); background:rgba(224,112,112,.08); border-color:rgba(224,112,112,.4); }
+.ouvir-vel{ color:var(--acento-forte); background:rgba(232,130,90,.1); border-color:rgba(232,130,90,.4); }
 
 /* ---------------- Banner de instalação iOS ---------------- */
 .ios-banner{
@@ -531,15 +533,85 @@ pre.codigo code{ background:none; border:0; padding:0; font-size:.84rem; line-he
 }
 .final-checklist li.ok{ border-color:var(--verde); color:var(--texto); }
 .final-checklist li.ok::after{ content:" ✓"; color:var(--verde); font-weight:700; }
-.certificado{
-  margin:1.3rem auto 0; max-width:560px; border:2px solid var(--acento);
-  border-radius:var(--raio); padding:1.6rem 1.2rem;
-  background:linear-gradient(160deg, rgba(232,130,90,.10), rgba(183,159,224,.08));
+.certificado{ margin:1.3rem auto 0; max-width:640px; }
+.cert-folha{
+  background:linear-gradient(160deg, #FBF3E8, #F4ECF7);
+  border-radius:14px; padding:.7rem; box-shadow:var(--sombra);
 }
-.cert-titulo{ font-size:.8rem; text-transform:uppercase; letter-spacing:.15em; color:var(--acento-forte); }
-.cert-nome{ font-family:var(--fonte-titulo); font-size:2rem; margin:.5rem 0; font-style:italic; }
-.cert-texto{ font-size:.95rem; color:var(--texto-suave); margin-bottom:.9rem; }
-.cert-acoes{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; }
+.cert-borda{
+  border:3px double #B4521E; border-radius:10px; padding:1.8rem 1.4rem; text-align:center;
+}
+.cert-selo{ font-size:2.4rem; color:#B4521E; display:block; }
+.cert-marca{ font-size:.8rem; letter-spacing:.25em; color:#8A3D12; font-weight:700; margin-top:.2rem; }
+.cert-titulo{ font-family:var(--fonte-titulo); font-size:1.5rem; color:#5A2A0E; margin:.5rem 0 1rem; }
+.cert-conferido{ font-size:.9rem; color:#6A5C49; }
+.cert-nome{ font-family:var(--fonte-titulo); font-size:2.2rem; margin:.2rem 0 .6rem; font-style:italic; color:#3A1E0C; }
+.cert-texto{ font-size:.98rem; color:#4A3D2E; line-height:1.7; margin-bottom:1.6rem; }
+.cert-rodape-folha{ display:flex; justify-content:space-around; gap:1rem; flex-wrap:wrap; }
+.cert-bloco{ display:flex; flex-direction:column; align-items:center; min-width:140px; }
+.cert-linha{ font-size:1rem; color:#3A1E0C; border-top:1.5px solid #B4521E; padding-top:.3rem; min-width:130px; }
+.cert-assinatura{ font-family:var(--fonte-titulo); font-style:italic; }
+.cert-legenda{ font-size:.72rem; color:#6A5C49; text-transform:uppercase; letter-spacing:.08em; margin-top:.2rem; }
+.cert-acoes{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1.1rem; }
+
+/* ---------------- Vitrine de cursos (plataforma) ---------------- */
+.catalogo-hero{ text-align:center; padding:1.5rem 0 .5rem; }
+.catalogo-hero h1{ font-size:clamp(1.9rem,6vw,3rem); margin:.7rem 0; }
+.catalogo-titulo{ font-size:1.3rem; margin:1.6rem 0 .9rem; }
+.catalogo-grade{ display:grid; gap:1rem; }
+@media(min-width:680px){ .catalogo-grade{ grid-template-columns:1fr 1fr; } }
+@media(min-width:980px){ .catalogo-grade{ grid-template-columns:repeat(3,1fr); } }
+.curso-card{
+  display:flex; flex-direction:column; text-align:left; padding:0; overflow:hidden;
+  background:var(--fundo-2); border:1px solid var(--borda); border-radius:var(--raio);
+  color:var(--texto); font-family:var(--fonte-corpo); cursor:default;
+}
+.curso-card.disponivel{ cursor:pointer; transition:transform .15s, border-color .15s; }
+.curso-card.disponivel:hover{ transform:translateY(-3px); border-color:var(--acento); }
+.curso-capa{
+  height:120px; display:flex; align-items:center; justify-content:center; font-size:3.2rem;
+  background:linear-gradient(135deg, var(--c1), var(--c2));
+}
+.curso-corpo{ padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.45rem; flex:1; }
+.curso-tag{
+  align-self:flex-start; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--verde); border:1px solid var(--verde); border-radius:999px; padding:.15rem .6rem;
+}
+.breve-tag{ color:var(--texto-suave); border-color:var(--borda); }
+.curso-corpo h3{ font-size:1.3rem; }
+.curso-corpo p{ font-size:.92rem; color:var(--texto-suave); flex:1; }
+.curso-meta{ display:flex; flex-wrap:wrap; gap:.5rem; font-size:.78rem; color:var(--texto-suave); }
+.curso-meta span{ background:var(--fundo-3); border:1px solid var(--borda); border-radius:999px; padding:.15rem .55rem; }
+.curso-progresso{ margin-top:.3rem; font-weight:700; color:var(--acento-forte); }
+.curso-card.breve{ opacity:.72; }
+.curso-card.breve .curso-capa{ filter:grayscale(.3); }
+.catalogo-rodape{ text-align:center; color:var(--texto-suave); font-size:.88rem; margin-top:1.6rem; }
+.voltar-cursos{
+  background:none; border:0; color:var(--acento-forte); font-family:var(--fonte-corpo);
+  font-size:.9rem; cursor:pointer; padding:.3rem 0; margin-bottom:.3rem;
+}
+.voltar-cursos:hover{ text-decoration:underline; }
+body.senior .curso-corpo h3{ font-size:1.5rem; }
+body.senior .curso-corpo p{ font-size:1.1rem; }
+
+/* ---------------- Impressão do certificado ---------------- */
+@media print{
+  body{ background:#fff !important; padding:0 !important; }
+  body.imprimindo-cert > *{ display:none !important; }
+  body.imprimindo-cert main,
+  body.imprimindo-cert [data-tela="final"],
+  body.imprimindo-cert #finalCaixa,
+  body.imprimindo-cert #certificado{ display:block !important; }
+  body.imprimindo-cert #finalCaixa > *:not(#certificado){ display:none !important; }
+  body.imprimindo-cert .nao-imprimir,
+  body.imprimindo-cert .nivel-rodape,
+  body.imprimindo-cert .tabbar,
+  body.imprimindo-cert .topo{ display:none !important; }
+  body.imprimindo-cert .certificado{ max-width:100%; margin:0; }
+  body.imprimindo-cert .cert-folha{ box-shadow:none; }
+  body.imprimindo-cert .cert-borda{ border-color:#8A3D12; }
+  @page{ size:landscape; margin:1.2cm; }
+}
 
 /* ---------------- Missões práticas ---------------- */
 .missoes{
