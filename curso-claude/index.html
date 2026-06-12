@@ -6,9 +6,23 @@
 <meta name="theme-color" content="#1A1714">
 <title>Academia Claude — Do zero ao avançado</title>
 <meta name="description" content="Curso completo e gratuito sobre o Claude da Anthropic: conta, modelos, conectores, MCP, Claude Code, API — do iniciante ao avançado, com quiz, jogo e biblioteca de prompts.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Outfit:wght@300..800&display=swap" rel="stylesheet">
+
+<!-- Cartão de compartilhamento (WhatsApp, redes sociais) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Academia Claude">
+<meta property="og:title" content="Academia Claude — Domine o Claude do zero ao avançado">
+<meta property="og:description" content="Curso gratuito em 3 níveis: missões práticas, quiz, jogos, tutor IA e plano personalizado para o seu trabalho. Feito para celular.">
+<meta property="og:url" content="https://guilhermeslettore-design.github.io/PAINEL/">
+<meta property="og:image" content="https://guilhermeslettore-design.github.io/PAINEL/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Academia Claude — Domine o Claude do zero ao avançado">
+<meta name="twitter:description" content="Curso gratuito em 3 níveis: missões práticas, quiz, jogos, tutor IA e plano personalizado.">
+<meta name="twitter:image" content="https://guilhermeslettore-design.github.io/PAINEL/og-image.png">
+
+<link rel="stylesheet" href="fontes/fontes.css">
 <link rel="stylesheet" href="styles.css">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icone-192.png">
@@ -21,6 +35,11 @@
 
 <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="ios-banner oculto" id="iosBanner">
+  <p>📲 <strong>Instale como aplicativo:</strong> toque em <span class="ios-icone">⎙</span> <strong>Compartilhar</strong> e depois em <strong>"Adicionar à Tela de Início"</strong>.</p>
+  <button id="iosBannerFechar" aria-label="Fechar aviso">✕</button>
+</div>
 
 <!-- ===================== CABEÇALHO ===================== -->
 <header class="topo">
@@ -39,6 +58,10 @@
       <a href="#" data-nav="jogo">🎮 Jogos</a>
       <a href="#" data-nav="final">🏆 Certificado</a>
     </nav>
+    <div class="fonte-controles" aria-label="Tamanho da letra">
+      <button class="fonte-btn" id="fonteMenor" aria-label="Diminuir letra">A−</button>
+      <button class="fonte-btn" id="fonteMaior" aria-label="Aumentar letra">A+</button>
+    </div>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

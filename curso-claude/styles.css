@@ -64,6 +64,33 @@ code{
 .toast.visivel{ opacity:1; transform:translateX(-50%) translateY(0); }
 @media(min-width:820px){ .toast{ bottom:30px; } }
 
+/* ---------------- Banner de instalação iOS ---------------- */
+.ios-banner{
+  position:fixed; left:.8rem; right:.8rem; bottom:84px; z-index:120;
+  background:var(--fundo-2); border:1px solid var(--acento); border-radius:14px;
+  padding:.8rem 2.4rem .8rem 1rem; font-size:.9rem; box-shadow:var(--sombra);
+  animation:surgir .4s ease;
+}
+.ios-banner p{ margin:0; }
+.ios-icone{
+  display:inline-block; border:1px solid var(--borda); border-radius:6px;
+  padding:0 .35rem; color:var(--acento-forte);
+}
+.ios-banner button{
+  position:absolute; top:.4rem; right:.5rem; background:none; border:0;
+  color:var(--texto-suave); font-size:1rem; cursor:pointer; padding:.3rem;
+}
+
+/* ---------------- Controle de tamanho da letra ---------------- */
+.fonte-controles{ display:flex; gap:.3rem; margin-left:auto; }
+@media(min-width:820px){ .fonte-controles{ margin-left:.5rem; } }
+.fonte-btn{
+  background:var(--fundo-3); color:var(--texto); border:1px solid var(--borda);
+  border-radius:8px; padding:.3rem .55rem; font-size:.8rem; font-weight:700;
+  cursor:pointer; font-family:var(--fonte-corpo);
+}
+.fonte-btn:hover{ border-color:var(--acento); }
+
 /* ---------------- Cabeçalho ---------------- */
 .topo{
   position:sticky; top:0; z-index:50;
