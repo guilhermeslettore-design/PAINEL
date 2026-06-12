@@ -564,27 +564,33 @@ pre.codigo code{ background:none; border:0; padding:0; font-size:.84rem; line-he
 .curso-card{
   display:flex; flex-direction:column; text-align:left; padding:0; overflow:hidden;
   background:var(--fundo-2); border:1px solid var(--borda); border-radius:var(--raio);
-  color:var(--texto); font-family:var(--fonte-corpo); cursor:default;
+  color:var(--texto); font-family:var(--fonte-corpo); cursor:default; box-shadow:var(--sombra);
 }
-.curso-card.disponivel{ cursor:pointer; transition:transform .15s, border-color .15s; }
-.curso-card.disponivel:hover{ transform:translateY(-3px); border-color:var(--acento); }
-.curso-capa{
-  height:120px; display:flex; align-items:center; justify-content:center; font-size:3.2rem;
-  background:linear-gradient(135deg, var(--c1), var(--c2));
+.curso-card.disponivel{ cursor:pointer; transition:transform .18s, border-color .18s, box-shadow .18s; }
+.curso-card.disponivel:hover{ transform:translateY(-4px); border-color:var(--acento); box-shadow:0 16px 38px rgba(0,0,0,.45); }
+.curso-capa-wrap{ position:relative; }
+.curso-capa-img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; }
+.curso-selo{
+  position:absolute; top:.65rem; left:.65rem;
+  background:var(--verde); color:#0d1f0d; font-size:.74rem; font-weight:700;
+  border-radius:999px; padding:.22rem .7rem; box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
-.curso-corpo{ padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.45rem; flex:1; }
-.curso-tag{
-  align-self:flex-start; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
-  color:var(--verde); border:1px solid var(--verde); border-radius:999px; padding:.15rem .6rem;
-}
-.breve-tag{ color:var(--texto-suave); border-color:var(--borda); }
+.breve-selo{ background:rgba(26,23,20,.82); color:#F2EBE0; }
+.curso-corpo{ padding:1rem 1.1rem 1.2rem; display:flex; flex-direction:column; gap:.5rem; flex:1; }
 .curso-corpo h3{ font-size:1.3rem; }
 .curso-corpo p{ font-size:.92rem; color:var(--texto-suave); flex:1; }
-.curso-meta{ display:flex; flex-wrap:wrap; gap:.5rem; font-size:.78rem; color:var(--texto-suave); }
-.curso-meta span{ background:var(--fundo-3); border:1px solid var(--borda); border-radius:999px; padding:.15rem .55rem; }
-.curso-progresso{ margin-top:.3rem; font-weight:700; color:var(--acento-forte); }
-.curso-card.breve{ opacity:.72; }
-.curso-card.breve .curso-capa{ filter:grayscale(.3); }
+.curso-meta{ display:flex; flex-wrap:wrap; gap:.45rem; font-size:.78rem; color:var(--texto-suave); }
+.curso-meta span{ background:var(--fundo-3); border:1px solid var(--borda); border-radius:999px; padding:.2rem .6rem; }
+.curso-cta{
+  margin-top:.5rem; align-self:flex-start; font-weight:700; color:#241307;
+  background:linear-gradient(120deg, var(--acento), var(--acento-forte));
+  border-radius:999px; padding:.55rem 1.1rem; font-size:.92rem;
+}
+.curso-card.breve{ opacity:.82; }
+.curso-card.breve .curso-capa-img{ filter:grayscale(.35) brightness(.92); }
+/* logo com SVG */
+.logo-marca{ display:flex; align-items:center; }
+.logo-marca svg{ display:block; }
 .catalogo-rodape{ text-align:center; color:var(--texto-suave); font-size:.88rem; margin-top:1.6rem; }
 .voltar-cursos{
   background:none; border:0; color:var(--acento-forte); font-family:var(--fonte-corpo);
