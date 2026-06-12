@@ -30,6 +30,7 @@
       <span class="logo-texto">Academia <em>Claude</em></span>
     </a>
     <nav class="menu" id="menu">
+      <a href="#" data-nav="tutor">💬 Tutor IA</a>
       <a href="#" data-nav="meucurso">🎯 Meu curso</a>
       <a href="#" data-nav="n1">🌱 Iniciante</a>
       <a href="#" data-nav="n2">🚀 Intermediário</a>
@@ -85,6 +86,7 @@
   </div>
 
   <div class="atalhos">
+    <button class="atalho" data-nav="tutor">💬 <span>Tutor IA — tire dúvidas</span></button>
     <button class="atalho" data-nav="meucurso">🎯 <span>Curso personalizado</span></button>
     <button class="atalho" data-nav="prompts">📚 <span>Biblioteca de Prompts</span></button>
     <button class="atalho" data-nav="jogo">🎮 <span>Jogos</span></button>
@@ -746,6 +748,32 @@ claude mcp list</code></pre>
 </section>
 
 <!-- ############################################################ -->
+<!-- ######################## TUTOR IA ########################## -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="tutor">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">💬 Tutor da Academia</span>
+    <h2>Tire qualquer dúvida sobre o Claude</h2>
+    <p>Pergunte sobre botões, funções, planos, modelos, conectores, Claude Code, API — o tutor conhece tudo. <span class="tutor-modo" id="tutorModo">🤖 respondendo na hora, grátis</span></p>
+  </div>
+
+  <div class="chat-caixa">
+    <div class="chat-mensagens" id="chatMensagens" aria-live="polite"></div>
+    <div class="chat-sugestoes" id="chatSugestoes"></div>
+    <form class="chat-form" id="chatForm">
+      <input id="chatInput" type="text" placeholder="Ex.: como instalo um conector?" maxlength="500" autocomplete="off" aria-label="Sua pergunta">
+      <button class="btn btn-primario chat-enviar" type="submit" aria-label="Enviar">➤</button>
+    </form>
+    <button class="chat-limpar" id="chatLimpar">🗑️ limpar conversa</button>
+  </div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="meucurso">Montar meu curso →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
 <!-- ##################### MEU CURSO (PERSONALIZADO) ############ -->
 <!-- ############################################################ -->
 <section class="tela oculto" data-tela="meucurso">
@@ -942,6 +970,7 @@ claude mcp list</code></pre>
 <!-- ===================== BARRA DE ABAS (celular) ===================== -->
 <nav class="tabbar" aria-label="Navegação principal">
   <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Início</span></button>
+  <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
   <button data-nav="meucurso" class="tab"><span class="tab-icone">🎯</span><span class="tab-rotulo">Meu curso</span></button>
   <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
   <button data-nav="n2" class="tab"><span class="tab-icone">🚀</span><span class="tab-rotulo">Nível 2</span></button>
