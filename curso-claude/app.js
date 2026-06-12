@@ -129,6 +129,8 @@
 
   function mostrarTela(id) {
     telas.forEach((t) => t.classList.toggle("oculto", t.dataset.tela !== id));
+    // contexto: vitrine (catálogo) x dentro de um curso → controla o que a interface mostra
+    document.body.dataset.ctx = (id === "catalogo") ? "catalogo" : "curso";
     document.querySelectorAll(".menu a").forEach((a) =>
       a.classList.toggle("ativo", a.dataset.nav === id)
     );
@@ -138,20 +140,23 @@
     menu.classList.remove("aberto");
     menuBtn.setAttribute("aria-expanded", "false");
     window.scrollTo(0, 0);
-    if (id !== "inicio") { estado.ultimaTela = id; salvar(); }
+    if (id !== "inicio" && id !== "catalogo") { estado.ultimaTela = id; salvar(); }
     atualizarContinuar();
   }
 
+  // Botão "Começar/Continuar" na home do curso: aponta para o nível certo
   function atualizarContinuar() {
-    const btn = document.getElementById("continuarBtn");
+    const btn = document.getElementById("comecarCursoBtn");
     if (!btn) return;
-    if (estado.ultimaTela && NOME_TELA[estado.ultimaTela]) {
-      btn.classList.remove("oculto");
-      btn.dataset.nav = estado.ultimaTela;
-      btn.textContent = "▶ Continuar: " + NOME_TELA[estado.ultimaTela];
-    } else {
-      btn.classList.add("oculto");
-    }
+    let alvo = "n1", rotulo = "▶ Começar pelo Nível 1";
+    const niveis = ["n1", "n2", "n3"];
+    const proximo = niveis.find((n) => !nivelCompleto(n));
+    if (!proximo) { alvo = "final"; rotulo = "🏆 Ver meu certificado"; }
+    else if (estado.ultimaTela && niveis.includes(estado.ultimaTela)) {
+      alvo = estado.ultimaTela; rotulo = "▶ Continuar no " + NOME_TELA[alvo];
+    } else if (proximo !== "n1") { alvo = proximo; rotulo = "▶ Continuar no " + NOME_TELA[proximo]; }
+    btn.dataset.nav = alvo;
+    btn.textContent = rotulo;
   }
 
   document.addEventListener("click", (ev) => {
@@ -193,7 +198,8 @@
         prog.textContent = feitosNivel >= totalNivel
           ? "✓ Nível completo!"
           : `${feitosNivel}/${totalNivel} etapas`;
-        prog.closest(".trilha-card").classList.toggle("completo", feitosNivel >= totalNivel);
+        const cartao = prog.closest(".roadmap-item, .trilha-card");
+        if (cartao) cartao.classList.toggle("completo", feitosNivel >= totalNivel);
       }
     });
 
@@ -1896,8 +1902,8 @@
       b.setAttribute("aria-pressed", String(estado.senior));
       b.classList.toggle("ativo", estado.senior);
     });
-    const heroBtn = document.getElementById("seniorHeroBtn");
-    if (heroBtn) heroBtn.textContent = estado.senior ? "👵 Sair do Modo Terceira Idade" : "👵 Modo Terceira Idade";
+    const catBtn = document.getElementById("seniorCatBtn");
+    if (catBtn) catBtn.textContent = estado.senior ? "Sair do Modo Terceira Idade" : "Ativar Modo Terceira Idade";
 
     if (estado.senior) {
       // injeta a explicação simples no topo de cada etapa
@@ -2239,6 +2245,8 @@
     });
   }
 
+  // contexto inicial: a vitrine de cursos
+  if (!document.body.dataset.ctx) document.body.dataset.ctx = "catalogo";
   atualizarContinuar();
   atualizarTudo();
 
