@@ -16,7 +16,7 @@
   };
   const QUIZ_DO_NIVEL = { n1: "quiz1", n2: "quiz2", n3: "quiz3" };
   const NOME_TELA = {
-    inicio: "Início", meucurso: "Meu curso personalizado",
+    inicio: "Início", tutor: "Tutor IA", meucurso: "Meu curso personalizado",
     n1: "Nível 1 · Iniciante", n2: "Nível 2 · Intermediário",
     n3: "Nível 3 · Avançado", prompts: "Biblioteca de Prompts", jogo: "Jogos", final: "Certificado",
   };
@@ -27,6 +27,7 @@
     missoes: {},
     jogo: { recorde: 0, passou: false },
     oficina: { melhor: 0, passou: false },
+    tutorHistorico: [],
     perfil: null,
     nome: "",
     ultimaTela: "",
@@ -1176,6 +1177,322 @@
     }
   }
   saudacao();
+
+  /* ============================================================
+     TUTOR IA — chat com base de conhecimento completa sobre o Claude
+     Modo local (grátis, instantâneo) + upgrade automático para o
+     Claude real via /api/chat quando o servidor estiver liberado.
+     ============================================================ */
+  const KB = [
+    { k: ["o que e claude", "que e o claude", "claude e o que", "para que serve o claude"], t: "O que é o Claude",
+      a: "O Claude é a inteligência artificial da Anthropic. Você conversa com ele em linguagem natural e ele escreve textos, resume e analisa documentos, lê imagens e PDFs, programa, pesquisa na web, cria planilhas e apresentações e muito mais. Funciona no site claude.ai, nos apps de celular e desktop, no Claude Code (terminal) e pela API." },
+    { k: ["anthropic", "quem criou", "quem fez o claude", "empresa"], t: "Anthropic",
+      a: "A Anthropic é a empresa americana que criou o Claude, fundada em 2021 por ex-pesquisadores de IA com foco em segurança. É uma das líderes mundiais em IA e criou também o padrão MCP, que conecta IAs a outras ferramentas." },
+    { k: ["token", "tokens"], t: "Tokens",
+      a: "Token é o 'pedacinho' de texto que a IA lê e escreve — uma palavra tem em média 1 a 3 tokens. No claude.ai você não se preocupa com isso (paga assinatura). Na API, o preço é por milhão de tokens: por exemplo, o Sonnet 4.6 custa US$ 3 por milhão na entrada e US$ 15 na saída." },
+    { k: ["janela de contexto", "contexto", "memoria de trabalho", "quanto texto"], t: "Janela de contexto",
+      a: "É a 'memória de trabalho' do modelo: quanto texto ele considera de uma vez na conversa. Sonnet, Opus e Fable trabalham com até 1 milhão de tokens (cabem livros inteiros!); o Haiku, com 200 mil. Se a conversa ficar gigante, o Claude resume automaticamente as partes antigas." },
+    { k: ["modelos", "qual modelo", "diferenca entre os modelos", "que modelo usar", "escolher modelo"], t: "Os modelos",
+      a: "São 4 principais: ⚡ Haiku 4.5 (rápido e barato — tarefas simples em volume), ⚖️ Sonnet 4.6 (equilibrado — o melhor para o dia a dia), 🎻 Opus 4.8 (especialista — trabalhos longos e complexos) e 🌟 Fable 5 (topo de linha — os problemas mais difíceis). Regra de bolso: comece pelo Sonnet; desça pro Haiku se for simples, suba pro Opus se for complexo." },
+    { k: ["haiku"], t: "Haiku 4.5",
+      a: "O Haiku 4.5 é o modelo mais rápido e barato da família (US$ 1 entrada / US$ 5 saída por milhão de tokens na API, contexto de 200 mil tokens). Ideal para tarefas simples e repetitivas em grande volume: classificar mensagens, respostas rápidas de atendimento, resumos curtos." },
+    { k: ["sonnet"], t: "Sonnet 4.6",
+      a: "O Sonnet 4.6 é o equilibrado — a melhor combinação de velocidade e inteligência. Perfeito para o dia a dia: escrever e revisar textos, programar, analisar documentos e planilhas. Contexto de 1 milhão de tokens; na API custa US$ 3 (entrada) / US$ 15 (saída) por milhão." },
+    { k: ["opus"], t: "Opus 4.8",
+      a: "O Opus 4.8 é o especialista autônomo: encara trabalhos longos e difíceis — refatorar projetos inteiros de código, pesquisas profundas, relatórios elaborados, agentes que trabalham horas sem supervisão. Contexto de 1 milhão; na API custa US$ 5 / US$ 25 por milhão de tokens." },
+    { k: ["fable", "mythos", "claude 5", "modelo mais forte", "mais inteligente", "topo de linha"], t: "Fable 5",
+      a: "O Fable 5 é o modelo mais capaz disponível — o primeiro da família Claude 5, da nova classe 'Mythos'. É chamado quando nem o Opus dá conta: raciocínio extremo e projetos autônomos longuíssimos. O raciocínio interno dele fica sempre ativo. Na API custa US$ 10 / US$ 50 por milhão de tokens." },
+    { k: ["preco", "precos", "quanto custa", "valor", "caro"], t: "Preços",
+      a: "Depende de onde você usa! No claude.ai: plano Free (grátis, com limites), Pro (assinatura mensal, uso ampliado), Max (5x ou 20x o Pro) e Team/Enterprise para empresas — confira valores atuais na página de planos do claude.ai. Na API (para desenvolvedores) paga-se por milhão de tokens: Haiku US$ 1/5, Sonnet US$ 3/15, Opus US$ 5/25, Fable US$ 10/50 (entrada/saída)." },
+    { k: ["plano free", "gratis", "gratuito", "de graca", "sem pagar"], t: "Plano grátis",
+      a: "Sim, dá para usar o Claude de graça! Crie a conta no claude.ai ou no app e use o plano Free — ele tem limite de mensagens que renova com o tempo e acesso aos recursos básicos. Para uso diário intenso, Projetos e conectores, o plano Pro vale a pena." },
+    { k: ["plano pro", "assinatura", "plano max", "team", "enterprise", "planos"], t: "Planos do claude.ai",
+      a: "Free: grátis, com limites — bom para conhecer. Pro: assinatura mensal com muito mais uso, mais modelos, Projetos e conectores. Max: para uso intenso, com faixas de 5x e 20x o limite do Pro. Team e Enterprise: para empresas, com gestão de equipe e controles administrativos. Os valores estão na página de planos do claude.ai." },
+    { k: ["criar conta", "cadastro", "como comecar", "primeiro acesso", "registrar"], t: "Criar conta",
+      a: "1) Acesse claude.ai no navegador ou baixe o app 'Claude' na App Store / Google Play. 2) Entre com seu e-mail ou conta Google. 3) Pronto — a tela principal é um chat: digite qualquer coisa e converse. Dica: comece pedindo 'o que você pode fazer por alguém da minha profissão?'" },
+    { k: ["aplicativo", "app", "celular", "baixar", "desktop", "computador", "instalar o claude"], t: "Apps do Claude",
+      a: "O Claude tem: site (claude.ai), app de celular (iPhone e Android — busque 'Claude' na loja), e app de desktop para Mac e Windows (baixe em claude.ai/download). Tudo sincronizado: a conversa que você começa no celular continua no computador." },
+    { k: ["nova conversa", "historico", "conversas antigas", "apagar conversa", "renomear"], t: "Conversas e histórico",
+      a: "O botão + cria uma conversa nova — use uma conversa por assunto, isso melhora muito as respostas. No menu lateral fica o histórico: dá para buscar, renomear, continuar de onde parou e apagar conversas. Hábito de ouro: assunto novo = conversa nova." },
+    { k: ["seletor de modelo", "trocar modelo", "mudar modelo", "escolher o modelo na tela"], t: "Trocar de modelo",
+      a: "Perto do campo de digitação há um seletor com o nome do modelo (ex.: 'Sonnet 4.6'). Toque nele para trocar entre Haiku, Sonnet, Opus etc. — alguns modelos dependem do seu plano. Teste a mesma pergunta em dois modelos para sentir a diferença!" },
+    { k: ["pensamento estendido", "modo de raciocinio", "thinking", "pensar mais", "raciocinio"], t: "Pensamento estendido",
+      a: "É uma chave/botão perto do campo de texto que deixa o Claude 'pensar' por mais tempo antes de responder. Ligue para problemas difíceis: matemática, lógica, análise profunda, decisões importantes. Desligado, ele responde mais rápido — melhor para perguntas simples." },
+    { k: ["anexar", "enviar arquivo", "mandar foto", "pdf", "imagem", "planilha", "excel", "documento", "clipe"], t: "Anexar arquivos e fotos",
+      a: "Toque no clipe 📎 (ou no + no celular) para enviar PDFs, fotos, planilhas, Word e outros arquivos. O Claude lê e analisa: 'resume este contrato', 'acha erros nesta planilha', 'transcreve esta foto'. Ele também CRIA arquivos: peça uma planilha ou apresentação e baixe o resultado." },
+    { k: ["pesquisa na web", "internet", "buscar na web", "noticias", "atualizado", "cotacao"], t: "Pesquisa na web",
+      a: "Ative a busca na web no menu de ferramentas da conversa e o Claude pesquisa informação atual na internet, citando as fontes. Essencial para preços, notícias e qualquer coisa recente — o conhecimento 'de fábrica' do modelo tem data de corte." },
+    { k: ["pesquisa profunda", "deep research", "pesquisa avancada", "relatorio com fontes"], t: "Pesquisa profunda",
+      a: "É o modo de pesquisa avançada: o Claude investiga um tema a fundo por vários minutos, cruzando dezenas de fontes, e devolve um relatório organizado com referências. Ótimo para estudo de mercado, comparar produtos ou se aprofundar num assunto. Disponível nos planos pagos." },
+    { k: ["voz", "falar", "ditado", "microfone", "audio"], t: "Voz e ditado",
+      a: "No app do celular, toque no microfone para ditar em vez de digitar — ou use o modo de voz para conversar falando e ouvindo, como uma ligação. Perfeito para usar andando, dirigindo ou quando der preguiça de digitar. 😄" },
+    { k: ["estilos", "tom de resposta", "jeito de escrever", "formal", "estilo de resposta"], t: "Estilos de resposta",
+      a: "Nas configurações (e no menu da conversa) você escolhe o estilo de escrita do Claude: mais formal, mais direto, mais explicativo — e dá para criar estilos personalizados com exemplos do seu jeito de escrever. Bom para padronizar e-mails e textos da empresa." },
+    { k: ["memoria", "lembrar", "ele lembra", "esquecer", "apagar memoria"], t: "Memória",
+      a: "O Claude pode lembrar informações suas entre conversas: nome, empresa, preferências, contexto de projetos. Você controla tudo: nas configurações dá para ver o que ele memorizou, editar e apagar. A memória deixa as respostas cada vez mais 'a sua cara'." },
+    { k: ["projeto", "projetos", "pasta inteligente", "instrucoes fixas", "base de conhecimento"], t: "Projetos",
+      a: "Projeto é uma 'pasta inteligente': agrupa conversas de um mesmo assunto e dá ao Claude instruções fixas + arquivos de referência permanentes. Como criar: menu lateral → Projetos → Novo projeto → escreva as instruções (quem é você, o que quer, regras) → suba arquivos (catálogo, tabela, modelos). Toda conversa dentro dele já 'nasce sabendo' tudo isso." },
+    { k: ["artifact", "artefato", "criar site", "criar app", "calculadora", "painel ao lado"], t: "Artifacts",
+      a: "Quando você pede algo que é um 'produto' (documento, site, mini-app, diagrama, planilha), o Claude abre um painel chamado Artifact ao lado do chat com o resultado pronto e editável. Peça mudanças ('muda a cor', 'adiciona um campo') e veja atualizar. Dá até para publicar e compartilhar o link. Teste: 'crie uma calculadora de gorjeta interativa'." },
+    { k: ["conector", "conectores", "connectors", "ligar ferramentas", "integracao"], t: "Conectores",
+      a: "Conectores ligam o Claude às suas ferramentas reais: Google Drive, Gmail, Agenda, Notion, Slack, GitHub e dezenas de outras — sempre com sua permissão. Aí você pede coisas como 'resume o documento X do meu Drive' ou 'o que tenho na agenda amanhã?'. Para instalar: Configurações → Conectores → escolha no diretório → Conectar e autorize." },
+    { k: ["instalar conector", "ativar conector", "como conecto", "google drive", "gmail", "agenda", "notion", "slack"], t: "Instalar um conector",
+      a: "Passo a passo: 1) No claude.ai, abra Configurações → Conectores. 2) Procure a ferramenta no diretório (ex.: Google Drive). 3) Toque em Conectar e faça login na ferramenta para autorizar. 4) Na conversa, ative o conector no menu de ferramentas e peça normalmente. Você pode desconectar quando quiser." },
+    { k: ["conector personalizado", "extensao", "extensoes", "adicionar url", "servidor proprio"], t: "Conectores personalizados",
+      a: "Se uma ferramenta não está no diretório mas tem um servidor MCP, adicione pelo endereço: Configurações → Conectores → Adicionar conector personalizado → cole a URL. No app de desktop também existem extensões locais, que acessam coisas do seu computador (como pastas de arquivos). Só instale de fontes confiáveis!" },
+    { k: ["mcp", "model context protocol", "usb das ias", "protocolo"], t: "MCP",
+      a: "MCP (Model Context Protocol) é um padrão aberto criado pela Anthropic — pense no 'USB das IAs': um plugue universal que conecta qualquer ferramenta a qualquer assistente. Um servidor MCP expõe ferramentas (ações) e recursos (dados); o Claude é o cliente que os usa. É a tecnologia por trás dos conectores." },
+    { k: ["servidor mcp", "criar mcp", "mcp add", "mcp list"], t: "Servidores MCP",
+      a: "Servidor MCP é o programa que oferece ferramentas para a IA (ex.: o do GitHub expõe 'criar issue', 'ler pull request'). Pode ser remoto (conecta pela URL) ou local (roda no seu computador). No Claude Code: 'claude mcp add --transport http nome URL' para adicionar e 'claude mcp list' para listar. Quem programa pode criar o próprio servidor com os SDKs oficiais." },
+    { k: ["claude code", "terminal", "linha de comando", "programar"], t: "Claude Code",
+      a: "O Claude Code é o Claude rodando no seu computador (terminal, desktop, VS Code). A diferença para o chat: ele AGE — lê e edita arquivos, roda comandos, testa e corrige sozinho, sempre pedindo sua aprovação para ações importantes. Serve para criar sistemas, corrigir bugs e automatizar tarefas repetitivas (organizar arquivos, consolidar planilhas, gerar relatórios)." },
+    { k: ["instalar claude code", "npm install", "node", "como instalo o code"], t: "Instalar o Claude Code",
+      a: "1) Instale o Node.js (nodejs.org). 2) No terminal: npm install -g @anthropic-ai/claude-code. 3) Entre na pasta do projeto e digite 'claude'. 4) Faça login com sua conta (Pro/Max ou chave da API) e converse: 'o que tem nesta pasta?'. Dica: o comando /init cria o CLAUDE.md, o 'manual do projeto'." },
+    { k: ["claude.md", "init", "comandos do claude code", "barra init"], t: "Comandos do Claude Code",
+      a: "Os principais: /init cria o arquivo CLAUDE.md (manual do projeto que ele lê em toda sessão); 'claude mcp add/list' gerencia servidores MCP; e você conversa normalmente pedindo qualquer coisa ('corrige esse bug', 'organize esta pasta'). Ele sempre mostra o plano e pede aprovação antes de ações importantes." },
+    { k: ["automatizar", "automacao", "tarefas repetitivas", "robotizar", "automatico"], t: "Automação",
+      a: "Com o Claude Code dá para automatizar de verdade: consolidar várias planilhas em um resumo único, gerar o relatório semanal a partir de uma pasta de arquivos, renomear/organizar centenas de documentos, criar rascunhos de e-mail em lote, comparar metas x realizado... Comece assim: pergunte ao Claude 'quais tarefas do meu trabalho dá para automatizar?' e peça o passo a passo da mais fácil." },
+    { k: ["api", "desenvolvedor", "integrar no sistema", "colocar no meu site"], t: "API",
+      a: "A API é como desenvolvedores colocam o Claude dentro dos próprios sistemas (chatbot no site, classificador de e-mails, gerador de relatórios). Você cria conta no console (platform.claude.com), gera uma chave de API e paga por uso (por milhão de tokens). Tem recursos como execução de código, busca na web, visão e respostas em JSON." },
+    { k: ["chave de api", "api key", "chave secreta", "sk-ant"], t: "Chave de API",
+      a: "A chave de API (começa com sk-ant-...) é a 'senha' que identifica seu aplicativo na Anthropic. Regras de ouro: nunca coloque a chave dentro do código publicado, nunca compartilhe, use variáveis de ambiente ou cofres de senha. Quem tem sua chave gasta na SUA conta!" },
+    { k: ["batch", "lote", "desconto", "50%", "mais barato"], t: "Batch API",
+      a: "O Batch API processa tarefas sem pressa (até 24h) com 50% de desconto sobre o preço normal da API. Perfeito para volumes grandes que não precisam de resposta imediata: classificar milhares de textos, gerar resumos em massa, processar relatórios da madrugada." },
+    { k: ["cache", "cache de prompt", "economizar na api"], t: "Cache de prompt",
+      a: "O cache de prompt guarda a parte repetida das suas chamadas de API (instruções fixas, documentos grandes) e cobra até ~90% mais barato nas chamadas seguintes. Junto com o Batch (50% off), é a principal forma de economizar na API." },
+    { k: ["agente", "agentes", "agentic", "funcionario digital"], t: "Agentes",
+      a: "Agente é a IA que não só responde — executa um objetivo: planeja, usa ferramentas, verifica o resultado e tenta de novo até concluir. Pense em 'funcionários digitais' para tarefas chatas: triagem de e-mails, monitoramento de planilhas, relatórios semanais. O Claude é referência mundial nisso." },
+    { k: ["skill", "skills", "habilidade", "apostila"], t: "Skills",
+      a: "Skills são 'apostilas' que ensinam o Claude a fazer uma tarefa do SEU jeito — por exemplo, o padrão de propostas da sua empresa. Você cria uma pasta com instruções e exemplos, e o Claude consulta quando a tarefa pede. Existem skills prontas (Excel, Word, PowerPoint, PDF) e personalizadas." },
+    { k: ["subagente", "subagentes", "paralelo", "varios agentes"], t: "Subagentes",
+      a: "Subagentes são 'ajudantes' que o Claude despacha em paralelo para dividir um trabalho grande: um pesquisa, outro escreve, outro revisa — tudo ao mesmo tempo. É como ter uma equipe inteira num comando só. Disponível no Claude Code e na API." },
+    { k: ["seguranca", "lgpd", "dados", "privacidade", "senha", "confiavel", "seguro"], t: "Segurança",
+      a: "Regras de ouro: 1) Senhas e chaves: NUNCA envie para nenhuma IA. 2) Dados de clientes: só conforme a política da empresa e a LGPD. 3) IA acelera, humano assina: revise documentos importantes. 4) Conectores: dê só as permissões necessárias e desconecte o que não usa. 5) Confira números e fatos importantes — IA pode errar." },
+    { k: ["alucina", "alucinacao", "erra", "inventa", "confiar", "mentira"], t: "Alucinação",
+      a: "Alucinação é quando a IA inventa uma informação com confiança — acontece com toda IA. Defesas: peça fontes ('cite as fontes'), use a pesquisa na web para fatos atuais, confira números importantes e desconfie de detalhes muito específicos (datas, valores, nomes) que você não consegue verificar." },
+    { k: ["limite", "limites", "acabou as mensagens", "quota", "esgotou"], t: "Limites de uso",
+      a: "Cada plano tem um limite de mensagens que renova com o tempo (no Free é menor; Pro e Max ampliam bastante). Conversas muito longas e arquivos grandes consomem mais. Dica: conversas novas por assunto gastam menos contexto e melhoram as respostas." },
+    { k: ["portugues", "idioma", "ingles", "linguagem"], t: "Idiomas",
+      a: "O Claude fala português brasileiro perfeitamente — pode conversar normalmente! Ele também traduz entre dezenas de idiomas: 'traduza este e-mail para o inglês formal' funciona na hora." },
+    { k: ["chatgpt", "gpt", "gemini", "diferenca", "melhor que", "comparar ia"], t: "Claude x outras IAs",
+      a: "O Claude se destaca em: textos longos e naturais, análise de documentos grandes (contexto de 1 milhão de tokens), programação (o Claude Code é referência), agentes que trabalham sozinhos e segurança. O ideal é testar com as SUAS tarefas — este curso te dá o método para extrair o máximo dele." },
+    { k: ["prompt", "como pedir", "escrever melhor", "dicas de prompt", "persona", "exemplos"], t: "Bons prompts",
+      a: "As 4 regras: 1) Dê contexto (quem, o quê, para quê). 2) Diga o formato (lista, tabela, nº de parágrafos). 3) Diga o porquê (a intenção melhora tudo). 4) Itere (peça ajustes na mesma conversa). Nível 2: defina uma persona ('você é um contador especialista...') e mostre exemplos do estilo que quer. Treine na Oficina de Prompts, na aba Jogos!" },
+    { k: ["curso", "certificado", "como funciona o site", "academia", "progresso", "missoes"], t: "Sobre este curso",
+      a: "A Academia Claude tem 3 níveis (Iniciante, Intermediário, Avançado), cada um com etapas, missões práticas 🔥 para fazer no Claude de verdade e um quiz (precisa de 70%). Completando tudo + o jogo Missão Certa, você libera o certificado para baixar. Na aba 🎯 Meu Curso, o site monta um plano personalizado para o seu trabalho. Seu progresso fica salvo no aparelho." },
+    { k: ["jogo", "jogos", "missao certa", "oficina"], t: "Os jogos",
+      a: "São dois: 🎮 Missão Certa — você é o gestor de IA e escolhe o modelo ideal para cada missão contra o tempo (50%+ conta para o certificado); e 🛠️ Oficina de Prompts — 8 rodadas para escolher a melhor versão de um prompt fraco (6 acertos = selo de Engenheiro de Prompts). Ambos na aba Jogos!" },
+  ];
+
+  const TUTOR_CEREBRO =
+    "Você é o Tutor da Academia Claude, um professor particular especialista em TUDO sobre o Claude da Anthropic: " +
+    "site claude.ai, apps (celular/desktop), planos (Free, Pro, Max, Team/Enterprise), todos os botões e funções da interface " +
+    "(nova conversa, seletor de modelo, pensamento estendido, anexos, pesquisa na web, pesquisa profunda, voz, estilos, memória), " +
+    "modelos (Haiku 4.5: rápido/barato, 200 mil de contexto, US$1/5 por milhão de tokens; Sonnet 4.6: equilibrado, 1 milhão, US$3/15; " +
+    "Opus 4.8: especialista autônomo, 1 milhão, US$5/25; Fable 5: topo de linha da família Claude 5, 1 milhão, US$10/50), " +
+    "Projetos, Artifacts, conectores e MCP (instalação em Configurações → Conectores), Claude Code (npm install -g @anthropic-ai/claude-code, " +
+    "/init, CLAUDE.md, claude mcp add/list, automações), API (console platform.claude.com, chaves, Batch -50%, cache de prompt -90%), " +
+    "agentes, skills, subagentes e segurança (LGPD, nunca enviar senhas, revisar conteúdo importante). " +
+    "Regras: responda SEMPRE em português brasileiro, de forma curta, prática e didática (máximo ~150 palavras), com passos numerados quando for tutorial. " +
+    "O aluno está fazendo o curso da Academia Claude (3 níveis + missões práticas + quiz + jogos + certificado). " +
+    "Se a pergunta fugir do tema Claude/IA, redirecione gentilmente para o curso. Se não tiver certeza de um valor atual (preço, limite), diga que pode mudar e indique onde conferir.";
+
+  const SUGESTOES_TUTOR = [
+    "Qual a diferença entre os modelos?",
+    "Como instalo um conector?",
+    "O que é o Claude Code?",
+    "Quanto custa o plano Pro?",
+    "Como criar um Projeto?",
+    "O que dá para automatizar?",
+    "O que são Artifacts?",
+    "O que é MCP?",
+    "Como escrever bons prompts?",
+    "O Claude pode errar?",
+  ];
+
+  const chatMensagens = document.getElementById("chatMensagens");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
+  const chatSugestoes = document.getElementById("chatSugestoes");
+  const tutorModo = document.getElementById("tutorModo");
+  let modoClaude = null; // null = ainda não testou; true = API real; false = local
+  let ultimoTema = null;
+
+  function normalizar(s) {
+    return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
+  function buscarResposta(pergunta) {
+    const p = " " + normalizar(pergunta) + " ";
+
+    // conversa social básica
+    if (/\b(oi|ola|opa|bom dia|boa tarde|boa noite|eai|e ai)\b/.test(p) && pergunta.length < 30)
+      return "Oi! 👋 Sou o tutor da Academia Claude. Pergunta qualquer coisa sobre o Claude — botões, planos, modelos, conectores, Claude Code... Pode mandar!";
+    if (/\b(obrigad|valeu|brigado|show|top|massa|perfeito)\b/.test(p) && pergunta.length < 40)
+      return "De nada! 😊 Qualquer outra dúvida, é só perguntar. E não esquece das missões práticas 🔥 — fazer é o que ensina!";
+    if (/quem (e|es) voce|o que voce faz|voce e quem/.test(p))
+      return "Sou o tutor da Academia Claude! Conheço o Claude de ponta a ponta: cada botão, cada função, planos, modelos, conectores, Claude Code, API... Pergunte qualquer dúvida do curso ou do app.";
+
+    let melhor = null, melhorPontos = 0;
+    KB.forEach((item) => {
+      let pontos = 0;
+      item.k.forEach((kw) => {
+        if (p.includes(normalizar(kw))) pontos += kw.split(" ").length * 2 + (kw.length > 8 ? 1 : 0);
+      });
+      if (pontos > melhorPontos) { melhorPontos = pontos; melhor = item; }
+    });
+
+    if (melhor && melhorPontos >= 2) {
+      ultimoTema = melhor;
+      return "💡 " + melhor.t + "\n\n" + melhor.a;
+    }
+    // contexto: pergunta curta de seguimento sobre o último tema
+    if (ultimoTema && pergunta.length < 30 && /\b(e |isso|ele|ela|como assim|mais|exemplo)\b/.test(p)) {
+      return "Sobre " + ultimoTema.t + ": " + ultimoTema.a;
+    }
+    return "Hmm, essa eu não tenho na ponta da língua no modo local. 🤔 Tente perguntar de outro jeito ou escolha um tema abaixo — sei tudo sobre: modelos e preços, planos, botões da tela, Projetos, Artifacts, conectores/MCP, Claude Code, API, agentes e segurança.";
+  }
+
+  function addBolha(de, texto, digitando) {
+    const div = document.createElement("div");
+    div.className = "msg " + (de === "eu" ? "msg-eu" : "msg-ia") + (digitando ? " digitando" : "");
+    div.textContent = texto;
+    chatMensagens.appendChild(div);
+    chatMensagens.scrollTop = chatMensagens.scrollHeight;
+    return div;
+  }
+
+  function salvarMsg(de, t) {
+    estado.tutorHistorico.push({ de, t });
+    if (estado.tutorHistorico.length > 60) estado.tutorHistorico = estado.tutorHistorico.slice(-60);
+    salvar();
+  }
+
+  function renderSugestoes() {
+    const escolhidas = embaralhar(SUGESTOES_TUTOR).slice(0, 4);
+    chatSugestoes.innerHTML = escolhidas
+      .map((s) => `<button type="button" class="chip" data-sugestao="${s}">${s}</button>`)
+      .join("");
+  }
+
+  function atualizarModoBadge() {
+    if (!tutorModo) return;
+    tutorModo.textContent = modoClaude === true
+      ? "✨ conectado ao Claude de verdade"
+      : "🤖 respondendo na hora, grátis";
+  }
+
+  async function responderComClaude(pergunta, bolha) {
+    const historico = estado.tutorHistorico.slice(-12).map((m) => ({
+      role: m.de === "eu" ? "user" : "assistant",
+      content: m.t,
+    }));
+    const msgs = [
+      { role: "user", content: TUTOR_CEREBRO },
+      { role: "assistant", content: "Entendido! Sou o tutor da Academia Claude. Pode perguntar." },
+    ].concat(historico, [{ role: "user", content: pergunta }]);
+
+    const ctrl = new AbortController();
+    const tempo = setTimeout(() => ctrl.abort(), 15000);
+    const resp = await fetch(API_IA, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: msgs }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(tempo);
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+
+    bolha.classList.remove("digitando");
+    bolha.textContent = "";
+    const leitor = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buffer = "";
+    while (true) {
+      const { done, value } = await leitor.read();
+      if (done) break;
+      buffer += dec.decode(value, { stream: true });
+      const linhas = buffer.split("\n");
+      buffer = linhas.pop();
+      for (const linha of linhas) {
+        if (!linha.startsWith("data: ")) continue;
+        try {
+          const ev2 = JSON.parse(linha.slice(6));
+          if (ev2.type === "content_block_delta" && ev2.delta && ev2.delta.type === "text_delta") {
+            bolha.textContent += ev2.delta.text;
+            chatMensagens.scrollTop = chatMensagens.scrollHeight;
+          }
+        } catch (e) { /* linha parcial */ }
+      }
+    }
+    if (!bolha.textContent.trim()) throw new Error("vazio");
+    return bolha.textContent;
+  }
+
+  async function enviarPergunta(pergunta) {
+    addBolha("eu", pergunta);
+    salvarMsg("eu", pergunta);
+    chatInput.value = "";
+    const bolha = addBolha("ia", "…", true);
+
+    let resposta = null;
+    if (modoClaude !== false) {
+      try {
+        resposta = await responderComClaude(pergunta, bolha);
+        modoClaude = true;
+      } catch (e) {
+        modoClaude = false;
+      }
+      atualizarModoBadge();
+    }
+    if (resposta === null) {
+      // modo local: resposta instantânea com pequena pausa natural
+      resposta = buscarResposta(pergunta);
+      await new Promise((r) => setTimeout(r, 350));
+      bolha.classList.remove("digitando");
+      bolha.textContent = resposta;
+      chatMensagens.scrollTop = chatMensagens.scrollHeight;
+    }
+    salvarMsg("ia", resposta);
+    renderSugestoes();
+  }
+
+  if (chatForm) {
+    // restaura conversa salva ou dá boas-vindas
+    if (estado.tutorHistorico.length) {
+      estado.tutorHistorico.forEach((m) => addBolha(m.de, m.t));
+    } else {
+      const boasVindas =
+        "Oi! 👋 Eu sou o tutor da Academia Claude. Pode me perguntar QUALQUER coisa sobre o Claude: " +
+        "o que cada botão faz, planos e preços, modelos, Projetos, conectores, Claude Code, automação... " +
+        "Toque numa sugestão abaixo ou escreva sua dúvida!";
+      addBolha("ia", boasVindas);
+      salvarMsg("ia", boasVindas);
+    }
+    renderSugestoes();
+    atualizarModoBadge();
+
+    chatForm.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const p = chatInput.value.trim();
+      if (p) enviarPergunta(p);
+    });
+
+    chatSugestoes.addEventListener("click", (ev) => {
+      const b = ev.target.closest("[data-sugestao]");
+      if (b) enviarPergunta(b.dataset.sugestao);
+    });
+
+    document.getElementById("chatLimpar").addEventListener("click", () => {
+      estado.tutorHistorico = [];
+      salvar();
+      chatMensagens.innerHTML = "";
+      ultimoTema = null;
+      const msg = "Conversa limpa! 🧹 Pode perguntar de novo o que quiser.";
+      addBolha("ia", msg);
+      salvarMsg("ia", msg);
+    });
+  }
 
   /* ============================================================
      OFICINA DE PROMPTS — jogo 2 (melhore o prompt fraco)
