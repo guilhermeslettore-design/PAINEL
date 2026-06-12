@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1A1714">
+<title>Marketing Digital na Prática — Aprende Aí</title>
+<meta name="description" content="Curso gratuito de Marketing Digital: funil, conteúdo, Instagram, WhatsApp, Google, e-mail e tráfego pago — com voz, quiz, jogos e certificado.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Aprende Aí">
+<meta property="og:title" content="Marketing Digital na Prática — Aprende Aí">
+<meta property="og:description" content="Do funil ao tráfego pago: curso prático e gratuito, com voz, quiz, jogos e certificado.">
+<meta property="og:url" content="https://guilhermeslettore-design.github.io/PAINEL/marketing/">
+<meta property="og:image" content="https://guilhermeslettore-design.github.io/PAINEL/capas/marketing.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../fontes/fontes.css">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/png" href="../icone-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+</head>
+<body data-ctx="curso">
+
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="topo">
+  <div class="topo-inner">
+    <a class="topo-voltar" href="../" aria-label="Voltar aos cursos">←</a>
+    <a class="logo" href="../">
+      <span class="logo-marca" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#E8825A"/><stop offset="1" stop-color="#B79FE0"/>
+          </linearGradient></defs>
+          <path d="M7 6 h26 a5 5 0 0 1 5 5 v15 a5 5 0 0 1 -5 5 h-13 l-8 7 v-7 h-5 a5 5 0 0 1 -5 -5 v-15 a5 5 0 0 1 5 -5 z" fill="url(#lg)"/>
+          <path d="M20 12 v13 M13.5 18.5 h13" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="logo-texto">Aprende <em>Aí</em></span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Seções do curso">
+      <a href="#" data-nav="inicio">📋 Conteúdo</a>
+      <a href="#" data-nav="tutor">💬 Tutor</a>
+      <a href="#" data-nav="kit">🧰 Kit</a>
+      <a href="#" data-nav="jogo">🎮 Jogos</a>
+      <a href="#" data-nav="final">🏆 Certificado</a>
+    </nav>
+    <div class="acoes-top">
+      <div class="fonte-controles" aria-label="Acessibilidade">
+        <button class="fonte-btn" id="seniorBtn" aria-pressed="false" title="Modo Terceira Idade">👵</button>
+        <button class="fonte-btn" id="fonteMenor" aria-label="Diminuir letra">A−</button>
+        <button class="fonte-btn" id="fonteMaior" aria-label="Aumentar letra">A+</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu do curso" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== HOME DO CURSO ===================== -->
+<section class="tela curso-home" id="inicio" data-tela="inicio">
+  <div class="ch-banner">
+    <img class="ch-banner-img" src="../capas/marketing.png" alt="Curso Marketing Digital na Prática">
+    <div class="ch-banner-info">
+      <span class="ch-eyebrow">CURSO · 3 níveis · ~3 horas</span>
+      <h1>Marketing Digital na Prática</h1>
+      <p>Do funil ao tráfego pago: atraia clientes de verdade, sem agência.</p>
+    </div>
+  </div>
+
+  <div class="ch-progresso">
+    <div class="ch-progresso-topo">
+      <span>Seu progresso</span><span id="progressoTexto">0%</span>
+    </div>
+    <div class="barra"><div class="barra-fill" id="barraGeral"></div></div>
+    <button class="btn btn-primario btn-bloco" id="comecarCursoBtn" data-nav="n1">▶ Começar pelo Nível 1</button>
+  </div>
+
+  <h2 class="sec-titulo"><span>📋 Conteúdo do curso</span></h2>
+  <ol class="roadmap">
+    <li class="roadmap-item" data-nav="n1" tabindex="0" role="button">
+      <span class="roadmap-num">1</span>
+      <div class="roadmap-txt">
+        <strong>Fundamentos</strong>
+        <span>Funil, cliente ideal, posicionamento, escolha de canais e as métricas que importam.</span>
+        <span class="roadmap-prog" data-prog-nivel="n1">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n2" tabindex="0" role="button">
+      <span class="roadmap-num">2</span>
+      <div class="roadmap-txt">
+        <strong>Conteúdo e Canais</strong>
+        <span>Copywriting, Instagram, WhatsApp, Google (busca local) e e-mail que vende.</span>
+        <span class="roadmap-prog" data-prog-nivel="n2">0/7 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+    <li class="roadmap-item" data-nav="n3" tabindex="0" role="button">
+      <span class="roadmap-num">3</span>
+      <div class="roadmap-txt">
+        <strong>Tráfego pago e estratégia</strong>
+        <span>Anúncios na Meta e no Google, funil completo, ROAS/CAC/LTV e IA no marketing.</span>
+        <span class="roadmap-prog" data-prog-nivel="n3">0/6 etapas</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
+  </ol>
+
+  <h2 class="sec-titulo"><span>🧰 Ferramentas do curso</span></h2>
+  <div class="ferramentas">
+    <button class="ferramenta" data-nav="tutor"><span class="ferramenta-ic">💬</span><strong>Tutor</strong><span>Tire qualquer dúvida</span></button>
+    <button class="ferramenta" data-nav="kit"><span class="ferramenta-ic">🧰</span><strong>Kit de Marketing</strong><span>Modelos prontos para copiar</span></button>
+    <button class="ferramenta" data-nav="jogo"><span class="ferramenta-ic">🎮</span><strong>Jogos</strong><span>Treine decidindo</span></button>
+    <button class="ferramenta" data-nav="final"><span class="ferramenta-ic">🏆</span><strong>Certificado</strong><span>Conclua e imprima</span></button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 1 ===================== -->
+<section class="tela nivel oculto" data-tela="n1">
+  <div class="nivel-cabecalho nivel-verde">
+    <span class="nivel-badge">🌱 Nível 1 · Fundamentos</span>
+    <h2>A base que 90% pula (e por isso quebra)</h2>
+    <p>Antes de postar ou anunciar: entenda o funil, o cliente e o jogo dos canais. É isso que separa quem atrai cliente de quem só "faz post".</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n1"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m1-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>O que é marketing digital de verdade</h3></div>
+    <article class="licao">
+      <p>Marketing digital <strong>não é "fazer post"</strong>. É um sistema para <strong>desconhecidos virarem clientes</strong> — e clientes voltarem. Tudo se organiza num <strong>funil</strong>:</p>
+      <ul class="lista-cartoes">
+        <li><strong>🔝 Topo — Atrair:</strong> a pessoa descobre que você existe (conteúdo, anúncios, indicação, Google).</li>
+        <li><strong>🤝 Meio — Convencer:</strong> ela passa a confiar (prova social, conteúdo útil, conversas, depoimentos).</li>
+        <li><strong>💰 Fundo — Vender:</strong> ela compra (oferta clara, facilidade de pagar, atendimento rápido).</li>
+        <li><strong>🔁 Pós — Reter:</strong> ela volta e indica (relacionamento, e-mail/WhatsApp, programa de indicação).</li>
+      </ul>
+      <div class="destaque">💡 <strong>O erro nº 1 do iniciante:</strong> só publicar "compre, compre, compre" (fundo de funil) para quem ainda nem te conhece. Primeiro gere valor e confiança; a venda é consequência.</div>
+      <p>Outra distinção essencial: <strong>orgânico</strong> (alcance gratuito, mais lento, constrói audiência) vs <strong>pago</strong> (alcance comprado, rápido, exige verba e oferta validada). Negócio saudável usa os dois — mas começa validando no orgânico/local.</p>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>Conheça seu cliente melhor que ele mesmo</h3></div>
+    <article class="licao">
+      <p>Quem fala com todo mundo não convence ninguém. Monte sua <strong>persona</strong> — o retrato do seu cliente ideal:</p>
+      <ol class="lista-passos">
+        <li><strong>Quem é:</strong> idade, ocupação, renda aproximada, onde mora.</li>
+        <li><strong>Dor:</strong> qual problema tira o sono dele (nas palavras DELE, não nas suas).</li>
+        <li><strong>Desejo:</strong> como é a vida dele depois de resolver o problema.</li>
+        <li><strong>Objeções:</strong> por que ele NÃO compraria de você ("é caro", "será que funciona?", "não confio").</li>
+        <li><strong>Onde ele está:</strong> Instagram? Grupos de WhatsApp? Pesquisando no Google?</li>
+      </ol>
+      <h4>🔎 Pesquisa de pobre (e poderosa) — faça hoje:</h4>
+      <ul class="lista-cartoes">
+        <li>Converse com seus <strong>5 melhores clientes</strong>: "por que você me escolheu?" e "o que quase te fez desistir?".</li>
+        <li>Leia os <strong>comentários e avaliações dos concorrentes</strong> (Google, Instagram, iFood): as reclamações deles são seu mapa do tesouro.</li>
+        <li>Anote as <strong>frases exatas</strong> que os clientes usam — elas viram seus títulos e anúncios depois.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>Posicionamento e oferta irresistível</h3></div>
+    <article class="licao">
+      <p><strong>Posicionamento</strong> é a resposta para "por que comprar de VOCÊ e não do concorrente (ou de ninguém)?". Construa com 3 peças:</p>
+      <ul class="lista-cartoes">
+        <li><strong>Promessa específica:</strong> "marmita fit com 40g de proteína entregue até 11h" vence "comida saudável e saborosa". Específico > genérico, sempre.</li>
+        <li><strong>Diferencial verdadeiro:</strong> velocidade, garantia, especialização, atendimento, preço — escolha 1 ou 2 e grite-os em tudo.</li>
+        <li><strong>Prova:</strong> depoimentos, números ("+300 clientes atendidos"), fotos de antes/depois, avaliações 5 estrelas. Sem prova, promessa é só barulho.</li>
+      </ul>
+      <div class="destaque">🎯 <strong>Teste do posicionamento:</strong> se você tampar a sua logo, o texto poderia ser de qualquer concorrente? Então não é posicionamento — recomece.</div>
+      <p>E a <strong>oferta</strong> não é o produto: é produto + facilidade + segurança. Exemplos de turbinar a mesma coisa: parcelamento, garantia de 7 dias, bônus, entrega grátis acima de X, "experimente antes".</p>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Canais: onde jogar o seu jogo</h3></div>
+    <article class="licao">
+      <p>Cada canal tem uma função. Os principais para pequenos negócios no Brasil:</p>
+      <ul class="lista-cartoes">
+        <li><strong>📸 Instagram:</strong> vitrine e relacionamento. Bom para mostrar trabalho, bastidores e prova social. Alcance orgânico vem dos Reels.</li>
+        <li><strong>💬 WhatsApp:</strong> onde o Brasil fecha negócio. Atendimento, catálogo, lista de transmissão e recompra. O canal mais subestimado.</li>
+        <li><strong>🔍 Google (busca/Maps):</strong> intenção pura — a pessoa JÁ está procurando "dentista perto de mim". Perfil da Empresa bem feito = clientes de graça.</li>
+        <li><strong>🎥 TikTok/YouTube:</strong> alcance e autoridade com vídeo. Exigem mais produção/consistência.</li>
+        <li><strong>📧 E-mail:</strong> o único canal que é SEU (ninguém muda o algoritmo). Melhor custo-benefício para vender de novo para quem já te conhece.</li>
+      </ul>
+      <div class="destaque">⚔️ <strong>Regra de ouro:</strong> domine UM canal antes de abrir três. Presença fraca em 4 redes perde para presença forte em 1. Escolha pelo lugar onde sua persona está + o que você consegue manter TODA semana.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m1-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>Métricas: vaidade x caixa</h3></div>
+    <article class="licao">
+      <p>Curtida não paga boleto. Separe <strong>métricas de vaidade</strong> (seguidores, curtidas) de <strong>métricas de negócio</strong>:</p>
+      <ul class="lista-cartoes">
+        <li><strong>Alcance:</strong> quantas pessoas viram. | <strong>Engajamento:</strong> quantas interagiram (salvar e compartilhar valem mais que curtir).</li>
+        <li><strong>Conversão:</strong> quantas fizeram a AÇÃO (chamar no WhatsApp, comprar). É a métrica rainha.</li>
+        <li><strong>CAC</strong> (Custo de Aquisição de Cliente): quanto você gasta para conquistar 1 cliente. Gastou R$ 300 em anúncio e fez 10 clientes → CAC = R$ 30.</li>
+        <li><strong>Ticket médio:</strong> valor médio por venda. | <strong>LTV:</strong> quanto um cliente deixa com você ao longo do tempo (cliente que volta 10x vale 10x).</li>
+      </ul>
+      <div class="destaque">🧮 <strong>A conta que sustenta tudo:</strong> o negócio é saudável quando <strong>LTV &gt; CAC</strong> (idealmente 3x ou mais). Se cada cliente custa R$ 30 e deixa R$ 300 ao longo do ano, você pode acelerar sem medo.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m1-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 1</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz1"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="n2">Ir para o Nível 2 →</button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 2 ===================== -->
+<section class="tela nivel oculto" data-tela="n2">
+  <div class="nivel-cabecalho nivel-azul">
+    <span class="nivel-badge">🚀 Nível 2 · Conteúdo e Canais</span>
+    <h2>Conteúdo que atrai, canais que vendem</h2>
+    <p>Copy, Instagram, WhatsApp, Google e e-mail — o arsenal completo do orgânico, com prática em cada etapa.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n2"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m2-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 7</span><h3>Conteúdo que atrai (sem virar escravo do feed)</h3></div>
+    <article class="licao">
+      <p>Conteúdo bom equilibra <strong>4 pilares</strong> — e a proporção certa é <strong>80/20</strong> (80% valor, 20% venda):</p>
+      <ul class="lista-cartoes">
+        <li><strong>🎓 Educar:</strong> dicas, "como fazer", erros comuns do seu mercado. Gera salvamentos.</li>
+        <li><strong>🎭 Conectar:</strong> bastidores, sua história, rotina, opinião. Gera identificação.</li>
+        <li><strong>🏆 Provar:</strong> resultados, depoimentos, antes/depois. Gera confiança.</li>
+        <li><strong>💰 Vender:</strong> oferta, chamada para ação clara. Gera caixa (mas só funciona com os 3 acima).</li>
+      </ul>
+      <h4>📅 Calendário mínimo viável (que você consegue MANTER):</h4>
+      <ol class="lista-passos">
+        <li>3 posts/semana: 1 educativo + 1 prova/bastidor + 1 com chamada para ação.</li>
+        <li>Stories quase todo dia (bastidor cru vale mais que produção perfeita).</li>
+        <li>1 hora por semana para planejar e deixar tudo agendado. Consistência > perfeição.</li>
+      </ol>
+      <div class="destaque">💡 <strong>Recicle sem dó:</strong> 1 ideia boa = 1 reel + 1 carrossel + 3 stories + 1 mensagem de lista. Quem te seguiu ontem não viu seu post do mês passado.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 7</span><h3>Copywriting: palavras que vendem</h3></div>
+    <article class="licao">
+      <p><strong>Copy</strong> é escrever para gerar ação. As regras do jogo:</p>
+      <ol class="lista-passos">
+        <li><strong>Gancho nos 3 primeiros segundos:</strong> a primeira frase decide se a pessoa para ou rola. Use pergunta, número ou quebra de expectativa: "Pare de postar todo dia" prende mais que "Dicas de marketing".</li>
+        <li><strong>Fórmula PAS:</strong> <em>Problema</em> ("agenda vazia na segunda?") → <em>Agitação</em> ("e o aluguel não espera...") → <em>Solução</em> ("este método lota horários ociosos").</li>
+        <li><strong>Especificidade vende:</strong> "emagreça 4kg em 6 semanas" > "emagreça rápido". "Resposta em 10 minutos" > "atendimento ágil".</li>
+        <li><strong>UM CTA claro por peça:</strong> "Chama no WhatsApp 👉 link na bio". Quem pede duas ações não recebe nenhuma.</li>
+        <li><strong>Fale de benefício, não de característica:</strong> característica = "tecido dry-fit"; benefício = "treina sem ficar ensopado".</li>
+      </ol>
+      <div class="exemplo-prompt">
+        <p class="exemplo-ruim"><span>❌ Fraca:</span> "Promoção imperdível! Qualidade e compromisso. Venha conferir!"</p>
+        <p class="exemplo-bom"><span>✅ Forte:</span> "Sobrou marmita na sexta? Congele 5 do nosso cardápio fit por R$ 89 e resolva sua semana. Só 20 kits — chama no WhatsApp."</p>
+      </div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 7</span><h3>Instagram na prática</h3></div>
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>Bio que converte:</strong> 1ª linha = o que você faz e para quem ("Marmitas fit em Curitiba"); 2ª = prova/diferencial ("+5.000 entregues"); 3ª = CTA com link ("Peça aqui 👇"). Nome de usuário pesquisável (área + cidade ajuda).</li>
+        <li><strong>Reels:</strong> o motor de alcance para quem ainda não te segue. 7–30s, gancho no primeiro segundo, legenda na tela (a maioria vê sem som).</li>
+        <li><strong>Carrossel/feed:</strong> profundidade e salvamentos — listas, passo a passo, antes/depois.</li>
+        <li><strong>Stories:</strong> relacionamento com quem JÁ te segue: enquetes, caixa de pergunta, bastidor, oferta do dia. É onde a venda acontece.</li>
+        <li><strong>Hashtags e horário:</strong> importam pouco hoje. 3–5 hashtags específicas bastam; "melhor horário" perde fácil para constância e qualidade do gancho.</li>
+        <li><strong>Sinal mais valioso para o algoritmo:</strong> compartilhamentos e salvamentos. Crie pensando "isso é útil o bastante para alguém mandar pra um amigo?".</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 7</span><h3>WhatsApp: onde o Brasil compra</h3></div>
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>Use o WhatsApp Business</strong> (grátis): perfil completo com endereço/horário, <strong>catálogo</strong> com fotos e preços, <strong>respostas rápidas</strong> (/preço, /entrega) e <strong>etiquetas</strong> (novo cliente, pagamento pendente, recompra).</li>
+        <li><strong>Mensagem de saudação + ausência</strong> configuradas: ninguém fica no vácuo.</li>
+        <li><strong>Lista de transmissão</strong> (não grupo!): ofertas e novidades 1x por semana para quem salvou seu contato. Parece mensagem pessoal, escala como canal.</li>
+        <li><strong>Status do WhatsApp:</strong> a rede social esquecida — bastidores e ofertas para quem já é próximo.</li>
+        <li><strong>Velocidade fecha venda:</strong> responder em minutos multiplica conversão. Se demorar, o cliente já chamou o concorrente.</li>
+      </ul>
+      <div class="destaque">📵 <strong>O que NUNCA fazer:</strong> comprar lista de contatos e disparar para quem não pediu. Além de ilegal (LGPD), queima seu número e sua marca.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 7</span><h3>Google: clientes de graça com busca local</h3></div>
+    <article class="licao">
+      <p>Quando alguém busca "barbearia perto de mim", o Google decide quem aparece. Entre no jogo:</p>
+      <ol class="lista-passos">
+        <li>Crie/reivindique seu <strong>Perfil da Empresa no Google</strong> (Google Business Profile) — grátis, em google.com/business.</li>
+        <li>Preencha TUDO: categoria certa, horário, fotos reais (lugares com 20+ fotos recebem muito mais contato), serviços e área de entrega.</li>
+        <li><strong>Avaliações são o novo boca a boca:</strong> peça (com link direto!) a todo cliente satisfeito. Responda TODAS — inclusive as ruins, com educação. Quantidade + nota + recência = ranking.</li>
+        <li>Poste novidades e ofertas no próprio perfil (quase ninguém faz; o Google adora).</li>
+        <li>No site/bio, use as palavras que o cliente busca: "conserto de celular no Centro de Campinas" — não "soluções tecnológicas".</li>
+      </ol>
+      <div class="destaque">🥇 Para negócio local, este é frequentemente <strong>o canal com melhor retorno por hora investida</strong>. E quase nenhum concorrente faz direito.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m2-6">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 7</span><h3>E-mail e retenção: o lucro escondido</h3></div>
+    <article class="licao">
+      <p>Vender para quem JÁ comprou é muito mais barato que conquistar desconhecido. O combo de retenção:</p>
+      <ul class="lista-cartoes">
+        <li><strong>Capture o contato</strong> com uma isca: desconto na 1ª compra, guia gratuito, sorteio, cupom de aniversário. "Me segue" não é contato; e-mail/telefone é.</li>
+        <li><strong>Sequência de boas-vindas</strong> (3 mensagens): 1) entrega a isca + sua história; 2) prova social + melhor conteúdo; 3) oferta de entrada com prazo.</li>
+        <li><strong>Cadência:</strong> 1 e-mail/lista por semana com 80% valor / 20% oferta. Quem some da caixa de entrada some da memória.</li>
+        <li><strong>Reative quem sumiu:</strong> "sentimos sua falta + benefício para voltar" a cada 60–90 dias. Custa quase zero e traz caixa imediato.</li>
+        <li><strong>Aniversário e datas:</strong> mensagem com mimo no aniversário do cliente = recompra fácil e fidelidade.</li>
+      </ul>
+      <div class="destaque">🏦 Seguidor é terreno alugado (o algoritmo manda); lista de e-mail/WhatsApp é <strong>patrimônio seu</strong>. Construa a sua desde o primeiro dia.</div>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m2-6">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 7 de 7</span><h3>Quiz do Nível 2</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz2"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n1">← Nível 1</button>
+    <button class="btn btn-primario" data-nav="n3">Ir para o Nível 3 →</button>
+  </div>
+</section>
+
+<!-- ===================== NÍVEL 3 ===================== -->
+<section class="tela nivel oculto" data-tela="n3">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">🧠 Nível 3 · Tráfego pago e estratégia</span>
+    <h2>Acelere com anúncios (sem queimar dinheiro)</h2>
+    <p>Meta Ads, Google Ads, funil completo e as contas que dizem se a campanha vive ou morre.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n3"></div></div>
+  </div>
+
+  <section class="modulo" data-modulo="m3-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>Anúncios na Meta (Instagram/Facebook)</h3></div>
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>Use o Gerenciador de Anúncios</strong>, não o botão "Impulsionar". O impulsionar é a versão de brinquedo: o Gerenciador permite objetivo certo, públicos e medição de verdade.</li>
+        <li><strong>Objetivo certo muda tudo:</strong> quer conversa? Campanha de "mensagens/WhatsApp". Quer venda no site? "Vendas/conversão". Escolher "reconhecimento" e esperar venda é o erro clássico.</li>
+        <li><strong>O criativo é ~80% do resultado:</strong> a imagem/vídeo + o gancho importam mais que segmentação fina. Teste 3–4 criativos diferentes por campanha.</li>
+        <li><strong>Público:</strong> comece amplo (cidade + faixa de idade) e deixe o algoritmo otimizar; refine só com dados. Público minúsculo encarece.</li>
+        <li><strong>Orçamento de teste:</strong> R$ 20–50/dia por 7 dias já ensina muito. Não julgue campanha com 1 dia de veiculação.</li>
+        <li><strong>Métricas de leitura:</strong> CPM (custo por mil impressões), CTR (% que clicou — abaixo de ~1% o criativo está fraco), CPC (custo por clique) e custo por resultado (a que manda).</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-1">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>Google Ads: pescar onde o peixe tem fome</h3></div>
+    <article class="licao">
+      <p>A diferença fundamental: na Meta você <strong>interrompe</strong> quem não pediu; no Google você aparece para quem <strong>JÁ está procurando</strong>. Intenção alta = conversão alta.</p>
+      <ul class="lista-cartoes">
+        <li><strong>Rede de Pesquisa:</strong> anúncios de texto na busca ("encanador 24h zona sul"). O melhor lugar para serviço/urgência.</li>
+        <li><strong>Palavras-chave:</strong> prefira específicas/cauda longa ("advogado trabalhista consulta online") às genéricas e caras ("advogado").</li>
+        <li><strong>Palavras-chave NEGATIVAS:</strong> o segredo dos profissionais. Vende serviço premium? Negative "grátis", "barato", "curso". Cada clique errado é dinheiro no lixo.</li>
+        <li><strong>Anúncio coerente:</strong> a página de destino deve entregar exatamente o que o anúncio prometeu — isso melhora o preço que você paga por clique (Índice de Qualidade).</li>
+        <li><strong>Comece pequeno:</strong> 1 campanha, 1 serviço carro-chefe, sua cidade. Meça por semana: quanto custou cada contato?</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-2">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>Funil completo e remarketing</h3></div>
+    <article class="licao">
+      <p>Anúncio bom sem funil é balde furado. A esteira que multiplica resultado:</p>
+      <ol class="lista-passos">
+        <li><strong>Isca</strong> (grátis): guia, aula, cupom, avaliação gratuita → captura o contato.</li>
+        <li><strong>Oferta de entrada</strong> (barata): facilita a primeira compra e filtra curiosos.</li>
+        <li><strong>Produto principal:</strong> onde está sua margem.</li>
+        <li><strong>Aumento de ticket:</strong> upsell ("leva o combo?"), cross-sell ("quem comprou X ama Y"), recorrência (assinatura/pacote).</li>
+      </ol>
+      <ul class="lista-cartoes">
+        <li><strong>Remarketing = anunciar para quem já demonstrou interesse</strong> (visitou o site, viu o vídeo, te seguiu). É o anúncio mais barato e com maior conversão que existe — a pessoa só precisava de um empurrão.</li>
+        <li><strong>97% não compram na primeira visita.</strong> Sem remarketing e lista, você paga caro pelo clique e joga o interessado fora.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-3">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Otimização: as contas que decidem tudo</h3></div>
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>ROAS</strong> (retorno sobre o gasto em anúncio): faturou R$ 4.000 gastando R$ 1.000 → ROAS 4. O mínimo aceitável depende da sua margem: margem apertada exige ROAS alto.</li>
+        <li><strong>Conversão por etapa:</strong> 1.000 viram o anúncio → 50 clicaram (CTR 5%) → 10 chamaram (20%) → 3 compraram (30%). Conserte a ETAPA mais fraca, não "o marketing".</li>
+        <li><strong>Teste A/B do jeito certo:</strong> mude UM elemento por vez (só o gancho, só a imagem, só a oferta). Mudou tudo junto? Não aprendeu nada.</li>
+        <li><strong>Quando escalar:</strong> campanha lucrativa por 1–2 semanas → suba o orçamento ~20% a cada poucos dias (dobrar de uma vez desestabiliza o algoritmo).</li>
+        <li><strong>Quando matar:</strong> gastou ~2–3× o valor do seu ticket sem nenhuma venda/contato qualificado → pause e troque o criativo ou a oferta (geralmente o problema é a oferta).</li>
+        <li><strong>Fadiga de criativo:</strong> todo anúncio cansa. CTR caindo + frequência alta (mesma pessoa vendo 4–5×) = hora de renovar.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-4">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo" data-modulo="m3-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>IA no marketing + o que NUNCA fazer</h3></div>
+    <article class="licao">
+      <h4>🤖 IA é seu estagiário infinito:</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Ideias e calendário:</strong> "gere 20 ideias de reels para [negócio], com gancho e roteiro de 15s".</li>
+        <li><strong>Copy em volume:</strong> 10 variações de título para testar A/B em segundos.</li>
+        <li><strong>Análise:</strong> cole os números da campanha e peça diagnóstico e próximos testes.</li>
+        <li><strong>Personas e objeções:</strong> simule seu cliente e ensaie respostas a objeções.</li>
+        <li>👉 Tem um curso inteiro disso aqui na plataforma: <strong>Domine o Claude</strong>. Os dois cursos se multiplicam.</li>
+      </ul>
+      <h4>🚫 A lista negra (queima marca e dinheiro):</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Comprar seguidores/engajamento:</strong> número falso afunda seu alcance real e qualquer anunciante percebe.</li>
+        <li><strong>Disparo em massa sem consentimento:</strong> fere a LGPD e bane seu número.</li>
+        <li><strong>Promessa falsa/enganosa:</strong> "resultado garantido" sem base = problema com Procon e reputação.</li>
+        <li><strong>Depender de UM canal:</strong> conta hackeada/banida acontece todo dia. Lista própria é seguro de vida.</li>
+        <li><strong>Copiar o concorrente às cegas:</strong> você não vê os números dele — talvez esteja copiando o prejuízo.</li>
+      </ul>
+    </article>
+    <button class="btn btn-concluir" data-concluir="m3-5">✓ Concluir etapa</button>
+  </section>
+
+  <section class="modulo modulo-quiz" data-modulo="quiz3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 3</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz3"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n2">← Nível 2</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para os Jogos →</button>
+  </div>
+</section>
+
+<!-- ===================== KIT DE MARKETING ===================== -->
+<section class="tela oculto" data-tela="kit">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">🧰 Kit de Marketing</span>
+    <h2>Modelos prontos para copiar</h2>
+    <p>Estruturas testadas: copie, troque os [colchetes] pelos seus dados e use hoje.</p>
+  </div>
+  <div class="areas-botoes" id="kitFiltros"></div>
+  <div class="prompts-grade" id="kitGrade"></div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para os Jogos →</button>
+  </div>
+</section>
+
+<!-- ===================== TUTOR ===================== -->
+<section class="tela oculto" data-tela="tutor">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">💬 Tutor do curso</span>
+    <h2>Tire qualquer dúvida de marketing</h2>
+    <p>Pergunte sobre funil, copy, Instagram, WhatsApp, Google, anúncios, métricas... <span class="tutor-modo" id="tutorModo">🤖 respondendo na hora, grátis</span></p>
+  </div>
+  <div class="chat-caixa">
+    <div class="chat-mensagens" id="chatMensagens" aria-live="polite"></div>
+    <div class="chat-sugestoes" id="chatSugestoes"></div>
+    <form class="chat-form" id="chatForm">
+      <input id="chatInput" type="text" placeholder="Ex.: o que é ROAS?" maxlength="500" autocomplete="off" aria-label="Sua pergunta">
+      <button class="btn btn-primario chat-enviar" type="submit" aria-label="Enviar">➤</button>
+    </form>
+    <button class="chat-limpar" id="chatLimpar">🗑️ limpar conversa</button>
+  </div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+  </div>
+</section>
+
+<!-- ===================== JOGOS ===================== -->
+<section class="tela oculto" data-tela="jogo">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">🎮 Jogo 1</span>
+    <h2>Decisão de Marketing</h2>
+    <p>Você é o estrategista. Para cada situação, escolha a melhor jogada — contra o relógio!</p>
+  </div>
+  <div class="jogo-caixa" id="jogoCaixa">
+    <div class="jogo-inicio" id="jogoInicio">
+      <p>Vão chegar <strong>8 situações reais</strong>. Escolha entre: <strong>📸 Orgânico</strong> (conteúdo/Instagram), <strong>💬 Relacionamento</strong> (WhatsApp/e-mail), <strong>🔍 Google</strong> (busca/perfil local) ou <strong>💸 Tráfego pago</strong>.</p>
+      <p>⏱️ 15 segundos por situação (30 no Modo Terceira Idade). Acertos em sequência ganham bônus 🔥.</p>
+      <button class="btn btn-primario" id="jogoComecar">Aceitar o desafio</button>
+      <p class="quiz-recorde" id="jogoRecorde"></p>
+    </div>
+    <div class="jogo-rodada oculto" id="jogoRodada">
+      <div class="quiz-topo">
+        <span id="jogoContador">Situação 1/8</span>
+        <span class="jogo-streak" id="jogoStreak"></span>
+        <span id="jogoPontos">0 pts</span>
+      </div>
+      <div class="jogo-timer"><div class="jogo-timer-fill" id="jogoTimer"></div></div>
+      <div class="jogo-missao">
+        <span class="jogo-missao-rotulo">📨 Situação:</span>
+        <p id="jogoMissaoTexto"></p>
+      </div>
+      <div class="jogo-escolhas">
+        <button class="jogo-escolha" data-modelo="organico">📸<span>Orgânico</span></button>
+        <button class="jogo-escolha" data-modelo="relacionamento">💬<span>Relacionam.</span></button>
+        <button class="jogo-escolha" data-modelo="google">🔍<span>Google</span></button>
+        <button class="jogo-escolha" data-modelo="pago">💸<span>Tráf. pago</span></button>
+      </div>
+      <p class="jogo-feedback oculto" id="jogoFeedback"></p>
+    </div>
+    <div class="jogo-fim oculto" id="jogoFim">
+      <h3 id="jogoResultadoTitulo"></h3>
+      <p class="quiz-nota" id="jogoNota"></p>
+      <p id="jogoResultadoMsg"></p>
+      <button class="btn btn-primario" id="jogoReiniciar">Jogar de novo</button>
+    </div>
+  </div>
+
+  <div class="nivel-cabecalho nivel-azul" style="margin-top:2rem">
+    <span class="nivel-badge">🛠️ Jogo 2</span>
+    <h2>Oficina de Copy</h2>
+    <p>Um texto fraco aparece — escolha a versão que vende mais, e aprenda o porquê.</p>
+  </div>
+  <div class="jogo-caixa">
+    <div class="quiz-caixa" id="oficinaCaixa" style="border:0;background:transparent;padding:0"></div>
+  </div>
+
+  <div class="nivel-cabecalho nivel-roxo" style="margin-top:2rem">
+    <span class="nivel-badge">🎓 Desafio Mestre · nível especialista</span>
+    <h2>Só para quem manda no jogo</h2>
+    <p>Cálculos de ROAS e CAC, decisões de campanha, pegadinhas de métrica. Acerte <strong>80%+</strong> para o título de Mestre.</p>
+  </div>
+  <div class="jogo-caixa">
+    <div class="quiz-caixa" id="desafioCaixa" style="border:0;background:transparent;padding:0"></div>
+  </div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n3">← Nível 3</button>
+    <button class="btn btn-primario" data-nav="final">Ver certificado →</button>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICADO ===================== -->
+<section class="tela oculto" data-tela="final">
+  <div class="final-caixa" id="finalCaixa">
+    <h2>🏆 Conclusão do curso</h2>
+    <p id="finalTexto">Complete tudo abaixo para liberar seu certificado:</p>
+    <ul class="final-checklist" id="finalChecklist">
+      <li data-check="n1">🌱 Nível 1 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="n2">🚀 Nível 2 completo (6 etapas + quiz com 70%+)</li>
+      <li data-check="n3">🧠 Nível 3 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="jogo">🎮 Jogo com 50%+ da pontuação</li>
+    </ul>
+    <div class="certificado oculto" id="certificado">
+      <div class="cert-folha" id="certFolha">
+        <div class="cert-borda">
+          <span class="cert-selo">✳</span>
+          <p class="cert-marca">APRENDE AÍ</p>
+          <p class="cert-titulo">Certificado de Conclusão</p>
+          <p class="cert-conferido">Conferido a</p>
+          <p class="cert-nome" id="certNome">Você</p>
+          <p class="cert-texto">por concluir com êxito o curso<br><strong>“Marketing Digital na Prática”</strong>,<br>
+          incluindo funil, posicionamento, conteúdo, copywriting, Instagram, WhatsApp, Google, e-mail, tráfego pago e métricas.</p>
+          <div class="cert-rodape-folha">
+            <div class="cert-bloco">
+              <span class="cert-linha" id="certData">—</span>
+              <span class="cert-legenda">Data de conclusão</span>
+            </div>
+            <div class="cert-bloco">
+              <span class="cert-linha cert-assinatura">Aprende Aí</span>
+              <span class="cert-legenda">Plataforma de ensino</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-acoes nao-imprimir">
+        <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
+        <button class="btn btn-primario" id="certPdfBtn">📄 Baixar PDF</button>
+        <button class="btn btn-fantasma" id="certImprimirBtn">🖨️ Imprimir</button>
+        <button class="btn btn-fantasma" id="certBaixarBtn">🖼️ Imagem</button>
+      </div>
+    </div>
+  </div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início do curso</button>
+    <a class="btn btn-primario" href="../">🏛️ Todos os cursos</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <p>Feito com ✳ na <strong>Aprende Aí</strong> — conteúdo educativo independente.</p>
+  <p>Plataformas e regras de anúncios mudam com frequência — confira as políticas oficiais de cada uma.</p>
+</footer>
+
+<!-- ===================== BARRA DE ABAS (celular) ===================== -->
+<nav class="tabbar" aria-label="Navegação principal">
+  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Curso</span></button>
+  <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
+  <button data-nav="kit" class="tab"><span class="tab-icone">🧰</span><span class="tab-rotulo">Kit</span></button>
+  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogos</span></button>
+  <button data-nav="final" class="tab"><span class="tab-icone">🏆</span><span class="tab-rotulo">Certificado</span></button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
