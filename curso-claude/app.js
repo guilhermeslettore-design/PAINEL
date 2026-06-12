@@ -804,4 +804,24 @@
 
   atualizarContinuar();
   atualizarTudo();
+
+  /* ---------------- PWA: service worker + instalação ---------------- */
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
+
+  // Captura o evento de instalação para avisar que dá para virar app
+  let eventoInstalar = null;
+  window.addEventListener("beforeinstallprompt", (ev) => {
+    ev.preventDefault();
+    eventoInstalar = ev;
+    avisar("📲 Dica: instale o curso como aplicativo no menu do navegador!");
+  });
+  window.addEventListener("appinstalled", () => {
+    eventoInstalar = null;
+    avisar("🎉 App instalado! Procure 'Academia Claude' na sua tela inicial.");
+    festejar();
+  });
 })();
