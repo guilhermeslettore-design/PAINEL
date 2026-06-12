@@ -17,6 +17,10 @@
       "dest": "/monitor_rio.html"
     },
     {
+      "src": "/curso-claude/?",
+      "dest": "/curso-claude/index.html"
+    },
+    {
       "src": "/favicon\\.ico",
       "dest": "/favicon.png"
     },

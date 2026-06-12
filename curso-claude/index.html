@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1A1714">
+<title>Academia Claude — Do zero ao avançado</title>
+<meta name="description" content="Curso completo e gratuito sobre o Claude da Anthropic: conta, modelos, conectores, MCP, Claude Code, API — do iniciante ao avançado, com quiz, jogo e biblioteca de prompts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..700&family=Outfit:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icone-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Academia Claude">
+</head>
+<body>
+
+<canvas id="confettiCanvas" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="topo">
+  <div class="topo-inner">
+    <a class="logo" href="#inicio" data-nav="inicio">
+      <span class="logo-marca">✳</span>
+      <span class="logo-texto">Academia <em>Claude</em></span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#" data-nav="n1">🌱 Iniciante</a>
+      <a href="#" data-nav="n2">🚀 Intermediário</a>
+      <a href="#" data-nav="n3">🧠 Avançado</a>
+      <a href="#" data-nav="prompts">📚 Prompts</a>
+      <a href="#" data-nav="jogo">🎮 Jogo</a>
+      <a href="#" data-nav="final">🏆 Certificado</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero tela" id="inicio" data-tela="inicio">
+  <p class="hero-tag">Curso gratuito · 100% em português · feito para celular</p>
+  <h1>Domine o <em>Claude</em> de verdade</h1>
+  <p class="hero-sub">
+    Do primeiro "olá" até conectores, automações e API. Três níveis, lições práticas,
+    <strong>quiz em cada etapa</strong>, <strong>biblioteca de prompts</strong> e um
+    <strong>jogo</strong> para treinar. Quando terminar, você vai saber aplicar o Claude
+    no <strong>seu trabalho</strong>.
+  </p>
+
+  <div class="hero-acoes">
+    <button class="btn btn-primario oculto" id="continuarBtn" data-nav="inicio">▶ Continuar de onde parei</button>
+  </div>
+
+  <div class="trilha">
+    <button class="trilha-card" data-nav="n1">
+      <span class="trilha-emoji">🌱</span>
+      <span class="trilha-nivel">Nível 1</span>
+      <h2>Iniciante</h2>
+      <p>O que é o Claude, conta e planos, a tela do app, os modelos e seus primeiros prompts.</p>
+      <span class="trilha-prog" data-prog-nivel="n1">0/6 etapas</span>
+    </button>
+    <button class="trilha-card" data-nav="n2">
+      <span class="trilha-emoji">🚀</span>
+      <span class="trilha-nivel">Nível 2</span>
+      <h2>Intermediário</h2>
+      <p>Projetos, Artifacts, conectores (MCP), memória, pesquisa e o Claude aplicado à sua profissão.</p>
+      <span class="trilha-prog" data-prog-nivel="n2">0/7 etapas</span>
+    </button>
+    <button class="trilha-card" data-nav="n3">
+      <span class="trilha-emoji">🧠</span>
+      <span class="trilha-nivel">Nível 3</span>
+      <h2>Avançado</h2>
+      <p>Claude Code, API, servidores MCP, agentes e automações, segurança profissional.</p>
+      <span class="trilha-prog" data-prog-nivel="n3">0/6 etapas</span>
+    </button>
+  </div>
+
+  <div class="atalhos">
+    <button class="atalho" data-nav="prompts">📚 <span>Biblioteca de Prompts</span></button>
+    <button class="atalho" data-nav="jogo">🎮 <span>Jogo Missão Certa</span></button>
+    <button class="atalho" data-nav="final">🏆 <span>Meu certificado</span></button>
+  </div>
+
+  <div class="progresso-geral">
+    <div class="progresso-rotulo">
+      <span>Progresso total do curso</span>
+      <span id="progressoTexto">0%</span>
+    </div>
+    <div class="barra"><div class="barra-fill" id="barraGeral"></div></div>
+  </div>
+</section>
+
+<main>
+
+<!-- ############################################################ -->
+<!-- ##################### NÍVEL 1 · INICIANTE ################## -->
+<!-- ############################################################ -->
+<section class="tela nivel oculto" data-tela="n1">
+  <div class="nivel-cabecalho nivel-verde">
+    <span class="nivel-badge">🌱 Nível 1 · Iniciante</span>
+    <h2>Primeiros passos com o Claude</h2>
+    <p>Aqui você sai do zero: entende o que é o Claude, cria sua conta, conhece a tela, os modelos e escreve seus primeiros prompts.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n1"></div></div>
+  </div>
+
+  <!-- ===== M1.1 ===== -->
+  <section class="modulo" data-modulo="m1-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>O que é o Claude (e quem é a Anthropic)</h3></div>
+
+    <article class="licao">
+      <p>
+        O <strong>Claude</strong> é uma inteligência artificial criada pela
+        <strong>Anthropic</strong>, empresa americana fundada em 2021 e focada em
+        construir IA segura e confiável. Você conversa com ele em linguagem natural —
+        como num chat — e ele escreve, resume, traduz, programa, analisa documentos,
+        imagens e planilhas, pesquisa, planeja e muito mais.
+      </p>
+      <div class="destaque">
+        💡 <strong>Pensa assim:</strong> o Claude é um assistente extremamente preparado,
+        disponível 24h. A diferença entre quem usa "mais ou menos" e quem usa
+        <em>muito bem</em> está em conhecer as ferramentas certas — e é exatamente isso
+        que este curso ensina.
+      </div>
+    </article>
+
+    <article class="licao">
+      <h4>🧠 Três palavras que vão aparecer o curso inteiro</h4>
+      <dl class="glossario">
+        <div><dt>Prompt</dt><dd>A instrução que você escreve para a IA. Quanto mais claro, melhor a resposta.</dd></div>
+        <div><dt>Token</dt><dd>O "pedacinho" de texto que a IA lê e escreve. Uma palavra tem em média 1 a 3 tokens. Na API, o preço é cobrado por milhão de tokens.</dd></div>
+        <div><dt>Janela de contexto</dt><dd>A "memória de trabalho" do modelo: quanto texto ele considera de uma vez. Os modelos atuais do Claude chegam a <strong>1 milhão de tokens</strong> — cabem livros inteiros.</dd></div>
+      </dl>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m1-1">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M1.2 ===== -->
+  <section class="modulo" data-modulo="m1-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>Conta, planos e onde usar</h3></div>
+
+    <article class="licao">
+      <h4>📲 Como começar (passo a passo)</h4>
+      <ol class="lista-passos">
+        <li>Acesse <strong>claude.ai</strong> no navegador ou baixe o app <strong>Claude</strong> na App Store / Google Play.</li>
+        <li>Crie a conta com seu e-mail ou conta Google.</li>
+        <li>Pronto: a tela principal é um chat. Digite qualquer coisa e converse.</li>
+        <li>Para usar no computador com mais recursos, existe também o <strong>app de desktop</strong> (Mac e Windows).</li>
+      </ol>
+    </article>
+
+    <article class="licao">
+      <h4>💳 Os planos do claude.ai</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Free (grátis):</strong> ótimo para conhecer. Tem limite de mensagens por período e acesso aos recursos básicos.</li>
+        <li><strong>Pro (assinatura mensal):</strong> muito mais uso, acesso a mais modelos e recursos como Projetos e conectores. É o plano de quem usa no dia a dia.</li>
+        <li><strong>Max:</strong> para uso intenso — limites bem maiores que o Pro (existem faixas de 5x e 20x o uso do Pro).</li>
+        <li><strong>Team e Enterprise:</strong> para empresas — gestão de equipe, controles administrativos e mais segurança.</li>
+      </ul>
+      <p class="nota">No claude.ai você paga assinatura fixa. Pagar "por token" é só na API (Nível 3). Valores e limites mudam com o tempo — confira a página de planos do claude.ai.</p>
+    </article>
+
+    <article class="licao">
+      <h4>🗺️ Os 4 "lugares" onde o Claude vive</h4>
+      <ul class="lista-cartoes">
+        <li><strong>claude.ai (site e apps):</strong> o chat para qualquer pessoa. É o foco dos Níveis 1 e 2.</li>
+        <li><strong>Claude Code:</strong> o Claude dentro do terminal/editor, para programar e automatizar. Veremos no Nível 3.</li>
+        <li><strong>API da Anthropic:</strong> para desenvolvedores colocarem o Claude nos próprios sistemas. Nível 3.</li>
+        <li><strong>Nuvens parceiras:</strong> Amazon Bedrock, Google Vertex AI e outras — como grandes empresas consomem o Claude.</li>
+      </ul>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m1-2">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M1.3 ===== -->
+  <section class="modulo" data-modulo="m1-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>A tela do Claude: modos, anexos e ajustes</h3></div>
+
+    <article class="licao">
+      <h4>🖥️ O que cada parte faz</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Nova conversa (+):</strong> cada assunto numa conversa nova. Isso mantém as respostas focadas.</li>
+        <li><strong>Seletor de modelo:</strong> perto do campo de texto você escolhe qual modelo responde (Haiku, Sonnet, Opus...). Na etapa 4 você aprende a escolher.</li>
+        <li><strong>Modo de raciocínio (pensamento estendido):</strong> um botão/chave que deixa o Claude "pensar" por mais tempo antes de responder. Ligue para problemas difíceis — matemática, lógica, análise profunda. Desligado, ele responde mais rápido.</li>
+        <li><strong>Anexar (📎):</strong> envie PDFs, fotos, planilhas e documentos. O Claude lê e analisa. Tire foto de um contrato e peça "explica em linguagem simples".</li>
+        <li><strong>Pesquisa na web:</strong> quando ativada, o Claude busca informação atual na internet e cita as fontes.</li>
+        <li><strong>Ditado e voz:</strong> no celular dá para falar em vez de digitar.</li>
+        <li><strong>Histórico:</strong> suas conversas ficam salvas; você pode buscar, renomear e continuar de onde parou.</li>
+        <li><strong>Estilos de resposta:</strong> nas configurações você ajusta o jeito de escrever (mais formal, mais direto, mais explicativo).</li>
+      </ul>
+      <div class="destaque">
+        📌 <strong>Hábito de ouro:</strong> um assunto = uma conversa. Misturar tudo numa
+        conversa só confunde o contexto e piora as respostas.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m1-3">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M1.4 ===== -->
+  <section class="modulo" data-modulo="m1-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Os modelos, um por um</h3></div>
+
+    <article class="licao">
+      <p>
+        O Claude é uma <strong>família de modelos</strong>. Cada um equilibra
+        <em>inteligência</em>, <em>velocidade</em> e <em>preço</em> de um jeito.
+        Saber escolher é a habilidade nº 1 de quem usa IA bem. 👇 Toque nos cartões para virar.
+      </p>
+    </article>
+
+    <div class="cartoes-modelos">
+      <button class="cartao-modelo" data-cor="haiku" aria-label="Cartão do modelo Haiku, toque para virar">
+        <div class="cartao-face cartao-frente">
+          <span class="cartao-emoji">⚡</span><h3>Haiku 4.5</h3>
+          <p class="cartao-papel">O veloz e econômico</p>
+          <p class="cartao-analogia">Como um motoboy: entrega rápido e cobra pouco.</p>
+          <span class="cartao-dica">toque para virar ↻</span>
+        </div>
+        <div class="cartao-face cartao-verso">
+          <h3>Haiku 4.5</h3>
+          <ul>
+            <li><strong>Para quê:</strong> tarefas simples e em volume — classificar mensagens, respostas rápidas, chatbots de atendimento, resumos curtos.</li>
+            <li><strong>Contexto:</strong> 200 mil tokens</li>
+            <li><strong>Preço (API):</strong> US$ 1 entrada / US$ 5 saída por milhão de tokens</li>
+            <li><strong>Ponto forte:</strong> o mais rápido e barato da família.</li>
+          </ul>
+        </div>
+      </button>
+
+      <button class="cartao-modelo" data-cor="sonnet" aria-label="Cartão do modelo Sonnet, toque para virar">
+        <div class="cartao-face cartao-frente">
+          <span class="cartao-emoji">⚖️</span><h3>Sonnet 4.6</h3>
+          <p class="cartao-papel">O equilibrado</p>
+          <p class="cartao-analogia">Como um gerente competente: resolve quase tudo com bom custo.</p>
+          <span class="cartao-dica">toque para virar ↻</span>
+        </div>
+        <div class="cartao-face cartao-verso">
+          <h3>Sonnet 4.6</h3>
+          <ul>
+            <li><strong>Para quê:</strong> o dia a dia — escrever e revisar textos, programar, analisar documentos, assistentes inteligentes.</li>
+            <li><strong>Contexto:</strong> 1 milhão de tokens</li>
+            <li><strong>Preço (API):</strong> US$ 3 entrada / US$ 15 saída por milhão de tokens</li>
+            <li><strong>Ponto forte:</strong> a melhor combinação de velocidade e inteligência.</li>
+          </ul>
+        </div>
+      </button>
+
+      <button class="cartao-modelo" data-cor="opus" aria-label="Cartão do modelo Opus, toque para virar">
+        <div class="cartao-face cartao-frente">
+          <span class="cartao-emoji">🎻</span><h3>Opus 4.8</h3>
+          <p class="cartao-papel">O especialista autônomo</p>
+          <p class="cartao-analogia">Como um engenheiro sênior: encara projetos longos e difíceis sozinho.</p>
+          <span class="cartao-dica">toque para virar ↻</span>
+        </div>
+        <div class="cartao-face cartao-verso">
+          <h3>Opus 4.8</h3>
+          <ul>
+            <li><strong>Para quê:</strong> trabalhos complexos e longos — refatorar projetos inteiros de código, pesquisas profundas, relatórios elaborados, agentes que trabalham horas sem supervisão.</li>
+            <li><strong>Contexto:</strong> 1 milhão de tokens</li>
+            <li><strong>Preço (API):</strong> US$ 5 entrada / US$ 25 saída por milhão de tokens</li>
+            <li><strong>Ponto forte:</strong> autonomia e raciocínio em tarefas longas.</li>
+          </ul>
+        </div>
+      </button>
+
+      <button class="cartao-modelo" data-cor="fable" aria-label="Cartão do modelo Fable, toque para virar">
+        <div class="cartao-face cartao-frente">
+          <span class="cartao-emoji">🌟</span><h3>Fable 5</h3>
+          <p class="cartao-papel">O topo de linha</p>
+          <p class="cartao-analogia">Como um cientista-chefe: chamado para os problemas mais difíceis de todos.</p>
+          <span class="cartao-dica">toque para virar ↻</span>
+        </div>
+        <div class="cartao-face cartao-verso">
+          <h3>Fable 5</h3>
+          <ul>
+            <li><strong>Para quê:</strong> o raciocínio mais exigente que existe — problemas que nenhum outro modelo resolve, projetos autônomos de longuíssimo prazo.</li>
+            <li><strong>Contexto:</strong> 1 milhão de tokens</li>
+            <li><strong>Preço (API):</strong> US$ 10 entrada / US$ 50 saída por milhão de tokens</li>
+            <li><strong>Detalhe:</strong> primeiro modelo da família Claude 5, da nova classe "Mythos". O raciocínio interno fica sempre ativo.</li>
+          </ul>
+        </div>
+      </button>
+    </div>
+
+    <article class="licao">
+      <h4>📊 Comparando lado a lado</h4>
+      <div class="tabela-scroll">
+        <table class="tabela-modelos">
+          <thead><tr><th>Modelo</th><th>Perfil</th><th>Contexto</th><th>Entrada*</th><th>Saída*</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Haiku 4.5</strong></td><td>Rápido e barato</td><td>200 mil</td><td>US$ 1</td><td>US$ 5</td></tr>
+            <tr><td><strong>Sonnet 4.6</strong></td><td>Equilibrado</td><td>1 milhão</td><td>US$ 3</td><td>US$ 15</td></tr>
+            <tr><td><strong>Opus 4.8</strong></td><td>Especialista</td><td>1 milhão</td><td>US$ 5</td><td>US$ 25</td></tr>
+            <tr><td><strong>Fable 5</strong></td><td>Topo de linha</td><td>1 milhão</td><td>US$ 10</td><td>US$ 50</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">* Preço da API por milhão de tokens (junho/2026). No claude.ai você paga assinatura, não por token.</p>
+      <div class="destaque">
+        🧭 <strong>Regra de bolso:</strong> comece pelo <strong>Sonnet</strong>. Tarefa
+        simples e repetitiva? Desça para o <strong>Haiku</strong>. Complexa e longa? Suba
+        para o <strong>Opus</strong>. O <strong>Fable</strong> é para quando nem o Opus dá conta.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m1-4">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M1.5 ===== -->
+  <section class="modulo" data-modulo="m1-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>Seus primeiros prompts</h3></div>
+
+    <article class="licao">
+      <h4>✍️ As 4 regras do bom prompt</h4>
+      <ol class="lista-passos">
+        <li><strong>Dê contexto.</strong> Em vez de "escreve um e-mail", diga "escreve um e-mail formal para um cliente avisando que o pedido vai atrasar 2 dias".</li>
+        <li><strong>Diga o formato.</strong> "Responde em lista", "no máximo 3 parágrafos", "em tabela".</li>
+        <li><strong>Diga o porquê.</strong> O Claude trabalha melhor quando entende a intenção: "isso é para um post de Instagram da minha loja de café".</li>
+        <li><strong>Itere.</strong> Não gostou? Peça ajuste: "deixa mais curto", "tom mais descontraído". A conversa continua de onde parou.</li>
+      </ol>
+      <div class="exemplo-prompt">
+        <p class="exemplo-ruim"><span>❌ Fraco:</span> "fala sobre café"</p>
+        <p class="exemplo-bom"><span>✅ Forte:</span> "Crie 3 legendas curtas e divertidas para Instagram sobre café coado, para a cafeteria de um bairro jovem. Inclua 1 emoji em cada."</p>
+      </div>
+    </article>
+
+    <article class="licao">
+      <h4>⚠️ Limites que você deve conhecer desde o início</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Pode errar.</strong> A IA às vezes "alucina" — inventa informação com confiança. Confira dados importantes.</li>
+        <li><strong>Conhecimento tem data.</strong> Para assuntos muito recentes, ative a pesquisa na web.</li>
+        <li><strong>Não compartilhe segredos.</strong> Evite enviar senhas e dados sensíveis para qualquer IA.</li>
+      </ul>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m1-5">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== QUIZ NÍVEL 1 ===== -->
+  <section class="modulo modulo-quiz" data-modulo="quiz1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 1</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz1"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="n2">Ir para o Nível 2 →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
+<!-- ################## NÍVEL 2 · INTERMEDIÁRIO ################# -->
+<!-- ############################################################ -->
+<section class="tela nivel oculto" data-tela="n2">
+  <div class="nivel-cabecalho nivel-azul">
+    <span class="nivel-badge">🚀 Nível 2 · Intermediário</span>
+    <h2>Os superpoderes do claude.ai</h2>
+    <p>Projetos, Artifacts, conectores (MCP), memória, pesquisa — e como aplicar tudo isso no seu trabalho.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n2"></div></div>
+  </div>
+
+  <!-- ===== M2.1 ===== -->
+  <section class="modulo" data-modulo="m2-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 7</span><h3>Projetos — sua central de trabalho</h3></div>
+
+    <article class="licao">
+      <p>
+        Um <strong>Projeto</strong> é uma "pasta inteligente" dentro do claude.ai que agrupa
+        conversas sobre o mesmo assunto e dá ao Claude um conhecimento permanente sobre ele.
+      </p>
+      <h4>O que dá para colocar num Projeto:</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Instruções fixas:</strong> "Você é o assistente da minha imobiliária. Escreva sempre em tom cordial e nunca prometa valores sem consultar a tabela." — vale para <em>todas</em> as conversas do projeto, sem repetir.</li>
+        <li><strong>Arquivos de conhecimento:</strong> suba seu catálogo, manual, tabela de preços, modelos de contrato. O Claude consulta esse material em qualquer conversa do projeto.</li>
+        <li><strong>Conversas organizadas:</strong> tudo daquele cliente/tema num lugar só.</li>
+      </ul>
+      <div class="destaque">
+        🎯 <strong>Exemplo real:</strong> crie o projeto "Posts da loja" com instruções sobre
+        sua marca + fotos dos produtos + tabela de preços. Depois é só abrir uma conversa
+        e pedir: "post para o lançamento de sábado". Ele já sabe tudo.
+      </div>
+      <h4>Como criar (passo a passo):</h4>
+      <ol class="lista-passos">
+        <li>No menu lateral do claude.ai, toque em <strong>Projetos → Novo projeto</strong>.</li>
+        <li>Dê um nome e escreva as <strong>instruções</strong> (quem é você, o que quer, regras).</li>
+        <li>Adicione os <strong>arquivos</strong> de referência.</li>
+        <li>Crie conversas dentro dele. Pronto: é seu assistente especializado.</li>
+      </ol>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-1">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M2.2 ===== -->
+  <section class="modulo" data-modulo="m2-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 7</span><h3>Artifacts — o Claude que entrega "coisas prontas"</h3></div>
+
+    <article class="licao">
+      <p>
+        Quando você pede algo que é um "produto" — um documento, um site, um app, um
+        diagrama — o Claude abre um painel chamado <strong>Artifact</strong> ao lado do
+        chat, com o resultado pronto e editável.
+      </p>
+      <h4>O que dá para criar com Artifacts:</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Documentos e textos formatados</strong> — relatórios, propostas, contratos-modelo.</li>
+        <li><strong>Sites e páginas</strong> — landing pages que você pode ver funcionando na hora.</li>
+        <li><strong>Mini-apps interativos</strong> — calculadoras, formulários, jogos, simuladores (sem saber programar!).</li>
+        <li><strong>Diagramas e fluxogramas</strong> — processos da empresa, organogramas.</li>
+        <li><strong>Planilhas e gráficos</strong> — visualizações a partir dos seus dados.</li>
+      </ul>
+      <div class="destaque">
+        ✨ <strong>Teste agora:</strong> peça ao Claude "crie uma calculadora de gorjeta
+        bonita e interativa". Em segundos você terá um mini-app funcionando — e pode pedir
+        mudanças: "deixa o botão verde", "adiciona divisão por pessoa". Dá até para
+        <strong>publicar e compartilhar</strong> o link do artifact com outras pessoas.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-2">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M2.3 ===== -->
+  <section class="modulo" data-modulo="m2-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 7</span><h3>Conectores e MCP — o Claude ligado às suas ferramentas</h3></div>
+
+    <article class="licao">
+      <h4>🔌 O que é um conector?</h4>
+      <p>
+        Sozinho, o Claude só vê o que você cola no chat. Com <strong>conectores</strong>,
+        ele acessa suas ferramentas <em>de verdade</em>: lê seu Google Drive, busca no seu
+        Gmail, consulta sua agenda, abre cards do Notion ou do Asana — sempre com a sua
+        permissão.
+      </p>
+      <p>
+        Por baixo dos panos, os conectores usam um padrão aberto chamado
+        <strong>MCP (Model Context Protocol)</strong> — pense nele como o
+        <em>"USB das IAs"</em>: um plugue universal que liga qualquer ferramenta a
+        qualquer assistente de IA. A Anthropic criou esse padrão e hoje o mercado todo usa.
+      </p>
+    </article>
+
+    <article class="licao">
+      <h4>🧩 Conectores populares e o que ganham para você</h4>
+      <ul class="lista-cartoes">
+        <li><strong>Google Drive:</strong> "resume o documento 'Planejamento 2026' que está no meu Drive".</li>
+        <li><strong>Gmail e Google Agenda:</strong> "o que tenho de reunião amanhã? rascunha uma resposta para o e-mail do fornecedor".</li>
+        <li><strong>Notion / Asana / Linear / Jira:</strong> "cria uma tarefa para cada pendência desta ata de reunião".</li>
+        <li><strong>Slack:</strong> "resume o que rolou no canal #vendas hoje".</li>
+        <li><strong>GitHub:</strong> "explica o que mudou no último pull request".</li>
+        <li><strong>Stripe, HubSpot, Canva e muitos outros</strong> — o diretório cresce toda semana.</li>
+      </ul>
+    </article>
+
+    <article class="licao">
+      <h4>📥 Como instalar um conector (passo a passo)</h4>
+      <ol class="lista-passos">
+        <li>No claude.ai, abra <strong>Configurações → Conectores</strong> (Settings → Connectors).</li>
+        <li>Procure no <strong>diretório de conectores</strong> a ferramenta que você usa (ex.: Google Drive).</li>
+        <li>Toque em <strong>Conectar</strong> e faça login na ferramenta para autorizar o acesso.</li>
+        <li>Na conversa, ative o conector no menu de ferramentas (ícone de busca/ferramentas) e peça normalmente: "busca no meu Drive...".</li>
+      </ol>
+      <p class="nota">
+        Também existem conectores "personalizados": se uma ferramenta tem um servidor MCP
+        (a maioria das grandes já tem), você adiciona pelo endereço dele em
+        Configurações → Conectores → Adicionar conector personalizado. No app de desktop
+        ainda dá para instalar <strong>extensões locais</strong>, que acessam coisas do seu
+        computador, como pastas de arquivos.
+      </p>
+      <div class="destaque">
+        🔐 <strong>Segurança:</strong> conectores só fazem o que você autorizar, e você pode
+        desconectar quando quiser. Em conta de empresa, o administrador controla quais
+        conectores são permitidos.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-3">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M2.4 ===== -->
+  <section class="modulo" data-modulo="m2-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 7</span><h3>Pesquisa, arquivos, memória e voz</h3></div>
+
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>🌐 Pesquisa na web:</strong> o Claude busca informação atualizada e cita as fontes. Essencial para preços, notícias e qualquer coisa recente. Há também a <em>pesquisa avançada/profunda</em>, que investiga um tema a fundo por vários minutos e devolve um relatório com referências.</li>
+        <li><strong>📁 Análise de arquivos:</strong> envie PDF, Word, Excel, CSV, imagens. Peça "compara esses dois contratos", "acha inconsistências nessa planilha", "transcreve o texto dessa foto". O Claude também <em>cria</em> arquivos: planilhas, documentos, apresentações.</li>
+        <li><strong>🧠 Memória:</strong> o Claude pode lembrar de informações entre conversas (seu nome, sua empresa, suas preferências) — você vê e apaga o que ele memorizou nas configurações.</li>
+        <li><strong>🎙️ Voz:</strong> no app do celular dá para conversar falando, ótimo para usar andando ou dirigindo.</li>
+      </ul>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-4">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M2.5 ===== -->
+  <section class="modulo" data-modulo="m2-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 7</span><h3>Claude no SEU trabalho</h3></div>
+
+    <article class="licao">
+      <p>
+        Agora a parte mais importante do curso: <strong>como o Claude facilita a sua
+        vida profissional</strong>. Escolha sua área e veja ideias prontas para usar hoje —
+        cada uma com um prompt de exemplo para copiar.
+      </p>
+      <div class="areas-botoes" id="areasBotoes">
+        <button class="area-btn ativo" data-area="vendas">💼 Vendas</button>
+        <button class="area-btn" data-area="marketing">📣 Marketing</button>
+        <button class="area-btn" data-area="adm">📊 Administrativo</button>
+        <button class="area-btn" data-area="juridico">⚖️ Jurídico</button>
+        <button class="area-btn" data-area="educacao">📚 Educação</button>
+        <button class="area-btn" data-area="saude">🩺 Saúde</button>
+        <button class="area-btn" data-area="dev">💻 Tecnologia</button>
+        <button class="area-btn" data-area="autonomo">🛠️ Autônomos</button>
+      </div>
+      <div class="area-conteudo" id="areaConteudo"></div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-5">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M2.6 ===== -->
+  <section class="modulo" data-modulo="m2-6">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 7</span><h3>Prompts nível 2 — técnicas que mudam o jogo</h3></div>
+
+    <article class="licao">
+      <ol class="lista-passos">
+        <li><strong>Defina um papel (persona).</strong> "Você é um contador especializado em pequenas empresas brasileiras. Analise..." — o Claude incorpora a expertise.</li>
+        <li><strong>Mostre exemplos.</strong> Cole 2 ou 3 exemplos do estilo que você quer e peça "siga este padrão". Funciona para e-mails, posts, relatórios.</li>
+        <li><strong>Peça em etapas.</strong> Tarefas grandes: "primeiro me mostre só a estrutura do relatório; depois que eu aprovar, escrevemos seção por seção".</li>
+        <li><strong>Peça crítica.</strong> "Aponte 3 fraquezas deste texto antes de melhorá-lo" — a IA revisando o próprio trabalho rende muito.</li>
+        <li><strong>Use o pensamento estendido</strong> para problemas de lógica, cálculo e decisões importantes.</li>
+        <li><strong>Padronize com Projetos.</strong> Instrução que você repete sempre? Vire instrução fixa de um Projeto.</li>
+      </ol>
+      <div class="exemplo-prompt">
+        <p class="exemplo-bom"><span>✅ Prompt profissional:</span> "Você é um consultor de RH. Com base na descrição de vaga em anexo, crie 10 perguntas de entrevista: 4 técnicas, 4 comportamentais e 2 sobre cultura. Formato: tabela com a pergunta e o que avaliar na resposta."</p>
+      </div>
+      <div class="destaque">
+        📚 <strong>Quer mais?</strong> Na <button class="link-interno" data-nav="prompts">Biblioteca de Prompts</button>
+        tem dezenas de prompts prontos para copiar, organizados por categoria.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m2-6">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== QUIZ NÍVEL 2 ===== -->
+  <section class="modulo modulo-quiz" data-modulo="quiz2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 7 de 7</span><h3>Quiz do Nível 2</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz2"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n1">← Nível 1</button>
+    <button class="btn btn-primario" data-nav="n3">Ir para o Nível 3 →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
+<!-- #################### NÍVEL 3 · AVANÇADO #################### -->
+<!-- ############################################################ -->
+<section class="tela nivel oculto" data-tela="n3">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">🧠 Nível 3 · Avançado</span>
+    <h2>Claude Code, API, MCP e agentes</h2>
+    <p>Aqui você vê como profissionais e empresas extraem o máximo do Claude — mesmo que você não programe, vale entender o que é possível.</p>
+    <div class="barra"><div class="barra-fill" data-barra-nivel="n3"></div></div>
+  </div>
+
+  <!-- ===== M3.1 ===== -->
+  <section class="modulo" data-modulo="m3-1">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 1 de 6</span><h3>Claude Code — o Claude que trabalha no seu computador</h3></div>
+
+    <article class="licao">
+      <p>
+        O <strong>Claude Code</strong> é o Claude rodando no <strong>terminal</strong> do
+        seu computador (e também em app de desktop, navegador e editores como VS Code).
+        Diferente do chat, ele <em>age</em>: lê e edita arquivos, roda comandos, instala
+        coisas, testa o que fez e corrige sozinho.
+      </p>
+      <h4>O que ele faz na prática:</h4>
+      <ul class="lista-cartoes">
+        <li>Cria sites e sistemas inteiros a partir de uma descrição ("crie um site de cardápio para meu restaurante").</li>
+        <li>Corrige bugs: você descreve o problema, ele investiga o código e conserta.</li>
+        <li>Automatiza tarefas repetitivas: renomear centenas de arquivos, organizar planilhas, gerar relatórios.</li>
+        <li>Explica projetos que você nunca viu: "me explica como esse sistema funciona".</li>
+      </ul>
+      <h4>Como instalar:</h4>
+      <ol class="lista-passos">
+        <li>Tenha o <strong>Node.js</strong> instalado (nodejs.org).</li>
+        <li>No terminal: <code>npm install -g @anthropic-ai/claude-code</code></li>
+        <li>Entre na pasta do seu projeto e digite <code>claude</code>.</li>
+        <li>Faça login com sua conta (assinatura Pro/Max ou chave da API) e converse: "o que tem nesta pasta?".</li>
+      </ol>
+      <div class="destaque">
+        🧰 <strong>Dicas de ouro:</strong> o comando <code>/init</code> cria um arquivo
+        <code>CLAUDE.md</code> — um "manual do projeto" que o Claude lê em toda sessão.
+        E você sempre aprova as ações importantes antes de ele executar.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m3-1">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M3.2 ===== -->
+  <section class="modulo" data-modulo="m3-2">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 2 de 6</span><h3>A API — Claude dentro do seu produto</h3></div>
+
+    <article class="licao">
+      <p>
+        A <strong>API</strong> é como empresas e desenvolvedores colocam o Claude dentro
+        dos próprios sistemas: um chatbot no seu site, um classificador de e-mails, um
+        gerador de relatórios automático.
+      </p>
+      <h4>Como funciona (visão geral):</h4>
+      <ol class="lista-passos">
+        <li>Crie uma conta de desenvolvedor no <strong>console da Anthropic</strong> (platform.claude.com).</li>
+        <li>Gere uma <strong>chave de API</strong> (uma senha secreta que identifica seu app).</li>
+        <li>Seu sistema envia mensagens para a API e recebe as respostas do modelo.</li>
+        <li>Você paga <strong>por uso</strong>: tantos dólares por milhão de tokens de entrada e de saída (lembra da tabela do Nível 1?).</li>
+      </ol>
+      <h4>Exemplo de chamada (Python):</h4>
+      <pre class="codigo"><code>import anthropic
+
+client = anthropic.Anthropic()  # usa a chave da API
+
+resposta = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=16000,
+    messages=[{"role": "user",
+               "content": "Resuma este contrato em 5 pontos"}],
+)
+print(resposta.content[0].text)</code></pre>
+      <ul class="lista-cartoes">
+        <li><strong>Economia:</strong> o <em>Batch API</em> processa tarefas sem pressa com 50% de desconto, e o <em>cache de prompt</em> barateia contextos repetidos em até 90%.</li>
+        <li><strong>Recursos:</strong> a API também oferece ferramentas como execução de código, busca na web, visão (imagens e PDFs) e respostas em JSON estruturado.</li>
+      </ul>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m3-2">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M3.3 ===== -->
+  <section class="modulo" data-modulo="m3-3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 3 de 6</span><h3>MCP por dentro — instale e até crie servidores</h3></div>
+
+    <article class="licao">
+      <p>
+        No Nível 2 você usou conectores prontos. Aqui está o que existe por baixo: o
+        <strong>MCP (Model Context Protocol)</strong> define "servidores" que oferecem
+        <em>ferramentas</em> (ações que a IA pode executar) e <em>recursos</em> (dados que
+        ela pode ler).
+      </p>
+      <ul class="lista-cartoes">
+        <li><strong>Servidor MCP:</strong> o programa que expõe uma ferramenta (ex.: o servidor do GitHub expõe "criar issue", "ler pull request").</li>
+        <li><strong>Cliente MCP:</strong> quem consome — o claude.ai, o Claude Code, o app de desktop.</li>
+        <li><strong>Remoto ou local:</strong> servidores remotos rodam na internet (você conecta pela URL); locais rodam no seu computador e acessam seus arquivos e programas.</li>
+      </ul>
+      <h4>Adicionando um servidor MCP no Claude Code:</h4>
+      <pre class="codigo"><code># exemplo: conectar um servidor MCP remoto
+claude mcp add --transport http linear https://mcp.linear.app/mcp
+
+# listar os servidores configurados
+claude mcp list</code></pre>
+      <p>
+        E quem programa pode <strong>criar o próprio servidor MCP</strong> com os SDKs
+        oficiais (Python, TypeScript e outros) — sua empresa pode expor o sistema interno
+        como ferramentas que o Claude usa com segurança.
+      </p>
+      <div class="destaque">
+        🚨 <strong>Cuidado profissional:</strong> só instale servidores MCP de fontes
+        confiáveis — eles podem executar ações reais nas suas contas e no seu computador.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m3-3">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M3.4 ===== -->
+  <section class="modulo" data-modulo="m3-4">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 4 de 6</span><h3>Agentes, skills e automações</h3></div>
+
+    <article class="licao">
+      <p>
+        Um <strong>agente</strong> é a IA que não só responde, mas <em>executa um objetivo</em>:
+        planeja, usa ferramentas, verifica o resultado e tenta de novo até concluir.
+        É a fronteira atual da IA — e o Claude é referência nisso.
+      </p>
+      <ul class="lista-cartoes">
+        <li><strong>Skills (habilidades):</strong> "apostilas" que ensinam o Claude a fazer uma tarefa do seu jeito — ex.: uma skill com o padrão de propostas da sua empresa. Você cria uma pasta com instruções e o Claude consulta quando precisa.</li>
+        <li><strong>Subagentes:</strong> o Claude pode dividir um trabalho grande e despachar "ajudantes" em paralelo — um pesquisa, outro escreve, outro revisa.</li>
+        <li><strong>Hooks e agendamentos:</strong> no Claude Code dá para criar gatilhos automáticos ("rode os testes após cada mudança") e tarefas recorrentes.</li>
+        <li><strong>Integração com GitHub/CI:</strong> times configuram o Claude para revisar código e corrigir falhas de build automaticamente em cada pull request.</li>
+        <li><strong>Agentes gerenciados (API):</strong> empresas criam agentes que rodam na infraestrutura da Anthropic, com sessões, arquivos e agendamento via API.</li>
+      </ul>
+      <div class="destaque">
+        🤝 <strong>Tradução para o dia a dia:</strong> pense em "funcionários digitais" para
+        tarefas chatas e repetitivas — triagem de e-mails, monitoramento de planilhas,
+        relatórios semanais — enquanto você cuida do que importa.
+      </div>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m3-4">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== M3.5 ===== -->
+  <section class="modulo" data-modulo="m3-5">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 5 de 6</span><h3>Segurança e uso profissional</h3></div>
+
+    <article class="licao">
+      <ul class="lista-cartoes">
+        <li><strong>Dados sensíveis:</strong> defina o que pode e o que não pode ir para a IA. Senhas e chaves, nunca. Dados de clientes, só conforme a política da empresa e a LGPD.</li>
+        <li><strong>Revisão humana:</strong> IA acelera, humano assina. Documentos importantes, números e decisões passam por revisão.</li>
+        <li><strong>Chaves de API são segredo:</strong> nunca coloque a chave no código nem compartilhe — use variáveis de ambiente e cofres de senhas.</li>
+        <li><strong>Permissões mínimas:</strong> conectores e agentes só devem ter acesso ao necessário para a tarefa.</li>
+        <li><strong>Transparência:</strong> em muitos contextos é boa prática (ou exigência) avisar quando um conteúdo foi gerado com IA.</li>
+        <li><strong>Verificação:</strong> peça fontes, confira números e teste código gerado antes de usar em produção.</li>
+      </ul>
+    </article>
+
+    <button class="btn btn-concluir" data-concluir="m3-5">✓ Concluir etapa</button>
+  </section>
+
+  <!-- ===== QUIZ NÍVEL 3 ===== -->
+  <section class="modulo modulo-quiz" data-modulo="quiz3">
+    <div class="modulo-cabecalho"><span class="modulo-numero">Etapa 6 de 6</span><h3>Quiz do Nível 3</h3></div>
+    <div class="quiz-caixa" data-quiz="quiz3"></div>
+  </section>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n2">← Nível 2</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para o Jogo →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
+<!-- ################## BIBLIOTECA DE PROMPTS ################### -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="prompts">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">📚 Biblioteca</span>
+    <h2>Prompts prontos para copiar</h2>
+    <p>Toque em <strong>copiar</strong>, cole no Claude e adapte os trechos entre [colchetes]. Salve esta página nos favoritos!</p>
+  </div>
+
+  <div class="areas-botoes" id="promptsFiltros"></div>
+  <div class="prompts-grade" id="promptsGrade"></div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="jogo">Ir para o Jogo →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
+<!-- ########################### JOGO ########################### -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="jogo">
+  <div class="nivel-cabecalho nivel-laranja">
+    <span class="nivel-badge">🎮 Desafio final</span>
+    <h2>Missão Certa</h2>
+    <p>Você é o gestor de IA de uma empresa. Escolha o modelo Claude ideal para cada missão — rápido, porque o tempo conta pontos!</p>
+  </div>
+
+  <div class="jogo-caixa" id="jogoCaixa">
+    <div class="jogo-inicio" id="jogoInicio">
+      <p>
+        Vão chegar <strong>8 missões</strong>. Para cada uma, escolha:
+        <strong>Haiku</strong> ⚡ (rápido e barato), <strong>Sonnet</strong> ⚖️ (equilibrado),
+        <strong>Opus</strong> 🎻 (especialista) ou <strong>Fable</strong> 🌟 (topo de linha).
+      </p>
+      <p>⏱️ Cada missão tem 15 segundos. Resposta certa: até 100 pts — e acertos em sequência ganham <strong>bônus 🔥</strong>.</p>
+      <button class="btn btn-primario" id="jogoComecar">Aceitar as missões</button>
+      <p class="quiz-recorde" id="jogoRecorde"></p>
+    </div>
+
+    <div class="jogo-rodada oculto" id="jogoRodada">
+      <div class="quiz-topo">
+        <span id="jogoContador">Missão 1/8</span>
+        <span class="jogo-streak" id="jogoStreak"></span>
+        <span id="jogoPontos">0 pts</span>
+      </div>
+      <div class="jogo-timer"><div class="jogo-timer-fill" id="jogoTimer"></div></div>
+      <div class="jogo-missao">
+        <span class="jogo-missao-rotulo">📨 Nova missão:</span>
+        <p id="jogoMissaoTexto"></p>
+      </div>
+      <div class="jogo-escolhas">
+        <button class="jogo-escolha" data-modelo="haiku">⚡<span>Haiku</span></button>
+        <button class="jogo-escolha" data-modelo="sonnet">⚖️<span>Sonnet</span></button>
+        <button class="jogo-escolha" data-modelo="opus">🎻<span>Opus</span></button>
+        <button class="jogo-escolha" data-modelo="fable">🌟<span>Fable</span></button>
+      </div>
+      <p class="jogo-feedback oculto" id="jogoFeedback"></p>
+    </div>
+
+    <div class="jogo-fim oculto" id="jogoFim">
+      <h3 id="jogoResultadoTitulo"></h3>
+      <p class="quiz-nota" id="jogoNota"></p>
+      <p id="jogoResultadoMsg"></p>
+      <button class="btn btn-primario" id="jogoReiniciar">Jogar de novo</button>
+    </div>
+  </div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="n3">← Nível 3</button>
+    <button class="btn btn-primario" data-nav="final">Ver certificado →</button>
+  </div>
+</section>
+
+<!-- ############################################################ -->
+<!-- ######################## CERTIFICADO ####################### -->
+<!-- ############################################################ -->
+<section class="tela oculto" data-tela="final">
+  <div class="final-caixa" id="finalCaixa">
+    <h2>🏆 Conclusão do curso</h2>
+    <p id="finalTexto">Complete tudo abaixo para liberar seu certificado:</p>
+    <ul class="final-checklist" id="finalChecklist">
+      <li data-check="n1">🌱 Nível 1 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="n2">🚀 Nível 2 completo (6 etapas + quiz com 70%+)</li>
+      <li data-check="n3">🧠 Nível 3 completo (5 etapas + quiz com 70%+)</li>
+      <li data-check="jogo">🎮 Jogo com 50%+ da pontuação máxima</li>
+    </ul>
+    <div class="certificado oculto" id="certificado">
+      <p class="cert-titulo">Certificado · Academia Claude</p>
+      <p class="cert-nome" id="certNome">Você</p>
+      <p class="cert-texto">concluiu o curso <strong>"Domine o Claude — do zero ao avançado"</strong>: modelos, Projetos, Artifacts, conectores MCP, Claude Code, API e agentes.</p>
+      <div class="cert-acoes">
+        <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
+        <button class="btn btn-primario" id="certBaixarBtn">⬇️ Baixar certificado</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Voltar ao início</button>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <p>Feito com ✳ na Academia Claude — curso independente, sem vínculo oficial com a Anthropic.</p>
+  <p>Modelos e preços conforme documentação pública da Anthropic (junho/2026). Telas e menus podem mudar com as atualizações dos apps.</p>
+</footer>
+
+<!-- ===================== BARRA DE ABAS (celular) ===================== -->
+<nav class="tabbar" aria-label="Navegação principal">
+  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Início</span></button>
+  <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
+  <button data-nav="n2" class="tab"><span class="tab-icone">🚀</span><span class="tab-rotulo">Nível 2</span></button>
+  <button data-nav="n3" class="tab"><span class="tab-icone">🧠</span><span class="tab-rotulo">Nível 3</span></button>
+  <button data-nav="prompts" class="tab"><span class="tab-icone">📚</span><span class="tab-rotulo">Prompts</span></button>
+  <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogo</span></button>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
