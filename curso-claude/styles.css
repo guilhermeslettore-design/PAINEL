@@ -421,6 +421,62 @@ pre.codigo code{ background:none; border:0; padding:0; font-size:.84rem; line-he
 .cert-texto{ font-size:.95rem; color:var(--texto-suave); margin-bottom:.9rem; }
 .cert-acoes{ display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; }
 
+/* ---------------- Missões práticas ---------------- */
+.missoes{
+  background:rgba(232,176,90,.07); border:1px dashed rgba(232,176,90,.45);
+  border-radius:14px; padding:.9rem 1rem; margin:.9rem 0 1rem;
+  display:grid; gap:.55rem;
+}
+.missoes-titulo{ font-weight:700; color:var(--laranja); font-size:.92rem; }
+.missao{
+  display:flex; gap:.6rem; align-items:flex-start; font-size:.92rem; cursor:pointer;
+  background:var(--fundo-3); border:1px solid var(--borda); border-radius:10px; padding:.6rem .75rem;
+}
+.missao input{ margin-top:.2rem; accent-color:var(--laranja); width:18px; height:18px; flex-shrink:0; cursor:pointer; }
+.missao:has(input:checked){ border-color:var(--laranja); opacity:.85; }
+.missao:has(input:checked) span{ text-decoration:line-through; text-decoration-color:rgba(232,176,90,.6); }
+.missoes-chip{ color:var(--laranja); }
+
+/* ---------------- Formulário Meu Curso ---------------- */
+.preset-btn{ width:100%; margin-bottom:1.1rem; border-style:dashed; }
+.formulario{ display:grid; gap:.9rem; }
+.formulario label{ display:grid; gap:.3rem; font-size:.9rem; color:var(--texto-suave); font-weight:600; }
+.formulario input, .formulario select{
+  width:100%; background:var(--fundo-3); border:1px solid var(--borda); border-radius:12px;
+  color:var(--texto); font-family:var(--fonte-corpo); font-size:1rem; padding:.75rem .9rem; outline:none;
+}
+.formulario input:focus, .formulario select:focus{ border-color:var(--acento); }
+.form-rotulo{ font-size:.9rem; color:var(--texto-suave); font-weight:600; }
+.form-duplo{ display:grid; gap:.9rem; }
+@media(min-width:640px){ .form-duplo{ grid-template-columns:1fr 1fr; } }
+.chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
+.chip{
+  background:var(--fundo-3); color:var(--texto); border:1px solid var(--borda);
+  border-radius:999px; padding:.5rem .9rem; font-size:.88rem; cursor:pointer;
+  font-family:var(--fonte-corpo); transition:border-color .15s, background .15s;
+}
+.chip.ativo{ background:rgba(232,130,90,.18); border-color:var(--acento); color:var(--acento-forte); font-weight:700; }
+
+/* ---------------- Plano personalizado ---------------- */
+.plano-pronto{ border-color:rgba(127,185,127,.5); }
+.plano-dia{
+  background:var(--fundo-3); border:1px solid var(--borda); border-left:4px solid var(--verde);
+  border-radius:12px; padding:.7rem .9rem; margin-bottom:.55rem;
+}
+.plano-dia p{ font-size:.9rem; color:var(--texto-suave); margin:.2rem 0 0; }
+.ia-saida{
+  margin-top:.8rem; background:#14110E; border:1px solid var(--borda); border-radius:12px;
+  padding:.9rem 1rem; font-size:.92rem; white-space:pre-wrap; color:#E8D9C3; line-height:1.6;
+}
+
+/* ---------------- Oficina de prompts ---------------- */
+.oficina-cenario{ font-weight:700; margin-bottom:.3rem; }
+.oficina-fraco{
+  color:var(--texto-suave); font-size:.92rem; margin-bottom:.8rem;
+  background:rgba(224,112,112,.07); border:1px dashed rgba(224,112,112,.4);
+  border-radius:10px; padding:.5rem .8rem;
+}
+
 /* ---------------- Rodapé ---------------- */
 .rodape{
   border-top:1px solid var(--borda); margin-top:2rem; padding:1.5rem 1rem 2.5rem;
