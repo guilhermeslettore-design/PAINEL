@@ -1,5 +1,5 @@
 /* ============================================================
-   APRENDE AÍ — Curso: Marketing Digital na Prática
+   IMPÉRIO DIGITAL — Curso: Marketing Digital na Prática
    Mesmo molde padronizado do curso do Claude (engine idêntica):
    navegação, progresso, missões, voz, quizzes, jogos, tutor,
    kit de modelos, modo terceira idade e certificado.
@@ -848,7 +848,7 @@
   if (chatForm) {
     if (estado.tutorHistorico.length) estado.tutorHistorico.forEach((m) => addBolha(m.de, m.t));
     else {
-      const bv = "Oi! 👋 Sou o tutor de Marketing da Aprende Aí. Pergunte QUALQUER coisa: funil, copy, Instagram, WhatsApp, Google, anúncios, ROAS, CAC... Toque numa sugestão ou escreva!";
+      const bv = "Oi! 👋 Sou o tutor de Marketing da Império Digital. Pergunte QUALQUER coisa: funil, copy, Instagram, WhatsApp, Google, anúncios, ROAS, CAC... Toque numa sugestão ou escreva!";
       addBolha("ia", bv); salvarMsg("ia", bv);
     }
     renderSugestoes();
@@ -917,7 +917,7 @@
       g.strokeStyle = "rgba(232,176,90,.35)"; g.lineWidth = 2; g.strokeRect(58, 58, 1084, 734);
       g.textAlign = "center";
       g.fillStyle = "#F2C25E"; g.font = "700 26px Outfit, sans-serif";
-      g.fillText("✳  APRENDE AÍ", 600, 140);
+      g.fillText("✳  IMPÉRIO DIGITAL", 600, 140);
       g.fillStyle = "#B8AC9B"; g.font = "22px Outfit, sans-serif";
       g.fillText("CERTIFICADO DE CONCLUSÃO", 600, 185);
       g.fillStyle = "#F2EBE0"; g.font = "italic 600 64px Fraunces, Georgia, serif";
@@ -934,7 +934,7 @@
       g.fillStyle = "#E8B05A"; g.font = "700 24px Outfit, sans-serif";
       g.fillText("🌱 Fundamentos   ·   🚀 Conteúdo e Canais   ·   🧠 Tráfego pago", 600, 660);
       g.fillStyle = "rgba(184,172,155,.7)"; g.font = "16px Outfit, sans-serif";
-      g.fillText("Aprende Aí · plataforma de cursos independente", 600, 760);
+      g.fillText("Império Digital · plataforma de cursos independente", 600, 760);
       cb(c);
     });
   }
