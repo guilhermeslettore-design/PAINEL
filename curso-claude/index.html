@@ -44,11 +44,12 @@
 <!-- ===================== CABEÇALHO ===================== -->
 <header class="topo">
   <div class="topo-inner">
-    <a class="logo" href="#inicio" data-nav="inicio">
+    <a class="logo" href="#catalogo" data-nav="catalogo">
       <span class="logo-marca">✳</span>
-      <span class="logo-texto">Academia <em>Claude</em></span>
+      <span class="logo-texto"><em>Academia</em> de Cursos</span>
     </a>
     <nav class="menu" id="menu">
+      <a href="#" data-nav="catalogo">🏛️ Cursos</a>
       <a href="#" data-nav="tutor">💬 Tutor IA</a>
       <a href="#" data-nav="meucurso">🎯 Meu curso</a>
       <a href="#" data-nav="n1">🌱 Iniciante</a>
@@ -69,8 +70,68 @@
   </div>
 </header>
 
-<!-- ===================== HERO ===================== -->
-<section class="hero tela" id="inicio" data-tela="inicio">
+<!-- ===================== VITRINE DE CURSOS ===================== -->
+<section class="tela catalogo" data-tela="catalogo">
+  <div class="catalogo-hero">
+    <p class="hero-tag">Plataforma de cursos · 100% em português · grátis</p>
+    <h1>Aprenda de um jeito <em>que funciona</em></h1>
+    <p class="hero-sub">
+      Cursos práticos, com lições curtas, voz, quiz, jogos e certificado.
+      Escolha um curso abaixo e comece agora — no seu ritmo, do celular.
+    </p>
+    <button class="btn btn-fantasma" id="seniorCatBtn" style="margin-top:.4rem">👵 Modo Terceira Idade</button>
+  </div>
+
+  <h2 class="catalogo-titulo">📚 Cursos disponíveis</h2>
+  <div class="catalogo-grade">
+    <button class="curso-card disponivel" data-nav="inicio">
+      <div class="curso-capa" style="--c1:#E8825A;--c2:#B79FE0">✳</div>
+      <div class="curso-corpo">
+        <span class="curso-tag">Disponível agora</span>
+        <h3>Domine o Claude</h3>
+        <p>Do zero ao avançado: o que é, como usar no trabalho, criar ferramentas, automatizar tarefas. Com tutor, jogos e certificado.</p>
+        <div class="curso-meta">
+          <span>🌱🚀🧠 3 níveis</span><span>🔊 com voz</span><span>🏆 certificado</span>
+        </div>
+        <span class="curso-progresso" id="catProgClaude">Começar curso →</span>
+      </div>
+    </button>
+  </div>
+
+  <h2 class="catalogo-titulo">🔜 Em breve</h2>
+  <div class="catalogo-grade">
+    <div class="curso-card breve">
+      <div class="curso-capa" style="--c1:#1E6B2E;--c2:#7FB97F">📊</div>
+      <div class="curso-corpo">
+        <span class="curso-tag breve-tag">Em breve</span>
+        <h3>Excel do Zero</h3>
+        <p>Planilhas, fórmulas e gráficos do básico ao profissional, com exemplos do dia a dia.</p>
+      </div>
+    </div>
+    <div class="curso-card breve">
+      <div class="curso-capa" style="--c1:#16508F;--c2:#7FA8D9">💬</div>
+      <div class="curso-corpo">
+        <span class="curso-tag breve-tag">Em breve</span>
+        <h3>WhatsApp Business</h3>
+        <p>Atendimento, catálogo, automações e vendas pelo WhatsApp para o seu negócio.</p>
+      </div>
+    </div>
+    <div class="curso-card breve">
+      <div class="curso-capa" style="--c1:#A85A00;--c2:#E8B05A">📣</div>
+      <div class="curso-corpo">
+        <span class="curso-tag breve-tag">Em breve</span>
+        <h3>Marketing Digital</h3>
+        <p>Redes sociais, anúncios e conteúdo para divulgar o seu trabalho sem agência.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="catalogo-rodape">Novos cursos chegando. Sugira um tema no Tutor IA! 💡</p>
+</section>
+
+<!-- ===================== HERO DO CURSO DO CLAUDE ===================== -->
+<section class="hero tela oculto" id="inicio" data-tela="inicio">
+  <button class="voltar-cursos" data-nav="catalogo">← Todos os cursos</button>
   <p class="hero-tag">Curso gratuito · 100% em português · feito para celular</p>
   <h1>Domine o <em>Claude</em> de verdade</h1>
   <p class="hero-sub">
@@ -970,12 +1031,31 @@ claude mcp list</code></pre>
       <li data-check="jogo">🎮 Jogo com 50%+ da pontuação máxima</li>
     </ul>
     <div class="certificado oculto" id="certificado">
-      <p class="cert-titulo">Certificado · Academia Claude</p>
-      <p class="cert-nome" id="certNome">Você</p>
-      <p class="cert-texto">concluiu o curso <strong>"Domine o Claude — do zero ao avançado"</strong>: modelos, Projetos, Artifacts, conectores MCP, Claude Code, API e agentes.</p>
-      <div class="cert-acoes">
+      <div class="cert-folha" id="certFolha">
+        <div class="cert-borda">
+          <span class="cert-selo">✳</span>
+          <p class="cert-marca">ACADEMIA DE CURSOS</p>
+          <p class="cert-titulo">Certificado de Conclusão</p>
+          <p class="cert-conferido">Conferido a</p>
+          <p class="cert-nome" id="certNome">Você</p>
+          <p class="cert-texto">por concluir com êxito o curso<br><strong>“Domine o Claude — do zero ao avançado”</strong>,<br>
+          incluindo modelos, Projetos, Artifacts, conectores (MCP), Claude Code, API, agentes e segurança.</p>
+          <div class="cert-rodape-folha">
+            <div class="cert-bloco">
+              <span class="cert-linha" id="certData">—</span>
+              <span class="cert-legenda">Data de conclusão</span>
+            </div>
+            <div class="cert-bloco">
+              <span class="cert-linha cert-assinatura">Academia de Cursos</span>
+              <span class="cert-legenda">Plataforma de ensino</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-acoes nao-imprimir">
         <button class="btn btn-fantasma" id="certNomeBtn">✏️ Colocar meu nome</button>
-        <button class="btn btn-primario" id="certBaixarBtn">⬇️ Baixar certificado</button>
+        <button class="btn btn-primario" id="certImprimirBtn">🖨️ Imprimir certificado</button>
+        <button class="btn btn-fantasma" id="certBaixarBtn">⬇️ Baixar imagem</button>
       </div>
     </div>
   </div>
@@ -994,7 +1074,7 @@ claude mcp list</code></pre>
 
 <!-- ===================== BARRA DE ABAS (celular) ===================== -->
 <nav class="tabbar" aria-label="Navegação principal">
-  <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Início</span></button>
+  <button data-nav="catalogo" class="tab ativo"><span class="tab-icone">🏛️</span><span class="tab-rotulo">Cursos</span></button>
   <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
   <button data-nav="meucurso" class="tab"><span class="tab-icone">🎯</span><span class="tab-rotulo">Meu curso</span></button>
   <button data-nav="n1" class="tab"><span class="tab-icone">🌱</span><span class="tab-rotulo">Nível 1</span></button>
