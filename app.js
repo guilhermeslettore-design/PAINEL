@@ -27,6 +27,7 @@
     missoes: {},
     jogo: { recorde: 0, passou: false },
     oficina: { melhor: 0, passou: false },
+    desafio: { melhor: 0, passou: false },
     tutorHistorico: [],
     perfil: null,
     nome: "",
@@ -1747,6 +1748,152 @@
     });
 
     ofInicio();
+  }
+
+  /* ============================================================
+     DESAFIO MESTRE — quiz avançado e difícil (especialista)
+     Distratores plausíveis; a resposta certa nem sempre é a "óbvia".
+     ============================================================ */
+  const DESAFIO = [
+    { p: "No Sonnet 4.6 (US$ 3 por milhão de tokens de entrada e US$ 15 de saída), uma tarefa usa 2 milhões de tokens de entrada e 400 mil de saída. Quanto custa, aproximadamente?",
+      o: ["US$ 12,00", "US$ 7,20", "US$ 18,00", "US$ 9,00"], c: 0,
+      e: "Entrada: 2 × US$3 = US$6. Saída: 0,4 × US$15 = US$6. Total ≈ US$ 12." },
+    { p: "Processar o MESMO volume de tokens no Opus 4.8 (US$5/US$25) em vez do Haiku 4.5 (US$1/US$5) custa cerca de…",
+      o: ["o mesmo", "2× mais", "5× mais", "10× mais"], c: 2,
+      e: "5/1 na entrada e 25/5 na saída = 5× mais caro. Por isso só suba para o Opus quando a tarefa exigir." },
+    { p: "Sobre o cache de prompt da API, o que é VERDADE?",
+      o: ["Toda chamada fica 90% mais barata automaticamente", "Escrever no cache custa MAIS que o normal; a economia vem das leituras seguintes", "Ele deixa as respostas mais inteligentes", "Guarda as respostas prontas para não repetir o trabalho"], c: 1,
+      e: "Gravar no cache custa ~1,25× um token normal; quem barateia (até ~90%) são as LEITURAS das próximas chamadas com o mesmo conteúdo." },
+    { p: "Qual modelo NÃO tem janela de contexto de 1 milhão de tokens?",
+      o: ["Sonnet 4.6", "Opus 4.8", "Haiku 4.5", "Fable 5"], c: 2,
+      e: "O Haiku 4.5 trabalha com 200 mil tokens; Sonnet, Opus e Fable chegam a 1 milhão." },
+    { p: "Uma IA precisa refatorar sozinha um sistema enorme por horas, parando e retomando com autonomia. Mesmo sendo 'caro', o ideal é…",
+      o: ["Haiku, para economizar", "Sonnet, é equilibrado", "Opus, especialista em tarefas longas e autônomas", "Tanto faz, todos fazem igual"], c: 2,
+      e: "Autonomia em tarefas longas e complexas é a especialidade do Opus. Economizar com Haiku aqui sairia caro em retrabalho." },
+    { p: "No MCP, quem é o CLIENTE e quem é o SERVIDOR?",
+      o: ["Cliente é o servidor da Anthropic; servidor é o seu PC", "Cliente é o claude.ai / Claude Code / app; servidor é o programa que expõe as ferramentas", "Cliente é o usuário; servidor é a internet", "São a mesma coisa"], c: 1,
+      e: "O cliente (claude.ai, Claude Code…) consome ferramentas e dados que o servidor MCP expõe." },
+    { p: "Qual comando adiciona um servidor MCP remoto via HTTP no Claude Code?",
+      o: ["claude install mcp <url>", "claude mcp add --transport http <nome> <url>", "npm add mcp <url>", "claude connect <url>"], c: 1,
+      e: "É 'claude mcp add --transport http nome URL'. Para listar: 'claude mcp list'." },
+    { p: "O Batch API dá 50% de desconto. Qual é a contrapartida?",
+      o: ["A qualidade cai pela metade", "Só funciona com o Haiku", "As respostas não são imediatas (podem levar até 24h)", "Você paga uma assinatura extra"], c: 2,
+      e: "O lote troca pressa por preço: até 50% mais barato para tarefas que podem esperar." },
+    { p: "Você quer que o Claude escreva e-mails EXATAMENTE no estilo da sua empresa. Qual técnica é a MAIS eficaz?",
+      o: ["Escrever 'seja profissional e caprichado'", "Colar 2 ou 3 e-mails reais e pedir para seguir aquele padrão", "Usar sempre o modelo mais caro", "Escrever o pedido em letras maiúsculas"], c: 1,
+      e: "Mostrar exemplos reais (few-shot) transfere estilo muito melhor do que qualquer adjetivo como 'profissional'." },
+    { p: "Qual a diferença entre um 'workflow' e um 'agente'?",
+      o: ["Não há diferença", "No workflow você controla os passos; o agente decide sozinho a sequência até atingir o objetivo", "Workflow é pago, agente é grátis", "Agente só funciona no celular"], c: 1,
+      e: "Workflow = você orquestra os passos. Agente = ele planeja, usa ferramentas, verifica e refaz até concluir." },
+    { p: "Qual afirmação está CORRETA?",
+      o: ["Projeto é um app gerado; Artifact guarda instruções fixas", "Projeto guarda instruções/arquivos permanentes; Artifact é um produto gerado ao lado do chat", "Os dois são a mesma coisa", "Artifact é um plano de assinatura"], c: 1,
+      e: "Projetos = contexto permanente (instruções + arquivos). Artifacts = entregáveis (apps, docs, gráficos) montados ao lado da conversa." },
+    { p: "Ligar o 'pensamento estendido' tende a…",
+      o: ["Deixar tudo mais rápido", "Gastar mais tokens/tempo, melhorando respostas difíceis", "Ser sempre melhor e de graça", "Desligar a pesquisa na web"], c: 1,
+      e: "Ele pensa mais antes de responder: ótimo para lógica e cálculo, mas custa mais tempo e tokens. Para perguntas simples, deixe desligado." },
+    { p: "Aproximadamente quantos tokens tem um texto de 100 palavras em português?",
+      o: ["Exatamente 100", "Cerca de 10", "Entre 130 e 300", "Mais de 5.000"], c: 2,
+      e: "Em média 1 a 3 tokens por palavra → ~130 a 300 tokens para 100 palavras." },
+    { p: "Quando faz sentido usar o Fable 5 no lugar do Opus 4.8?",
+      o: ["Sempre — é melhor e mais barato em tudo", "Em tarefas simples para economizar", "Em problemas extremamente difíceis, onde nem o Opus dá conta", "Para classificar e-mails em massa"], c: 2,
+      e: "Fable 5 é o topo de linha (e o mais caro): reservado para os problemas mais difíceis. Tarefas simples = Haiku." },
+    { p: "Qual prática com a chave de API é SEGURA?",
+      o: ["Colar a chave direto no código do site", "Compartilhar no grupo da equipe", "Guardar em variável de ambiente / cofre de senhas, fora do código", "Subir para o GitHub como backup"], c: 2,
+      e: "Chave é segredo: variável de ambiente ou cofre. Quem tem sua chave gasta na sua conta." },
+    { p: "Subagentes servem principalmente para…",
+      o: ["Deixar a resposta mais barata", "Dividir um trabalho grande em ajudantes que rodam em PARALELO", "Traduzir para outros idiomas", "Economizar bateria do celular"], c: 1,
+      e: "Um pesquisa, outro escreve, outro revisa — ao mesmo tempo. Paralelismo, não economia." },
+    { p: "A 'memória' do Claude e a 'janela de contexto' são…",
+      o: ["A mesma coisa", "Diferentes: memória persiste ENTRE conversas; contexto é o que cabe DENTRO de uma conversa", "Ambas infinitas", "Recursos só de empresas"], c: 1,
+      e: "Contexto = memória de trabalho de uma conversa. Memória = o que ele lembra de você entre conversas (e você controla)." },
+    { p: "Para um contrato jurídico rascunhado pelo Claude, o correto é…",
+      o: ["Enviar direto ao cliente", "Confiar 100%, ele não erra em direito", "Usar como rascunho e SEMPRE revisar com um humano/advogado", "Publicar para validar com o público"], c: 2,
+      e: "IA acelera, humano assina. Documentos sérios sempre passam por revisão profissional." },
+    { p: "Ao conectar o Google Drive, como o Claude ganha acesso?",
+      o: ["Você digita sua senha do Google no chat", "Ele acessa tudo automaticamente", "Você autoriza via login (OAuth); o acesso é com sua permissão e revogável", "Por e-mail para a Anthropic"], c: 2,
+      e: "Conectores usam autorização (OAuth). Você nunca digita senha no chat e pode desconectar quando quiser." },
+    { p: "Para gerar uma resposta MUITO longa (dezenas de milhares de tokens) sem dar erro de tempo, o recomendado é…",
+      o: ["Pedir tudo de uma vez, sem mais nada", "Usar streaming (resposta em fluxo)", "Diminuir a janela de contexto", "Trocar para o Haiku"], c: 1,
+      e: "Saídas muito grandes devem usar streaming, senão a requisição pode estourar o tempo limite." },
+    { p: "Por que só instalar servidores MCP de fontes confiáveis?",
+      o: ["Para economizar internet", "Porque eles podem executar AÇÕES REAIS nas suas contas e no seu PC", "Para o app ficar bonito", "Não importa a fonte"], c: 1,
+      e: "Um servidor MCP tem poder real (criar, apagar, enviar). Fonte não confiável = risco de verdade." },
+    { p: "O que o comando /init faz no Claude Code?",
+      o: ["Reinicia o computador", "Cria o arquivo CLAUDE.md, um 'manual do projeto' lido em toda sessão", "Instala o Node.js", "Apaga o histórico"], c: 1,
+      e: "O /init gera o CLAUDE.md com convenções e comandos do projeto — contexto permanente para o agente." },
+    { p: "A 'pesquisa profunda' difere da busca normal porque…",
+      o: ["É mais rápida", "Investiga por vários minutos, cruza muitas fontes e entrega um relatório com referências", "Só busca no seu celular", "Não cita fontes"], c: 1,
+      e: "É a investigação avançada: leva tempo, mas devolve um relatório fundamentado com as fontes." },
+  ];
+
+  const desafioCaixa = document.getElementById("desafioCaixa");
+  if (desafioCaixa) {
+    const N_DESAFIO = Math.min(12, DESAFIO.length);
+    let ordem = [], atual = 0, pontos = 0;
+
+    function dInicio() {
+      const info = estado.desafio;
+      desafioCaixa.innerHTML = `
+        <div class="quiz-inicio">
+          <p><strong>${N_DESAFIO} perguntas difíceis</strong> sorteadas de um banco de ${DESAFIO.length}.
+          Você pode (e vai!) errar algumas. Acerte <strong>80%+</strong> (no mínimo ${Math.ceil(N_DESAFIO*0.8)} de ${N_DESAFIO}) para o título de Mestre. 🎓</p>
+          <button class="btn btn-primario" data-d="comecar">Aceitar o desafio</button>
+          ${info.melhor ? `<p class="quiz-recorde">Seu recorde: <strong>${info.melhor}%</strong>${info.passou ? " · 🎓 Mestre do Claude" : ""}</p>` : ""}
+        </div>`;
+    }
+    function dRodada() {
+      const q = ordem[atual];
+      const idx = embaralhar(q.o.map((_, i) => i));
+      desafioCaixa.innerHTML = `
+        <div class="quiz-jogo">
+          <div class="quiz-topo"><span>Pergunta ${atual + 1}/${ordem.length}</span><span>${pontos} acerto${pontos === 1 ? "" : "s"}</span></div>
+          <div class="barra barra-quiz"><div class="barra-fill" style="width:${(atual / ordem.length) * 100}%"></div></div>
+          <h3 class="quiz-pergunta">${q.p}</h3>
+          <div class="quiz-opcoes">${idx.map((i) => `<button class="quiz-opcao" data-d-op="${i}">${q.o[i]}</button>`).join("")}</div>
+          <p class="quiz-feedback oculto"></p>
+          <button class="btn btn-primario oculto" data-d="proxima">Próxima →</button>
+        </div>`;
+    }
+    function dResponder(i) {
+      const q = ordem[atual];
+      if (i === q.c) pontos++;
+      desafioCaixa.querySelectorAll("[data-d-op]").forEach((b) => {
+        b.disabled = true;
+        const idx = Number(b.dataset.dOp);
+        if (idx === q.c) b.classList.add("correta");
+        else if (idx === i) b.classList.add("errada");
+      });
+      const fb = desafioCaixa.querySelector(".quiz-feedback");
+      fb.textContent = (i === q.c ? "✅ Acertou! " : "❌ Errou. ") + q.e;
+      fb.classList.remove("oculto");
+      const btn = desafioCaixa.querySelector('[data-d="proxima"]');
+      btn.textContent = atual + 1 < ordem.length ? "Próxima →" : "Ver resultado 🏁";
+      btn.classList.remove("oculto");
+    }
+    function dFim() {
+      const pct = Math.round((pontos / ordem.length) * 100);
+      const passou = pct >= 80;
+      estado.desafio.melhor = Math.max(estado.desafio.melhor, pct);
+      estado.desafio.passou = estado.desafio.passou || passou;
+      salvar();
+      if (passou) festejar();
+      desafioCaixa.innerHTML = `
+        <div class="quiz-fim">
+          <h3>${pct === 100 ? "🏆 Perfeito — você é fera!" : passou ? "🎓 Você é um Mestre do Claude!" : "💪 Quase! Esse é difícil mesmo."}</h3>
+          <p class="quiz-nota">${pontos}/${ordem.length}</p>
+          <p>${passou ? "Título de Mestre conquistado. Poucos acertam esse." : "Reveja a explicação de cada pergunta — é aí que mora o aprendizado. Tente de novo!"}</p>
+          ${passou ? '<p class="quiz-selo">🎓 Mestre do Claude</p>' : ""}
+          <button class="btn btn-primario" data-d="comecar" style="margin-top:.8rem">Tentar de novo</button>
+        </div>`;
+    }
+    desafioCaixa.addEventListener("click", (ev) => {
+      const acao = ev.target.closest("[data-d]");
+      const op = ev.target.closest("[data-d-op]");
+      if (acao && acao.dataset.d === "comecar") { ordem = embaralhar(DESAFIO).slice(0, N_DESAFIO); atual = 0; pontos = 0; dRodada(); }
+      else if (acao && acao.dataset.d === "proxima") { atual++; if (atual < ordem.length) dRodada(); else dFim(); }
+      else if (op && !op.disabled) { dResponder(Number(op.dataset.dOp)); }
+    });
+    dInicio();
   }
 
   /* ---------------- Tamanho da letra (A− / A+) ---------------- */
