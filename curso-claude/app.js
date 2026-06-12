@@ -32,6 +32,8 @@
     nome: "",
     ultimaTela: "",
     certComemorado: false,
+    fonte: 16,
+    iosBannerFechado: false,
   };
 
   try {
@@ -616,7 +618,10 @@
       restante = TEMPO_MISSAO;
       elTimer.style.width = "100%";
       clearInterval(cronometro);
+      const telaJogo = document.querySelector('[data-tela="jogo"]');
       cronometro = setInterval(() => {
+        // pausa o relógio se a pessoa sair da tela do jogo ou minimizar
+        if (document.hidden || telaJogo.classList.contains("oculto")) return;
         restante -= 0.1;
         elTimer.style.width = Math.max(0, (restante / TEMPO_MISSAO) * 100) + "%";
         if (restante <= 0) { clearInterval(cronometro); responderJogo(null); }
@@ -1628,6 +1633,37 @@
     });
 
     ofInicio();
+  }
+
+  /* ---------------- Tamanho da letra (A− / A+) ---------------- */
+  function aplicarFonte() {
+    document.documentElement.style.fontSize = estado.fonte + "px";
+  }
+  const fonteMenor = document.getElementById("fonteMenor");
+  const fonteMaior = document.getElementById("fonteMaior");
+  if (fonteMenor && fonteMaior) {
+    fonteMenor.addEventListener("click", () => {
+      estado.fonte = Math.max(14, estado.fonte - 1);
+      aplicarFonte(); salvar();
+    });
+    fonteMaior.addEventListener("click", () => {
+      estado.fonte = Math.min(21, estado.fonte + 1);
+      aplicarFonte(); salvar();
+    });
+  }
+  if (estado.fonte !== 16) aplicarFonte();
+
+  /* ---------------- Banner de instalação no iPhone/iPad ---------------- */
+  const ehIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const emApp = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  const iosBanner = document.getElementById("iosBanner");
+  if (iosBanner && ehIOS && !emApp && !estado.iosBannerFechado) {
+    setTimeout(() => iosBanner.classList.remove("oculto"), 2500);
+    document.getElementById("iosBannerFechar").addEventListener("click", () => {
+      iosBanner.classList.add("oculto");
+      estado.iosBannerFechado = true;
+      salvar();
+    });
   }
 
   atualizarContinuar();

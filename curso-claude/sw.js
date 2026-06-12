@@ -1,5 +1,5 @@
 /* Service worker da Academia Claude — funciona offline */
-const CACHE = "academia-claude-v3";
+const CACHE = "academia-claude-v4";
 const ARQUIVOS = [
   "./",
   "./index.html",
@@ -8,6 +8,15 @@ const ARQUIVOS = [
   "./manifest.json",
   "./icone-192.png",
   "./icone-512.png",
+  "./fontes/fontes.css",
+  "./fontes/f0.woff2",
+  "./fontes/f1.woff2",
+  "./fontes/f2.woff2",
+  "./fontes/f3.woff2",
+  "./fontes/f4.woff2",
+  "./fontes/f5.woff2",
+  "./fontes/f6.woff2",
+  "./fontes/f7.woff2",
 ];
 
 self.addEventListener("install", (ev) => {
