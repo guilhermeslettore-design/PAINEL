@@ -1666,6 +1666,130 @@
     });
   }
 
+  /* ============================================================
+     LEITURA EM VOZ ALTA — botão 🔊 Ouvir em cada etapa
+     Usa a voz em português do próprio aparelho (grátis, offline)
+     ============================================================ */
+  const sintese = window.speechSynthesis;
+  let leitura = { fila: [], idx: 0, btn: null, parar: null, estado: "parado" };
+
+  function vozPortugues() {
+    const vozes = sintese ? sintese.getVoices() : [];
+    return (
+      vozes.find((v) => /pt[-_]br/i.test(v.lang)) ||
+      vozes.find((v) => /^pt/i.test(v.lang)) ||
+      null
+    );
+  }
+  if (sintese) sintese.getVoices(); // dispara o carregamento das vozes
+
+  function textoDaEtapa(secao) {
+    const clone = secao.cloneNode(true);
+    clone.querySelectorAll("pre, button, input, select, .quiz-caixa, .ouvir-controles").forEach((e) => e.remove());
+    return clone.textContent.replace(/\s+/g, " ").trim();
+  }
+
+  function quebrarEmFrases(texto) {
+    const frases = texto.match(/[^.!?…]+[.!?…]*/g) || [texto];
+    const fila = [];
+    frases.forEach((f) => {
+      f = f.trim();
+      if (!f) return;
+      // frases longas demais travam alguns navegadores — quebra por vírgula
+      while (f.length > 220) {
+        const corte = f.lastIndexOf(",", 220);
+        const pedaco = corte > 60 ? f.slice(0, corte + 1) : f.slice(0, 220);
+        fila.push(pedaco.trim());
+        f = f.slice(pedaco.length).trim();
+      }
+      if (f) fila.push(f);
+    });
+    return fila;
+  }
+
+  function atualizarBotaoLeitura() {
+    if (!leitura.btn) return;
+    leitura.btn.textContent =
+      leitura.estado === "falando" ? "⏸ Pausar" :
+      leitura.estado === "pausado" ? "▶ Continuar" : "🔊 Ouvir esta etapa";
+    if (leitura.parar) leitura.parar.classList.toggle("oculto", leitura.estado === "parado");
+  }
+
+  function pararLeitura() {
+    if (!sintese) return;
+    sintese.cancel();
+    leitura.estado = "parado";
+    leitura.fila = [];
+    leitura.idx = 0;
+    atualizarBotaoLeitura();
+    leitura.btn = null;
+    leitura.parar = null;
+  }
+
+  function falarProxima() {
+    if (leitura.idx >= leitura.fila.length) {
+      leitura.estado = "parado";
+      atualizarBotaoLeitura();
+      return;
+    }
+    const u = new SpeechSynthesisUtterance(leitura.fila[leitura.idx]);
+    u.lang = "pt-BR";
+    const voz = vozPortugues();
+    if (voz) u.voice = voz;
+    u.rate = 1.04;
+    u.onend = () => {
+      leitura.idx++;
+      if (leitura.estado === "falando" || leitura.estado === "pausado") falarProxima();
+    };
+    u.onerror = () => { leitura.idx++; if (leitura.estado !== "parado") falarProxima(); };
+    sintese.speak(u);
+  }
+
+  if (sintese && "SpeechSynthesisUtterance" in window) {
+    document.querySelectorAll(".modulo[data-modulo]").forEach((secao) => {
+      if (secao.dataset.modulo.startsWith("quiz")) return; // quiz é interativo
+      const cab = secao.querySelector(".modulo-cabecalho");
+      if (!cab) return;
+      const wrap = document.createElement("div");
+      wrap.className = "ouvir-controles";
+      wrap.innerHTML =
+        '<button type="button" class="ouvir-btn">🔊 Ouvir esta etapa</button>' +
+        '<button type="button" class="ouvir-parar oculto" aria-label="Parar leitura">⏹ Parar</button>';
+      cab.appendChild(wrap);
+
+      const btn = wrap.querySelector(".ouvir-btn");
+      const parar = wrap.querySelector(".ouvir-parar");
+
+      btn.addEventListener("click", () => {
+        // tocando ESTA etapa: alterna pausa/continua
+        if (leitura.btn === btn && leitura.estado === "falando") {
+          sintese.pause();
+          leitura.estado = "pausado";
+          atualizarBotaoLeitura();
+          return;
+        }
+        if (leitura.btn === btn && leitura.estado === "pausado") {
+          sintese.resume();
+          leitura.estado = "falando";
+          atualizarBotaoLeitura();
+          return;
+        }
+        // começa a ler esta etapa (parando qualquer outra)
+        pararLeitura();
+        leitura.btn = btn;
+        leitura.parar = parar;
+        leitura.fila = quebrarEmFrases(textoDaEtapa(secao));
+        leitura.idx = 0;
+        leitura.estado = "falando";
+        atualizarBotaoLeitura();
+        falarProxima();
+        avisar("🔊 Lendo em voz alta — dá para bloquear a tela e só ouvir!");
+      });
+
+      parar.addEventListener("click", pararLeitura);
+    });
+  }
+
   atualizarContinuar();
   atualizarTudo();
 

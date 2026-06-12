@@ -64,6 +64,17 @@ code{
 .toast.visivel{ opacity:1; transform:translateX(-50%) translateY(0); }
 @media(min-width:820px){ .toast{ bottom:30px; } }
 
+/* ---------------- Leitura em voz alta ---------------- */
+.ouvir-controles{ display:flex; gap:.45rem; margin-top:.6rem; }
+.ouvir-btn, .ouvir-parar{
+  background:rgba(183,159,224,.12); color:var(--roxo);
+  border:1px solid rgba(183,159,224,.45); border-radius:999px;
+  padding:.45rem .9rem; font-size:.85rem; font-weight:700;
+  cursor:pointer; font-family:var(--fonte-corpo); transition:border-color .15s;
+}
+.ouvir-btn:hover, .ouvir-parar:hover{ border-color:var(--roxo); }
+.ouvir-parar{ color:var(--erro); background:rgba(224,112,112,.08); border-color:rgba(224,112,112,.4); }
+
 /* ---------------- Banner de instalação iOS ---------------- */
 .ios-banner{
   position:fixed; left:.8rem; right:.8rem; bottom:84px; z-index:120;
