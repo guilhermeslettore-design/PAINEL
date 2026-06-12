@@ -64,6 +64,88 @@ code{
 .toast.visivel{ opacity:1; transform:translateX(-50%) translateY(0); }
 @media(min-width:820px){ .toast{ bottom:30px; } }
 
+/* ============================================================
+   MODO TERCEIRA IDADE — tema claro, alto contraste, tudo grande
+   ============================================================ */
+body.senior{
+  --fundo:#FFFFFF;
+  --fundo-2:#F4F1EA;
+  --fundo-3:#FFFFFF;
+  --borda:#9A8F7E;
+  --texto:#1A1410;
+  --texto-suave:#3A332B;
+  --acento:#B4521E;          /* terracota escura, alto contraste */
+  --acento-forte:#8A3D12;
+  --verde:#1E6B2E;
+  --azul:#16508F;
+  --roxo:#6A3FA0;
+  --laranja:#A85A00;
+  --erro:#B11E1E;
+  --raio:16px;
+  background:#FFFFFF;
+  line-height:1.85;
+  font-weight:500;
+}
+/* tipografia maior e mais legível */
+body.senior{ font-size:1.18rem; }
+body.senior h1{ font-size:clamp(2rem,7vw,2.8rem); }
+body.senior h2{ font-size:1.7rem; }
+body.senior h3{ font-size:1.45rem; }
+body.senior h4{ font-size:1.25rem; color:var(--acento-forte); }
+body.senior .hero-sub,
+body.senior .licao p,
+body.senior .lista-cartoes li,
+body.senior .lista-passos li,
+body.senior .destaque,
+body.senior .glossario dd{ font-size:1.18rem; }
+
+/* botões e áreas de toque bem maiores */
+body.senior .btn{ font-size:1.2rem; padding:1.05rem 1.8rem; }
+body.senior .btn-concluir{ font-size:1.2rem; padding:1.2rem; }
+body.senior .tab-rotulo{ font-size:.72rem; }
+body.senior .tab-icone{ font-size:1.4rem; }
+body.senior .ouvir-btn, body.senior .ouvir-parar{ font-size:1.05rem; padding:.7rem 1.2rem; }
+body.senior .area-btn, body.senior .chip{ font-size:1.05rem; padding:.7rem 1.2rem; }
+body.senior .quiz-opcao{ font-size:1.15rem; padding:1.1rem 1.2rem; }
+body.senior .jogo-escolha{ font-size:1.9rem; padding:1.1rem .5rem; }
+body.senior .jogo-escolha span{ font-size:1.1rem; }
+
+/* contraste reforçado nas bordas e cartões */
+body.senior .modulo,
+body.senior .trilha-card,
+body.senior .lista-cartoes li,
+body.senior .nivel-cabecalho,
+body.senior .quiz-caixa,
+body.senior .jogo-caixa,
+body.senior .cartao-face,
+body.senior .final-caixa{ border-width:2px; }
+body.senior .topo{ background:#FFFFFF; }
+body.senior .tabbar{ background:#FFFFFF; border-top:2px solid var(--borda); }
+body.senior .destaque{ background:#FBEEE6; border-width:2px; }
+body.senior code{ background:#EDE7DB; }
+body.senior pre.codigo{ background:#2B2620; }
+body.senior pre.codigo code{ color:#F4E9D6; }
+
+/* caixa de explicação fácil */
+.senior-box{
+  background:#FBF3E8; border:2px solid var(--acento);
+  border-radius:16px; padding:1.1rem 1.2rem; margin:0 0 1.1rem;
+}
+.senior-box-tag{
+  display:inline-block; background:var(--acento); color:#fff;
+  font-size:1rem; font-weight:700; border-radius:999px;
+  padding:.25rem .9rem; margin-bottom:.7rem;
+}
+.senior-box p{ font-size:1.22rem; line-height:1.85; margin:0 0 .7rem; }
+.senior-box p:last-child{ margin-bottom:0; }
+.senior-box strong{ color:var(--acento-forte); }
+
+/* botão da terceira idade ativo */
+.fonte-btn.ativo, .btn.ativo{
+  background:var(--acento); color:#fff; border-color:var(--acento);
+}
+#seniorBtn{ font-size:1rem; }
+
 /* ---------------- Leitura em voz alta ---------------- */
 .ouvir-controles{ display:flex; gap:.45rem; margin-top:.6rem; }
 .ouvir-btn, .ouvir-parar{
