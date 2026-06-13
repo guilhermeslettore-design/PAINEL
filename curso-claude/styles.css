@@ -881,6 +881,15 @@ body.senior .menu.aberto a{ font-size:1.2rem; }
 body.senior .sim-cel{ font-size:1.1rem; padding:.7rem .6rem; }
 body.senior .sim-barra-input{ font-size:1.15rem; }
 
+/* Projeto final */
+.proj-cabecalho{ display:flex; align-items:center; gap:.7rem; }
+.proj-prog{ flex:1 1 auto; height:.6rem; background:var(--fundo-3); border:1px solid var(--borda); border-radius:999px; overflow:hidden; }
+.proj-prog-fill{ height:100%; width:0; background:linear-gradient(90deg,var(--acento),var(--acento-forte)); transition:width .35s ease; }
+.proj-prog-txt{ flex:0 0 auto; font-size:.85rem; font-weight:600; color:var(--acento-forte); }
+.proj-recomecar{ flex:none !important; align-self:flex-start; opacity:.85; }
+.roadmap-final{ border-style:dashed; }
+.roadmap-final .roadmap-num{ background:transparent; font-size:1.3rem; }
+
 /* ---------------- Animações ---------------- */
 @keyframes surgir{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none; } }
 .tela:not(.oculto){ animation:surgir .35s ease; }
