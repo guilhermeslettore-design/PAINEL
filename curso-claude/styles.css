@@ -821,6 +821,66 @@ body.senior .menu.aberto a{ font-size:1.2rem; }
   text-align:center; color:var(--texto-suave); font-size:.82rem;
 }
 
+/* ---------------- Simulador / Praticar ---------------- */
+.sim-app{ display:flex; flex-direction:column; gap:1rem; }
+.sim-missoes{ display:flex; gap:.5rem; overflow-x:auto; padding-bottom:.3rem; -webkit-overflow-scrolling:touch; }
+.sim-aba{
+  flex:0 0 auto; display:flex; flex-direction:column; gap:.15rem; align-items:flex-start;
+  background:var(--fundo-2); border:1px solid var(--borda); border-radius:12px;
+  padding:.5rem .8rem; color:var(--texto); cursor:pointer; min-width:8.5rem; text-align:left;
+  font-size:.92rem; line-height:1.2; transition:border-color .15s, background .15s;
+}
+.sim-aba:hover{ border-color:var(--acento); }
+.sim-aba.ativa{ border-color:var(--acento); background:var(--fundo-3); box-shadow:0 0 0 1px var(--acento) inset; }
+.sim-aba-nivel{ font-size:.7rem; text-transform:uppercase; letter-spacing:.04em; color:var(--acento-forte); font-weight:600; }
+.sim-painel{ background:var(--fundo-2); border:1px solid var(--borda); border-radius:16px; padding:1rem; display:flex; flex-direction:column; gap:.9rem; }
+.sim-tarefa-titulo{ margin:0 0 .3rem; font-size:1.1rem; }
+.sim-tarefa-texto{ margin:0; color:var(--texto-suave); line-height:1.5; }
+.sim-tarefa code, .sim-feedback code, .sim-tarefa b{ }
+.sim-tarefa code{ background:var(--fundo-3); border:1px solid var(--borda); border-radius:6px; padding:.05rem .35rem; font-size:.9em; color:var(--acento-forte); }
+.sim-barra{ display:flex; align-items:stretch; gap:.4rem; }
+.sim-barra-cel{
+  flex:0 0 auto; min-width:2.6rem; display:flex; align-items:center; justify-content:center;
+  background:var(--fundo-3); border:1px solid var(--borda); border-radius:10px;
+  font-weight:700; color:var(--acento-forte); font-family:"Outfit",sans-serif;
+}
+.sim-barra-input{
+  flex:1 1 auto; min-width:0; background:var(--fundo-3); border:1px solid var(--borda);
+  border-radius:10px; padding:.6rem .7rem; color:var(--texto); font-size:1rem;
+  font-family:"Outfit",monospace;
+}
+.sim-barra-input:focus{ outline:none; border-color:var(--acento); }
+.sim-ok{
+  flex:0 0 auto; width:2.8rem; background:var(--acento); color:#fff; border:none;
+  border-radius:10px; font-size:1.2rem; cursor:pointer;
+}
+.sim-grade-wrap{ overflow-x:auto; border:1px solid var(--borda); border-radius:12px; -webkit-overflow-scrolling:touch; }
+.sim-grade{ border-collapse:collapse; width:100%; font-family:"Outfit",sans-serif; }
+.sim-grade th, .sim-grade td{ border:1px solid var(--borda); }
+.sim-grade thead th, .sim-grade .sim-num{
+  background:var(--fundo-3); color:var(--texto-suave); font-weight:600;
+  text-align:center; padding:.4rem; font-size:.85rem; position:sticky; left:0;
+}
+.sim-grade thead th{ position:static; }
+.sim-grade .sim-canto{ background:var(--fundo-3); }
+.sim-cel{
+  padding:.55rem .5rem; min-width:5rem; max-width:11rem; height:1.4rem;
+  color:var(--texto); cursor:cell; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-size:.95rem;
+}
+.sim-cel.num{ text-align:right; font-variant-numeric:tabular-nums; }
+.sim-cel.temf{ color:var(--verde); }
+.sim-cel.sel{ outline:2px solid var(--acento); outline-offset:-2px; background:rgba(232,130,90,.1); }
+.sim-acoes{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.sim-mini{ flex:1 1 auto; padding:.5rem .6rem !important; font-size:.92rem; }
+.sim-feedback{ min-height:1.2rem; line-height:1.5; color:var(--texto-suave); }
+.sim-feedback.ok{ color:var(--verde); background:rgba(127,185,127,.12); border:1px solid var(--verde); border-radius:10px; padding:.7rem .8rem; }
+.sim-feedback.dica{ color:var(--texto); background:var(--fundo-3); border:1px solid var(--borda); border-radius:10px; padding:.7rem .8rem; }
+.sim-feedback code{ background:var(--fundo-2); border:1px solid var(--borda); border-radius:6px; padding:.05rem .35rem; color:var(--acento-forte); }
+.ferramenta.destaque{ border-color:var(--acento); box-shadow:0 0 0 1px var(--acento) inset; }
+body.senior .sim-cel{ font-size:1.1rem; padding:.7rem .6rem; }
+body.senior .sim-barra-input{ font-size:1.15rem; }
+
 /* ---------------- Animações ---------------- */
 @keyframes surgir{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none; } }
 .tela:not(.oculto){ animation:surgir .35s ease; }
