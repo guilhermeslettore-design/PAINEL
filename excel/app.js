@@ -68,6 +68,7 @@
     confetes = confetes.filter((c) => c.y < canvas.height + 30);
     if (!confetes.length) { cancelAnimationFrame(confeteAnim); confeteAnim = null; ctx.clearRect(0, 0, canvas.width, canvas.height); }
   }
+  window.confete = festejar;
 
   /* ---------------- Copiar ---------------- */
   function copiarTexto(texto) {

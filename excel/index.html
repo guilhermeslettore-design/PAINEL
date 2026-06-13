@@ -42,6 +42,7 @@
     </a>
     <nav class="menu" id="menu" aria-label="Seções do curso">
       <a href="#" data-nav="inicio">📋 Conteúdo</a>
+      <a href="#" data-nav="praticar">⌨️ Praticar</a>
       <a href="#" data-nav="tutor">💬 Tutor</a>
       <a href="#" data-nav="kit">🧰 Funções</a>
       <a href="#" data-nav="jogo">🎮 Jogos</a>
@@ -114,6 +115,7 @@
 
   <h2 class="sec-titulo"><span>🧰 Ferramentas do curso</span></h2>
   <div class="ferramentas">
+    <button class="ferramenta destaque" data-nav="praticar"><span class="ferramenta-ic">⌨️</span><strong>Praticar na planilha</strong><span>Digite fórmulas de verdade</span></button>
     <button class="ferramenta" data-nav="tutor"><span class="ferramenta-ic">💬</span><strong>Tutor</strong><span>Tire qualquer dúvida</span></button>
     <button class="ferramenta" data-nav="kit"><span class="ferramenta-ic">🧰</span><strong>Guia de Funções</strong><span>Modelos prontos para copiar</span></button>
     <button class="ferramenta" data-nav="jogo"><span class="ferramenta-ic">🎮</span><strong>Jogos</strong><span>Treine decidindo</span></button>
@@ -465,6 +467,20 @@ Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
   </div>
 </section>
 
+<!-- ===================== PRATICAR (PLANILHA INTERATIVA) ===================== -->
+<section class="tela oculto" data-tela="praticar">
+  <div class="nivel-cabecalho nivel-verde">
+    <span class="nivel-badge">⌨️ Praticar de verdade</span>
+    <h2>Uma planilha viva, dentro do curso</h2>
+    <p>Aqui você digita fórmulas como se estivesse no Excel e vê o resultado na hora — em uma célula, em uma linha ou em várias. Escolha uma missão e mãos à obra.</p>
+  </div>
+  <div id="sim-app" class="sim-app"></div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="inicio">← Início</button>
+    <button class="btn btn-primario" data-nav="kit">Ver guia de funções →</button>
+  </div>
+</section>
+
 <!-- ===================== GUIA DE FUNÇÕES (KIT) ===================== -->
 <section class="tela oculto" data-tela="kit">
   <div class="nivel-cabecalho nivel-laranja">
@@ -623,12 +639,14 @@ Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
 <!-- ===================== BARRA DE ABAS (celular) ===================== -->
 <nav class="tabbar" aria-label="Navegação principal">
   <button data-nav="inicio" class="tab ativo"><span class="tab-icone">🏠</span><span class="tab-rotulo">Curso</span></button>
+  <button data-nav="praticar" class="tab"><span class="tab-icone">⌨️</span><span class="tab-rotulo">Praticar</span></button>
   <button data-nav="tutor" class="tab"><span class="tab-icone">💬</span><span class="tab-rotulo">Tutor</span></button>
-  <button data-nav="kit" class="tab"><span class="tab-icone">🧰</span><span class="tab-rotulo">Funções</span></button>
   <button data-nav="jogo" class="tab"><span class="tab-icone">🎮</span><span class="tab-rotulo">Jogos</span></button>
   <button data-nav="final" class="tab"><span class="tab-icone">🏆</span><span class="tab-rotulo">Certificado</span></button>
 </nav>
 
 <script src="app.js"></script>
+<script src="motor.js"></script>
+<script src="simulador.js"></script>
 </body>
 </html>
