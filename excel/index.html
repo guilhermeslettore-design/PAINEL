@@ -46,6 +46,7 @@
       <a href="#" data-nav="tutor">💬 Tutor</a>
       <a href="#" data-nav="kit">🧰 Funções</a>
       <a href="#" data-nav="jogo">🎮 Jogos</a>
+      <a href="#" data-nav="projeto">🛠️ Projeto final</a>
       <a href="#" data-nav="final">🏆 Certificado</a>
     </nav>
     <div class="acoes-top">
@@ -111,6 +112,15 @@
       </div>
       <span class="roadmap-seta">→</span>
     </li>
+    <li class="roadmap-item roadmap-final" data-nav="projeto" tabindex="0" role="button">
+      <span class="roadmap-num">🛠️</span>
+      <div class="roadmap-txt">
+        <strong>Projeto final — Relatório de vendas</strong>
+        <span>Monte uma planilha de verdade do zero, passo a passo, e libere o certificado.</span>
+        <span class="roadmap-prog">9 passos guiados</span>
+      </div>
+      <span class="roadmap-seta">→</span>
+    </li>
   </ol>
 
   <h2 class="sec-titulo"><span>🧰 Ferramentas do curso</span></h2>
@@ -119,6 +129,7 @@
     <button class="ferramenta" data-nav="tutor"><span class="ferramenta-ic">💬</span><strong>Tutor</strong><span>Tire qualquer dúvida</span></button>
     <button class="ferramenta" data-nav="kit"><span class="ferramenta-ic">🧰</span><strong>Guia de Funções</strong><span>Modelos prontos para copiar</span></button>
     <button class="ferramenta" data-nav="jogo"><span class="ferramenta-ic">🎮</span><strong>Jogos</strong><span>Treine decidindo</span></button>
+    <button class="ferramenta destaque" data-nav="projeto"><span class="ferramenta-ic">🛠️</span><strong>Projeto final</strong><span>Monte um relatório do zero</span></button>
     <button class="ferramenta" data-nav="final"><span class="ferramenta-ic">🏆</span><strong>Certificado</strong><span>Conclua e imprima</span></button>
   </div>
 </section>
@@ -578,7 +589,21 @@ Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
 
   <div class="nivel-rodape">
     <button class="btn btn-fantasma" data-nav="n3">← Nível 3</button>
-    <button class="btn btn-primario" data-nav="final">Ver certificado →</button>
+    <button class="btn btn-primario" data-nav="projeto">Ir para o Projeto Final →</button>
+  </div>
+</section>
+
+<!-- ===================== PROJETO FINAL ===================== -->
+<section class="tela oculto" data-tela="projeto">
+  <div class="nivel-cabecalho nivel-roxo">
+    <span class="nivel-badge">🛠️ Projeto final</span>
+    <h2>Relatório de Vendas da Semana</h2>
+    <p>Chegou a hora de juntar tudo. Você vai montar, do zero e passo a passo, um relatório de vendas completo — com totais, faturamento, média, classificação e contagem. Ao terminar, seu certificado é liberado.</p>
+  </div>
+  <div id="projeto-app" class="sim-app"></div>
+  <div class="nivel-rodape">
+    <button class="btn btn-fantasma" data-nav="jogo">← Jogos</button>
+    <button class="btn btn-primario" data-nav="final">Ver meu certificado →</button>
   </div>
 </section>
 
@@ -592,6 +617,7 @@ Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
       <li data-check="n2">🚀 Nível 2 completo (6 etapas + quiz com 70%+)</li>
       <li data-check="n3">🧠 Nível 3 completo (5 etapas + quiz com 70%+)</li>
       <li data-check="jogo">🎮 Jogo com 50%+ da pontuação</li>
+      <li data-check="projeto">🛠️ Projeto final concluído (relatório de vendas)</li>
     </ul>
     <div class="certificado oculto" id="certificado">
       <div class="cert-folha" id="certFolha">
@@ -648,5 +674,6 @@ Certo:   =B2*$E$1 (E1 fica travado para todas as linhas)</code></pre>
 <script src="app.js"></script>
 <script src="motor.js"></script>
 <script src="simulador.js"></script>
+<script src="projeto.js"></script>
 </body>
 </html>

@@ -23,6 +23,7 @@
     jogo: { recorde: 0, passou: false },
     oficina: { melhor: 0, passou: false },
     desafio: { melhor: 0, passou: false },
+    projeto: { concluido: false },
     tutorHistorico: [],
     nome: "", ultimaTela: "", certComemorado: false,
     fonte: 16, senior: false, vozNome: "", vozVel: 1,
@@ -680,7 +681,7 @@
 
   /* ============================================================ CERTIFICADO ============================================================ */
   function atualizarCertificado() {
-    const checks = { n1: nivelCompleto("n1"), n2: nivelCompleto("n2"), n3: nivelCompleto("n3"), jogo: estado.jogo.passou };
+    const checks = { n1: nivelCompleto("n1"), n2: nivelCompleto("n2"), n3: nivelCompleto("n3"), jogo: estado.jogo.passou, projeto: estado.projeto.concluido };
     document.querySelectorAll("#finalChecklist [data-check]").forEach((li) => li.classList.toggle("ok", !!checks[li.dataset.check]));
     const tudo = Object.values(checks).every(Boolean);
     const cert = document.getElementById("certificado");
@@ -906,5 +907,15 @@
 
   /* ---------------- Inicialização ---------------- */
   function atualizarTudo() { atualizarModulos(); atualizarProgresso(); atualizarCertificado(); }
+
+  /* ---------------- API para o Projeto Final ---------------- */
+  window.cursoExcel = {
+    concluirProjeto() {
+      if (!estado.projeto.concluido) { estado.projeto.concluido = true; salvar(); }
+      atualizarTudo();
+    },
+    projetoConcluido() { return !!estado.projeto.concluido; },
+  };
+
   atualizarContinuar(); atualizarTudo();
 })();

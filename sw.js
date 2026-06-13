@@ -1,5 +1,5 @@
 /* Service worker da Academia Claude — funciona offline */
-const CACHE = "academia-claude-v14";
+const CACHE = "academia-claude-v15";
 const ARQUIVOS = [
   "./",
   "./index.html",
@@ -18,6 +18,7 @@ const ARQUIVOS = [
   "./excel/app.js",
   "./excel/motor.js",
   "./excel/simulador.js",
+  "./excel/projeto.js",
   "./fontes/fontes.css",
   "./fontes/f0.woff2",
   "./fontes/f1.woff2",
