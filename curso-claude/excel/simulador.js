@@ -144,6 +144,132 @@
         selecao: "E2",
       },
       {
+        id: "contse",
+        titulo: "Contar por categoria (CONT.SE)",
+        nivel: "Condição",
+        enunciado:
+          "A coluna A tem a região de cada venda. Na célula <b>B2</b>, conte quantas vendas foram da região <b>Sul</b>.",
+        dica: 'CONT.SE conta as células que batem com um critério: <code>=CONT.SE(A2:A6;"Sul")</code>',
+        solucao: '=CONT.SE(A2:A6;"Sul")',
+        cols: 2,
+        linhas: 6,
+        dados: {
+          A1: "Região", B1: "Qtd no Sul",
+          A2: "Sul", A3: "Norte", A4: "Sul", A5: "Sul", A6: "Norte",
+        },
+        alvos: [{ cel: "B2", esperado: "3" }],
+        depois: "Troque um “Norte” por “Sul” em qualquer linha e veja a contagem mudar na hora.",
+        selecao: "B2",
+      },
+      {
+        id: "somase",
+        titulo: "Somar com uma condição (SOMASE)",
+        nivel: "Condição",
+        enunciado:
+          "A coluna A tem a região e a B o valor da venda. Na célula <b>D2</b>, some apenas as vendas da região <b>Sul</b>.",
+        dica:
+          "SOMASE soma os valores cujo critério bate: <code>=SOMASE(A2:A6;\"Sul\";B2:B6)</code> " +
+          "(intervalo do critério; critério; intervalo a somar).",
+        solucao: '=SOMASE(A2:A6;"Sul";B2:B6)',
+        cols: 4,
+        linhas: 6,
+        dados: {
+          A1: "Região", B1: "Valor", D1: "Total Sul",
+          A2: "Sul", B2: "100",
+          A3: "Norte", B3: "200",
+          A4: "Sul", B4: "150",
+          A5: "Sul", B5: "50",
+          A6: "Norte", B6: "300",
+        },
+        alvos: [{ cel: "D2", esperado: "300" }],
+        depois: "É assim que se soma só o que interessa: vendas de um vendedor, de um mês, de uma categoria...",
+        selecao: "D2",
+      },
+      {
+        id: "somases",
+        titulo: "Somar com vários critérios (SOMASES)",
+        nivel: "Condição",
+        enunciado:
+          "Agora some o <b>valor</b> (coluna C) só quando a região (A) for <b>Sul</b> <i>e</i> o produto (B) for <b>Café</b>. Coloque a fórmula em <b>E2</b>.",
+        dica:
+          "No SOMASES o intervalo a somar vem primeiro, depois os pares (intervalo; critério): " +
+          "<code>=SOMASES(C2:C5;A2:A5;\"Sul\";B2:B5;\"Café\")</code>",
+        solucao: '=SOMASES(C2:C5;A2:A5;"Sul";B2:B5;"Café")',
+        cols: 5,
+        linhas: 5,
+        dados: {
+          A1: "Região", B1: "Produto", C1: "Valor", E1: "Sul + Café",
+          A2: "Sul", B2: "Café", C2: "100",
+          A3: "Sul", B3: "Filtro", C3: "50",
+          A4: "Norte", B4: "Café", C4: "200",
+          A5: "Sul", B5: "Café", C5: "80",
+        },
+        alvos: [{ cel: "E2", esperado: "180" }],
+        depois: "Dois filtros ao mesmo tempo — o jeito profissional de fatiar uma base de dados.",
+        selecao: "E2",
+      },
+      {
+        id: "procx",
+        titulo: "Busca moderna (PROCX)",
+        nivel: "Busca",
+        enunciado:
+          "PROCX é a versão nova e mais simples do PROCV. Na célula <b>E2</b>, busque o preço do produto que está em <b>D2</b> (Filtro).",
+        dica:
+          "A ordem é: o que procurar; onde procurar; o que devolver. " +
+          "<code>=PROCX(D2;A2:A4;B2:B4)</code>",
+        solucao: "=PROCX(D2;A2:A4;B2:B4)",
+        cols: 5,
+        linhas: 4,
+        dados: {
+          A1: "Produto", B1: "Preço", D1: "Buscar", E1: "Preço",
+          A2: "Café", B2: "18",
+          A3: "Filtro", B3: "9",
+          A4: "Leite", B4: "7",
+          D2: "Filtro",
+        },
+        alvos: [{ cel: "E2", esperado: "9" }],
+        depois: "Mais curta que o PROCV e não quebra se você inserir colunas. Se sua versão do Excel tiver PROCX, prefira ela.",
+        selecao: "E2",
+      },
+      {
+        id: "porcentagem",
+        titulo: "Calcular porcentagem",
+        nivel: "Números",
+        enunciado:
+          "A conta do almoço está em <b>A2</b>. Na célula <b>B2</b>, calcule <b>15%</b> de gorjeta sobre esse valor.",
+        dica:
+          "O sinal % divide por 100. Então 15% vale 0,15. Multiplique: <code>=A2*15%</code> (ou <code>=A2*0,15</code>).",
+        solucao: "=A2*15%",
+        cols: 2,
+        linhas: 3,
+        dados: { A1: "Conta (R$)", B1: "Gorjeta 15%", A2: "80" },
+        alvos: [{ cel: "B2", esperado: "12" }],
+        depois: "Para somar a gorjeta ao total: <code>=A2+A2*15%</code> ou <code>=A2*1,15</code>. Teste!",
+        selecao: "B2",
+      },
+      {
+        id: "email",
+        titulo: "Montar e-mail a partir do nome",
+        nivel: "Texto",
+        enunciado:
+          "RH pediu o e-mail no padrão <b>nome.sobrenome@empresa.com</b>, tudo minúsculo. " +
+          "Com o nome em A2 e o sobrenome em B2, monte o e-mail em <b>C2</b>.",
+        dica:
+          'Junte com & e deixe minúsculo com MINÚSCULA: ' +
+          '<code>=MINÚSCULA(A2&"."&B2&"@empresa.com")</code>',
+        solucao: '=MINÚSCULA(A2&"."&B2&"@empresa.com")',
+        cols: 3,
+        linhas: 4,
+        dados: {
+          A1: "Nome", B1: "Sobrenome", C1: "E-mail",
+          A2: "Maria", B2: "Souza",
+          A3: "João", B3: "Lima",
+        },
+        alvos: [{ cel: "C2", esperado: "maria.souza@empresa.com" }],
+        depois: "Repita em C3 e gere a lista inteira de e-mails da equipe em segundos.",
+        selecao: "C2",
+      },
+      {
         id: "livre",
         titulo: "Planilha livre (sem missão)",
         nivel: "Livre",
