@@ -732,6 +732,48 @@ body.senior .menu.aberto a{ font-size:1.2rem; }
 .missao:has(input:checked) span{ text-decoration:line-through; text-decoration-color:rgba(232,176,90,.6); }
 .missoes-chip{ color:var(--laranja); }
 
+/* ---------------- Explique você (recuperação ativa) ---------------- */
+.explique{
+  background:rgba(127,168,217,.07); border:1px dashed rgba(127,168,217,.5);
+  border-radius:14px; padding:.9rem 1rem; margin:.9rem 0 1rem; display:grid; gap:.6rem;
+}
+.explique-cab{ font-weight:700; color:var(--azul); font-size:.95rem; }
+.explique-cab span{ font-weight:400; color:var(--texto-suave); font-size:.85rem; margin-left:.3rem; }
+.explique-q{ font-size:.97rem; }
+.explique-texto{
+  width:100%; background:var(--fundo-3); border:1px solid var(--borda); border-radius:12px;
+  color:var(--texto); font-family:var(--fonte-corpo); font-size:1rem; padding:.7rem .85rem;
+  outline:none; resize:vertical; min-height:64px;
+}
+.explique-texto:focus{ border-color:var(--azul); }
+.explique-conferir{ justify-self:start; padding:.6rem 1.1rem; }
+.explique-resultado{ display:grid; gap:.6rem; }
+.explique-veredito{ font-weight:700; font-size:.95rem; }
+.explique-veredito.ok{ color:var(--verde); }
+.explique-pontos{ list-style:none; display:grid; gap:.35rem; font-size:.9rem; }
+.explique-pontos li{ background:var(--fundo-3); border:1px solid var(--borda); border-radius:10px; padding:.5rem .7rem; }
+.explique-pontos li.ok{ border-color:rgba(127,185,127,.5); }
+.explique-pontos li.falta{ border-color:rgba(232,176,90,.5); }
+.explique-modelo{
+  background:var(--fundo-3); border:1px solid var(--borda); border-left:4px solid var(--azul);
+  border-radius:12px; padding:.7rem .9rem;
+}
+.explique-modelo span{ display:block; font-weight:700; color:var(--azul); font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.3rem; }
+.explique-modelo p{ font-size:.93rem; margin:0; color:var(--texto); }
+.explique-auto{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+.explique-auto span{ font-size:.88rem; color:var(--texto-suave); width:100%; }
+.explique-auto button{
+  background:var(--fundo-3); color:var(--texto); border:1px solid var(--borda); border-radius:999px;
+  padding:.4rem .85rem; font-size:.88rem; cursor:pointer; font-family:var(--fonte-corpo);
+}
+.explique-auto button:hover{ border-color:var(--azul); }
+.explique-auto button.sel{ border-color:var(--azul); background:rgba(127,168,217,.15); color:var(--azul); font-weight:700; }
+.explique-trava{ font-size:.85rem; color:var(--texto-suave); }
+.btn-concluir.bloqueado{ opacity:.5; cursor:not-allowed; border-style:dashed; }
+.btn-concluir.bloqueado:hover{ border-color:var(--borda); color:var(--texto); }
+body.senior .explique-cab{ font-size:1.1rem; }
+body.senior .explique-q, body.senior .explique-texto, body.senior .explique-modelo p{ font-size:1.1rem; }
+
 /* ---------------- Formulário Meu Curso ---------------- */
 .preset-btn{ width:100%; margin-bottom:1.1rem; border-style:dashed; }
 .formulario{ display:grid; gap:.9rem; }

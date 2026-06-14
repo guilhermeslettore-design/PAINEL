@@ -25,6 +25,7 @@
     feitos: {},
     quizes: {},
     missoes: {},
+    explicacoes: {},
     jogo: { recorde: 0, passou: false },
     oficina: { melhor: 0, passou: false },
     desafio: { melhor: 0, passou: false },
@@ -923,6 +924,7 @@
   /* ---------------- Atualização geral ---------------- */
   function atualizarTudo() {
     atualizarModulos();
+    atualizarExplicacoes();
     atualizarProgresso();
     atualizarCertificado();
   }
@@ -1037,6 +1039,249 @@
     });
   }
 
+  /* ============================================================
+     EXPLIQUE VOCÊ — recuperação ativa (a pessoa devolve com as próprias palavras)
+     A conclusão da etapa só libera depois que a pessoa explica.
+     ============================================================ */
+  const EXPLIQUE = {
+    "m1-1": {
+      q: "Sem olhar a lição: o que é o Claude e o que significa 'token'? Explique como se fosse para um amigo.",
+      chave: [
+        { rotulo: "O Claude é uma IA da Anthropic", termos: ["anthropic", "inteligencia", "intelig", "assistente", " ia "] },
+        { rotulo: "'token' é o pedaço de texto que a IA lê e escreve", termos: ["token", "pedaco de texto", "pedacinho", "unidade de texto", "palavra"] },
+      ],
+      modelo: "O Claude é uma inteligência artificial criada pela Anthropic, com quem você conversa em linguagem natural. 'Token' é o pedacinho de texto que a IA lê e escreve — uma palavra tem, em média, de 1 a 3 tokens.",
+    },
+    "m1-2": {
+      q: "Com suas palavras: quais são os planos do claude.ai e em que 'lugares' dá para usar o Claude?",
+      chave: [
+        { rotulo: "Planos: Free, Pro e Max (e Team/Enterprise)", termos: ["free", "gratis", "pro", "max", "plano"] },
+        { rotulo: "Lugares: claude.ai, Claude Code, API e nuvens parceiras", termos: ["claude.ai", "aplicativo", "app", "claude code", "api"] },
+      ],
+      modelo: "Planos: Free (grátis, com limites), Pro (assinatura do dia a dia), Max (uso intenso) e Team/Enterprise (empresas). E o Claude 'vive' em 4 lugares: claude.ai (site e app), Claude Code, a API da Anthropic e nuvens parceiras (Bedrock, Vertex).",
+    },
+    "m1-3": {
+      q: "Sem olhar: cite pelo menos 3 coisas que dá para fazer na tela do Claude e para que servem.",
+      chave: [
+        { rotulo: "Anexar arquivos/fotos para o Claude analisar", termos: ["anexar", "anexo", "arquivo", "foto", "pdf", "imagem"] },
+        { rotulo: "Escolher o modelo certo", termos: ["modelo", "seletor", "haiku", "sonnet", "opus"] },
+        { rotulo: "Pensamento estendido / pesquisa na web / voz", termos: ["pensamento", "raciocin", "pesquisa", "web", "voz", "ditado"] },
+      ],
+      modelo: "Na tela você pode: anexar arquivos e fotos (o Claude lê e analisa), escolher o modelo no seletor, ligar o pensamento estendido para problemas difíceis, ativar a pesquisa na web para informação atual, usar voz no celular e abrir uma nova conversa por assunto.",
+    },
+    "m1-4": {
+      q: "Explique a diferença entre o Haiku, o Sonnet e o Opus — quando usar cada um?",
+      chave: [
+        { rotulo: "Haiku = rápido e barato (tarefas simples/volume)", termos: ["haiku", "rapido", "barato", "volume", "simples"] },
+        { rotulo: "Sonnet = equilibrado (dia a dia)", termos: ["sonnet", "equilibr", "dia a dia"] },
+        { rotulo: "Opus = tarefas complexas/longas", termos: ["opus", "complex", "longo", "dificil", "autonom"] },
+      ],
+      modelo: "Haiku é o mais rápido e barato — ótimo para tarefas simples e em volume. Sonnet é o equilibrado, o ponto de partida do dia a dia. Opus é o especialista, para tarefas longas e complexas. Regra: comece no Sonnet, desça pro Haiku se for simples, suba pro Opus se for difícil.",
+    },
+    "m1-5": {
+      q: "Sem olhar: quais são as regras de um bom prompt? Cite pelo menos duas e diga por que ajudam.",
+      chave: [
+        { rotulo: "Dar contexto", termos: ["contexto"] },
+        { rotulo: "Dizer o formato", termos: ["formato", "lista", "tabela", "paragrafo", "linhas"] },
+        { rotulo: "Dizer o porquê / iterar", termos: ["porque", "objetivo", "intencao", "iterar", "ajustar", "refinar"] },
+      ],
+      modelo: "Um bom prompt: (1) dá contexto (para quem, sobre o quê), (2) diz o formato (lista, tabela, nº de parágrafos), (3) diz o porquê/objetivo e (4) itera — se não gostou, peça ajuste. Quanto mais claro o pedido, melhor a resposta.",
+    },
+    "m2-1": {
+      q: "Com suas palavras: o que é um 'Projeto' no claude.ai e para que ele serve?",
+      chave: [
+        { rotulo: "Pasta inteligente que agrupa conversas de um tema", termos: ["pasta", "agrupa", "tema", "organiz"] },
+        { rotulo: "Guarda instruções fixas e arquivos de conhecimento", termos: ["instrucao", "instrucoes", "regras", "arquivo", "conhecimento", "permanente"] },
+      ],
+      modelo: "Um Projeto é uma 'pasta inteligente' que reúne as conversas de um mesmo assunto e dá ao Claude um conhecimento permanente: você define instruções fixas (quem é você, regras) e sobe arquivos de referência (catálogo, tabela de preços). Aí, em qualquer conversa do projeto, ele já sabe tudo.",
+    },
+    "m2-2": {
+      q: "Explique o que são Artifacts e dê um exemplo do que dá para criar.",
+      chave: [
+        { rotulo: "Painel ao lado do chat com um 'produto pronto' e editável", termos: ["painel", "ao lado", "produto", "pronto", "editavel"] },
+        { rotulo: "Ex.: documento, site, mini-app, gráfico", termos: ["documento", "site", "app", "calculadora", "grafico", "pagina"] },
+      ],
+      modelo: "Artifacts são painéis que abrem ao lado do chat com um 'produto pronto' e editável: um documento, uma landing page, um mini-app (como uma calculadora), um diagrama ou um gráfico. Você pede, vê funcionando na hora e pode ajustar — e até publicar o link.",
+    },
+    "m2-3": {
+      q: "Sem olhar: o que é um 'conector' e o que é o MCP? Por que isso é útil?",
+      chave: [
+        { rotulo: "Conector liga o Claude às suas ferramentas (Drive, Gmail...)", termos: ["conector", "ferramenta", "drive", "gmail", "agenda", "notion", "liga"] },
+        { rotulo: "MCP = padrão aberto, o 'USB das IAs'", termos: ["mcp", "padrao", "usb", "protocolo"] },
+        { rotulo: "Sempre com a sua autorização", termos: ["autoriza", "permissao", "permite"] },
+      ],
+      modelo: "Um conector liga o Claude às suas ferramentas de verdade (Google Drive, Gmail, agenda, Notion...), sempre com a sua autorização. Por baixo, eles usam o MCP (Model Context Protocol), um padrão aberto criado pela Anthropic — o 'USB das IAs' — que conecta qualquer ferramenta a qualquer assistente.",
+    },
+    "m2-4": {
+      q: "Cite pelo menos 2 recursos do claude.ai (pesquisa, arquivos, memória, voz) e o que cada um faz.",
+      chave: [
+        { rotulo: "Pesquisa na web (informação atual + fontes)", termos: ["pesquisa", "web", "atual", "fonte", "internet"] },
+        { rotulo: "Análise/criação de arquivos", termos: ["arquivo", "pdf", "planilha", "excel", "documento", "analis"] },
+        { rotulo: "Memória entre conversas / voz", termos: ["memoria", "lembra", "voz", "falar"] },
+      ],
+      modelo: "Pesquisa na web: busca informação atual e cita as fontes. Arquivos: você envia PDF, Excel ou imagem e ele analisa (e também cria arquivos). Memória: lembra informações suas entre conversas, e você controla. Voz: no celular dá para conversar falando.",
+    },
+    "m2-5": {
+      q: "Pense no SEU trabalho: descreva uma tarefa chata ou demorada que o Claude poderia te ajudar a fazer, e como você pediria.",
+      chave: [],
+      modelo: "Não existe resposta certa aqui — o segredo é escolher uma tarefa real e específica (responder e-mails de cobrança, resumir reuniões, criar posts...) e escrever um pedido com contexto + formato. Quanto mais perto do seu dia a dia, mais útil fica.",
+    },
+    "m2-6": {
+      q: "Explique 2 técnicas avançadas de prompt e por que elas funcionam.",
+      chave: [
+        { rotulo: "Definir um papel/persona", termos: ["persona", "papel", "especialista", "voce e um"] },
+        { rotulo: "Mostrar exemplos (few-shot)", termos: ["exemplo", "exemplos", "padrao", "modelo"] },
+        { rotulo: "Pedir em etapas / pedir crítica", termos: ["etapa", "passo", "critica", "fraqueza", "revisar"] },
+      ],
+      modelo: "Algumas técnicas: definir uma persona ('Você é um contador...') faz o Claude incorporar a expertise; mostrar 2-3 exemplos do estilo que você quer transfere o padrão; pedir em etapas (a estrutura antes do texto) controla tarefas grandes; e pedir crítica ('aponte 3 fraquezas') melhora o resultado.",
+    },
+    "m3-1": {
+      q: "Com suas palavras: o que é o Claude Code e como ele difere do chat normal?",
+      chave: [
+        { rotulo: "Roda no seu computador (terminal/editor)", termos: ["terminal", "computador", "editor", "vs code", "desktop"] },
+        { rotulo: "Ele AGE: lê/edita arquivos, roda comandos, corrige", termos: ["age", "executa", "arquivo", "comando", "corrige", "automatiza"] },
+        { rotulo: "Você aprova as ações", termos: ["aprova", "aprovacao", "permissao", "autoriza"] },
+      ],
+      modelo: "O Claude Code é o Claude rodando no seu computador (terminal, editor, desktop). Diferente do chat, ele AGE: lê e edita arquivos, roda comandos, testa e corrige sozinho — sempre pedindo sua aprovação nas ações importantes. Serve para criar sistemas, corrigir bugs e automatizar tarefas.",
+    },
+    "m3-2": {
+      q: "Explique para que serve a API da Anthropic e como funciona a cobrança.",
+      chave: [
+        { rotulo: "Coloca o Claude dentro de sistemas/apps", termos: ["sistema", "aplicativo", "app", "produto", "desenvolvedor", "integra"] },
+        { rotulo: "Precisa de uma chave de API", termos: ["chave", "key", "console"] },
+        { rotulo: "Paga por uso (por token)", termos: ["token", "por uso", "milhao", "entrada", "saida"] },
+      ],
+      modelo: "A API é como empresas e desenvolvedores colocam o Claude dentro dos próprios sistemas (um chatbot no site, um classificador de e-mails). Você cria uma chave de API no console da Anthropic e paga por uso — por milhão de tokens de entrada e de saída.",
+    },
+    "m3-3": {
+      q: "Sem olhar: o que é um 'servidor MCP' e o que é o 'cliente'?",
+      chave: [
+        { rotulo: "Servidor expõe ferramentas (ações) e recursos (dados)", termos: ["servidor", "ferramenta", "acao", "recurso", "dado", "expoe"] },
+        { rotulo: "Cliente consome (claude.ai, Claude Code...)", termos: ["cliente", "consome", "claude.ai", "claude code", "app"] },
+        { rotulo: "Só instalar de fontes confiáveis", termos: ["confiavel", "confianca", "fonte", "seguranca"] },
+      ],
+      modelo: "Um servidor MCP é o programa que oferece ferramentas (ações que a IA executa) e recursos (dados que ela lê) — ex.: o servidor do GitHub. O cliente é quem consome: o claude.ai, o Claude Code, o app de desktop. Só instale servidores de fontes confiáveis, pois eles executam ações reais.",
+    },
+    "m3-4": {
+      q: "Explique o que é um 'agente' de IA e dê um exemplo de automação útil.",
+      chave: [
+        { rotulo: "Agente persegue um objetivo: planeja, age, verifica", termos: ["objetivo", "planeja", "verifica", "sozinho", "autonom", "executa"] },
+        { rotulo: "Ex.: triagem de e-mails, relatórios, monitorar planilha", termos: ["email", "relatorio", "planilha", "tarefa", "repetitiv", "monitor"] },
+      ],
+      modelo: "Um agente é uma IA que não só responde, mas executa um objetivo: planeja, usa ferramentas, verifica o resultado e tenta de novo até concluir. Pense em 'funcionários digitais' para tarefas repetitivas — triagem de e-mails, relatórios semanais, monitorar uma planilha — enquanto você cuida do resto.",
+    },
+    "m3-5": {
+      q: "Cite pelo menos 2 cuidados de segurança ao usar IA no trabalho.",
+      chave: [
+        { rotulo: "Não expor dados sensíveis/senhas (LGPD)", termos: ["dado", "sensivel", "senha", "lgpd", "cliente", "privacidade"] },
+        { rotulo: "Revisão humana de documentos importantes", termos: ["revisao", "revisar", "humano", "conferir", "verificar"] },
+        { rotulo: "Chave de API é segredo", termos: ["chave", "segredo", "variavel de ambiente"] },
+      ],
+      modelo: "Cuidados: nunca envie senhas/chaves e trate dados de clientes conforme a política da empresa e a LGPD; revise com um humano os documentos e números importantes (IA acelera, humano assina); guarde chaves de API como segredo, nunca no código; e dê a conectores/agentes só as permissões mínimas.",
+    },
+  };
+
+  function avaliarExplicacao(texto, item) {
+    const t = " " + normalizar(texto).replace(/\s+/g, " ") + " ";
+    const acertou = [], faltou = [];
+    (item.chave || []).forEach((c) => {
+      const ok = c.termos.some((termo) => t.includes(normalizar(termo)));
+      (ok ? acertou : faltou).push(c.rotulo);
+    });
+    return { acertou, faltou };
+  }
+
+  function renderExplique(mod) {
+    const bloco = document.querySelector(`[data-explique="${mod}"]`);
+    if (!bloco) return;
+    const res = bloco.querySelector(".explique-resultado");
+    if (!res) return;
+    const item = EXPLIQUE[mod];
+    const dados = estado.explicacoes[mod] || {};
+    const reflexao = !(item.chave && item.chave.length);
+    const { acertou, faltou } = avaliarExplicacao(dados.texto || "", item);
+    let html = "";
+    if (reflexao) html += `<p class="explique-veredito ok">🎉 Boa reflexão! Aqui não há resposta única — o que vale é ligar ao seu dia a dia.</p>`;
+    else if (!faltou.length) html += `<p class="explique-veredito ok">🎉 Você cobriu os pontos principais!</p>`;
+    else html += `<p class="explique-veredito">Quase lá — veja o que dá para reforçar:</p>`;
+    if (!reflexao) {
+      html += `<ul class="explique-pontos">` +
+        acertou.map((r) => `<li class="ok">✅ ${r}</li>`).join("") +
+        faltou.map((r) => `<li class="falta">🤔 Não vi menção clara a: ${r}</li>`).join("") +
+        `</ul>`;
+    }
+    html += `<div class="explique-modelo"><span>📖 Resposta-modelo</span><p>${item.modelo}</p></div>`;
+    const a = dados.auto || "";
+    html += `<div class="explique-auto"><span>Sendo sincero(a): como você se saiu?</span>` +
+      `<button type="button" data-auto="bem" class="${a === "bem" ? "sel" : ""}">😎 Mandei bem</button>` +
+      `<button type="button" data-auto="mais" class="${a === "mais" ? "sel" : ""}">🙂 Mais ou menos</button>` +
+      `<button type="button" data-auto="revisar" class="${a === "revisar" ? "sel" : ""}">📖 Vou revisar</button>` +
+      `</div>`;
+    res.innerHTML = html;
+  }
+
+  function injetarExplique() {
+    Object.keys(EXPLIQUE).forEach((mod) => {
+      const secao = document.querySelector(`[data-modulo="${mod}"]`);
+      if (!secao) return;
+      const btn = secao.querySelector(".btn-concluir");
+      if (!btn) return;
+      const item = EXPLIQUE[mod];
+      const dados = estado.explicacoes[mod] || {};
+      const bloco = document.createElement("div");
+      bloco.className = "explique";
+      bloco.dataset.explique = mod;
+      bloco.innerHTML =
+        `<div class="explique-cab">🧠 <strong>Explique você</strong><span>— quem ensina, aprende em dobro</span></div>` +
+        `<p class="explique-q">${item.q}</p>` +
+        `<textarea class="explique-texto" rows="3" maxlength="600" placeholder="Escreva com as suas palavras, sem olhar a lição..."></textarea>` +
+        `<button class="btn btn-fantasma explique-conferir" type="button">Conferir minha resposta</button>` +
+        `<div class="explique-resultado${dados.tentou ? "" : " oculto"}"></div>` +
+        `<p class="explique-trava oculto">🔒 Explique acima para liberar o botão “Concluir etapa”.</p>`;
+      secao.insertBefore(bloco, btn);
+      if (dados.texto) bloco.querySelector(".explique-texto").value = dados.texto;
+      if (dados.tentou) renderExplique(mod);
+      bloco.addEventListener("click", (ev) => {
+        const conferir = ev.target.closest(".explique-conferir");
+        const autoBtn = ev.target.closest("[data-auto]");
+        if (conferir) {
+          const ta = bloco.querySelector(".explique-texto");
+          const txt = ta.value.trim();
+          const res = bloco.querySelector(".explique-resultado");
+          res.classList.remove("oculto");
+          if (txt.length < 12) {
+            res.innerHTML = `<p class="explique-veredito">✍️ Escreva um pouquinho mais — tente explicar em pelo menos uma frase. É escrevendo que fixa!</p>`;
+            return;
+          }
+          estado.explicacoes[mod] = Object.assign({}, estado.explicacoes[mod], { texto: txt, tentou: true });
+          salvar();
+          renderExplique(mod);
+          atualizarExplicacoes();
+          avisar("🧠 Boa! Etapa liberada — agora confira a resposta-modelo.");
+        } else if (autoBtn) {
+          estado.explicacoes[mod] = Object.assign({}, estado.explicacoes[mod], { auto: autoBtn.dataset.auto });
+          salvar();
+          renderExplique(mod);
+        }
+      });
+    });
+  }
+
+  function atualizarExplicacoes() {
+    Object.keys(EXPLIQUE).forEach((mod) => {
+      const secao = document.querySelector(`[data-modulo="${mod}"]`);
+      if (!secao) return;
+      const btn = secao.querySelector(".btn-concluir");
+      if (!btn) return;
+      const d = estado.explicacoes[mod];
+      const liberado = !!estado.feitos[mod] || !!(d && d.tentou);
+      btn.disabled = !liberado;
+      btn.classList.toggle("bloqueado", !liberado);
+      const trava = secao.querySelector(".explique-trava");
+      if (trava) trava.classList.toggle("oculto", liberado);
+    });
+  }
+
   document.addEventListener("change", (ev) => {
     const cb = ev.target.closest("[data-missao]");
     if (!cb) return;
@@ -1046,6 +1291,7 @@
     if (cb.checked) avisar("🔥 Missão cumprida! É assim que se aprende.");
   });
 
+  injetarExplique();
   injetarMissoes();
   atualizarMissoesChip();
 
